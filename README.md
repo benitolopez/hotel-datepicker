@@ -31,7 +31,7 @@ $('#input-id').hotelDatePicker(options);
 
 ## Options
 
-### autoshow
+### format
 
 - Type: `String`
 - Default: `YYYY-MM-DD`
@@ -83,9 +83,9 @@ Maximum nights required to select a range of dates.
 ### container
 
 - Type: `Element`
-- Default: ``
+- Default: `''`
 
-A element for putting the datepicker. If not set, the datepicker will be appended to the parent of the input.
+An element for putting the datepicker. If not set, the datepicker will be appended to the parent of the input.
 
 ### duration
 
