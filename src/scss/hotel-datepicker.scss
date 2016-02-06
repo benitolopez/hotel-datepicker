@@ -1,0 +1,286 @@
+// Colors
+$accent_color: #48BEFF;
+$text_color: #333;
+$today_bg_color: #555;
+$disabled_color: #ccc;
+
+// Media queries
+$breakpoint__phone: 320px;
+$breakpoint__large-phone: 480px;
+$breakpoint__tablet: 768px;
+
+@mixin phone {
+  @media (min-width: $breakpoint__phone) {
+    @content;
+  }
+}
+
+@mixin large-phone {
+  @media (min-width: $breakpoint__large-phone) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint__tablet) {
+    @content;
+  }
+}
+
+.hdp-wrapper {
+    background-color: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    box-sizing: border-box;
+    font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
+    font-size: .75em;
+    padding: 1.5em;
+    position: absolute;
+    width: 240px;
+    z-index: 1;
+
+    @include phone {
+        font-size: 1em;
+        width: 300px;
+
+        .month-wrapper {
+            position: relative;
+        }
+    }
+
+    @include large-phone {
+        width: 460px;
+
+        .month-wrapper {
+            position: relative;
+
+            &:before {
+                background: #ccc;
+                bottom: 0;
+                content: '';
+                display: block;
+                left: 50%;
+                position: absolute;
+                top: 0;
+                width: 1px;
+            }
+        }
+
+        .month1 {
+            float: left;
+        }
+
+        .month2 {
+            float: right;
+        }
+    }
+
+    @include tablet {
+        width: 560px;
+    }
+
+    .month-name {
+        text-transform: uppercase;
+    }
+
+    table {
+        border-collapse: collapse;
+        font-size: inherit;
+
+        @include large-phone {
+            font-size: .75em;
+        }
+
+        @include tablet {
+            font-size: 1em;
+        }
+    }
+
+    table th,
+    table td {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    tr.week-name {
+        font-size: .7em;
+        text-transform: uppercase;
+
+        th {
+            padding: .5em 0;
+        }
+    }
+
+    .day {
+        padding: .5em;
+
+        &.invalid {
+            color: $disabled_color;
+        }
+
+        &.valid {
+            cursor: pointer;
+        }
+
+        &.checked {
+            background-color: rgba($accent_color, 0.6);
+            color: #fff;
+        }
+
+        &.day.hovering {
+            background-color: rgba($accent_color, 0.3);
+        }
+
+        &.day.nextMonth,
+        &.day.lastMonth {
+            display: none;
+            height: 0;
+        }
+
+        &.real-today {
+            background-color: $today_bg_color;
+            color: #fff;
+
+            &.checked {
+                background-color: rgba($accent_color, 0.6);
+                color: #fff;
+            }
+
+            &.first-date-selected,
+            &.last-date-selected {
+                background-color: $accent_color;
+            }
+        }
+
+        &.first-date-selected,
+        &.last-date-selected {
+            background-color: $accent_color;
+        }
+    }
+
+    tr.caption {
+        border-bottom: 1px solid #ccc;
+        height: 2em;
+    }
+
+    .next,
+    .prev {
+        cursor: pointer;
+        padding: 0 .5em;
+        transition-duration: 0.2s;
+        transition-property: color, background-color;
+        transition-timing-function: cubic-bezier(.4,0,.2,1);
+
+        &:hover {
+            background-color: $accent_color;
+            color: #fff;
+        }
+    }
+
+    &.two-months.no-prev-next .month1 .next,
+    &.two-months.no-prev-next .month2 .prev {
+        display: none;
+    }
+
+    .selected-days {
+        display: none;
+    }
+
+    .drp_top-bar {
+        font-size: .8em;
+        font-style: italic;
+        margin-bottom: 1.5em;
+        padding: .7em 0;
+
+        @include tablet {
+            padding: .7em 2em .7em 0;
+            position: relative;
+        }
+    }
+
+    .error-top,
+    .normal-top {
+        display: none;
+    }
+
+    .error {
+        .default-top {
+            display: none;
+        }
+
+        .error-top {
+            color: red;
+            display: block;
+        }
+
+    }
+
+    .normal {
+        .default-top {
+            display: none;
+        }
+
+        .normal-top {
+            display: block;
+        }
+    }
+
+    .apply-btn {
+        -webkit-appearance: none;
+        background-color: #ccc;
+        border-radius: 4px;
+        border: none;
+        box-shadow: none;
+        color: $text_color;
+        cursor: pointer;
+        display: inline-block;
+        font-size: .7em;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 2px;
+        margin: 1em 0 0;
+        padding: .7em 1.5em;
+        text-decoration: none;
+        text-shadow: none;
+        text-transform: uppercase;
+        transition-duration: 0.2s;
+        transition-property: color, background-color;
+        transition-timing-function: cubic-bezier(.4,0,.2,1);
+        vertical-align: top;
+
+        &:hover {
+            background-color: $accent_color;
+            color: #fff;
+        }
+
+        @include tablet {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+
+    .date-range-length-tip {
+        background-color: $today_bg_color;
+        border-radius: 2px;
+        color: #fff;
+        display: none;
+        font-size: .7em;
+        line-height: 16px;
+        margin-top: -14px;
+        padding: 5px 10px;
+        position: absolute;
+
+        &:after {
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid $today_bg_color;
+            bottom: -4px;
+            content: '';
+            left: 50%;
+            margin-left: -4px;
+            position: absolute;
+        }
+    }
+}

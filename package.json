@@ -1,0 +1,31 @@
+{
+  "name": "hotel-datepicker",
+  "version": "1.0.0",
+  "author": "Benito Lopez <me@benitolopez.me> (http://benitolopez.me)",
+  "license": "MIT",
+  "description": "Date range picker for hotels",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lopezb/hotel-datepicker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lopezb/hotel-datepicker/issues"
+  },
+  "homepage": "https://github.com/lopezb/hotel-datepicker",
+  "keywords": [
+    "datepicker",
+    "jquery",
+    "hotel"
+  ],
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-group-css-media-queries": "^1.1.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-uglify": "^1.5.1",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0"
+  }
+}

@@ -1,0 +1,259 @@
+.hdp-wrapper {
+  background-color: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: .75em;
+  padding: 1.5em;
+  position: absolute;
+  width: 240px;
+  z-index: 1;
+}
+
+.hdp-wrapper .month-name {
+  text-transform: uppercase;
+}
+
+.hdp-wrapper table {
+  border-collapse: collapse;
+  font-size: inherit;
+}
+
+.hdp-wrapper table th,
+.hdp-wrapper table td {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.hdp-wrapper tr.week-name {
+  font-size: .7em;
+  text-transform: uppercase;
+}
+
+.hdp-wrapper tr.week-name th {
+  padding: .5em 0;
+}
+
+.hdp-wrapper .day {
+  padding: .5em;
+}
+
+.hdp-wrapper .day.invalid {
+  color: #ccc;
+}
+
+.hdp-wrapper .day.valid {
+  cursor: pointer;
+}
+
+.hdp-wrapper .day.checked {
+  background-color: rgba(72, 190, 255, 0.6);
+  color: #fff;
+}
+
+.hdp-wrapper .day.day.hovering {
+  background-color: rgba(72, 190, 255, 0.3);
+}
+
+.hdp-wrapper .day.day.nextMonth,
+.hdp-wrapper .day.day.lastMonth {
+  display: none;
+  height: 0;
+}
+
+.hdp-wrapper .day.real-today {
+  background-color: #555;
+  color: #fff;
+}
+
+.hdp-wrapper .day.real-today.checked {
+  background-color: rgba(72, 190, 255, 0.6);
+  color: #fff;
+}
+
+.hdp-wrapper .day.real-today.first-date-selected,
+.hdp-wrapper .day.real-today.last-date-selected {
+  background-color: #48BEFF;
+}
+
+.hdp-wrapper .day.first-date-selected,
+.hdp-wrapper .day.last-date-selected {
+  background-color: #48BEFF;
+}
+
+.hdp-wrapper tr.caption {
+  border-bottom: 1px solid #ccc;
+  height: 2em;
+}
+
+.hdp-wrapper .next,
+.hdp-wrapper .prev {
+  cursor: pointer;
+  padding: 0 .5em;
+  transition-duration: 0.2s;
+  transition-property: color, background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hdp-wrapper .next:hover,
+.hdp-wrapper .prev:hover {
+  background-color: #48BEFF;
+  color: #fff;
+}
+
+.hdp-wrapper.two-months.no-prev-next .month1 .next,
+.hdp-wrapper.two-months.no-prev-next .month2 .prev {
+  display: none;
+}
+
+.hdp-wrapper .selected-days {
+  display: none;
+}
+
+.hdp-wrapper .drp_top-bar {
+  font-size: .8em;
+  font-style: italic;
+  margin-bottom: 1.5em;
+  padding: .7em 0;
+}
+
+.hdp-wrapper .error-top,
+.hdp-wrapper .normal-top {
+  display: none;
+}
+
+.hdp-wrapper .error .default-top {
+  display: none;
+}
+
+.hdp-wrapper .error .error-top {
+  color: red;
+  display: block;
+}
+
+.hdp-wrapper .normal .default-top {
+  display: none;
+}
+
+.hdp-wrapper .normal .normal-top {
+  display: block;
+}
+
+.hdp-wrapper .apply-btn {
+  -webkit-appearance: none;
+  background-color: #ccc;
+  border-radius: 4px;
+  border: none;
+  box-shadow: none;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  font-size: .7em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin: 1em 0 0;
+  padding: .7em 1.5em;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: uppercase;
+  transition-duration: 0.2s;
+  transition-property: color, background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  vertical-align: top;
+}
+
+.hdp-wrapper .apply-btn:hover {
+  background-color: #48BEFF;
+  color: #fff;
+}
+
+.hdp-wrapper .date-range-length-tip {
+  background-color: #555;
+  border-radius: 2px;
+  color: #fff;
+  display: none;
+  font-size: .7em;
+  line-height: 16px;
+  margin-top: -14px;
+  padding: 5px 10px;
+  position: absolute;
+}
+
+.hdp-wrapper .date-range-length-tip:after {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #555;
+  bottom: -4px;
+  content: '';
+  left: 50%;
+  margin-left: -4px;
+  position: absolute;
+}
+
+@media (min-width: 320px) {
+  .hdp-wrapper {
+    font-size: 1em;
+    width: 300px;
+  }
+
+  .hdp-wrapper .month-wrapper {
+    position: relative;
+  }
+}
+
+@media (min-width: 480px) {
+  .hdp-wrapper {
+    width: 460px;
+  }
+
+  .hdp-wrapper .month-wrapper {
+    position: relative;
+  }
+
+  .hdp-wrapper .month-wrapper:before {
+    background: #ccc;
+    bottom: 0;
+    content: '';
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
+
+  .hdp-wrapper .month1 {
+    float: left;
+  }
+
+  .hdp-wrapper .month2 {
+    float: right;
+  }
+
+  .hdp-wrapper table {
+    font-size: .75em;
+  }
+}
+
+@media (min-width: 768px) {
+  .hdp-wrapper {
+    width: 560px;
+  }
+
+  .hdp-wrapper table {
+    font-size: 1em;
+  }
+
+  .hdp-wrapper .drp_top-bar {
+    padding: .7em 2em .7em 0;
+    position: relative;
+  }
+
+  .hdp-wrapper .apply-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
