@@ -1,5 +1,5 @@
 /*!
- * Hotel Datepicker Plugin v1.0.0
+ * Hotel Datepicker Plugin v1.0.1
  * https://github.com/lopezb/hotel-datepicker
  *
  * Original work Copyright (c) 2015 Chunlong
