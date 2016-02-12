@@ -1,6 +1,6 @@
 {
   "name": "hotel-datepicker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Benito Lopez <me@benitolopez.me> (http://benitolopez.me)",
   "license": "MIT",
   "description": "Date range picker for hotels",
