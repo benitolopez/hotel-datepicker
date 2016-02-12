@@ -40,3 +40,9 @@ gulp.task('compress', function() {
 });
 
 gulp.task('default', ['sass', 'lint', 'compress']);
+
+gulp.task('watch', function () {
+  gulp.watch(files.js, ['lint']);
+  gulp.watch(files.js, ['compress']);
+  gulp.watch(files.scss);
+});
