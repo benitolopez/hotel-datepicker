@@ -80,6 +80,13 @@ Minimum nights required to select a range of dates.
 
 Maximum nights required to select a range of dates.
 
+### selectForward
+
+- Type: `Boolean`
+- Default: `false`
+
+If `true`, the selection of the second date must be after the first date. If `false`, you can select a range of dates in both directions.
+
 ### container
 
 - Type: `Element`

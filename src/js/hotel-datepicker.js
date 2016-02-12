@@ -31,6 +31,7 @@
             endDate: false,
             minNights: 1,
             maxNights: 0,
+            selectForward: false,
             container: '', // default container of the input
             duration: 200,
             hoveringTooltip: true, // or function
@@ -378,7 +379,7 @@
                 }
 
                 // check if date is before opt.start
-                if (time < opt.start) {
+                if (opt.selectForward && time < opt.start) {
                     return false;
                 }
             }
