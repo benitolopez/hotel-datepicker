@@ -1,5 +1,5 @@
 /*!
- * Hotel Datepicker Plugin v1.0.1
+ * Hotel Datepicker Plugin v1.0.2
  * https://github.com/lopezb/hotel-datepicker
  *
  * Original work Copyright (c) 2015 Chunlong
@@ -41,14 +41,8 @@
                 'night': 'Night',
                 'nights': 'Nights',
                 'apply': 'Close',
-                'week-1': 'mo',
-                'week-2': 'tu',
-                'week-3': 'we',
-                'week-4': 'th',
-                'week-5': 'fr',
-                'week-6': 'sa',
-                'week-7': 'su',
-                'month-name': ['january','february','march','april','may','june','july','august','september','october','november','december'],
+                'day-names': ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+                'month-names': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
                 'less-than': 'Date range should not be more than %d night(s)',
                 'more-than': 'Date range should not be less than %d night(s)',
                 'default-more': 'Please select a date range longer than %d night(s)',
@@ -636,7 +630,7 @@
         }
 
         function nameMonth(m) {
-            return lang('month-name')[m];
+            return lang('month-names')[m];
         }
 
         function getDateString(d) {
@@ -742,21 +736,21 @@
 
         function getWeekHead() {
             if (opt.startOfWeek === 'monday') {
-                return '<th>' + lang('week-1') + '</th>' +
-                    '<th>' + lang('week-2') + '</th>' +
-                    '<th>' + lang('week-3') + '</th>' +
-                    '<th>' + lang('week-4') + '</th>' +
-                    '<th>' + lang('week-5') + '</th>' +
-                    '<th>' + lang('week-6') + '</th>' +
-                    '<th>' + lang('week-7') + '</th>';
+                return '<th>' + lang('day-names')[1] + '</th>' +
+                    '<th>' + lang('day-names')[2] + '</th>' +
+                    '<th>' + lang('day-names')[3] + '</th>' +
+                    '<th>' + lang('day-names')[4] + '</th>' +
+                    '<th>' + lang('day-names')[5] + '</th>' +
+                    '<th>' + lang('day-names')[6] + '</th>' +
+                    '<th>' + lang('day-names')[0] + '</th>';
             } else {
-                return '<th>'+lang('week-7') + '</th>' +
-                    '<th>' + lang('week-1') + '</th>' +
-                    '<th>' + lang('week-2') + '</th>' +
-                    '<th>' + lang('week-3') + '</th>' +
-                    '<th>' + lang('week-4') + '</th>' +
-                    '<th>' + lang('week-5') + '</th>' +
-                    '<th>' + lang('week-6') + '</th>';
+                return '<th>' + lang('day-names')[0] + '</th>' +
+                    '<th>' + lang('day-names')[1] + '</th>' +
+                    '<th>' + lang('day-names')[2] + '</th>' +
+                    '<th>' + lang('day-names')[3] + '</th>' +
+                    '<th>' + lang('day-names')[4] + '</th>' +
+                    '<th>' + lang('day-names')[5] + '</th>' +
+                    '<th>' + lang('day-names')[6] + '</th>';
             }
         }
 
