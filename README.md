@@ -4,6 +4,8 @@ This is a fork of [jQuery Date Range Picker Plugin](https://github.com/longbill/
 
 Another difference is that it uses *nights* instead of *days* to calculate the date range. For this reason, the plugin is perfect for hotels.
 
+![Hotel Datepicker](https://dl.dropboxusercontent.com/u/48106753/hotel-datepicker.png "Hotel Datepicker")
+
 ## Installation
 
 Include files:
