@@ -1,5 +1,5 @@
 /*!
- * Hotel Datepicker Plugin v1.0.2
+ * Hotel Datepicker Plugin v1.1.0
  * https://github.com/lopezb/hotel-datepicker
  *
  * Original work Copyright (c) 2015 Chunlong
@@ -32,6 +32,7 @@
             minNights: 1,
             maxNights: 0,
             selectForward: false,
+            disabledDated: [],
             container: '', // default container of the input
             duration: 200,
             hoveringTooltip: true, // or function
@@ -375,6 +376,34 @@
                 // check if date is before opt.start
                 if (opt.selectForward && time < opt.start) {
                     return false;
+                }
+
+                if (opt.disabledDates) {
+                    var valid = true;
+                    var timeTmp = time;
+
+                    while (countDays(timeTmp, opt.start) > 1) {
+                        if (opt.disabledDates.indexOf(fecha.format(timeTmp, 'YYYY-MM-DD')) !== -1) {
+                            valid = false;
+                            break;
+                        }
+
+                        if (Math.abs(timeTmp - opt.start) < 86400000) {
+                            break;
+                        }
+
+                        if (timeTmp > opt.start) {
+                            timeTmp -= 86400000;
+                        }
+
+                        if (timeTmp < opt.start) {
+                            timeTmp += 86400000;
+                        }
+                    }
+
+                    if (!valid) {
+                        return false;
+                    }
                 }
             }
 
@@ -883,6 +912,12 @@
 
                     singleDay.extraClass = '';
                     singleDay.tooltip = '';
+
+                    if (singleDay.valid && opt.disabledDates) {
+						singleDay.valid = opt.disabledDates.indexOf(fecha.format(singleDay.time, 'YYYY-MM-DD')) !== -1 ? '' : 'valid';
+						singleDay.extraClass = '';
+						singleDay.tooltip = '';
+					}
 
                     var todayDivAttr = {
                         time: singleDay.time,

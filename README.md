@@ -89,6 +89,13 @@ Maximum nights required to select a range of dates.
 
 If `true`, the selection of the second date must be after the first date. If `false`, you can select a range of dates in both directions.
 
+### disabledDates
+
+- Type: `Array`
+- Default: `[]`
+
+An array of strings in this format: `YYYY-MM-DD`. If not empty, those dates will be disabled. 
+
 ### container
 
 - Type: `Element`
