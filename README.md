@@ -94,7 +94,7 @@ If `true`, the selection of the second date must be after the first date. If `fa
 - Type: `Array`
 - Default: `[]`
 
-An array of strings in this format: `YYYY-MM-DD`. If not empty, those dates will be disabled. 
+An array of strings in this format: `YYYY-MM-DD`. All the dates passed to the list will be disabled. 
 
 ### container
 
