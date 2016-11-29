@@ -1,5 +1,5 @@
 /*!
- * Hotel Datepicker Plugin v1.1.0
+ * Hotel Datepicker Plugin v1.2.0
  * https://github.com/lopezb/hotel-datepicker
  *
  * Original work Copyright (c) 2015 Chunlong
@@ -17,6 +17,7 @@
         // defaults
         opt = $.extend(true, {
             format: 'YYYY-MM-DD',
+            infoFormat: 'YYYY-MM-DD',
             separator: ' - ',
             startOfWeek: 'sunday', // or monday
             getValue: function() {
@@ -64,6 +65,8 @@
         if (opt.endDate && typeof opt.endDate === 'string') {
             opt.endDate = fecha.parse(opt.endDate, opt.format);
         }
+
+        opt.infoFormat = opt.infoFormat ? opt.infoFormat : opt.format;
 
         var box;
         var initiated = false;
@@ -535,11 +538,11 @@
             box.find('.selected-days').hide();
 
             if (opt.start) {
-                box.find('.start-day').html(getDateString(new Date(parseInt(opt.start))));
+                box.find('.start-day').html(fecha.format(new Date(parseInt(opt.start)), opt.infoFormat));
             }
 
             if (opt.end) {
-                box.find('.end-day').html(getDateString(new Date(parseInt(opt.end))));
+                box.find('.end-day').html(fecha.format(new Date(parseInt(opt.end)), opt.infoFormat));
             }
 
             if (opt.start && opt.end) {

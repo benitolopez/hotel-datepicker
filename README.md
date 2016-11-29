@@ -40,6 +40,13 @@ $('#input-id').hotelDatePicker(options);
 
 The date format string.
 
+### infoFormat
+
+- Type: `String`
+- Default: `YYYY-MM-DD`
+
+The date format string in the info box. If not set, it uses the `format` option.
+
 ### separator
 
 - Type: `String`
