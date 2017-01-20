@@ -3,7 +3,7 @@
 
 export default class HotelDatepicker {
 	constructor(input, options) {
-		// Set default values
+        // Set default values
 		const opts = options || {};
 
 		this.format = opts.format || 'YYYY-MM-DD';
@@ -44,17 +44,17 @@ export default class HotelDatepicker {
 			input.value = s;
 		};
 
-		// DOM input
+        // DOM input
 		this.input = input;
 
-		// Initialize the datepicker
+        // Initialize the datepicker
 		this.init();
 	}
 
 	getWeekDayNames() {
 		let week = '';
 
-		// Start from monday if we passed that option
+        // Start from monday if we passed that option
 		if (this.startOfWeek === 'monday') {
 			for (let i = 0; i < 7; i++) {
 				week += '<th class="datepicker__week-name">' + this.lang('day-names')[(1 + i) % 7] + '</th>';
@@ -63,7 +63,7 @@ export default class HotelDatepicker {
 			return week;
 		}
 
-		// Otherwise start from sunday (default)
+        // Otherwise start from sunday (default)
 		for (let i = 0; i < 7; i++) {
 			week += '<th class="datepicker__week-name">' + this.lang('day-names')[i] + '</th>';
 		}
@@ -72,100 +72,100 @@ export default class HotelDatepicker {
 	}
 
 	getMonthDom(month) {
-		// Get month DOM element
+        // Get month DOM element
 		return document.getElementById(this.getMonthTableId(month));
 	}
 
 	getMonthName(m) {
-		// Get month name
+        // Get month name
 		return this.lang('month-names')[m];
 	}
 
 	getDatepickerId() {
-		// Get datepicker ID
+        // Get datepicker ID
 		return 'datepicker-' + this.generateId();
 	}
 
 	getMonthTableId(month) {
-		// Get month table ID
+        // Get month table ID
 		return 'month-' + month + '-' + this.generateId();
 	}
 
 	getCloseButtonId() {
-		// Get close button ID
+        // Get close button ID
 		return 'close-' + this.generateId();
 	}
 
 	getTooltipId() {
-		// Get close button ID
+        // Get close button ID
 		return 'tooltip-' + this.generateId();
 	}
 
 	getNextMonth(month) {
-		// Get next month date
+        // Get next month date
 		const _m = new Date(month.valueOf());
 
 		return new Date(_m.setMonth(_m.getMonth() + 1));
 	}
 
 	getPrevMonth(month) {
-		// Get previous month date
+        // Get previous month date
 		const _m = new Date(month.valueOf());
 
 		return new Date(_m.setMonth(_m.getMonth() - 1));
 	}
 
 	getDateString(date, format = this.format) {
-		// Format date
+        // Format date
 		return fecha.format(date, format);
 	}
 
 	parseDate(date, format = this.format) {
-		// Parse a date object
+        // Parse a date object
 		return fecha.parse(date, format);
 	}
 
 	init() {
-		// DOM container
+        // DOM container
 		this.parent = this.container ? this.container : this.input.parentElement;
 
-		// Start date of the selected range
+        // Start date of the selected range
 		this.start = false;
 
-		// End date of the selected range
+        // End date of the selected range
 		this.end = false;
 
-		// Set the minimum of days required by the daterange
+        // Set the minimum of days required by the daterange
 		this.minDays = this.minNights > 1 ? this.minNights + 1 : 2;
 
-		// Set the maximum of days required by the daterange
+        // Set the maximum of days required by the daterange
 		this.maxDays = this.maxNights > 1 ? this.maxNights + 1 : 0;
 
-		// Set startDate if we passed that option
+        // Set startDate if we passed that option
 		if (this.startDate && typeof this.startDate === 'string') {
 			this.startDate = this.parseDate(this.startDate);
 		}
 
-		// Set endDate if we passed that option
+        // Set endDate if we passed that option
 		if (this.endDate && typeof this.endDate === 'string') {
 			this.endDate = this.parseDate(this.endDate);
 		}
 
-		// Hide tooltip on touch devices
+        // Hide tooltip on touch devices
 		if (this.isTouchDevice()) {
 			this.hoveringTooltip = false;
 		}
 
-		// Flag that checks if the datepicker is open
+        // Flag that checks if the datepicker is open
 		this.isOpen = false;
 
-		// Flag that checks if the second date of the range is set
+        // Flag that checks if the second date of the range is set
 		this.changed = false;
 
-		// Create the DOM elements
+        // Create the DOM elements
 		this.createDom();
 
-		// Set default time
+        // Set default time
 		let defaultTime = new Date();
 
 		if (this.startDate && this.compareMonth(defaultTime, this.startDate) < 0) {
@@ -176,73 +176,76 @@ export default class HotelDatepicker {
 			defaultTime = this.getPrevMonth(this.endDate);
 		}
 
-		// Show months
+        // Show months
 		this.showMonth(defaultTime, 1);
 		this.showMonth(this.getNextMonth(defaultTime), 2);
 
-		// Print default info in top bar
+        // Print default info in top bar
 		this.topBarDefaultText();
 
-		// Parse disabled dates
+        // Parse disabled dates
 		if (this.disabledDates.length > 0) {
 			this.parseDisabledDates();
 		}
 
-		// Attach listeners
+        // Attach listeners
 		this.addListeners();
 	}
 
 	addListeners() {
-		// Next month button
+        // Next month button
 		const nextButtons = this.datepicker.getElementsByClassName('datepicker__month-button--next');
 
 		for (let i = 0; i < nextButtons.length; i++) {
 			nextButtons[i].addEventListener('click', evt => this.goToNextMonth(evt));
 		}
 
-		// Previous month button
+        // Previous month button
 		const prevButtons = this.datepicker.getElementsByClassName('datepicker__month-button--prev');
 
 		for (let i = 0; i < prevButtons.length; i++) {
 			prevButtons[i].addEventListener('click', evt => this.goToPreviousMonth(evt));
 		}
 
-		// Open the datepicker on the input click
+        // Open the datepicker on the input click
 		this.input.addEventListener('click', evt => this.openDatepicker(evt));
 
-		// Close the datepicker on the button click
+        // Close the datepicker on the button click
 		document.getElementById(this.getCloseButtonId()).addEventListener('click', evt => this.closeDatepicker(evt));
 
-		// Close the datepicker on resize
-		window.addEventListener('resize', evt => this.closeDatepicker(evt));
+        // Close the datepicker on resize?
+        // The problem is that mobile keyboards trigger the resize event closing
+        // the datepicker. There are some workarounds (http://stackoverflow.com/q/14902321)
+        // but for now I will disable this option. I'm open to new ideas.
+        // window.addEventListener('resize', evt => this.closeDatepicker(evt));
 
-		// Add a click event listener to the document. This will help us to:
-		// 1 - Check if the click it's outside the datepicker
-		// 2 - Handle the click on calendar days
+        // Add a click event listener to the document. This will help us to:
+        // 1 - Check if the click it's outside the datepicker
+        // 2 - Handle the click on calendar days
 		document.addEventListener('click', evt => this.documentClick(evt));
 
-		// Add a mouseover event listener to the document. This will help us to:
-		// 1 - Handle the hover on calendar days
+        // Add a mouseover event listener to the document. This will help us to:
+        // 1 - Handle the hover on calendar days
 		document.addEventListener('mouseover', evt => this.documentHover(evt));
 
-		// Add a mouseout event listener to the document. This will help us to:
-		// 1 - Hide the tooltip on the mouseout event on days
+        // Add a mouseout event listener to the document. This will help us to:
+        // 1 - Hide the tooltip on the mouseout event on days
 		document.addEventListener('mouseout', evt => this.documentMouseOut(evt));
 
-		// Update the selected values when the input changes manually
+        // Update the selected values when the input changes manually
 		this.input.addEventListener('change', () => this.checkAndSetDefaultValue());
 	}
 
 	generateId() {
-		// Generate an unique ID for each datepicker
+        // Generate an unique ID for each datepicker
 		let id = '';
 
-		// Use input ID if set
+        // Use input ID if set
 		if (this.input.id) {
 			id += this.input.id;
-		// Otherwise create a random string
+        // Otherwise create a random string
 		} else {
-			// @todo - Is a date string unique enough?
+            // @todo - Is a date string unique enough?
 			id += Date.now();
 		}
 
@@ -252,41 +255,41 @@ export default class HotelDatepicker {
 	createDom() {
 		const domString = this.createDatepickerDomString();
 
-		// Insert the datepicker in the document
+        // Insert the datepicker in the document
 		this.parent.insertAdjacentHTML('beforeend', domString);
 
-		// Store our datepicker in a property
+        // Store our datepicker in a property
 		this.datepicker = document.getElementById(this.getDatepickerId());
 	}
 
 	createDatepickerDomString() {
-		// Generate our datepicker
+        // Generate our datepicker
 		let html = '<div id="' + this.getDatepickerId() + '" style="display:none" class="datepicker datepicker--closed">';
 
 		html += '<div class="datepicker__inner">';
 
-		// Top bar section
+        // Top bar section
 		html += '<div class="datepicker__topbar">' +
-					'<div class="datepicker__info datepicker__info--selected"><span class="datepicker__info datepicker__info--selected-label">' + this.lang('selected') + ' </span> <strong class="datepicker__info-text datepicker__info-text--start-day">...</strong>' +
-						' <span class="datepicker__info-text datepicker__info--separator">' + this.separator + '</span> <strong class="datepicker__info-text datepicker__info-text--end-day">...</strong> <em class="datepicker__info-text datepicker__info-text--selected-days">(<span></span>)</em>' +
-					'</div>' +
+                    '<div class="datepicker__info datepicker__info--selected"><span class="datepicker__info datepicker__info--selected-label">' + this.lang('selected') + ' </span> <strong class="datepicker__info-text datepicker__info-text--start-day">...</strong>' +
+                        ' <span class="datepicker__info-text datepicker__info--separator">' + this.separator + '</span> <strong class="datepicker__info-text datepicker__info-text--end-day">...</strong> <em class="datepicker__info-text datepicker__info-text--selected-days">(<span></span>)</em>' +
+                    '</div>' +
 
-					'<div class="datepicker__info datepicker__info--feedback"></div>' +
+                    '<div class="datepicker__info datepicker__info--feedback"></div>' +
 
-					'<button id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>' +
-				'</div>';
+                    '<button id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>' +
+                '</div>';
 
-		// Months section
+        // Months section
 		html += '<div class="datepicker__months">';
 
-		// Print single months
+        // Print single months
 		for (let i = 1; i <= 2; i++) {
 			html += '<table id="' + this.getMonthTableId(i) + '" class="datepicker__month datepicker__month--month' + i + '"><thead><tr class="datepicker__month-caption"><th><span class="datepicker__month-button datepicker__month-button--prev" month="' + i + '">&lt;</span></th><th colspan="5" class="datepicker__month-name"></th><th><span class="datepicker__month-button datepicker__month-button--next" month="' + i + '">&gt;</span></th></tr><tr class="datepicker__week-days">' + this.getWeekDayNames(i) + '</tr></thead><tbody></tbody></table>';
 		}
 
 		html += '</div>';
 
-		// Tooltip
+        // Tooltip
 		html += '<div style="display:none" id="' + this.getTooltipId() + '" class="datepicker__tooltip"></div>';
 
 		html += '</div>';
@@ -297,25 +300,25 @@ export default class HotelDatepicker {
 	}
 
 	showMonth(date, month) {
-		// Show month table and create the necessary HTML code
+        // Show month table and create the necessary HTML code
 		const name = this.getMonthName(date.getMonth());
 		const monthDom = this.getMonthDom(month);
 		const monthName = monthDom.getElementsByClassName('datepicker__month-name')[0];
 		const monthBody = monthDom.getElementsByTagName('tbody')[0];
 
-		// Month caption
+        // Month caption
 		monthName.textContent = name + ' ' + date.getFullYear();
 
-		// Remove child elements before to insert the new month
+        // Remove child elements before to insert the new month
 		this.emptyElement(monthBody);
 
-		// Append the month
+        // Append the month
 		monthBody.insertAdjacentHTML('beforeend', this.createMonthDomString(date));
 
-		// Check day dates
+        // Check day dates
 		this.updateSelectableRange();
 
-		// Store current month dates
+        // Store current month dates
 		this['month' + month] = date;
 	}
 
@@ -329,27 +332,27 @@ export default class HotelDatepicker {
 		const currentMonth = _date.getMonth();
 
 		if ((dayOfWeek === 0) && (this.startOfWeek === 'monday')) {
-			// Add one week
+            // Add one week
 			dayOfWeek = 7;
 		}
 
-		// If the first day is in the middle of the week, push also
-		// the first days of the week (the days before our first day).
-		// We need a complete week row.
-		// Obviously, these days are part of the previous month.
+        // If the first day is in the middle of the week, push also
+        // the first days of the week (the days before our first day).
+        // We need a complete week row.
+        // Obviously, these days are part of the previous month.
 		if (dayOfWeek > 0) {
 			for (let i = dayOfWeek; i > 0; i--) {
 				const _day = new Date(_date.getTime() - (86400000 * i));
 
-				// Check if the day is valid. And pass this property to the days object
+                // Check if the day is valid. And pass this property to the days object
 				valid = this.isValidDate(_day.getTime());
 
 				if ((this.startDate && this.compareDay(_day, this.startDate) < 0) || (this.endDate && this.compareDay(_day, this.endDate) > 0)) {
 					valid = false;
 				}
 
-				// We pass the type property to know if the day is part of the
-				// previous month. We already know that it is true.
+                // We pass the type property to know if the day is part of the
+                // previous month. We already know that it is true.
 				days.push({
 					date: _day,
 					type: 'lastMonth',
@@ -360,22 +363,22 @@ export default class HotelDatepicker {
 			}
 		}
 
-		// Push 40 days. Each month table needs the days of the month plus
-		// the remaining days (of the week row) before the first day of the month
-		// and after the last day of the month. (PS. They will be hidden)
-		// 40 days are enough to cover all the possibilities.
+        // Push 40 days. Each month table needs the days of the month plus
+        // the remaining days (of the week row) before the first day of the month
+        // and after the last day of the month. (PS. They will be hidden)
+        // 40 days are enough to cover all the possibilities.
 		for (let i = 0; i < 40; i++) {
 			const _day = this.addDays(_date, i);
 
-			// Check if the day is valid. And pass this property to the days object
+            // Check if the day is valid. And pass this property to the days object
 			valid = this.isValidDate(_day.getTime());
 
 			if ((this.startDate && this.compareDay(_day, this.startDate) < 0) || (this.endDate && this.compareDay(_day, this.endDate) > 0)) {
 				valid = false;
 			}
 
-			// We pass the type property to know if the day is part of the
-			// current month or part of the next month
+            // We pass the type property to know if the day is part of the
+            // current month or part of the next month
 			days.push({
 				date: _day,
 				type: _day.getMonth() === currentMonth ? 'visibleMonth' : 'nextMonth',
@@ -385,41 +388,48 @@ export default class HotelDatepicker {
 			});
 		}
 
-		// Create the week rows.
+        // Create the week rows.
 		for (let week = 0; week < 6; week++) {
-			// Iterate the days object week by week.
-			// If the last day is part of the next month, stop the loop.
+            // Iterate the days object week by week.
+            // If the last day is part of the next month, stop the loop.
 			if (days[week * 7].type === 'nextMonth') {
 				break;
 			}
 
+            // Flag for disabled dates
+			let flag = 0;
+
 			html += '<tr class="datepicker__week-row">';
 
-			// Create the days of a week, one by one
+            // Create the days of a week, one by one
 			for (let i = 0; i < 7; i++) {
 				let _day = (this.startOfWeek === 'monday') ? i + 1 : i;
 				_day = days[(week * 7) + _day];
 				const isToday = this.getDateString(_day.time) === this.getDateString(new Date());
 				let isDisabled = false;
 
-				// Check if the day is one of the days passed in the
-				// (optional) disabledDates option. And set valid to
-				// false in this case.
+                // Check if the day is one of the days passed in the
+                // (optional) disabledDates option. And set valid to
+                // false in this case.
 				if (_day.valid && this.disabledDates.length > 0) {
-					// if (this.end && _day.time)
+                    // if (this.end && _day.time)
 					if (this.disabledDates.indexOf(this.getDateString(_day.time, 'YYYY-MM-DD')) > -1) {
 						_day.valid = false;
 						isDisabled = true;
+
+						flag++;
+					} else {
+						flag = 0;
 					}
 				}
 
-				// Each day has the "time" attribute (timestamp) and an appropriate class
+                // Each day has the "time" attribute (timestamp) and an appropriate class
 				const dayAttributes = {
 					time: _day.time,
-					class: 'datepicker__month-day--' + _day.type + ' datepicker__month-day--' + (_day.valid ? 'valid' : 'invalid') + ' ' + (isToday ? 'datepicker__month-day--today' : '') + ' ' + (isDisabled ? 'datepicker__month-day--disabled' : '')
+					class: 'datepicker__month-day--' + _day.type + ' datepicker__month-day--' + (_day.valid ? 'valid' : 'invalid') + ' ' + (isToday ? 'datepicker__month-day--today' : '') + ' ' + (isDisabled ? 'datepicker__month-day--disabled' : '') + ' ' + (isDisabled && this.enableCheckout && (flag === 1) ? 'datepicker__month-day--checkout-enabled' : '')
 				};
 
-				// Create the day HTML
+                // Create the day HTML
 				html += '<td class="datepicker__month-day ' + dayAttributes.class + '" ' + this.printAttributes(dayAttributes) + '>' + _day.day + '</td>';
 			}
 
@@ -430,87 +440,87 @@ export default class HotelDatepicker {
 	}
 
 	openDatepicker() {
-		// Open the datepicker
+        // Open the datepicker
 		if (!this.isOpen) {
-			// Add/remove helper classes
+            // Add/remove helper classes
 			this.removeClass(this.datepicker, 'datepicker--closed');
 			this.addClass(this.datepicker, 'datepicker--open');
 
-			// Set (and check) the range value based on the current input value
+            // Set (and check) the range value based on the current input value
 			this.checkAndSetDefaultValue();
 
-			// Slide down the datepicker
+            // Slide down the datepicker
 			this.slideDown(this.datepicker, this.animationSpeed);
 
-			// Set flag
+            // Set flag
 			this.isOpen = true;
 
-			// Show selected days in the calendar
+            // Show selected days in the calendar
 			this.showSelectedDays();
 
-			// Disable (if needed) the prev/next buttons
+            // Disable (if needed) the prev/next buttons
 			this.disableNextPrevButtons();
 		}
 	}
 
 	closeDatepicker() {
-		// Close the datepicker
+        // Close the datepicker
 		if (!this.isOpen) {
 			return;
 		}
 
-		// Add/remove helper classes
+        // Add/remove helper classes
 		this.removeClass(this.datepicker, 'datepicker--open');
 		this.addClass(this.datepicker, 'datepicker--closed');
 
-		// Slide up the datepicker
+        // Slide up the datepicker
 		this.slideUp(this.datepicker, this.animationSpeed);
 		this.isOpen = false;
 	}
 
 	autoclose() {
-		// Autoclose the datepicker when the second date is set
+        // Autoclose the datepicker when the second date is set
 		if (this.autoClose && this.changed && this.isOpen && this.start && this.end) {
 			this.closeDatepicker();
 		}
 	}
 
 	documentClick(evt) {
-		// Check if the click was outside the datepicker and close it
+        // Check if the click was outside the datepicker and close it
 		if (!this.parent.contains(evt.target) && evt.target !== this.input) {
 			this.closeDatepicker();
 		} else if (evt.target.tagName.toLowerCase() === 'td') {
-			// Check if the click was on a calendar day
+            // Check if the click was on a calendar day
 			this.dayClicked(evt.target);
 		}
 	}
 
 	documentHover(evt) {
-		// Check if the hover is on a calendar day
+        // Check if the hover is on a calendar day
 		if (evt.target.tagName.toLowerCase() === 'td') {
 			this.dayHovering(evt.target);
 		}
 	}
 
 	documentMouseOut(evt) {
-		// Check if the mouseout is on a calendar day
+        // Check if the mouseout is on a calendar day
 		if (evt.target.tagName.toLowerCase() === 'td') {
-			// Hide the tooltip
+            // Hide the tooltip
 			const tooltipContainer = document.getElementById(this.getTooltipId());
 			tooltipContainer.style.display = 'none';
 		}
 	}
 
 	checkAndSetDefaultValue() {
-		// Set range based on the input value
+        // Set range based on the input value
 
-		// Get dates from input value
+        // Get dates from input value
 		const value = this.getValue();
 		const dates = value ? value.split(this.separator) : '';
 
-		// If we have our two dates, set the date range
+        // If we have our two dates, set the date range
 		if (dates && (dates.length >= 2)) {
-			// Format the values correctly
+            // Format the values correctly
 			let _format = this.format;
 
 			if (_format.match(/Do/)) {
@@ -519,7 +529,7 @@ export default class HotelDatepicker {
 				dates[1] = dates[1].replace(/(\d+)(th|nd|st)/, '$1');
 			}
 
-			// Set the date range
+            // Set the date range
 			this.changed = false;
 			this.setDateRange(this.parseDate(dates[0], _format), this.parseDate(dates[1], _format));
 			this.changed = true;
@@ -530,7 +540,7 @@ export default class HotelDatepicker {
 	}
 
 	setDateRange(date1, date2) {
-		// Swap dates if needed
+        // Swap dates if needed
 		if (date1.getTime() > date2.getTime()) {
 			let tmp = date2;
 
@@ -541,27 +551,27 @@ export default class HotelDatepicker {
 
 		let valid = true;
 
-		// Check the validity of the dates
+        // Check the validity of the dates
 		if ((this.startDate && this.compareDay(date1, this.startDate) < 0) || (this.endDate && this.compareDay(date2, this.endDate) > 0)) {
 			valid = false;
 		}
 
-		// If not valid, reset the datepicker
+        // If not valid, reset the datepicker
 		if (!valid) {
-			// Show default (initial) months
+            // Show default (initial) months
 			this.showMonth(this.startDate, 1);
 			this.showMonth(this.getNextMonth(this.startDate), 2);
 
-			// Show selected days in the calendar
+            // Show selected days in the calendar
 			this.showSelectedDays();
 
-			// Disable (if needed) the prev/next buttons
+            // Disable (if needed) the prev/next buttons
 			this.disableNextPrevButtons();
 
 			return;
 		}
 
-		// Calculate the next month value
+        // Calculate the next month value
 		this.start = date1.getTime();
 		this.end = date2.getTime();
 
@@ -573,57 +583,57 @@ export default class HotelDatepicker {
 			date2 = this.getNextMonth(date1);
 		}
 
-		// Show the months
+        // Show the months
 		this.showMonth(date1, 1);
 		this.showMonth(date2, 2);
 
-		// Show selected days in the calendar
+        // Show selected days in the calendar
 		this.showSelectedDays();
 
-		// Disable (if needed) the prev/next buttons
+        // Disable (if needed) the prev/next buttons
 		this.disableNextPrevButtons();
 
-		// Check the selection
+        // Check the selection
 		this.checkSelection();
 
-		// Show selected dates in top bar
+        // Show selected dates in top bar
 		this.showSelectedInfo();
 
-		// Close the datepicker
+        // Close the datepicker
 		this.autoclose();
 	}
 
 	showSelectedDays() {
-		// Show selected days in the calendar
+        // Show selected days in the calendar
 
-		// Return early if we don't have the start and end dates
+        // Return early if we don't have the start and end dates
 		if (!this.start && !this.end) {
 			return;
 		}
 
-		// Get every td in the months table: our days
+        // Get every td in the months table: our days
 		const days = this.datepicker.getElementsByTagName('td');
 
-		// Iterate each day and assign an appropriate HTML class
-		// if they are selected in the date range
+        // Iterate each day and assign an appropriate HTML class
+        // if they are selected in the date range
 		for (let i = 0; i < days.length; i++) {
 			const time = parseInt(days[i].getAttribute('time'), 10);
 
-			// Add selected class
+            // Add selected class
 			if ((this.start && this.end && this.end >= time && this.start <= time) || (this.start && !this.end && this.getDateString(this.start, 'YYYY-MM-DD') === this.getDateString(time, 'YYYY-MM-DD'))) {
 				this.addClass(days[i], 'datepicker__month-day--selected');
 			} else {
 				this.removeClass(days[i], 'datepicker__month-day--selected');
 			}
 
-			// Add class to the first day of the range
+            // Add class to the first day of the range
 			if (this.start && this.getDateString(this.start, 'YYYY-MM-DD') === this.getDateString(time, 'YYYY-MM-DD')) {
 				this.addClass(days[i], 'datepicker__month-day--first-day-selected');
 			} else {
 				this.removeClass(days[i], 'datepicker__month-day--first-day-selected');
 			}
 
-			// Add class to the last day of the range
+            // Add class to the last day of the range
 			if (this.end && this.getDateString(this.end, 'YYYY-MM-DD') === this.getDateString(time, 'YYYY-MM-DD')) {
 				this.addClass(days[i], 'datepicker__month-day--last-day-selected');
 			} else {
@@ -633,45 +643,45 @@ export default class HotelDatepicker {
 	}
 
 	showSelectedInfo() {
-		// Show selected range in top bar
+        // Show selected range in top bar
 		const selectedInfo = this.datepicker.getElementsByClassName('datepicker__info--selected')[0];
 		const elStart = selectedInfo.getElementsByClassName('datepicker__info-text--start-day')[0];
 		const elEnd = selectedInfo.getElementsByClassName('datepicker__info-text--end-day')[0];
 		const elSelected = selectedInfo.getElementsByClassName('datepicker__info-text--selected-days')[0];
 		const closeButton = document.getElementById(this.getCloseButtonId());
 
-		// Set default text and hide the count element
+        // Set default text and hide the count element
 		elStart.textContent = '...';
 		elEnd.textContent = '...';
 		elSelected.style.display = 'none';
 
-		// Show first date
+        // Show first date
 		if (this.start) {
 			selectedInfo.style.display = '';
 			elStart.textContent = this.getDateString(new Date(parseInt(this.start, 10)), this.infoFormat);
 		}
 
-		// Show second date
+        // Show second date
 		if (this.end) {
 			elEnd.textContent = this.getDateString(new Date(parseInt(this.end, 10)), this.infoFormat);
 		}
 
-		// If both dates are set, show the count and set the value of our input
+        // If both dates are set, show the count and set the value of our input
 		if (this.start && this.end) {
 			const count = this.countDays(this.end, this.start) - 1;
 			const countText = count === 1 ? count + ' ' + this.lang('night') : count + ' ' + this.lang('nights');
 			const dateRangeValue = this.getDateString(new Date(this.start)) + this.separator + this.getDateString(new Date(this.end));
 
-			// Show count
+            // Show count
 			elSelected.style.display = '';
 			elSelected.firstElementChild.textContent = countText;
 			closeButton.disabled = false;
 
-			// Set input value
+            // Set input value
 			this.setValue(dateRangeValue);
 			this.changed = true;
 		} else {
-			// Disable the close button until a valid date range
+            // Disable the close button until a valid date range
 			closeButton.disabled = true;
 		}
 	}
@@ -691,7 +701,7 @@ export default class HotelDatepicker {
 			this.end = time;
 		}
 
-		// Swap dates if they are inverted
+        // Swap dates if they are inverted
 		if (this.start && this.end && this.start > this.end) {
 			const tmp = this.end;
 
@@ -702,52 +712,52 @@ export default class HotelDatepicker {
 		this.start = parseInt(this.start, 10);
 		this.end = parseInt(this.end, 10);
 
-		// Remove hovering class from every day and hide tooltip
+        // Remove hovering class from every day and hide tooltip
 		this.clearHovering();
 
         // Show hover
 		if (this.start && !this.end) {
-			// Add hovering class
+            // Add hovering class
 			this.dayHovering(day);
 		}
 
-		// Check day dates
+        // Check day dates
 		this.updateSelectableRange();
 
-		// Check the selection
+        // Check the selection
 		this.checkSelection();
 
-		// Show selected dates in top bar
+        // Show selected dates in top bar
 		this.showSelectedInfo();
 
-		// Show selected days in the calendar
+        // Show selected days in the calendar
 		this.showSelectedDays();
 
-		// Close the datepicker
+        // Close the datepicker
 		this.autoclose();
 	}
 
 	isValidDate(time) {
-		// Check if the date is valid
+        // Check if the date is valid
 		time = parseInt(time, 10);
 
 		if ((this.startDate && this.compareDay(time, this.startDate) < 0) || (this.endDate && this.compareDay(time, this.endDate) > 0)) {
 			return false;
 		}
 
-		// Update valid dates during the selection
+        // Update valid dates during the selection
 		if (this.start && !this.end) {
-			// Check maximum/minimum days
+            // Check maximum/minimum days
 			if ((this.maxDays > 0 && this.countDays(time, this.start) > this.maxDays) || (this.minDays > 0 && this.countDays(time, this.start) < this.minDays)) {
 				return false;
 			}
 
-			// Check if date is before first date of range
+            // Check if date is before first date of range
 			if (this.selectForward && time < this.start) {
 				return false;
 			}
 
-			// Check the disabled dates
+            // Check the disabled dates
 			if (this.disabledDates.length > 0) {
 				const limit = this.getClosestDates(new Date(parseInt(this.start, 10)));
 
@@ -772,7 +782,7 @@ export default class HotelDatepicker {
 			this.start = false;
 			this.end = false;
 
-			// Remove selected class from each day
+            // Remove selected class from each day
 			const days = this.datepicker.getElementsByTagName('td');
 			for (let i = 0; i < days.length; i++) {
 				this.removeClass(days[i], 'datepicker__month-day--selected');
@@ -780,14 +790,14 @@ export default class HotelDatepicker {
 				this.removeClass(days[i], 'datepicker__month-day--last-day-selected');
 			}
 
-			// Show error in top bar
+            // Show error in top bar
 			const errorValue = this.maxDays - 1;
 			this.topBarErrorText(bar, 'error-more', errorValue);
 		} else if (this.minDays && numberOfDays < this.minDays) {
 			this.start = false;
 			this.end = false;
 
-			// Remove selected class from each day
+            // Remove selected class from each day
 			const days = this.datepicker.getElementsByTagName('td');
 			for (let i = 0; i < days.length; i++) {
 				this.removeClass(days[i], 'datepicker__month-day--selected');
@@ -795,22 +805,22 @@ export default class HotelDatepicker {
 				this.removeClass(days[i], 'datepicker__month-day--last-day-selected');
 			}
 
-			// Show error in top bar
+            // Show error in top bar
 			const errorValue = this.minDays - 1;
 			this.topBarErrorText(bar, 'error-less', errorValue);
 		} else if (this.start || this.end) {
-			// Remove error and help classes from top bar
+            // Remove error and help classes from top bar
 			this.removeClass(bar, 'datepicker__info--error');
 			this.removeClass(bar, 'datepicker__info--help');
 		} else {
-			// Show help message
+            // Show help message
 			this.removeClass(bar, 'datepicker__info--error');
 			this.addClass(bar, 'datepicker__info--help');
 		}
 	}
 
 	addDays(date, days) {
-		// Add xx days to date
+        // Add xx days to date
 		const result = new Date(date);
 
 		result.setDate(result.getDate() + days);
@@ -819,12 +829,12 @@ export default class HotelDatepicker {
 	}
 
 	countDays(start, end) {
-		// Return days between two dates
+        // Return days between two dates
 		return Math.abs(this.daysFrom1970(start) - this.daysFrom1970(end)) + 1;
 	}
 
 	compareDay(day1, day2) {
-		// Compare two days: check if day1 is before/after/same day of day2
+        // Compare two days: check if day1 is before/after/same day of day2
 		const p = parseInt(this.getDateString(day1, 'YYYYMMDD'), 10) - parseInt(this.getDateString(day2, 'YYYYMMDD'), 10);
 
 		if (p > 0) {
@@ -839,7 +849,7 @@ export default class HotelDatepicker {
 	}
 
 	compareMonth(month1, month2) {
-		// Compare two months: check if month1 is before/after/same month of month2
+        // Compare two months: check if month1 is before/after/same month of month2
 		const p = parseInt(this.getDateString(month1, 'YYYYMM'), 10) - parseInt(this.getDateString(month2, 'YYYYMM'), 10);
 
 		if (p > 0) {
@@ -854,12 +864,12 @@ export default class HotelDatepicker {
 	}
 
 	daysFrom1970(t) {
-		// Get days from 1970
+        // Get days from 1970
 		return Math.floor(this.toLocalTimestamp(t) / 86400000);
 	}
 
 	toLocalTimestamp(t) {
-		// Convert timestamp to local timestamp
+        // Convert timestamp to local timestamp
 		if (typeof t === 'object' && t.getTime) {
 			t = t.getTime();
 		}
@@ -874,7 +884,7 @@ export default class HotelDatepicker {
 	}
 
 	printAttributes(obj) {
-		// Print object attributes in a DOM element
+        // Print object attributes in a DOM element
 		const _obj = obj;
 		let attribute = '';
 
@@ -888,60 +898,60 @@ export default class HotelDatepicker {
 	}
 
 	goToNextMonth(e) {
-		// Go to the next month
+        // Go to the next month
 		const thisMonth = e.target.getAttribute('month');
 		const isMonth2 = thisMonth > 1;
 		let nextMonth = isMonth2 ? this.month2 : this.month1;
 
 		nextMonth = this.getNextMonth(nextMonth);
 
-		// Dont't go to the next month if:
-		// 1. The second month is visible and it is the next month after
-		//    our current month
-		// 2. The month is after the (optional) endDate. There's no need
-		//    to show other months in this case.
+        // Dont't go to the next month if:
+        // 1. The second month is visible and it is the next month after
+        //    our current month
+        // 2. The month is after the (optional) endDate. There's no need
+        //    to show other months in this case.
 		if ((!this.isSingleMonth() && !isMonth2 && this.compareMonth(nextMonth, this.month2) >= 0) || this.isMonthOutOfRange(nextMonth)) {
 			return;
 		}
 
-		// We can now show the month and proceed
+        // We can now show the month and proceed
 		this.showMonth(nextMonth, thisMonth);
 		this.showSelectedDays();
 		this.disableNextPrevButtons();
 	}
 
 	goToPreviousMonth(e) {
-		// Go to the previous month
+        // Go to the previous month
 		const thisMonth = e.target.getAttribute('month');
 		const isMonth2 = thisMonth > 1;
 		let prevMonth = isMonth2 ? this.month2 : this.month1;
 
 		prevMonth = this.getPrevMonth(prevMonth);
 
-		// Dont't go to the previous month if:
-		// 1. The click it's in the second month and the month we need is already
-		//    shown in the first month
-		// 2. The month is before the (optional) startDate. There's no need
-		//    to show other months in this case.
+        // Dont't go to the previous month if:
+        // 1. The click it's in the second month and the month we need is already
+        //    shown in the first month
+        // 2. The month is before the (optional) startDate. There's no need
+        //    to show other months in this case.
 		if ((isMonth2 && this.compareMonth(prevMonth, this.month1) <= 0) || this.isMonthOutOfRange(prevMonth)) {
 			return;
 		}
 
-		// We can now show the month and proceed
+        // We can now show the month and proceed
 		this.showMonth(prevMonth, thisMonth);
 		this.showSelectedDays();
 		this.disableNextPrevButtons();
 	}
 
 	isSingleMonth() {
-		// Check if the second month is visible
+        // Check if the second month is visible
 		return !this.isVisible(this.getMonthDom(2));
 	}
 
 	isMonthOutOfRange(month) {
 		const _m = new Date(month.valueOf());
 
-		// Return true for months before the startDate and months after the endDate
+        // Return true for months before the startDate and months after the endDate
 		if ((this.startDate && (new Date(_m.getFullYear(), _m.getMonth() + 1, 0, 23, 59, 59) < this.startDate)) || (this.endDate && (new Date(_m.getFullYear(), _m.getMonth(), 1) > this.endDate))) {
 			return true;
 		}
@@ -949,8 +959,8 @@ export default class HotelDatepicker {
 		return false;
 	}
 
-	// Disable next/prev buttons according to the value of the prev/next
-	// month. We don't want two same months at the same time!
+    // Disable next/prev buttons according to the value of the prev/next
+    // month. We don't want two same months at the same time!
 	disableNextPrevButtons() {
 		if (this.isSingleMonth()) {
 			return;
@@ -960,10 +970,10 @@ export default class HotelDatepicker {
 		const month2 = parseInt(this.getDateString(this.month2, 'YYYYMM'), 10);
 		const d = Math.abs(month1 - month2);
 
-		// First month "next" month button
+        // First month "next" month button
 		const nextButton = this.datepicker.getElementsByClassName('datepicker__month-button--next')[0];
 
-		// Second month "previous" month button
+        // Second month "previous" month button
 		const prevButton = this.datepicker.getElementsByClassName('datepicker__month-button--prev')[1];
 
 		if (d > 1 && d !== 89) {
@@ -976,7 +986,7 @@ export default class HotelDatepicker {
 	}
 
 	topBarDefaultText() {
-		// Show help message on top bar
+        // Show help message on top bar
 		let topBarText = '';
 
 		if (this.minDays && this.maxDays) {
@@ -997,7 +1007,7 @@ export default class HotelDatepicker {
 	}
 
 	topBarErrorText(bar, errorText, errorValue) {
-		// Show error message on top bar
+        // Show error message on top bar
 		this.addClass(bar, 'datepicker__info--error');
 		this.removeClass(bar, 'datepicker__info--help');
 
@@ -1009,7 +1019,7 @@ export default class HotelDatepicker {
 			errorText = this.lang(errorText);
 		}
 
-		// And hide the selected info
+        // And hide the selected info
 		const selectedInfo = this.datepicker.getElementsByClassName('datepicker__info--selected')[0];
 		selectedInfo.style.display = 'none';
 	}
@@ -1018,7 +1028,7 @@ export default class HotelDatepicker {
 		const days = this.datepicker.getElementsByTagName('td');
 		const isSelecting = this.start && !this.end;
 
-		// Add needed classes
+        // Add needed classes
 		for (let i = 0; i < days.length; i++) {
 			if (this.hasClass(days[i], 'datepicker__month-day--invalid') && this.hasClass(days[i], 'datepicker__month-day--tmp')) {
 				this.removeClass(days[i], 'datepicker__month-day--invalid');
@@ -1026,7 +1036,7 @@ export default class HotelDatepicker {
 				this.addClass(days[i], 'datepicker__month-day--valid');
 			}
 
-			// Update day classes during the date range selection
+            // Update day classes during the date range selection
 			if (isSelecting) {
 				if (this.hasClass(days[i], 'datepicker__month-day--visibleMonth') && (this.hasClass(days[i], 'datepicker__month-day--valid') || this.hasClass(days[i], 'datepicker__month-day--disabled'))) {
 					const time = parseInt(days[i].getAttribute('time'), 10);
@@ -1035,6 +1045,7 @@ export default class HotelDatepicker {
 						this.addClass(days[i], 'datepicker__month-day--valid');
 						this.addClass(days[i], 'datepicker__month-day--tmp');
 						this.removeClass(days[i], 'datepicker__month-day--invalid');
+						this.removeClass(days[i], 'datepicker__month-day--disabled');
 					} else {
 						this.addClass(days[i], 'datepicker__month-day--invalid');
 						this.addClass(days[i], 'datepicker__month-day--tmp');
@@ -1052,10 +1063,10 @@ export default class HotelDatepicker {
 		let tooltip = '';
 
 		if (!this.hasClass(day, 'datepicker__month-day--invalid')) {
-			// Get every td in the months table: our days
+            // Get every td in the months table: our days
 			const days = this.datepicker.getElementsByTagName('td');
 
-			// Iterate each day and add the hovering class
+            // Iterate each day and add the hovering class
 			for (let i = 0; i < days.length; i++) {
 				const time = parseInt(days[i].getAttribute('time'), 10);
 
@@ -1072,7 +1083,7 @@ export default class HotelDatepicker {
 				}
 			}
 
-			// Generate date range tooltip
+            // Generate date range tooltip
 			if (this.start && !this.end) {
 				const nights = this.countDays(hoverTime, this.start) - 1;
 
@@ -1087,7 +1098,7 @@ export default class HotelDatepicker {
 			}
 		}
 
-		// Show tooltip on hovering and set its position
+        // Show tooltip on hovering and set its position
 		if (tooltip) {
 			const dayBounding = day.getBoundingClientRect();
 			const datepickerBounding = this.datepicker.getBoundingClientRect();
@@ -1116,23 +1127,23 @@ export default class HotelDatepicker {
 	}
 
 	clearHovering() {
-		// Remove hovering class from every day
+        // Remove hovering class from every day
 		const days = this.datepicker.getElementsByTagName('td');
 		for (let i = 0; i < days.length; i++) {
 			this.removeClass(days[i], 'datepicker__month-day--hovering');
 		}
 
-		// Hide the tooltip
+        // Hide the tooltip
 		const tooltipContainer = document.getElementById(this.getTooltipId());
 		tooltipContainer.style.display = 'none';
 	}
 
 	clearSelection() {
-		// Reset start and end dates
+        // Reset start and end dates
 		this.start = false;
 		this.end = false;
 
-		// Remove selected classes
+        // Remove selected classes
 		const days = this.datepicker.getElementsByTagName('td');
 		for (let i = 0; i < days.length; i++) {
 			this.removeClass(days[i], 'datepicker__month-day--selected');
@@ -1140,13 +1151,13 @@ export default class HotelDatepicker {
 			this.removeClass(days[i], 'datepicker__month-day--last-day-selected');
 		}
 
-		// Reset input
+        // Reset input
 		this.setValue('');
 
-		// Check the selection
+        // Check the selection
 		this.checkSelection();
 
-		// Show selected dates in top bar
+        // Show selected dates in top bar
 		this.showSelectedInfo();
 
         // Show selected days in the calendar
@@ -1154,7 +1165,7 @@ export default class HotelDatepicker {
 	}
 
 	parseDisabledDates() {
-		// Sort disabled dates and store it in property
+        // Sort disabled dates and store it in property
 		const _tmp = [];
 
 		for (let i = 0; i < this.disabledDates.length; i++) {
@@ -1169,28 +1180,28 @@ export default class HotelDatepicker {
 	}
 
 	getClosestDates(x) {
-		// This method implements part of the work done by the user Zeta
-		// http://stackoverflow.com/a/11795472
+        // This method implements part of the work done by the user Zeta
+        // http://stackoverflow.com/a/11795472
 
-		// Return an array with two elements:
-		// - The closest date on the left
-		// - The closest date on the right
+        // Return an array with two elements:
+        // - The closest date on the left
+        // - The closest date on the right
 		let dates = [false, false];
 
-		// If the day is before the first disabled date return early
+        // If the day is before the first disabled date return early
 		if (x < this.disabledDatesTime[0]) {
-			// Add one day if we want include the checkout
+            // Add one day if we want include the checkout
 			if (this.enableCheckout) {
 				dates = [false, this.addDays(this.disabledDatesTime[0], 1)];
-			// Otherwise use the first date of the array
+            // Otherwise use the first date of the array
 			} else {
 				dates = [false, this.disabledDatesTime[0]];
 			}
 
-		// If the day is after the last disabled date return early
+        // If the day is after the last disabled date return early
 		} else if (x > this.disabledDatesTime[this.disabledDatesTime.length - 1]) {
 			dates = [this.disabledDatesTime[this.disabledDatesTime.length - 1], false];
-		// Otherwise calculate the closest dates
+        // Otherwise calculate the closest dates
 		} else {
 			let bestPrevDate = this.disabledDatesTime.length;
 			let bestNextDate = this.disabledDatesTime.length;
@@ -1220,10 +1231,10 @@ export default class HotelDatepicker {
 
 			if (typeof this.disabledDatesTime[bestPrevDate] === 'undefined') {
 				dates[1] = false;
-			// Add one day if we want include the checkout
+            // Add one day if we want include the checkout
 			} else if (this.enableCheckout) {
 				dates[1] = this.addDays(this.disabledDatesTime[bestNextDate], 1);
-			// Otherwise use the date of the array
+            // Otherwise use the date of the array
 			} else {
 				dates[1] = this.disabledDatesTime[bestNextDate];
 			}
@@ -1233,46 +1244,46 @@ export default class HotelDatepicker {
 	}
 
 	lang(s) {
-		// Return i18n string
+        // Return i18n string
 		return (s in this.i18n) ? this.i18n[s] : '';
 	}
 
 	emptyElement(element) {
-		// Remove all child elements of a DOM node
+        // Remove all child elements of a DOM node
 		while (element.firstChild) {
 			element.removeChild(element.firstChild);
 		}
 	}
 
-	// Helper regex for DOM classes
+    // Helper regex for DOM classes
 	classRegex(c) {
 		return new RegExp('(^|\\s+)' + c + '(\\s+|$)');
 	}
 
-	// Check if an element has a class
+    // Check if an element has a class
 	hasClass(el, c) {
 		return this.classRegex(c).test(el.className);
 	}
 
-	// Add a class to the element
+    // Add a class to the element
 	addClass(el, c) {
 		if (!this.hasClass(el, c)) {
 			el.className = el.className + ' ' + c;
 		}
 	}
 
-	// Remove class from element
+    // Remove class from element
 	removeClass(el, c) {
 		el.className = el.className.replace(this.classRegex(c), ' ');
 	}
 
 	isVisible(element) {
-		// Check if a DOM element is visible
+        // Check if a DOM element is visible
 		return (element.offsetWidth || element.offsetHeight || element.getClientRects().length);
 	}
 
 	slideDown(element, speed) {
-		// Slide down an element
+        // Slide down an element
 		element.style.display = '';
 		const h = element.getBoundingClientRect().height;
 		element.style.height = 0;
@@ -1285,7 +1296,7 @@ export default class HotelDatepicker {
 	}
 
 	slideUp(element, speed) {
-		// Slide up an element
+        // Slide up an element
 		const h = element.getBoundingClientRect().height;
 		element.style.height = h + 'px';
 		this.recalc(element.offsetHeight);
@@ -1297,19 +1308,19 @@ export default class HotelDatepicker {
 	}
 
 	recalc(element) {
-		// Force browser recalculation
+        // Force browser recalculation
 		return element.offsetHeight;
 	}
 
 	isTouchDevice() {
-		// This *does not* necessarily reflect a touchscreen device!!!
-		// http://www.stucox.com/blog/you-cant-detect-a-touchscreen/
+        // This *does not* necessarily reflect a touchscreen device!!!
+        // http://www.stucox.com/blog/you-cant-detect-a-touchscreen/
 		return (('ontouchstart' in window) || (window.DocumentTouch && document instanceof DocumentTouch));
 	}
 
-	// ------------------ //
-	//   PUBLIC METHODS   //
-	// ------------------ //
+    // ------------------ //
+    //   PUBLIC METHODS   //
+    // ------------------ //
 
 	open() {
 		this.openDatepicker();
