@@ -65,8 +65,25 @@
 }
 
 .datepicker__month-day--invalid {
-	color: $text__disabled__color;
+	color: $text__invalid__color;
 }
+
+.datepicker__month-day--disabled {
+	color: $text__invalid__color;
+	position: relative;
+
+	&:after {
+		content: '\00d7';
+		left: 50%;
+		position: absolute;
+		color: red;
+		font-size: 16px;
+		top: 50%;
+		transform: translate(-50%,-50%);
+	}
+}
+
+.datepicker__month-day--checkout-enabled {}
 
 .datepicker__month-day--selected {
 	background-color: rgba($accent__color,.5);
@@ -87,6 +104,10 @@
 .datepicker__month-day--last-day-selected {
 	background-color: $accent__color;
 	color: #fff;
+}
+
+.datepicker__month-day--last-day-selected:after {
+	content: none;
 }
 
 .datepicker__month-button {

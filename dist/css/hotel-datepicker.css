@@ -107,6 +107,21 @@
   color: #e8ebf4;
 }
 
+.datepicker__month-day--disabled {
+  color: #e8ebf4;
+  position: relative;
+}
+
+.datepicker__month-day--disabled:after {
+  content: '\00d7';
+  left: 50%;
+  position: absolute;
+  color: red;
+  font-size: 16px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .datepicker__month-day--selected {
   background-color: rgba(116, 107, 253, 0.5);
   color: #fff;
@@ -126,6 +141,10 @@
 .datepicker__month-day--last-day-selected {
   background-color: #746bfd;
   color: #fff;
+}
+
+.datepicker__month-day--last-day-selected:after {
+  content: none;
 }
 
 .datepicker__month-button {
