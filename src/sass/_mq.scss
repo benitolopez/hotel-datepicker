@@ -1,0 +1,21 @@
+$breakpoint__s: 320px;
+$breakpoint__m: 480px;
+$breakpoint__l: 768px;
+
+@mixin mq_s {
+	@media (min-width: $breakpoint__s) {
+		@content;
+	}
+}
+
+@mixin mq_m {
+	@media (min-width: $breakpoint__m) {
+		@content;
+	}
+}
+
+@mixin mq_l {
+	@media (min-width: $breakpoint__l) {
+		@content;
+	}
+}

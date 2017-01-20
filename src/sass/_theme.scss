@@ -1,0 +1,184 @@
+/* =============================================================
+ * THEME
+ * ============================================================*/
+
+.datepicker {
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 8px 8px 40px 5px rgba(0,0,0,.08);
+	color: $text__base__color;
+	font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
+	font-size: 14px;
+	line-height: 14px;
+}
+
+.datepicker__inner {
+	padding: 20px;
+}
+
+.datepicker__month {
+	font-size: 12px;
+}
+
+.datepicker__months {
+	@include mq_m {
+		position: relative;
+
+		&:before {
+			background: $line__border__color;
+			bottom: 0;
+			content: '';
+			display: block;
+			left: 50%;
+			position: absolute;
+			top: 0;
+			width: 1px;
+		}
+	}
+}
+
+.datepicker__month-caption {
+	border-bottom: 1px solid $line__border__color;
+	height: 2.5em;
+	vertical-align: middle;
+}
+
+.datepicker__month-name {
+	text-transform: uppercase;
+}
+
+.datepicker__week-days {
+	height: 2em;
+	vertical-align: middle;
+}
+
+.datepicker__week-name {
+	font-size: 11px;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+
+.datepicker__month-day {
+	@include transition;
+	color: $text__light__color;
+	padding: 9px 7px;
+}
+
+.datepicker__month-day--invalid {
+	color: $text__disabled__color;
+}
+
+.datepicker__month-day--selected {
+	background-color: rgba($accent__color,.5);
+	color: #fff;
+}
+
+.datepicker__month-day--hovering {
+	background-color: rgba($accent__color,.3);
+	color: #fff;
+}
+
+.datepicker__month-day--today {
+	background-color: $text__base__color;
+	color: #fff;
+}
+
+.datepicker__month-day--first-day-selected,
+.datepicker__month-day--last-day-selected {
+	background-color: $accent__color;
+	color: #fff;
+}
+
+.datepicker__month-button {
+	@include transition;
+	background-color: $button__bg__color;
+	border-radius: 4px;
+	color: $button__txt__color;
+	display: inline-block;
+	padding: 5px 10px;
+
+	&:hover {
+		background-color: $button__bg__hover__color;
+		color: $button__txt__hover__color;
+	}
+}
+
+.datepicker__topbar {
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.datepicker__info-text {
+	font-size: 13px;
+}
+
+.datepicker__info--selected {
+	font-size: 11px;
+	text-transform: uppercase;
+}
+
+.datepicker__info--selected-label {
+	color: $text__light__color;
+}
+
+.datepicker__info-text--selected-days {
+	font-size: 11px;
+	font-style: normal;
+}
+
+.datepicker__info--error {
+	color: red;
+	font-size: 13px;
+	font-style: italic;
+}
+
+.datepicker__info--help {
+	color: $text__light__color;
+	font-style: italic;
+}
+
+.datepicker__close-button {
+	@include transition;
+	background-color: $button__bg__hover__color;
+	border-radius: 4px;
+	border: none;
+	box-shadow: none;
+	font-size: 10px;
+	color: $button__txt__hover__color;
+	margin-top: 20px;
+	padding: 7px 13px;
+	text-decoration: none;
+	text-shadow: none;
+	text-transform: uppercase;
+
+	&:hover {
+		background-color: $text__base__color;
+		color: #fff;
+	}
+
+	@include mq_l {
+		margin-top: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+
+.datepicker__tooltip {
+	background-color: #ffe684;
+	border-radius: 2px;
+	font-size: 11px;
+	margin-top: -5px;
+	padding: 5px 10px;
+
+	&:after {
+		border-left: 4px solid transparent;
+		border-right: 4px solid transparent;
+		border-top: 4px solid #ffe684;
+		bottom: -4px;
+		content: '';
+		left: 50%;
+		margin-left: -4px;
+		position: absolute;
+	}
+}

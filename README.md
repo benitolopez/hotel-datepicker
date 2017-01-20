@@ -1,10 +1,8 @@
 # Hotel Datepicker
 
-This is a fork of [jQuery Date Range Picker Plugin](https://github.com/longbill/jquery-date-range-picker) by Chunlong. The main difference is that Hotel Datepicker uses [Fecha](https://github.com/taylorhakes/fecha) instead of Moment.js. And a lot of options of jQuery Date Range Picker Plugin are not available in Hotel Datepicker. Hotel Datepicker is a light version of jQuery Date Range Picker Plugin.
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-Another difference is that it uses *nights* instead of *days* to calculate the date range. For this reason, the plugin is perfect for hotels.
-
-![Hotel Datepicker](https://dl.dropboxusercontent.com/u/48106753/hotel-datepicker.png "Hotel Datepicker")
+A pure Javascript date range picker for hotels. Requires [Fecha](https://github.com/taylorhakes/fecha) and supports all modern browsers.
 
 ## Installation
 
@@ -12,15 +10,14 @@ Include files:
 
 ```html
 <link  href="/path/to/hotel-datepicker.css" rel="stylesheet"><!-- Optional -->
-<script src="/path/to/jquery.js"></script>
 <script src="/path/to/fecha.js"></script>
-<script src="/path/to/hotel-datepicker.js"></script>
+<script src="/path/to/hotel-datepicker.min.js"></script>
 
 ```
 
 ## Usage
 
-Initialize with `$.fn.hotelDatePicker` method.
+Initialize with vanilla JS.
 
 ```html
 <input id="input-id" type="text">
@@ -28,7 +25,7 @@ Initialize with `$.fn.hotelDatePicker` method.
 ```
 
 ```js
-$('#input-id').hotelDatePicker(options);
+var hdpkr = new HotelDatepicker(document.getElementById('input-id'), options);
 ```
 
 ## Options
@@ -101,7 +98,14 @@ If `true`, the selection of the second date must be after the first date. If `fa
 - Type: `Array`
 - Default: `[]`
 
-An array of strings in this format: `YYYY-MM-DD`. All the dates passed to the list will be disabled. 
+An array of strings in this format: `YYYY-MM-DD`. All the dates passed to the list will be disabled.
+
+### enableCheckout
+
+- Type: `Boolean`
+- Default: `false`
+
+If `true`, allows the checkout on a disabled date. But with a criteria. Let's say we have these disabled dates: `03 April 2020` and `04 April 2020`. With this option enabled, an user can still select the first date (`03 April 2020`) for the checkout. But not `04 April 2020`.
 
 ### container
 
@@ -110,12 +114,12 @@ An array of strings in this format: `YYYY-MM-DD`. All the dates passed to the li
 
 An element for putting the datepicker. If not set, the datepicker will be appended to the parent of the input.
 
-### duration
+### animationSpeed
 
-- Type: `Number`
-- Default: `200`
+- Type: `String`
+- Default: `.5s`
 
-The duration of the animation (open/close datepicker).
+The duration (in seconds) of the animation (open/close datepicker).
 
 ### hoveringTooltip
 
@@ -137,6 +141,13 @@ hoveringTooltip: function(nights, startTime, hoverTime) {
 
 Show/hide the toolbar.
 
+### autoClose
+
+- Type: `Boolean`
+- Default: `true`
+
+Close the datepicker after the selection of the second date.
+
 ### i18n
 
 - Type: `Object`
@@ -148,20 +159,14 @@ i18n: {
     'selected': 'Your stay:',
     'night': 'Night',
     'nights': 'Nights',
-    'apply': 'Close',
-    'week-1': 'mo',
-    'week-2': 'tu',
-    'week-3': 'we',
-    'week-4': 'th',
-    'week-5': 'fr',
-    'week-6': 'sa',
-    'week-7': 'su',
-    'month-name': ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
-    'less-than': 'Date range should not be more than %d night(s)',
-    'more-than': 'Date range should not be less than %d night(s)',
-    'default-more': 'Please select a date range longer than %d night(s)',
-    'default-range': 'Please select a date range between %d and %d night(s)',
-    'default-default': 'Please select a date range'
+    'button': 'Close',
+    'day-names': ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+    'month-names': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    'error-more': 'Date range should not be more than %d night(s)',
+    'error-less': 'Date range should not be less than %d night(s)',
+    'info-more': 'Please select a date range longer than %d night(s)',
+    'info-range': 'Please select a date range between %d and %d night(s)',
+    'info-default': 'Please select a date range'
 }
 ```
 
@@ -169,18 +174,42 @@ i18n: {
 
 ### getValue()
 
-This function is called when get date range string from DOM.
+This function is called when the picker gets the date range string from the input.
 
 ### setValue()
 
-This function is called when set date range string to DOM.
+This function is called when the picker sets the input value.
+
+## API
+
+### open()
+
+Opens the datepicker.
+
+### close()
+
+Closes the datepicker.
+
+### getDatePicker()
+
+Gets the datepicker DOM element.
+
+### setRange(d1, d2)
+
+Sets the date range value.
+
+### clear()
+
+Clears the datepicker value.
 
 ## Versioning
 
 Maintained under the [Semantic Versioning guidelines](http://semver.org/).
 
+## Credits
+
+Hotel Datepicker was initially developed as a fork of [jQuery Date Range Picker Plugin](https://github.com/longbill/jquery-date-range-picker) by Chunlong. But it was entirely rewritten in the version 2. It is now an independent project.
+
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
-Original work Copyright (c) 2015 [Chunlong](https://github.com/longbill/jquery-date-range-picker)
-Modified work Copyright 2016 [Benito Lopez](http://benitolopez.me)
+[MIT](http://opensource.org/licenses/MIT) Copyright (c) 2017 [Benito Lopez](http://lopezb.com)
