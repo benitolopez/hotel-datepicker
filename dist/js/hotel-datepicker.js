@@ -1,4 +1,4 @@
-/*! hotel-datepicker 2.0.1 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 2.0.2 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -694,7 +694,7 @@ HotelDatepicker.prototype.showSelectedInfo = function showSelectedInfo () {
 		closeButton.disabled = false;
 
             // Set input value
-		this.setValue(dateRangeValue);
+		this.setValue(dateRangeValue, this.getDateString(new Date(this.start)), this.getDateString(new Date(this.end)));
 		this.changed = true;
 	} else {
             // Disable the close button until a valid date range

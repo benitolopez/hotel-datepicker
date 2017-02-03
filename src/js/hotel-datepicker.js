@@ -678,7 +678,7 @@ export default class HotelDatepicker {
 			closeButton.disabled = false;
 
             // Set input value
-			this.setValue(dateRangeValue);
+			this.setValue(dateRangeValue, this.getDateString(new Date(this.start)), this.getDateString(new Date(this.end)));
 			this.changed = true;
 		} else {
             // Disable the close button until a valid date range
