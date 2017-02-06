@@ -1,4 +1,4 @@
-/*! hotel-datepicker 2.0.2 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 2.0.3 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -288,7 +288,7 @@ HotelDatepicker.prototype.createDatepickerDomString = function createDatepickerD
 
                     '<div class="datepicker__info datepicker__info--feedback"></div>' +
 
-                    '<button id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>' +
+                    '<button type="button" id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>' +
                 '</div>';
 
         // Months section

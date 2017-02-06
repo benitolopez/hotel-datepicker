@@ -276,7 +276,7 @@ export default class HotelDatepicker {
 
                     '<div class="datepicker__info datepicker__info--feedback"></div>' +
 
-                    '<button id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>' +
+                    '<button type="button" id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>' +
                 '</div>';
 
         // Months section
