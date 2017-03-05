@@ -139,7 +139,7 @@ export default class HotelDatepicker {
 		this.minDays = this.minNights > 1 ? this.minNights + 1 : 2;
 
         // Set the maximum of days required by the daterange
-		this.maxDays = this.maxNights > 1 ? this.maxNights + 1 : 0;
+		this.maxDays = this.maxNights > 0 ? this.maxNights + 1 : 0;
 
         // Set startDate if we passed that option
 		if (this.startDate && typeof this.startDate === 'string') {

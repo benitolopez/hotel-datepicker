@@ -1,4 +1,4 @@
-/*! hotel-datepicker 2.0.3 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 2.0.4 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -147,7 +147,7 @@ HotelDatepicker.prototype.init = function init () {
 	this.minDays = this.minNights > 1 ? this.minNights + 1 : 2;
 
         // Set the maximum of days required by the daterange
-	this.maxDays = this.maxNights > 1 ? this.maxNights + 1 : 0;
+	this.maxDays = this.maxNights > 0 ? this.maxNights + 1 : 0;
 
         // Set startDate if we passed that option
 	if (this.startDate && typeof this.startDate === 'string') {
