@@ -1,5 +1,6 @@
 'use strict';
 /* global fecha, DocumentTouch */
+/* eslint-disable no-multi-assign */
 
 export default class HotelDatepicker {
 	constructor(input, options) {
@@ -412,7 +413,6 @@ export default class HotelDatepicker {
                 // (optional) disabledDates option. And set valid to
                 // false in this case.
 				if (_day.valid && this.disabledDates.length > 0) {
-                    // if (this.end && _day.time)
 					if (this.disabledDates.indexOf(this.getDateString(_day.time, 'YYYY-MM-DD')) > -1) {
 						_day.valid = false;
 						isDisabled = true;
@@ -497,14 +497,14 @@ export default class HotelDatepicker {
 
 	documentHover(evt) {
         // Check if the hover is on a calendar day
-		if (evt.target.tagName.toLowerCase() === 'td') {
+		if (evt.target.tagName && evt.target.tagName.toLowerCase() === 'td') {
 			this.dayHovering(evt.target);
 		}
 	}
 
 	documentMouseOut(evt) {
         // Check if the mouseout is on a calendar day
-		if (evt.target.tagName.toLowerCase() === 'td') {
+		if (evt.target.tagName && evt.target.tagName.toLowerCase() === 'td') {
             // Hide the tooltip
 			const tooltipContainer = document.getElementById(this.getTooltipId());
 			tooltipContainer.style.display = 'none';

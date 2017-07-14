@@ -1,8 +1,9 @@
-/*! hotel-datepicker 2.0.4 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 2.0.5 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
 /* global fecha, DocumentTouch */
+/* eslint-disable no-multi-assign */
 
 var HotelDatepicker = function HotelDatepicker(input, options) {
         // Set default values
@@ -426,7 +427,6 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
                 // (optional) disabledDates option. And set valid to
                 // false in this case.
 			if (_day$2.valid && this$1.disabledDates.length > 0) {
-                    // if (this.end && _day.time)
 				if (this$1.disabledDates.indexOf(this$1.getDateString(_day$2.time, 'YYYY-MM-DD')) > -1) {
 					_day$2.valid = false;
 					isDisabled = true;
@@ -511,14 +511,14 @@ HotelDatepicker.prototype.documentClick = function documentClick (evt) {
 
 HotelDatepicker.prototype.documentHover = function documentHover (evt) {
         // Check if the hover is on a calendar day
-	if (evt.target.tagName.toLowerCase() === 'td') {
+	if (evt.target.tagName && evt.target.tagName.toLowerCase() === 'td') {
 		this.dayHovering(evt.target);
 	}
 };
 
 HotelDatepicker.prototype.documentMouseOut = function documentMouseOut (evt) {
         // Check if the mouseout is on a calendar day
-	if (evt.target.tagName.toLowerCase() === 'td') {
+	if (evt.target.tagName && evt.target.tagName.toLowerCase() === 'td') {
             // Hide the tooltip
 		var tooltipContainer = document.getElementById(this.getTooltipId());
 		tooltipContainer.style.display = 'none';
