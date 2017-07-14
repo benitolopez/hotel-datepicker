@@ -2,7 +2,8 @@
  * BASE STYLES
  * ============================================================*/
 .datepicker {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   overflow: hidden;
   position: absolute;
   width: 260px;
@@ -59,7 +60,8 @@
 .datepicker {
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
+  -webkit-box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
+          box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
   color: #484c55;
   font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
   font-size: 14px;
@@ -96,9 +98,12 @@
 }
 
 .datepicker__month-day {
-  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  -webkit-transition-property: color, background-color, border-color;
   transition-property: color, background-color, border-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   color: #acb2c1;
   padding: 9px 7px;
 }
@@ -119,7 +124,8 @@
   color: red;
   font-size: 16px;
   top: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .datepicker__month-day--selected {
@@ -148,9 +154,12 @@
 }
 
 .datepicker__month-button {
-  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  -webkit-transition-property: color, background-color, border-color;
   transition-property: color, background-color, border-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #d6dae5;
   border-radius: 4px;
   color: #9da6b8;
@@ -198,13 +207,17 @@
 }
 
 .datepicker__close-button {
-  transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
+  -webkit-transition-property: color, background-color, border-color;
   transition-property: color, background-color, border-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #746bfd;
   border-radius: 4px;
   border: none;
-  box-shadow: none;
+  -webkit-box-shadow: none;
+          box-shadow: none;
   font-size: 10px;
   color: #fff;
   margin-top: 20px;
