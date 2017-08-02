@@ -1169,7 +1169,7 @@ export default class HotelDatepicker {
 		const _tmp = [];
 
 		for (let i = 0; i < this.disabledDates.length; i++) {
-			_tmp[i] = new Date(this.disabledDates[i]);
+			_tmp[i] = fecha.parse(this.disabledDates[i], 'YYYY-MM-DD');
 		}
 
 		_tmp.sort((a, b) => {

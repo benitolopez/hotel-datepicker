@@ -1197,7 +1197,7 @@ HotelDatepicker.prototype.parseDisabledDates = function parseDisabledDates () {
 	var _tmp = [];
 
 	for (var i = 0; i < this.disabledDates.length; i++) {
-		_tmp[i] = new Date(this$1.disabledDates[i]);
+		_tmp[i] = fecha.parse(this$1.disabledDates[i], 'YYYY-MM-DD');
 	}
 
 	_tmp.sort(function (a, b) {
