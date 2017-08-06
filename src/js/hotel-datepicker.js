@@ -571,6 +571,10 @@ export default class HotelDatepicker {
 			return;
 		}
 
+		// Fix DST
+		date1.setTime(date1.getTime() + (12 * 60 * 60 * 1000));
+		date2.setTime(date2.getTime() + (12 * 60 * 60 * 1000));
+
         // Calculate the next month value
 		this.start = date1.getTime();
 		this.end = date2.getTime();
