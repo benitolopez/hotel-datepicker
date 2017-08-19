@@ -207,6 +207,10 @@ Sets the date range value.
 
 Clears the datepicker value.
 
+### getNights()
+
+Gets the number of nights selected. Returns `0` otherwise.
+
 ## Versioning
 
 Maintained under the [Semantic Versioning guidelines](http://semver.org/).
