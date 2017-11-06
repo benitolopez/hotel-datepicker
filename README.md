@@ -211,6 +211,10 @@ Clears the datepicker value.
 
 Gets the number of nights selected. Returns `0` otherwise.
 
+### destroy()
+
+Destroys the datepicker.
+
 ## Versioning
 
 Maintained under the [Semantic Versioning guidelines](http://semver.org/).

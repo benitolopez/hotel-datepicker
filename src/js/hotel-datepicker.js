@@ -209,7 +209,8 @@ export default class HotelDatepicker {
 		}
 
         // Open the datepicker on the input click
-		this.input.addEventListener('click', evt => this.openDatepicker(evt));
+		this.boundOpenDatepicker = evt => this.openDatepicker(evt);
+		this.input.addEventListener('click', this.boundOpenDatepicker);
 
         // Close the datepicker on the button click
 		document.getElementById(this.getCloseButtonId()).addEventListener('click', evt => this.closeDatepicker(evt));
@@ -1374,5 +1375,12 @@ export default class HotelDatepicker {
 		}
 
 		return count;
+	}
+
+	destroy() {
+		if (document.getElementById(this.getDatepickerId())) {
+			this.input.removeEventListener('click', this.boundOpenDatepicker);
+			this.datepicker.parentNode.removeChild(this.datepicker);
+		}
 	}
 }
