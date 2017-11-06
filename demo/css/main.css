@@ -58,26 +58,36 @@ a:hover {
 	color: #484c55;
 }
 
-.button--download {
+.button {
 	background-color: #746bfd;
-	border-radius: 8px;
+	border-radius: 4px;
 	border: none;
 	box-shadow: none;
 	color: #fff;
 	display: inline-block;
 	font-size: 12px;
-	margin-bottom: 1em;
-	margin-top: 2em;
-	padding: 15px 60px;
+	padding: 10px 20px;
 	text-decoration: none;
 	text-shadow: none;
 	text-transform: uppercase;
+	transition-duration: 0.2s;
+	transition-property: color, background-color, border-color;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.button--download:hover {
+.button:hover {
 	background-color: #484c55;
 	color: #fff;
+	cursor: pointer;
 }
+
+.button--download {
+	border-radius: 8px;
+	margin-bottom: 1em;
+	margin-top: 2em;
+	padding: 15px 60px;
+}
+
 
 ul {
 	list-style: none;
@@ -100,7 +110,7 @@ code {
 	background-color: #f5f5f5;
 	font-family: Consolas, Monaco, "Andale Mono", "DejaVu Sans Mono", monospace;
 	font-size: 13px;
-	color: #746bfd;	
+	color: #746bfd;
 }
 
 pre {
