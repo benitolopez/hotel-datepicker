@@ -4,8 +4,11 @@ var HotelDatepicker = (function () {
 
 /* global fecha, DocumentTouch */
 /* eslint-disable no-multi-assign */
+var idCounter = 0;
 
 var HotelDatepicker = function HotelDatepicker(input, options) {
+	this.id = HotelDatepicker.getNewId();
+
         // Set default values
 	var opts = options || {};
 
@@ -52,6 +55,10 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 
         // Initialize the datepicker
 	this.init();
+};
+
+HotelDatepicker.getNewId = function getNewId () {
+	return ++idCounter;
 };
 
 HotelDatepicker.prototype.getWeekDayNames = function getWeekDayNames () {
@@ -250,18 +257,12 @@ HotelDatepicker.prototype.addListeners = function addListeners () {
 
 HotelDatepicker.prototype.generateId = function generateId () {
         // Generate an unique ID for each datepicker
-	var id = '';
-
         // Use input ID if set
 	if (this.input.id) {
-		id += this.input.id;
-        // Otherwise create a random string
-	} else {
-            // @todo - Is a date string unique enough?
-		id += Date.now();
+		return this.input.id;
+        // Otherwise get the instance id
 	}
-
-	return id;
+	return this.id;
 };
 
 HotelDatepicker.prototype.createDom = function createDom () {
