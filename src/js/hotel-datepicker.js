@@ -4,6 +4,8 @@
 
 export default class HotelDatepicker {
 	constructor(input, options) {
+		this._boundedEventHandlers = {};
+
         // Set default values
 		const opts = options || {};
 
@@ -50,6 +52,34 @@ export default class HotelDatepicker {
 
         // Initialize the datepicker
 		this.init();
+	}
+
+	addBoundedListener(node, event, handler, capture) {
+		if (!(node in this._boundedEventHandlers)) {
+            // _boundedEventHandlers stores references to nodes
+			this._boundedEventHandlers[node] = {};
+		}
+		if (!(event in this._boundedEventHandlers[node])) {
+            // Each entry contains another entry for each event type
+			this._boundedEventHandlers[node][event] = [];
+		}
+        // Capture reference
+		const boundedHandler = handler.bind(this);
+		this._boundedEventHandlers[node][event].push([boundedHandler, capture]);
+		node.addEventListener(event, boundedHandler, capture);
+	}
+
+	removeAllBoundedListeners(node, event) {
+		if (node in this._boundedEventHandlers) {
+			const handlers = this._boundedEventHandlers[node];
+			if (event in handlers) {
+				const eventHandlers = handlers[event];
+				for (let i = eventHandlers.length; i--;) {
+					const handler = eventHandlers[i];
+					node.removeEventListener(event, handler[0], handler[1]);
+				}
+			}
+		}
 	}
 
 	getWeekDayNames() {
@@ -209,8 +239,7 @@ export default class HotelDatepicker {
 		}
 
         // Open the datepicker on the input click
-		this.boundOpenDatepicker = evt => this.openDatepicker(evt);
-		this.input.addEventListener('click', this.boundOpenDatepicker);
+		this.addBoundedListener(this.input, 'click', evt => this.openDatepicker(evt));
 
         // Close the datepicker on the button click
 		document.getElementById(this.getCloseButtonId()).addEventListener('click', evt => this.closeDatepicker(evt));
@@ -224,18 +253,18 @@ export default class HotelDatepicker {
         // Add a click event listener to the document. This will help us to:
         // 1 - Check if the click it's outside the datepicker
         // 2 - Handle the click on calendar days
-		document.addEventListener('click', evt => this.documentClick(evt));
+		this.addBoundedListener(document, 'click', evt => this.documentClick(evt));
 
         // Add a mouseover event listener to the document. This will help us to:
         // 1 - Handle the hover on calendar days
-		document.addEventListener('mouseover', evt => this.documentHover(evt));
+		this.addBoundedListener(document, 'mouseover', evt => this.documentHover(evt));
 
         // Add a mouseout event listener to the document. This will help us to:
         // 1 - Hide the tooltip on the mouseout event on days
-		document.addEventListener('mouseout', evt => this.documentMouseOut(evt));
+		this.addBoundedListener(document, 'mouseout', evt => this.documentMouseOut(evt));
 
         // Update the selected values when the input changes manually
-		this.input.addEventListener('change', () => this.checkAndSetDefaultValue());
+		this.addBoundedListener(this.input, 'change', () => this.checkAndSetDefaultValue());
 	}
 
 	generateId() {
@@ -1379,7 +1408,11 @@ export default class HotelDatepicker {
 
 	destroy() {
 		if (document.getElementById(this.getDatepickerId())) {
-			this.input.removeEventListener('click', this.boundOpenDatepicker);
+			this.removeAllBoundedListeners(this.input, 'click');
+			this.removeAllBoundedListeners(document, 'click');
+			this.removeAllBoundedListeners(document, 'mouseover');
+			this.removeAllBoundedListeners(document, 'mouseout');
+			this.removeAllBoundedListeners(this.input, 'change');
 			this.datepicker.parentNode.removeChild(this.datepicker);
 		}
 	}
