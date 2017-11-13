@@ -1,10 +1,12 @@
 'use strict';
 /* global fecha, DocumentTouch */
 /* eslint-disable no-multi-assign */
+let idCounter = 0;
 
 export default class HotelDatepicker {
 	constructor(input, options) {
 		this._boundedEventHandlers = {};
+		this.id = HotelDatepicker.getNewId();
 
         // Set default values
 		const opts = options || {};
@@ -54,6 +56,7 @@ export default class HotelDatepicker {
 		this.init();
 	}
 
+
 	addBoundedListener(node, event, handler, capture) {
 		if (!(node in this._boundedEventHandlers)) {
             // _boundedEventHandlers stores references to nodes
@@ -80,6 +83,9 @@ export default class HotelDatepicker {
 				}
 			}
 		}
+
+	static getNewId() {
+		return ++idCounter;
 	}
 
 	getWeekDayNames() {
@@ -269,18 +275,12 @@ export default class HotelDatepicker {
 
 	generateId() {
         // Generate an unique ID for each datepicker
-		let id = '';
-
         // Use input ID if set
 		if (this.input.id) {
-			id += this.input.id;
-        // Otherwise create a random string
-		} else {
-            // @todo - Is a date string unique enough?
-			id += Date.now();
+			return this.input.id;
+        // Otherwise get the instance id
 		}
-
-		return id;
+		return this.id;
 	}
 
 	createDom() {

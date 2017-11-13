@@ -52,8 +52,8 @@
 		<h3>Demo</h3>
 
 		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo1" value="">
+			<div class="demo__input" id="demo1-input-parent">
+				<input type="text" value="">
 			</div>
 			<p class="demo__description">Default settings with a predefined value in the input</p>
 			<div class="demo__config">
@@ -65,8 +65,8 @@ var datepicker = new HotelDatepicker(input);
 		</div>
 
 		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo2" value="">
+            <div class="demo__input" id="demo2-input-parent">
+				<input type="text" value="">
 			</div>
 			<p class="demo__description">Default settings with an empty input</p>
 			<div class="demo__config">
@@ -296,7 +296,7 @@ function destroyDatepicker() {
 			var today = new Date();
 			var tomorrow = new Date();
 			tomorrow.setDate(tomorrow.getDate() + 1);
-			var input1 = document.getElementById('demo1');
+            var input1 = document.querySelector('#demo1-input-parent input');
 			input1.value = fecha.format(today, 'YYYY-MM-DD') + ' - ' + fecha.format(tomorrow, 'YYYY-MM-DD');
 
 			var demo1 = new HotelDatepicker(input1);
@@ -304,7 +304,7 @@ function destroyDatepicker() {
 
 			// ------------------- DEMO 2 ------------------- //
 
-			var demo2 = new HotelDatepicker(document.getElementById('demo2'));
+            var demo2 = new HotelDatepicker(document.querySelector('#demo2-input-parent input'));
 
 
 			// ------------------- DEMO 3 ------------------- //
