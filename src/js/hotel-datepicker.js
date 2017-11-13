@@ -56,7 +56,6 @@ export default class HotelDatepicker {
 		this.init();
 	}
 
-
 	addBoundedListener(node, event, handler, capture) {
 		if (!(node in this._boundedEventHandlers)) {
             // _boundedEventHandlers stores references to nodes
@@ -83,6 +82,7 @@ export default class HotelDatepicker {
 				}
 			}
 		}
+	}
 
 	static getNewId() {
 		return ++idCounter;

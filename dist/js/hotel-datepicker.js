@@ -58,7 +58,6 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 	this.init();
 };
 
-
 HotelDatepicker.prototype.addBoundedListener = function addBoundedListener (node, event, handler, capture) {
 	if (!(node in this._boundedEventHandlers)) {
             // _boundedEventHandlers stores references to nodes
@@ -85,6 +84,7 @@ HotelDatepicker.prototype.removeAllBoundedListeners = function removeAllBoundedL
 			}
 		}
 	}
+};
 
 HotelDatepicker.getNewId = function getNewId () {
 	return ++idCounter;
