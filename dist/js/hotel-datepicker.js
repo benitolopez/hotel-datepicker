@@ -7,6 +7,7 @@ var HotelDatepicker = (function () {
 var idCounter = 0;
 
 var HotelDatepicker = function HotelDatepicker(input, options) {
+	this._boundedEventHandlers = {};
 	this.id = HotelDatepicker.getNewId();
 
         // Set default values
@@ -55,6 +56,34 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 
         // Initialize the datepicker
 	this.init();
+};
+
+HotelDatepicker.prototype.addBoundedListener = function addBoundedListener (node, event, handler, capture) {
+	if (!(node in this._boundedEventHandlers)) {
+            // _boundedEventHandlers stores references to nodes
+		this._boundedEventHandlers[node] = {};
+	}
+	if (!(event in this._boundedEventHandlers[node])) {
+            // Each entry contains another entry for each event type
+		this._boundedEventHandlers[node][event] = [];
+	}
+        // Capture reference
+	var boundedHandler = handler.bind(this);
+	this._boundedEventHandlers[node][event].push([boundedHandler, capture]);
+	node.addEventListener(event, boundedHandler, capture);
+};
+
+HotelDatepicker.prototype.removeAllBoundedListeners = function removeAllBoundedListeners (node, event) {
+	if (node in this._boundedEventHandlers) {
+		var handlers = this._boundedEventHandlers[node];
+		if (event in handlers) {
+			var eventHandlers = handlers[event];
+			for (var i = eventHandlers.length; i--;) {
+				var handler = eventHandlers[i];
+				node.removeEventListener(event, handler[0], handler[1]);
+			}
+		}
+	}
 };
 
 HotelDatepicker.getNewId = function getNewId () {
@@ -226,8 +255,7 @@ HotelDatepicker.prototype.addListeners = function addListeners () {
 	}
 
         // Open the datepicker on the input click
-	this.boundOpenDatepicker = function (evt) { return this$1.openDatepicker(evt); };
-	this.input.addEventListener('click', this.boundOpenDatepicker);
+	this.addBoundedListener(this.input, 'click', function (evt) { return this$1.openDatepicker(evt); });
 
         // Close the datepicker on the button click
 	document.getElementById(this.getCloseButtonId()).addEventListener('click', function (evt) { return this$1.closeDatepicker(evt); });
@@ -241,18 +269,18 @@ HotelDatepicker.prototype.addListeners = function addListeners () {
         // Add a click event listener to the document. This will help us to:
         // 1 - Check if the click it's outside the datepicker
         // 2 - Handle the click on calendar days
-	document.addEventListener('click', function (evt) { return this$1.documentClick(evt); });
+	this.addBoundedListener(document, 'click', function (evt) { return this$1.documentClick(evt); });
 
         // Add a mouseover event listener to the document. This will help us to:
         // 1 - Handle the hover on calendar days
-	document.addEventListener('mouseover', function (evt) { return this$1.documentHover(evt); });
+	this.addBoundedListener(document, 'mouseover', function (evt) { return this$1.documentHover(evt); });
 
         // Add a mouseout event listener to the document. This will help us to:
         // 1 - Hide the tooltip on the mouseout event on days
-	document.addEventListener('mouseout', function (evt) { return this$1.documentMouseOut(evt); });
+	this.addBoundedListener(document, 'mouseout', function (evt) { return this$1.documentMouseOut(evt); });
 
         // Update the selected values when the input changes manually
-	this.input.addEventListener('change', function () { return this$1.checkAndSetDefaultValue(); });
+	this.addBoundedListener(this.input, 'change', function () { return this$1.checkAndSetDefaultValue(); });
 };
 
 HotelDatepicker.prototype.generateId = function generateId () {
@@ -1410,7 +1438,11 @@ HotelDatepicker.prototype.getNights = function getNights () {
 
 HotelDatepicker.prototype.destroy = function destroy () {
 	if (document.getElementById(this.getDatepickerId())) {
-		this.input.removeEventListener('click', this.boundOpenDatepicker);
+		this.removeAllBoundedListeners(this.input, 'click');
+		this.removeAllBoundedListeners(document, 'click');
+		this.removeAllBoundedListeners(document, 'mouseover');
+		this.removeAllBoundedListeners(document, 'mouseout');
+		this.removeAllBoundedListeners(this.input, 'change');
 		this.datepicker.parentNode.removeChild(this.datepicker);
 	}
 };

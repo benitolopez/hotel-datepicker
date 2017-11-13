@@ -469,7 +469,13 @@ function destroyDatepicker() {
 			destroyButton.addEventListener('click', destroyDatepicker);
 
 			function destroyDatepicker() {
-				demo15.destroy();
+                if (document.getElementById('datepicker-demo15')) {
+                    demo15.destroy();
+                    destroyButton.textContent = "Recreate";
+                } else {
+                    demo15 = new HotelDatepicker(document.getElementById('demo15'));
+                    destroyButton.textContent = "Destroy";
+                }
 			}
 		})();
 	</script>
