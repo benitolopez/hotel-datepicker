@@ -236,6 +236,7 @@ var datepicker = new HotelDatepicker(input, {
 				<pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
+    format: 'dddd d MMM YYYY',
     startOfWeek: 'monday',
     i18n: {
         selected: 'Il tuo soggiorno:',
@@ -442,6 +443,7 @@ function destroyDatepicker() {
 			// ------------------- DEMO 14 ------------------ //
 
 			var demo14 = new HotelDatepicker(document.getElementById('demo14'), {
+                format: 'dddd d MMM YYYY',
 				startOfWeek: 'monday',
 				i18n: {
 					selected: 'Il tuo soggiorno:',
