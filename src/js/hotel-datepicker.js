@@ -256,11 +256,6 @@ export default class HotelDatepicker {
         // but for now I will disable this option. I'm open to new ideas.
         // window.addEventListener('resize', evt => this.closeDatepicker(evt));
 
-        // Add a click event listener to the document. This will help us to:
-        // 1 - Check if the click it's outside the datepicker
-        // 2 - Handle the click on calendar days
-		this.addBoundedListener(document, 'click', evt => this.documentClick(evt));
-
         // Add a mouseover event listener to the document. This will help us to:
         // 1 - Handle the hover on calendar days
 		this.datepicker.addEventListener('mouseover', evt => this.datepickerHover(evt));
@@ -490,6 +485,11 @@ export default class HotelDatepicker {
 
             // Disable (if needed) the prev/next buttons
 			this.disableNextPrevButtons();
+
+            // Add a click event listener to the document. This will help us to:
+            // 1 - Check if the click it's outside the datepicker
+            // 2 - Handle the click on calendar days
+			this.addBoundedListener(document, 'click', evt => this.documentClick(evt));
 		}
 	}
 
@@ -506,6 +506,8 @@ export default class HotelDatepicker {
         // Slide up the datepicker
 		this.slideUp(this.datepicker, this.animationSpeed);
 		this.isOpen = false;
+
+		this.removeAllBoundedListeners(document, 'click');
 	}
 
 	autoclose() {
