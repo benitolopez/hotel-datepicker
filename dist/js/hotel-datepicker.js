@@ -266,18 +266,13 @@ HotelDatepicker.prototype.addListeners = function addListeners () {
         // but for now I will disable this option. I'm open to new ideas.
         // window.addEventListener('resize', evt => this.closeDatepicker(evt));
 
-        // Add a click event listener to the document. This will help us to:
-        // 1 - Check if the click it's outside the datepicker
-        // 2 - Handle the click on calendar days
-	this.addBoundedListener(document, 'click', function (evt) { return this$1.documentClick(evt); });
-
         // Add a mouseover event listener to the document. This will help us to:
         // 1 - Handle the hover on calendar days
-	this.addBoundedListener(document, 'mouseover', function (evt) { return this$1.documentHover(evt); });
+	this.datepicker.addEventListener('mouseover', function (evt) { return this$1.datepickerHover(evt); });
 
         // Add a mouseout event listener to the document. This will help us to:
         // 1 - Hide the tooltip on the mouseout event on days
-	this.addBoundedListener(document, 'mouseout', function (evt) { return this$1.documentMouseOut(evt); });
+	this.datepicker.addEventListener('mouseout', function (evt) { return this$1.datepickerMouseOut(evt); });
 
         // Update the selected values when the input changes manually
 	this.addBoundedListener(this.input, 'change', function () { return this$1.checkAndSetDefaultValue(); });
@@ -484,6 +479,8 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 };
 
 HotelDatepicker.prototype.openDatepicker = function openDatepicker () {
+		var this$1 = this;
+
         // Open the datepicker
 	if (!this.isOpen) {
             // Add/remove helper classes
@@ -504,6 +501,11 @@ HotelDatepicker.prototype.openDatepicker = function openDatepicker () {
 
             // Disable (if needed) the prev/next buttons
 		this.disableNextPrevButtons();
+
+            // Add a click event listener to the document. This will help us to:
+            // 1 - Check if the click it's outside the datepicker
+            // 2 - Handle the click on calendar days
+		this.addBoundedListener(document, 'click', function (evt) { return this$1.documentClick(evt); });
 	}
 };
 
@@ -520,6 +522,8 @@ HotelDatepicker.prototype.closeDatepicker = function closeDatepicker () {
         // Slide up the datepicker
 	this.slideUp(this.datepicker, this.animationSpeed);
 	this.isOpen = false;
+
+	this.removeAllBoundedListeners(document, 'click');
 };
 
 HotelDatepicker.prototype.autoclose = function autoclose () {
@@ -539,14 +543,14 @@ HotelDatepicker.prototype.documentClick = function documentClick (evt) {
 	}
 };
 
-HotelDatepicker.prototype.documentHover = function documentHover (evt) {
+HotelDatepicker.prototype.datepickerHover = function datepickerHover (evt) {
         // Check if the hover is on a calendar day
 	if (evt.target.tagName && evt.target.tagName.toLowerCase() === 'td') {
 		this.dayHovering(evt.target);
 	}
 };
 
-HotelDatepicker.prototype.documentMouseOut = function documentMouseOut (evt) {
+HotelDatepicker.prototype.datepickerMouseOut = function datepickerMouseOut (evt) {
         // Check if the mouseout is on a calendar day
 	if (evt.target.tagName && evt.target.tagName.toLowerCase() === 'td') {
             // Hide the tooltip
@@ -1440,8 +1444,6 @@ HotelDatepicker.prototype.destroy = function destroy () {
 	if (document.getElementById(this.getDatepickerId())) {
 		this.removeAllBoundedListeners(this.input, 'click');
 		this.removeAllBoundedListeners(document, 'click');
-		this.removeAllBoundedListeners(document, 'mouseover');
-		this.removeAllBoundedListeners(document, 'mouseout');
 		this.removeAllBoundedListeners(this.input, 'change');
 		this.datepicker.parentNode.removeChild(this.datepicker);
 	}
