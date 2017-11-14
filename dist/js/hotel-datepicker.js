@@ -33,7 +33,9 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 		night: 'Night',
 		nights: 'Nights',
 		button: 'Close',
-		'day-names': ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+		'day-names-short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+		'day-names': ['Sunday', 'Monday', 'Tueday', 'Wednesday', 'Thurday', 'Friday', 'Satday'],
+		'month-names-short': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
 		'month-names': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 		'error-more': 'Date range should not be more than 1 night',
 		'error-more-plural': 'Date range should not be more than %d nights',
@@ -90,6 +92,13 @@ HotelDatepicker.getNewId = function getNewId () {
 	return ++idCounter;
 };
 
+HotelDatepicker.prototype.setFechaI18n = function setFechaI18n () {
+	fecha.i18n.dayNamesShort = this.i18n['day-names-short'];
+	fecha.i18n.dayNames = this.i18n['day-names'];
+	fecha.i18n.monthNamesShort = this.i18n['month-names-short'];
+	fecha.i18n.monthNames = this.i18n['month-names'];
+};
+
 HotelDatepicker.prototype.getWeekDayNames = function getWeekDayNames () {
 		var this$1 = this;
 
@@ -98,7 +107,7 @@ HotelDatepicker.prototype.getWeekDayNames = function getWeekDayNames () {
         // Start from monday if we passed that option
 	if (this.startOfWeek === 'monday') {
 		for (var i = 0; i < 7; i++) {
-			week += '<th class="datepicker__week-name">' + this$1.lang('day-names')[(1 + i) % 7] + '</th>';
+			week += '<th class="datepicker__week-name">' + this$1.lang('day-names-short')[(1 + i) % 7] + '</th>';
 		}
 
 		return week;
@@ -106,7 +115,7 @@ HotelDatepicker.prototype.getWeekDayNames = function getWeekDayNames () {
 
         // Otherwise start from sunday (default)
 	for (var i$1 = 0; i$1 < 7; i$1++) {
-		week += '<th class="datepicker__week-name">' + this$1.lang('day-names')[i$1] + '</th>';
+		week += '<th class="datepicker__week-name">' + this$1.lang('day-names-short')[i$1] + '</th>';
 	}
 
 	return week;
@@ -160,6 +169,7 @@ HotelDatepicker.prototype.getDateString = function getDateString (date, format) 
 		if ( format === void 0 ) format = this.format;
 
         // Format date
+	this.setFechaI18n();
 	return fecha.format(date, format);
 };
 
@@ -167,6 +177,7 @@ HotelDatepicker.prototype.parseDate = function parseDate (date, format) {
 		if ( format === void 0 ) format = this.format;
 
         // Parse a date object
+	this.setFechaI18n();
 	return fecha.parse(date, format);
 };
 
@@ -1229,7 +1240,7 @@ HotelDatepicker.prototype.parseDisabledDates = function parseDisabledDates () {
 
         // Sort disabled dates and store it in property
 	var _tmp = [];
-
+	this.setFechaI18n();
 	for (var i = 0; i < this.disabledDates.length; i++) {
 		_tmp[i] = fecha.parse(this$1.disabledDates[i], 'YYYY-MM-DD');
 	}
