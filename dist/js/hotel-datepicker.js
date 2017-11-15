@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.0.0 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.0.1 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -1121,6 +1121,13 @@ HotelDatepicker.prototype.updateSelectableRange = function updateSelectableRange
 					this$1.removeClass(days[i], 'datepicker__month-day--valid');
 				}
 			}
+		// At the end of the selection, restore the disabled/invalid class for
+		// days where the checkout is enabled. We need to check this when the
+		// autoclose option is false
+		} else if (this$1.hasClass(days[i], 'datepicker__month-day--checkout-enabled')) {
+			this$1.addClass(days[i], 'datepicker__month-day--invalid');
+			this$1.removeClass(days[i], 'datepicker__month-day--valid');
+			this$1.addClass(days[i], 'datepicker__month-day--disabled');
 		}
 	}
 
