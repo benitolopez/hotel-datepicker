@@ -152,6 +152,8 @@ Close the datepicker after the selection of the second date.
 
 ### i18n
 
+**[BREAK CHANGE]** Two new options has been introduced in the v.3: `month-names-short` and `day-names-short`. Previously, the *short* day name version ('Sun', 'Mon', 'Tue', etc) was used in the `day-names` option. Now, the `day-names` option uses the *long* version.
+
 - Type: `Object`
 
 Default:
