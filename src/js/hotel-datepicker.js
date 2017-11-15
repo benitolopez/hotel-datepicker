@@ -31,7 +31,9 @@ export default class HotelDatepicker {
 			night: 'Night',
 			nights: 'Nights',
 			button: 'Close',
-			'day-names': ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+			'day-names-short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+			'day-names': ['Sunday', 'Monday', 'Tueday', 'Wednesday', 'Thurday', 'Friday', 'Satday'],
+			'month-names-short': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
 			'month-names': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 			'error-more': 'Date range should not be more than 1 night',
 			'error-more-plural': 'Date range should not be more than %d nights',
@@ -88,13 +90,20 @@ export default class HotelDatepicker {
 		return ++idCounter;
 	}
 
+	setFechaI18n() {
+		fecha.i18n.dayNamesShort = this.i18n['day-names-short'];
+		fecha.i18n.dayNames = this.i18n['day-names'];
+		fecha.i18n.monthNamesShort = this.i18n['month-names-short'];
+		fecha.i18n.monthNames = this.i18n['month-names'];
+	}
+
 	getWeekDayNames() {
 		let week = '';
 
         // Start from monday if we passed that option
 		if (this.startOfWeek === 'monday') {
 			for (let i = 0; i < 7; i++) {
-				week += '<th class="datepicker__week-name">' + this.lang('day-names')[(1 + i) % 7] + '</th>';
+				week += '<th class="datepicker__week-name">' + this.lang('day-names-short')[(1 + i) % 7] + '</th>';
 			}
 
 			return week;
@@ -102,7 +111,7 @@ export default class HotelDatepicker {
 
         // Otherwise start from sunday (default)
 		for (let i = 0; i < 7; i++) {
-			week += '<th class="datepicker__week-name">' + this.lang('day-names')[i] + '</th>';
+			week += '<th class="datepicker__week-name">' + this.lang('day-names-short')[i] + '</th>';
 		}
 
 		return week;
@@ -154,11 +163,13 @@ export default class HotelDatepicker {
 
 	getDateString(date, format = this.format) {
         // Format date
+		this.setFechaI18n();
 		return fecha.format(date, format);
 	}
 
 	parseDate(date, format = this.format) {
         // Parse a date object
+		this.setFechaI18n();
 		return fecha.parse(date, format);
 	}
 
@@ -1201,7 +1212,7 @@ export default class HotelDatepicker {
 	parseDisabledDates() {
         // Sort disabled dates and store it in property
 		const _tmp = [];
-
+		this.setFechaI18n();
 		for (let i = 0; i < this.disabledDates.length; i++) {
 			_tmp[i] = fecha.parse(this.disabledDates[i], 'YYYY-MM-DD');
 		}

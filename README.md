@@ -152,6 +152,8 @@ Close the datepicker after the selection of the second date.
 
 ### i18n
 
+**[BREAK CHANGE]** Two new options has been introduced in the v.3: `month-names-short` and `day-names-short`. Previously, the *short* day name version ('Sun', 'Mon', 'Tue', etc) was used in the `day-names` option. Now, the `day-names` option uses the *long* version.
+
 - Type: `Object`
 
 Default:
@@ -162,7 +164,9 @@ i18n: {
     night: 'Night',
     nights: 'Nights',
     button: 'Close',
-    'day-names': ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+    'day-names-short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+    'day-names': ['Sunday', 'Monday', 'Tueday', 'Wednesday', 'Thurday', 'Friday', 'Satday'],
+    'month-names-short': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
     'month-names': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
     'error-more': 'Date range should not be more than 1 night',
     'error-more-plural': 'Date range should not be more than %d nights',

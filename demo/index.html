@@ -236,13 +236,16 @@ var datepicker = new HotelDatepicker(input, {
 				<pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
+    format: 'dddd D MMM YYYY',
     startOfWeek: 'monday',
     i18n: {
         selected: 'Il tuo soggiorno:',
         night: 'Notte',
         nights: 'Notti',
         button: 'Chiudi',
-        'day-names': ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
+        'day-names-short': ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
+        'day-names': ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+        'month-names-short': ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
         'month-names': ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
         'error-more': 'L\'intervallo di date non deve avere più di 1 notte',
         'error-more-plural': 'L\'intervallo di date non deve avere più di %d notti',
@@ -442,13 +445,16 @@ function destroyDatepicker() {
 			// ------------------- DEMO 14 ------------------ //
 
 			var demo14 = new HotelDatepicker(document.getElementById('demo14'), {
+                format: 'dddd D MMM YYYY',
 				startOfWeek: 'monday',
 				i18n: {
 					selected: 'Il tuo soggiorno:',
 					night: 'Notte',
 					nights: 'Notti',
 					button: 'Chiudi',
-					'day-names': ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
+					'day-names-short': ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
+					'day-names': ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+					'month-names-short': ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
 					'month-names': ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
 					'error-more': 'L\'intervallo di date non deve avere più di 1 notte',
 					'error-more-plural': 'L\'intervallo di date non deve avere più di %d notti',
