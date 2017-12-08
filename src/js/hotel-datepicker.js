@@ -26,6 +26,7 @@ export default class HotelDatepicker {
 		this.animationSpeed = opts.animationSpeed || '.5s';
 		this.hoveringTooltip = opts.hoveringTooltip || true; // Or a function
 		this.autoClose = opts.autoClose === undefined ? true : opts.autoClose;
+		this.showTopbar = opts.showTopbar === undefined ? true : opts.showTopbar;
 		this.i18n = opts.i18n || {
 			selected: 'Your stay:',
 			night: 'Night',
@@ -228,7 +229,7 @@ export default class HotelDatepicker {
 		this.showMonth(defaultTime, 1);
 		this.showMonth(this.getNextMonth(defaultTime), 2);
 
-        // Print default info in top bar
+		// Print default info in top bar
 		this.topBarDefaultText();
 
         // Parse disabled dates
@@ -258,8 +259,10 @@ export default class HotelDatepicker {
         // Open the datepicker on the input click
 		this.addBoundedListener(this.input, 'click', evt => this.openDatepicker(evt));
 
-        // Close the datepicker on the button click
-		document.getElementById(this.getCloseButtonId()).addEventListener('click', evt => this.closeDatepicker(evt));
+		if (this.showTopbar) {
+			// Close the datepicker on the button click
+			document.getElementById(this.getCloseButtonId()).addEventListener('click', evt => this.closeDatepicker(evt));
+		}
 
         // Close the datepicker on resize?
         // The problem is that mobile keyboards trigger the resize event closing
@@ -305,16 +308,18 @@ export default class HotelDatepicker {
 
 		html += '<div class="datepicker__inner">';
 
-        // Top bar section
-		html += '<div class="datepicker__topbar">' +
-                    '<div class="datepicker__info datepicker__info--selected"><span class="datepicker__info datepicker__info--selected-label">' + this.lang('selected') + ' </span> <strong class="datepicker__info-text datepicker__info-text--start-day">...</strong>' +
-                        ' <span class="datepicker__info-text datepicker__info--separator">' + this.separator + '</span> <strong class="datepicker__info-text datepicker__info-text--end-day">...</strong> <em class="datepicker__info-text datepicker__info-text--selected-days">(<span></span>)</em>' +
-                    '</div>' +
+		if (this.showTopbar) {
+			// Top bar section
+			html += '<div class="datepicker__topbar">' +
+						'<div class="datepicker__info datepicker__info--selected"><span class="datepicker__info datepicker__info--selected-label">' + this.lang('selected') + ' </span> <strong class="datepicker__info-text datepicker__info-text--start-day">...</strong>' +
+							' <span class="datepicker__info-text datepicker__info--separator">' + this.separator + '</span> <strong class="datepicker__info-text datepicker__info-text--end-day">...</strong> <em class="datepicker__info-text datepicker__info-text--selected-days">(<span></span>)</em>' +
+						'</div>' +
 
-                    '<div class="datepicker__info datepicker__info--feedback"></div>' +
+						'<div class="datepicker__info datepicker__info--feedback"></div>' +
 
-                    '<button type="button" id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>' +
-                '</div>';
+						'<button type="button" id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>' +
+					'</div>';
+		}
 
         // Months section
 		html += '<div class="datepicker__months">';
@@ -576,7 +581,7 @@ export default class HotelDatepicker {
 			this.changed = false;
 			this.setDateRange(this.parseDate(dates[0], _format), this.parseDate(dates[1], _format));
 			this.changed = true;
-		} else {
+		} else if (this.showTopbar) {
 			const selectedInfo = this.datepicker.getElementsByClassName('datepicker__info--selected')[0];
 			selectedInfo.style.display = 'none';
 		}
@@ -643,7 +648,7 @@ export default class HotelDatepicker {
         // Check the selection
 		this.checkSelection();
 
-        // Show selected dates in top bar
+		// Show selected dates in top bar
 		this.showSelectedInfo();
 
         // Close the datepicker
@@ -690,6 +695,20 @@ export default class HotelDatepicker {
 	}
 
 	showSelectedInfo() {
+		// Return early if the top bar is disabled
+		if (!this.showTopbar) {
+			// If both dates are set, set the value of our input
+			if (this.start && this.end) {
+				const dateRangeValue = this.getDateString(new Date(this.start)) + this.separator + this.getDateString(new Date(this.end));
+
+				// Set input value
+				this.setValue(dateRangeValue, this.getDateString(new Date(this.start)), this.getDateString(new Date(this.end)));
+				this.changed = true;
+			}
+
+			return;
+		}
+
         // Show selected range in top bar
 		const selectedInfo = this.datepicker.getElementsByClassName('datepicker__info--selected')[0];
 		const elStart = selectedInfo.getElementsByClassName('datepicker__info-text--start-day')[0];
@@ -823,7 +842,7 @@ export default class HotelDatepicker {
 
 	checkSelection() {
 		const numberOfDays = Math.ceil((this.end - this.start) / 86400000) + 1;
-		const bar = this.datepicker.getElementsByClassName('datepicker__info--feedback')[0];
+		const bar = this.showTopbar ? this.datepicker.getElementsByClassName('datepicker__info--feedback')[0] : false;
 
 		if (this.maxDays && numberOfDays > this.maxDays) {
 			this.start = false;
@@ -837,9 +856,11 @@ export default class HotelDatepicker {
 				this.removeClass(days[i], 'datepicker__month-day--last-day-selected');
 			}
 
-            // Show error in top bar
-			const errorValue = this.maxDays - 1;
-			this.topBarErrorText(bar, 'error-more', errorValue);
+			if (this.showTopbar) {
+				// Show error in top bar
+				const errorValue = this.maxDays - 1;
+				this.topBarErrorText(bar, 'error-more', errorValue);
+			}
 		} else if (this.minDays && numberOfDays < this.minDays) {
 			this.start = false;
 			this.end = false;
@@ -852,15 +873,19 @@ export default class HotelDatepicker {
 				this.removeClass(days[i], 'datepicker__month-day--last-day-selected');
 			}
 
-            // Show error in top bar
-			const errorValue = this.minDays - 1;
-			this.topBarErrorText(bar, 'error-less', errorValue);
+			if (this.showTopbar) {
+				// Show error in top bar
+				const errorValue = this.minDays - 1;
+				this.topBarErrorText(bar, 'error-less', errorValue);
+			}
 		} else if (this.start || this.end) {
-            // Remove error and help classes from top bar
-			this.removeClass(bar, 'datepicker__info--error');
-			this.removeClass(bar, 'datepicker__info--help');
-		} else {
-            // Show help message
+			if (this.showTopbar) {
+				// Remove error and help classes from top bar
+				this.removeClass(bar, 'datepicker__info--error');
+				this.removeClass(bar, 'datepicker__info--help');
+			}
+		} else if (this.showTopbar) {
+			// Show help message
 			this.removeClass(bar, 'datepicker__info--error');
 			this.addClass(bar, 'datepicker__info--help');
 		}
@@ -1033,6 +1058,11 @@ export default class HotelDatepicker {
 	}
 
 	topBarDefaultText() {
+		// Return early if the top bar is disabled
+		if (!this.showTopbar) {
+			return;
+		}
+
         // Show help message on top bar
 		let topBarText = '';
 
@@ -1054,6 +1084,10 @@ export default class HotelDatepicker {
 	}
 
 	topBarErrorText(bar, errorText, errorValue) {
+		if (!this.showTopbar) {
+			return;
+		}
+
         // Show error message on top bar
 		this.addClass(bar, 'datepicker__info--error');
 		this.removeClass(bar, 'datepicker__info--help');
