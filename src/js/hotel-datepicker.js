@@ -21,6 +21,8 @@ export default class HotelDatepicker {
 		this.maxNights = opts.maxNights || 0;
 		this.selectForward = opts.selectForward || false;
 		this.disabledDates = opts.disabledDates || [];
+		this.noCheckInDates = opts.noCheckInDates || []
+		this.noCheckOutDates = opts.noCheckOutDates || []
 		this.enableCheckout = opts.enableCheckout || false;
 		this.container = opts.container || '';
 		this.animationSpeed = opts.animationSpeed || '.5s';
@@ -31,6 +33,8 @@ export default class HotelDatepicker {
 			selected: 'Your stay:',
 			night: 'Night',
 			nights: 'Nights',
+			noCheckInMsg: "No Check-In",
+			noCheckOutMsg: "No Check-Out",
 			button: 'Close',
 			'day-names-short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 			'day-names': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -51,6 +55,9 @@ export default class HotelDatepicker {
 		this.setValue = opts.setValue || function (s) {
 			input.value = s;
 		};
+
+		this.onDayClick = opts.onDayClick
+		this.onOpenDatepicker = opts.onOpenDatepicker
 
         // DOM input
 		this.input = input;
@@ -449,25 +456,62 @@ export default class HotelDatepicker {
 				_day = days[(week * 7) + _day];
 				const isToday = this.getDateString(_day.time) === this.getDateString(new Date());
 				let isDisabled = false;
+				let isNoCheckIn = false;
+				let isNoCheckOut = false;
 
                 // Check if the day is one of the days passed in the
                 // (optional) disabledDates option. And set valid to
                 // false in this case.
-				if (_day.valid && this.disabledDates.length > 0) {
-					if (this.disabledDates.indexOf(this.getDateString(_day.time, 'YYYY-MM-DD')) > -1) {
-						_day.valid = false;
-						isDisabled = true;
+				if (_day.valid) {
+					if (this.disabledDates.length > 0) {
+						if (this.disabledDates.indexOf(this.getDateString(_day.time, 'YYYY-MM-DD')) > -1) {
+							_day.valid = false;
+							isDisabled = true;
 
-						flag++;
-					} else {
-						flag = 0;
+							flag++;
+						} else {
+							flag = 0;
+						}
+					}
+
+					if (this.noCheckInDates.length) {
+						if (this.noCheckInDates.indexOf(dateString) > -1) {
+							isNoCheckIn = true;
+						}
+					}
+
+					if (this.noCheckOutDates.length) {
+						if (this.noCheckOutDates.indexOf(dateString) > -1) {
+							isNoCheckOut = true;
+						}
 					}
 				}
 
+				let classes = [
+					'datepicker__month-day--' + _day.type,
+					'datepicker__month-day--' + (_day.valid ? 'valid' : 'invalid'),
+					isToday ? 'datepicker__month-day--today' : '',
+					isDisabled ? 'datepicker__month-day--disabled' : '',
+					isDisabled && this.enableCheckout && (flag === 1) ? 'datepicker__month-day--checkout-enabled' : '',
+					isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
+					isNoCheckOut ? 'datepicker__month-day--no-check-out' : ''
+				]
+
+				let title = ""
+				if (isNoCheckIn) {
+					title = this.i18n.noCheckInMsg
+				}
+				if (isNoCheckOut) {
+					if (title) {
+						title += ". "
+					}
+					title += this.i18n.noCheckOutMsg
+				}
                 // Each day has the "time" attribute (timestamp) and an appropriate class
 				const dayAttributes = {
 					time: _day.time,
-					class: 'datepicker__month-day--' + _day.type + ' datepicker__month-day--' + (_day.valid ? 'valid' : 'invalid') + ' ' + (isToday ? 'datepicker__month-day--today' : '') + ' ' + (isDisabled ? 'datepicker__month-day--disabled' : '') + ' ' + (isDisabled && this.enableCheckout && (flag === 1) ? 'datepicker__month-day--checkout-enabled' : '')
+					class: classes.join(' '),
+					title: title
 				};
 
                 // Create the day HTML
@@ -506,6 +550,10 @@ export default class HotelDatepicker {
             // 1 - Check if the click it's outside the datepicker
             // 2 - Handle the click on calendar days
 			this.addBoundedListener(document, 'click', evt => this.documentClick(evt));
+
+			if (this.onOpenDatepicker) {
+				this.onOpenDatepicker()
+			}
 		}
 	}
 
@@ -757,10 +805,21 @@ export default class HotelDatepicker {
 			return;
 		}
 
+		const isSelectStart = (this.start && this.end) || (!this.start && !this.end)
+
+		if (isSelectStart) {
+			if (this.hasClass(day, 'datepicker__month-day--no-check-in')) {
+				return
+			}
+		} else if (this.start) {
+			if (this.hasClass(day, 'datepicker__month-day--no-check-out')) {
+				return
+			}
+		}
 		const time = parseInt(day.getAttribute('time'), 10);
 		this.addClass(day, 'datepicker__month-day--selected');
 
-		if ((this.start && this.end) || (!this.start && !this.end)) {
+		if (isSelectStart) {
 			this.start = time;
 			this.end = false;
 		} else if (this.start) {
@@ -801,6 +860,10 @@ export default class HotelDatepicker {
 
         // Close the datepicker
 		this.autoclose();
+
+		if (this.onDayClick) {
+			this.onDayClick()
+		}
 	}
 
 	isValidDate(time) {

@@ -64,6 +64,14 @@
 	padding: 9px 7px;
 }
 
+.datepicker__month-day--no-check-in {
+  background: linear-gradient(90deg, #fff 50%, red 50%);
+}
+
+.datepicker__month-day--no-check-out {
+  background: linear-gradient(90deg, red 50%, #fff 50%);
+}
+
 .datepicker__month-day--invalid {
 	color: $text__invalid__color;
 }
