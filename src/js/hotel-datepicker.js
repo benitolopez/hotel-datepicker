@@ -21,8 +21,8 @@ export default class HotelDatepicker {
 		this.maxNights = opts.maxNights || 0;
 		this.selectForward = opts.selectForward || false;
 		this.disabledDates = opts.disabledDates || [];
-		this.noCheckInDates = opts.noCheckInDates || []
-		this.noCheckOutDates = opts.noCheckOutDates || []
+		this.noCheckInDates = opts.noCheckInDates || [];
+		this.noCheckOutDates = opts.noCheckOutDates || [];
 		this.enableCheckout = opts.enableCheckout || false;
 		this.container = opts.container || '';
 		this.animationSpeed = opts.animationSpeed || '.5s';
@@ -33,9 +33,9 @@ export default class HotelDatepicker {
 			selected: 'Your stay:',
 			night: 'Night',
 			nights: 'Nights',
-			noCheckInMsg: "No Check-In",
-			noCheckOutMsg: "No Check-Out",
 			button: 'Close',
+			'checkin-disabled': 'Check-in disabled',
+			'checkout-disabled': 'Check-out disabled',
 			'day-names-short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 			'day-names': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 			'month-names-short': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -55,9 +55,8 @@ export default class HotelDatepicker {
 		this.setValue = opts.setValue || function (s) {
 			input.value = s;
 		};
-
-		this.onDayClick = opts.onDayClick
-		this.onOpenDatepicker = opts.onOpenDatepicker
+		this.onDayClick = opts.onDayClick === undefined ? false : opts.onDayClick;
+		this.onOpenDatepicker = opts.onOpenDatepicker === undefined ? false : opts.onOpenDatepicker;
 
         // DOM input
 		this.input = input;
@@ -462,8 +461,10 @@ export default class HotelDatepicker {
                 // Check if the day is one of the days passed in the
                 // (optional) disabledDates option. And set valid to
                 // false in this case.
+                //
+                // Also, check if the checkin or checkout is disabled
 				if (_day.valid) {
-					let dateString = this.getDateString(_day.time, 'YYYY-MM-DD')
+					const dateString = this.getDateString(_day.time, 'YYYY-MM-DD');
 					if (this.disabledDates.length > 0) {
 						if (this.disabledDates.indexOf(dateString) > -1) {
 							_day.valid = false;
@@ -475,20 +476,20 @@ export default class HotelDatepicker {
 						}
 					}
 
-					if (this.noCheckInDates.length) {
+					if (this.noCheckInDates.length > 0) {
 						if (this.noCheckInDates.indexOf(dateString) > -1) {
 							isNoCheckIn = true;
 						}
 					}
 
-					if (this.noCheckOutDates.length) {
+					if (this.noCheckOutDates.length > 0) {
 						if (this.noCheckOutDates.indexOf(dateString) > -1) {
 							isNoCheckOut = true;
 						}
 					}
 				}
 
-				let classes = [
+				const classes = [
 					'datepicker__month-day--' + _day.type,
 					'datepicker__month-day--' + (_day.valid ? 'valid' : 'invalid'),
 					isToday ? 'datepicker__month-day--today' : '',
@@ -496,24 +497,33 @@ export default class HotelDatepicker {
 					isDisabled && this.enableCheckout && (flag === 1) ? 'datepicker__month-day--checkout-enabled' : '',
 					isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
 					isNoCheckOut ? 'datepicker__month-day--no-check-out' : ''
-				]
+				];
 
-				let title = ""
+				// Add a title for those days where the checkin or checkout is disabled
+				let title = '';
+
 				if (isNoCheckIn) {
-					title = this.i18n.noCheckInMsg
+					title = this.i18n['checkin-disabled'];
 				}
+
 				if (isNoCheckOut) {
 					if (title) {
-						title += ". "
+						title += '. ';
 					}
-					title += this.i18n.noCheckOutMsg
+
+					title += this.i18n['checkout-disabled'];
 				}
+
                 // Each day has the "time" attribute (timestamp) and an appropriate class
 				const dayAttributes = {
 					time: _day.time,
-					class: classes.join(' '),
-					title: title
+					class: classes.join(' ')
 				};
+
+				// Add title attribute if available
+				if (title) {
+					dayAttributes.title = title;
+				}
 
                 // Create the day HTML
 				html += '<td class="datepicker__month-day ' + dayAttributes.class + '" ' + this.printAttributes(dayAttributes) + '>' + _day.day + '</td>';
@@ -552,8 +562,9 @@ export default class HotelDatepicker {
             // 2 - Handle the click on calendar days
 			this.addBoundedListener(document, 'click', evt => this.documentClick(evt));
 
+			// Optionally run a function when the datepicker is open
 			if (this.onOpenDatepicker) {
-				this.onOpenDatepicker()
+				this.onOpenDatepicker();
 			}
 		}
 	}
@@ -806,17 +817,19 @@ export default class HotelDatepicker {
 			return;
 		}
 
-		const isSelectStart = (this.start && this.end) || (!this.start && !this.end)
+		const isSelectStart = (this.start && this.end) || (!this.start && !this.end);
 
+		// Return early for those days where the checkin or checkout is disabled
 		if (isSelectStart) {
 			if (this.hasClass(day, 'datepicker__month-day--no-check-in')) {
-				return
+				return;
 			}
 		} else if (this.start) {
 			if (this.hasClass(day, 'datepicker__month-day--no-check-out')) {
-				return
+				return;
 			}
 		}
+
 		const time = parseInt(day.getAttribute('time'), 10);
 		this.addClass(day, 'datepicker__month-day--selected');
 
@@ -862,8 +875,9 @@ export default class HotelDatepicker {
         // Close the datepicker
 		this.autoclose();
 
+		// Optionally run a function when a day is clicked
 		if (this.onDayClick) {
-			this.onDayClick()
+			this.onDayClick();
 		}
 	}
 
