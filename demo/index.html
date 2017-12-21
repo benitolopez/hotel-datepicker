@@ -243,6 +243,8 @@ var datepicker = new HotelDatepicker(input, {
         night: 'Notte',
         nights: 'Notti',
         button: 'Chiudi',
+        'checkin-disabled': 'Check-in disabilitato',
+		'checkout-disabled': 'Check-out disabilitato',
         'day-names-short': ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
         'day-names': ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
         'month-names-short': ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
@@ -293,6 +295,17 @@ var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     showTopbar: false
 });
+				</pre>
+			</div>
+		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo17" value="">
+			</div>
+			<p class="demo__description">Disable check-in or check-out on some dates. Check-in disabled on: <code id="code-demo17-a"></code>. Check-out disabled on <code id="code-demo17-b"></code>.</p>
+			<div class="demo__config">
+				<pre id="pre-demo17">
 				</pre>
 			</div>
 		</div>
@@ -467,6 +480,8 @@ var datepicker = new HotelDatepicker(input, {
 					night: 'Notte',
 					nights: 'Notti',
 					button: 'Chiudi',
+					'checkin-disabled': 'Check-in disabilitato',
+					'checkout-disabled': 'Check-out disabilitato',
 					'day-names-short': ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
 					'day-names': ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
 					'month-names-short': ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
@@ -503,6 +518,40 @@ var datepicker = new HotelDatepicker(input, {
 
 			var demo16 = new HotelDatepicker(document.getElementById('demo16'), {
 				showTopbar: false
+			});
+
+			// ------------------- DEMO 17 ------------------- //
+
+			var date1 = new Date();
+			var date2 = new Date();
+			var date3 = new Date();
+			var date4 = new Date();
+			var date5 = new Date();
+			var date6 = new Date();
+			date1.setDate(date1.getDate() + 3);
+			date2.setDate(date2.getDate() + 10);
+			date3.setDate(date3.getDate() + 6);
+			date4.setDate(date4.getDate() + 15);
+
+			var codeDemo17a = document.getElementById('code-demo17-a');
+			var codeDemo17b = document.getElementById('code-demo17-b');
+			var preDemo17 = document.getElementById('pre-demo17');
+
+			var txt = "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    noCheckInDates: [\n        "+ "'" + fecha.format(date1, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date2, 'YYYY-MM-DD') + "'" + "\n    ],\n    noCheckOutDates: [\n        "+ "'" + fecha.format(date3, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date4, 'YYYY-MM-DD') + "'" + "\n    ]\n});";
+			preDemo17.textContent = txt;
+
+			codeDemo17a.textContent = '['+ fecha.format(date1, 'YYYY-MM-DD') +', '+ fecha.format(date2, 'YYYY-MM-DD') +']'
+			codeDemo17b.textContent = '['+ fecha.format(date3, 'YYYY-MM-DD') +', '+ fecha.format(date4, 'YYYY-MM-DD') +']'
+
+			var demo17 = new HotelDatepicker(document.getElementById('demo17'), {
+				noCheckInDates: [
+					fecha.format(date1, 'YYYY-MM-DD'),
+					fecha.format(date2, 'YYYY-MM-DD'),
+				],
+				noCheckOutDates: [
+					fecha.format(date3, 'YYYY-MM-DD'),
+					fecha.format(date4, 'YYYY-MM-DD'),
+				]
 			});
 		})();
 	</script>
