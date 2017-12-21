@@ -107,7 +107,21 @@ An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the 
 - Type: `Boolean`
 - Default: `false`
 
-If `true`, allows the checkout on a disabled date. But with a criteria. Let's say we have these disabled dates: `03 April 2020` and `04 April 2020`. With this option enabled, an user can still select the first date (`03 April 2020`) for the checkout. But not `04 April 2020`.
+If `true`, allows the checkout on a **disabled** date. But with a criteria. Let's say we have these disabled dates: `03 April 2020` and `04 April 2020`. With this option enabled, an user can still select the first date (`03 April 2020`) for the checkout. But not `04 April 2020`.
+
+### noCheckInDates
+
+- Type: `Array`
+- Default: `[]`
+
+An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the dates passed to the list will not allow a check-in on that day.
+
+### noCheckOutDates
+
+- Type: `Array`
+- Default: `[]`
+
+An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the dates passed to the list will not allow a check-out on that day.
 
 ### container
 
@@ -150,6 +164,32 @@ Show/hide the toolbar.
 
 Close the datepicker after the selection of the second date.
 
+### onDayClick
+
+- Type: `Function`
+- Default: `false`
+
+Run a cutom function every time a day is clicked:
+
+```js
+onDayClick: function() {
+    console.log('Day clicked!');
+}
+```
+
+### onOpenDatepicker
+
+- Type: `Function`
+- Default: `false`
+
+Run a cutom function when the datepicker is opened:
+
+```js
+onOpenDatepicker: function() {
+    console.log('Datepicker opened!');
+}
+```
+
 ### i18n
 
 **[BREAK CHANGE]** Two new options has been introduced in the v.3: `month-names-short` and `day-names-short`. Previously, the *short* day name version ('Sun', 'Mon', 'Tue', etc) was used in the `day-names` option. Now, the `day-names` option uses the *long* version.
@@ -164,6 +204,8 @@ i18n: {
     night: 'Night',
     nights: 'Nights',
     button: 'Close',
+    'checkin-disabled': 'Check-in disabled',
+    'checkout-disabled': 'Check-out disabled',
     'day-names-short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     'day-names': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     'month-names-short': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
