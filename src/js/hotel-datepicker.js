@@ -463,8 +463,9 @@ export default class HotelDatepicker {
                 // (optional) disabledDates option. And set valid to
                 // false in this case.
 				if (_day.valid) {
+					let dateString = this.getDateString(_day.time, 'YYYY-MM-DD')
 					if (this.disabledDates.length > 0) {
-						if (this.disabledDates.indexOf(this.getDateString(_day.time, 'YYYY-MM-DD')) > -1) {
+						if (this.disabledDates.indexOf(dateString) > -1) {
 							_day.valid = false;
 							isDisabled = true;
 
