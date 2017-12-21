@@ -108,6 +108,38 @@
   padding: 9px 7px;
 }
 
+.datepicker__month-day--no-check-in {
+  position: relative;
+}
+
+.datepicker__month-day--no-check-in:after {
+  background-color: rgba(255, 0, 0, 0.1);
+  bottom: 0;
+  content: '';
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 50%;
+  top: 0;
+  z-index: -1;
+}
+
+.datepicker__month-day--no-check-out {
+  position: relative;
+}
+
+.datepicker__month-day--no-check-out:after {
+  background-color: rgba(255, 0, 0, 0.1);
+  bottom: 0;
+  content: '';
+  display: block;
+  left: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
 .datepicker__month-day--invalid {
   color: #e8ebf4;
 }
@@ -131,6 +163,10 @@
 .datepicker__month-day--selected {
   background-color: rgba(116, 107, 253, 0.5);
   color: #fff;
+}
+
+.datepicker__month-day--selected:after {
+  display: none;
 }
 
 .datepicker__month-day--hovering {
