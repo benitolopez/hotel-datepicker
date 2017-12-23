@@ -164,12 +164,12 @@ Show/hide the toolbar.
 
 Close the datepicker after the selection of the second date.
 
-### moveBothMonthsOnButtonClick
+### moveBothMonths
 
 - Type: `Boolean`
 - Default: `false`
 
-Move month of the first calendar if click to next month on the second calendar and vice versa.
+Move both months when clicking on the next/prev month button.
 
 ### onDayClick
 

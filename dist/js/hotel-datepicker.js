@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.1.0 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.2.0 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -31,6 +31,7 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 	this.hoveringTooltip = opts.hoveringTooltip || true; // Or a function
 	this.autoClose = opts.autoClose === undefined ? true : opts.autoClose;
 	this.showTopbar = opts.showTopbar === undefined ? true : opts.showTopbar;
+	this.moveBothMonths = opts.moveBothMonths || false;
 	this.i18n = opts.i18n || {
 		selected: 'Your stay:',
 		night: 'Night',
@@ -1085,6 +1086,9 @@ HotelDatepicker.prototype.goToNextMonth = function goToNextMonth (e) {
 	}
 
         // We can now show the month and proceed
+	if (this.moveBothMonths && isMonth2) {
+		this.showMonth(this.month2, 1);
+	}
 	this.showMonth(nextMonth, thisMonth);
 	this.showSelectedDays();
 	this.disableNextPrevButtons();
@@ -1108,6 +1112,9 @@ HotelDatepicker.prototype.goToPreviousMonth = function goToPreviousMonth (e) {
 	}
 
         // We can now show the month and proceed
+	if (this.moveBothMonths && !isMonth2) {
+		this.showMonth(this.month1, 2);
+	}
 	this.showMonth(prevMonth, thisMonth);
 	this.showSelectedDays();
 	this.disableNextPrevButtons();

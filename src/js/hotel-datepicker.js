@@ -29,7 +29,7 @@ export default class HotelDatepicker {
 		this.hoveringTooltip = opts.hoveringTooltip || true; // Or a function
 		this.autoClose = opts.autoClose === undefined ? true : opts.autoClose;
 		this.showTopbar = opts.showTopbar === undefined ? true : opts.showTopbar;
-        this.moveBothMonthsOnButtonClick = opts.moveBothMonthsOnButtonClick || false
+		this.moveBothMonths = opts.moveBothMonths || false;
 		this.i18n = opts.i18n || {
 			selected: 'Your stay:',
 			night: 'Night',
@@ -1066,9 +1066,9 @@ export default class HotelDatepicker {
 		}
 
         // We can now show the month and proceed
-        if (this.moveBothMonthsOnButtonClick && isMonth2) {
-            this.showMonth(this.month2, 1)
-        }
+		if (this.moveBothMonths && isMonth2) {
+			this.showMonth(this.month2, 1);
+		}
 		this.showMonth(nextMonth, thisMonth);
 		this.showSelectedDays();
 		this.disableNextPrevButtons();
@@ -1092,9 +1092,9 @@ export default class HotelDatepicker {
 		}
 
         // We can now show the month and proceed
-        if (this.moveBothMonthsOnButtonClick && !isMonth2) {
-            this.showMonth(this.month1, 2)
-        }
+		if (this.moveBothMonths && !isMonth2) {
+			this.showMonth(this.month1, 2);
+		}
 		this.showMonth(prevMonth, thisMonth);
 		this.showSelectedDays();
 		this.disableNextPrevButtons();
