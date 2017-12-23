@@ -309,6 +309,21 @@ var datepicker = new HotelDatepicker(input, {
 				</pre>
 			</div>
 		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo18" value="">
+			</div>
+			<p class="demo__description">Move both months when clicking on the next/prev month button</p>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    moveBothMonths: true
+});
+				</pre>
+			</div>
+		</div>
 	</div>
 
 	<footer class="site__footer">
@@ -552,6 +567,12 @@ var datepicker = new HotelDatepicker(input, {
 					fecha.format(date3, 'YYYY-MM-DD'),
 					fecha.format(date4, 'YYYY-MM-DD'),
 				]
+			});
+
+			// ------------------- DEMO 18 ------------------ //
+
+			var demo18 = new HotelDatepicker(document.getElementById('demo18'), {
+				moveBothMonths: true
 			});
 		})();
 	</script>
