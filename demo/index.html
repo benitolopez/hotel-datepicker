@@ -318,6 +318,12 @@ var datepicker = new HotelDatepicker(input, {
 			input1.value = fecha.format(today, 'YYYY-MM-DD') + ' - ' + fecha.format(tomorrow, 'YYYY-MM-DD');
 
 			var demo1 = new HotelDatepicker(input1);
+			
+			//Event Listner when close datepicker
+			input1.addEventListener('afterClose', function () {
+				console.log('When close datepicker and call any prototype function');
+				console.log('Total Night '+demo1.getNights());
+			}, false);
 
 
 			// ------------------- DEMO 2 ------------------- //

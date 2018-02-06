@@ -531,6 +531,11 @@ HotelDatepicker.prototype.closeDatepicker = function closeDatepicker () {
 		return;
 	}
 
+	//Event Binding When Date Picker Close
+	var evt = document.createEvent("Event");
+	evt.initEvent("afterClose", true, true);
+	this.input.dispatchEvent(evt);
+
         // Add/remove helper classes
 	this.removeClass(this.datepicker, 'datepicker--open');
 	this.addClass(this.datepicker, 'datepicker--closed');
