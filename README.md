@@ -268,6 +268,20 @@ Gets the number of nights selected. Returns `0` otherwise.
 
 Destroys the datepicker.
 
+## Events
+
+### afterClose
+
+You can list for this event when the datepicker closes.
+
+```js
+var input = document.getElementById('input-id');
+
+input.addEventListener('afterClose', function () {
+    console.log('Closed!');
+}, false);
+```
+
 ## Versioning
 
 Maintained under the [Semantic Versioning guidelines](http://semver.org/).
