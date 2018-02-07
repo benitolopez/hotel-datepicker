@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.2.0 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.3.0 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -599,6 +599,11 @@ HotelDatepicker.prototype.closeDatepicker = function closeDatepicker () {
         // Slide up the datepicker
 	this.slideUp(this.datepicker, this.animationSpeed);
 	this.isOpen = false;
+
+	// Create event on close
+	var evt = document.createEvent('Event');
+	evt.initEvent('afterClose', true, true);
+	this.input.dispatchEvent(evt);
 
 	this.removeAllBoundedListeners(document, 'click');
 };

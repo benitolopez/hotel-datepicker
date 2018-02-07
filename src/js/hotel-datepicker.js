@@ -584,6 +584,11 @@ export default class HotelDatepicker {
 		this.slideUp(this.datepicker, this.animationSpeed);
 		this.isOpen = false;
 
+		// Create event on close
+		const evt = document.createEvent('Event');
+		evt.initEvent('afterClose', true, true);
+		this.input.dispatchEvent(evt);
+
 		this.removeAllBoundedListeners(document, 'click');
 	}
 
