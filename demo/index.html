@@ -29,7 +29,7 @@
 	<h1>Hotel Datepicker</h1>
 	<p>A pure Javascript date range picker for hotels.</p>
 
-	<a class="button button--download" href="https://github.com/benitolopez/hotel-datepicker/archive/2.0.1.zip">Download</a>
+	<a class="button button--download" href="https://github.com/benitolopez/hotel-datepicker/archive/2.3.0.zip">Download</a>
 
 	<ul class="social">
 		<li class="social__item"><a class="social__link" href="https://github.com/benitolopez/hotel-datepicker">View on Github</a></li>
@@ -324,6 +324,22 @@ var datepicker = new HotelDatepicker(input, {
 				</pre>
 			</div>
 		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo19" value="">
+			</div>
+			<p class="demo__description">Run a function when the datepicker closes.</p>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+
+input.addEventListener('afterClose', function () {
+    console.log('Closed!');
+}, false);
+				</pre>
+			</div>
+		</div>
 	</div>
 
 	<footer class="site__footer">
@@ -574,6 +590,15 @@ var datepicker = new HotelDatepicker(input, {
 			var demo18 = new HotelDatepicker(document.getElementById('demo18'), {
 				moveBothMonths: true
 			});
+
+			// ------------------- DEMO 19 ------------------ //
+
+			var input19 = document.getElementById('demo19');
+			var demo19 = new HotelDatepicker(input19);
+
+			input19.addEventListener('afterClose', function () {
+			    console.log('Closed!');
+			}, false);
 		})();
 	</script>
 </body>
