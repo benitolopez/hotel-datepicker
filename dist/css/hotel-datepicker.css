@@ -160,8 +160,12 @@
           transform: translate(-50%, -50%);
 }
 
+.datepicker__month-day--day-of-week-disabled {
+  background-color: rgba(232, 235, 244, 0.5);
+}
+
 .datepicker__month-day--selected {
-  background-color: rgba(116, 107, 253, 0.5);
+  background-color: rgba(116, 107, 253, 0.2);
   color: #fff;
 }
 
