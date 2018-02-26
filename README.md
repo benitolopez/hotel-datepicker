@@ -123,6 +123,17 @@ An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the 
 
 An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the dates passed to the list will not allow a check-out on that day.
 
+### disabledDaysOfWeek
+
+- Type: `Array`
+- Default: `[]`
+
+An array of **strings** in English: `'Monday'` (note the `''` and the uppercase).
+
+```js
+['Monday', 'Tuesday', 'Wednesday']
+```
+
 ### container
 
 - Type: `Element`
