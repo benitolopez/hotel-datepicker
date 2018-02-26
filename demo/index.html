@@ -29,7 +29,7 @@
 	<h1>Hotel Datepicker</h1>
 	<p>A pure Javascript date range picker for hotels.</p>
 
-	<a class="button button--download" href="https://github.com/benitolopez/hotel-datepicker/archive/2.3.0.zip">Download</a>
+	<a class="button button--download" href="https://github.com/benitolopez/hotel-datepicker/archive/3.4.0.zip">Download</a>
 
 	<ul class="social">
 		<li class="social__item"><a class="social__link" href="https://github.com/benitolopez/hotel-datepicker">View on Github</a></li>
@@ -148,6 +148,22 @@ var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     minNights: 4,
     maxNights: 8
+});
+				</pre>
+			</div>
+		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo20" value="">
+			</div>
+			<p class="demo__description">Disable specific days of weeks</p>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    minNights: 6,
+    disabledDaysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 });
 				</pre>
 			</div>
@@ -599,6 +615,13 @@ input.addEventListener('afterClose', function () {
 			input19.addEventListener('afterClose', function () {
 			    console.log('Closed!');
 			}, false);
+
+			// ------------------- DEMO 20 ------------------ //
+
+			var demo20 = new HotelDatepicker(document.getElementById('demo20'), {
+				minNights: 6,
+				disabledDaysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+			});
 		})();
 	</script>
 </body>

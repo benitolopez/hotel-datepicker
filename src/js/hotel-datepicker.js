@@ -23,6 +23,7 @@ export default class HotelDatepicker {
 		this.disabledDates = opts.disabledDates || [];
 		this.noCheckInDates = opts.noCheckInDates || [];
 		this.noCheckOutDates = opts.noCheckOutDates || [];
+		this.disabledDaysOfWeek = opts.disabledDaysOfWeek || [];
 		this.enableCheckout = opts.enableCheckout || false;
 		this.container = opts.container || '';
 		this.animationSpeed = opts.animationSpeed || '.5s';
@@ -458,6 +459,7 @@ export default class HotelDatepicker {
 				let isDisabled = false;
 				let isNoCheckIn = false;
 				let isNoCheckOut = false;
+				let isDayOfWeekDisabled = false;
 
                 // Check if the day is one of the days passed in the
                 // (optional) disabledDates option. And set valid to
@@ -474,6 +476,13 @@ export default class HotelDatepicker {
 							flag++;
 						} else {
 							flag = 0;
+						}
+					}
+
+					if (this.disabledDaysOfWeek.length > 0) {
+						if (this.disabledDaysOfWeek.indexOf(fecha.format(_day.time, 'dddd')) > -1) {
+							_day.valid = false;
+							isDayOfWeekDisabled = true;
 						}
 					}
 
@@ -497,7 +506,8 @@ export default class HotelDatepicker {
 					isDisabled ? 'datepicker__month-day--disabled' : '',
 					isDisabled && this.enableCheckout && (flag === 1) ? 'datepicker__month-day--checkout-enabled' : '',
 					isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
-					isNoCheckOut ? 'datepicker__month-day--no-check-out' : ''
+					isNoCheckOut ? 'datepicker__month-day--no-check-out' : '',
+					isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''
 				];
 
 				// Add a title for those days where the checkin or checkout is disabled

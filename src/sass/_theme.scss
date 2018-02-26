@@ -115,10 +115,14 @@
 	}
 }
 
+.datepicker__month-day--day-of-week-disabled {
+	background-color: rgba($text__invalid__color, .5);
+}
+
 .datepicker__month-day--checkout-enabled {}
 
 .datepicker__month-day--selected {
-	background-color: rgba($accent__color,.5);
+	background-color: rgba($accent__color,.2);
 	color: #fff;
 
 	&:after {
