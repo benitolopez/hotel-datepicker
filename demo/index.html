@@ -356,6 +356,27 @@ input.addEventListener('afterClose', function () {
 				</pre>
 			</div>
 		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo22" value="">
+				<button type="button" id="open-datepicker" class="button">Open</button>
+			</div>
+			<p class="demo__description">Click the button to open the datepicker</p>
+			<div class="demo__config">
+				<pre>
+var datepicker = new HotelDatepicker(document.getElementById('input-id'));
+var open_datepicker_button = document.getElementById('open-datepicker');
+
+open_datepicker_button.addEventListener('click', open_datepicker_function);
+
+function open_datepicker_function() {
+	console.log('Open!');
+	datepicker.open();
+}
+				</pre>
+			</div>
+		</div>
 	</div>
 
 	<footer class="site__footer">
@@ -622,6 +643,18 @@ input.addEventListener('afterClose', function () {
 				minNights: 6,
 				disabledDaysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 			});
+
+			// ------------------- DEMO 21 ------------------- //
+
+			var demo22 = new HotelDatepicker(document.getElementById('demo22'));
+			var open_datepicker_button = document.getElementById('open-datepicker');
+
+			open_datepicker_button.addEventListener('click', open_datepicker_function);
+
+			function open_datepicker_function() {
+				console.log('Open!');
+				demo22.open();
+			}
 		})();
 	</script>
 </body>
