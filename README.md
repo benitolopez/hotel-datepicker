@@ -233,7 +233,7 @@ i18n: {
     'error-less': 'Date range should not be less than 1 night',
     'error-less-plural': 'Date range should not be less than %d nights',
     'info-more': 'Please select a date range of at least 1 night',
-    'info-more-plural': 'Please select a date of at least %d nights',
+    'info-more-plural': 'Please select a date range of at least %d nights',
     'info-range': 'Please select a date range between %d and %d nights',
     'info-default': 'Please select a date range'
 }
