@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.4.0 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.4.1 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -48,8 +48,8 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 		'error-more-plural': 'Date range should not be more than %d nights',
 		'error-less': 'Date range should not be less than 1 night',
 		'error-less-plural': 'Date range should not be less than %d nights',
-		'info-more': 'Please select a date range longer than 1 night',
-		'info-more-plural': 'Please select a date range longer than %d nights',
+		'info-more': 'Please select a date range of at least 1 night',
+		'info-more-plural': 'Please select a date range of at least %d nights',
 		'info-range': 'Please select a date range between %d and %d nights',
 		'info-default': 'Please select a date range'
 	};
