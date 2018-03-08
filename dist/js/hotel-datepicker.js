@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.4.1 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.4.2 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -926,7 +926,7 @@ HotelDatepicker.prototype.isValidDate = function isValidDate (time) {
         // Update valid dates during the selection
 	if (this.start && !this.end) {
             // Check maximum/minimum days
-		if ((this.maxDays > 0 && this.countDays(time, this.start) > this.maxDays) || (this.minDays > 0 && this.countDays(time, this.start) < this.minDays)) {
+		if ((this.maxDays > 0 && this.countDays(time, this.start) > this.maxDays) || (this.minDays > 0 && this.countDays(time, this.start) > 1 && this.countDays(time, this.start) < this.minDays)) {
 			return false;
 		}
 

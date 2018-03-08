@@ -908,7 +908,7 @@ export default class HotelDatepicker {
         // Update valid dates during the selection
 		if (this.start && !this.end) {
             // Check maximum/minimum days
-			if ((this.maxDays > 0 && this.countDays(time, this.start) > this.maxDays) || (this.minDays > 0 && this.countDays(time, this.start) < this.minDays)) {
+			if ((this.maxDays > 0 && this.countDays(time, this.start) > this.maxDays) || (this.minDays > 0 && this.countDays(time, this.start) > 1 && this.countDays(time, this.start) < this.minDays)) {
 				return false;
 			}
 
