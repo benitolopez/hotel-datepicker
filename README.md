@@ -187,7 +187,7 @@ Move both months when clicking on the next/prev month button.
 - Type: `Function`
 - Default: `false`
 
-Run a cutom function every time a day is clicked:
+Run a custom function every time a day is clicked:
 
 ```js
 onDayClick: function() {
@@ -200,7 +200,7 @@ onDayClick: function() {
 - Type: `Function`
 - Default: `false`
 
-Run a cutom function when the datepicker is opened:
+Run a custom function when the datepicker is opened:
 
 ```js
 onOpenDatepicker: function() {
