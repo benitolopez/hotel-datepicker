@@ -377,6 +377,23 @@ function open_datepicker_function() {
 				</pre>
 			</div>
 		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo23" value="">
+			</div>
+			<p class="demo__description">Click the button to open the datepicker</p>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    onSelectRange: function() {
+		console.log('Date rage selected!')
+	}
+});
+				</pre>
+			</div>
+		</div>
 	</div>
 
 	<footer class="site__footer">
@@ -644,7 +661,7 @@ function open_datepicker_function() {
 				disabledDaysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 			});
 
-			// ------------------- DEMO 21 ------------------- //
+			// ------------------- DEMO 22 ------------------- //
 
 			var demo22 = new HotelDatepicker(document.getElementById('demo22'));
 			var open_datepicker_button = document.getElementById('open-datepicker');
@@ -655,6 +672,14 @@ function open_datepicker_function() {
 				console.log('Open!');
 				demo22.open();
 			}
+
+			// ------------------- DEMO 23 ------------------- //
+
+			var demo23 = new HotelDatepicker(document.getElementById('demo23'), {
+				onSelectRange: function() {
+					console.log('Date rage selected!')
+				}
+			});
 		})();
 	</script>
 </body>
