@@ -217,7 +217,7 @@ Run a custom function when the datepicker is opened:
 
 ```js
 onSelectRange: function() {
-    console.log('Range selected!');
+    console.log('Date range selected!');
 }
 ```
 
