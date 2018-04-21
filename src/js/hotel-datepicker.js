@@ -58,8 +58,8 @@ export default class HotelDatepicker {
 			input.value = s;
 		};
 		this.onDayClick = opts.onDayClick === undefined ? false : opts.onDayClick;
-        this.onOpenDatepicker = opts.onOpenDatepicker === undefined ? false : opts.onOpenDatepicker;
-        this.onSelectRange = opts.onSelectRange === undefined ? false : opts.onSelectRange;
+		this.onOpenDatepicker = opts.onOpenDatepicker === undefined ? false : opts.onOpenDatepicker;
+		this.onSelectRange = opts.onSelectRange === undefined ? false : opts.onSelectRange;
 
         // DOM input
 		this.input = input;
@@ -895,12 +895,12 @@ export default class HotelDatepicker {
 		// Optionally run a function when a day is clicked
 		if (this.onDayClick) {
 			this.onDayClick();
-        }
+		}
 
         // Optionally run a function when a range is selected
-        if (this.end && this.onSelectRange) {
-            this.onSelectRange();
-        }
+		if (this.end && this.onSelectRange) {
+			this.onSelectRange();
+		}
 	}
 
 	isValidDate(time) {

@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.4.2 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.5.0 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -60,8 +60,8 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 		input.value = s;
 	};
 	this.onDayClick = opts.onDayClick === undefined ? false : opts.onDayClick;
-        this.onOpenDatepicker = opts.onOpenDatepicker === undefined ? false : opts.onOpenDatepicker;
-        this.onSelectRange = opts.onSelectRange === undefined ? false : opts.onSelectRange;
+	this.onOpenDatepicker = opts.onOpenDatepicker === undefined ? false : opts.onOpenDatepicker;
+	this.onSelectRange = opts.onSelectRange === undefined ? false : opts.onSelectRange;
 
         // DOM input
 	this.input = input;
@@ -913,12 +913,12 @@ HotelDatepicker.prototype.dayClicked = function dayClicked (day) {
 	// Optionally run a function when a day is clicked
 	if (this.onDayClick) {
 		this.onDayClick();
-        }
+	}
 
         // Optionally run a function when a range is selected
-        if (this.end && this.onSelectRange) {
-            this.onSelectRange();
-        }
+	if (this.end && this.onSelectRange) {
+		this.onSelectRange();
+	}
 };
 
 HotelDatepicker.prototype.isValidDate = function isValidDate (time) {
