@@ -1,6 +1,6 @@
 {
   "name": "hotel-datepicker",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "author": "Benito Lopez (http://lopezb.com)",
   "license": "MIT",
   "description": "Date range picker for hotels",
@@ -17,6 +17,7 @@
     "calendar",
     "date"
   ],
+  "main": "dist/js/hotel-datepicker.js",
   "scripts": {
     "test": "xo",
     "run:sass": "node-sass -o .sass-cache src/sass --output-style expanded",
