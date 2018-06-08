@@ -1218,13 +1218,13 @@ export default class HotelDatepicker {
         // Add needed classes
 		for (let i = 0; i < days.length; i++) {
 			if (this.hasClass(days[i], 'datepicker__month-day--invalid') && this.hasClass(days[i], 'datepicker__month-day--tmp')) {
-				this$1.removeClass(days[i], 'datepicker__month-day--tmp');
-				if (this$1.hasClass(days[i], 'datepicker__month-day--tmpinvalid')) {
-					this$1.removeClass(days[i], 'datepicker__month-day--tmpinvalid');
+				this.removeClass(days[i], 'datepicker__month-day--tmp');
+				if (this.hasClass(days[i], 'datepicker__month-day--tmpinvalid')) {
+					this.removeClass(days[i], 'datepicker__month-day--tmpinvalid');
 				}
 				else {
-					this$1.removeClass(days[i], 'datepicker__month-day--invalid');
-					this$1.addClass(days[i], 'datepicker__month-day--valid');
+					this.removeClass(days[i], 'datepicker__month-day--invalid');
+					this.addClass(days[i], 'datepicker__month-day--valid');
 				}
 			}
 
@@ -1239,8 +1239,8 @@ export default class HotelDatepicker {
 						this.removeClass(days[i], 'datepicker__month-day--invalid');
 						this.removeClass(days[i], 'datepicker__month-day--disabled');
 					} else {
-						if (this$1.hasClass(days[i], 'datepicker__month-day--invalid')) {
-							this$1.addClass(days[i], 'datepicker__month-day--tmpinvalid');
+						if (this.hasClass(days[i], 'datepicker__month-day--invalid')) {
+							this.addClass(days[i], 'datepicker__month-day--tmpinvalid');
 						}
 						this.addClass(days[i], 'datepicker__month-day--invalid');
 						this.addClass(days[i], 'datepicker__month-day--tmp');
