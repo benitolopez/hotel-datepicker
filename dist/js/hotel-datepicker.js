@@ -1240,9 +1240,13 @@ HotelDatepicker.prototype.updateSelectableRange = function updateSelectableRange
         // Add needed classes
 	for (var i = 0; i < days.length; i++) {
 		if (this$1.hasClass(days[i], 'datepicker__month-day--invalid') && this$1.hasClass(days[i], 'datepicker__month-day--tmp')) {
-			this$1.removeClass(days[i], 'datepicker__month-day--invalid');
 			this$1.removeClass(days[i], 'datepicker__month-day--tmp');
-			this$1.addClass(days[i], 'datepicker__month-day--valid');
+			if (this$1.hasClass(days[i], 'datepicker__month-day--tmpinvalid')) {
+				this$1.removeClass(days[i], 'datepicker__month-day--tmpinvalid');
+			} else {
+				this$1.removeClass(days[i], 'datepicker__month-day--invalid');
+				this$1.addClass(days[i], 'datepicker__month-day--valid');
+			}
 		}
 
             // Update day classes during the date range selection
@@ -1256,6 +1260,9 @@ HotelDatepicker.prototype.updateSelectableRange = function updateSelectableRange
 					this$1.removeClass(days[i], 'datepicker__month-day--invalid');
 					this$1.removeClass(days[i], 'datepicker__month-day--disabled');
 				} else {
+					if (this$1.hasClass(days[i], 'datepicker__month-day--invalid')) {
+						this$1.addClass(days[i], 'datepicker__month-day--tmpinvalid');
+					}
 					this$1.addClass(days[i], 'datepicker__month-day--invalid');
 					this$1.addClass(days[i], 'datepicker__month-day--tmp');
 					this$1.removeClass(days[i], 'datepicker__month-day--valid');

@@ -1218,9 +1218,13 @@ export default class HotelDatepicker {
         // Add needed classes
 		for (let i = 0; i < days.length; i++) {
 			if (this.hasClass(days[i], 'datepicker__month-day--invalid') && this.hasClass(days[i], 'datepicker__month-day--tmp')) {
-				this.removeClass(days[i], 'datepicker__month-day--invalid');
 				this.removeClass(days[i], 'datepicker__month-day--tmp');
-				this.addClass(days[i], 'datepicker__month-day--valid');
+				if (this.hasClass(days[i], 'datepicker__month-day--tmpinvalid')) {
+					this.removeClass(days[i], 'datepicker__month-day--tmpinvalid');
+				} else {
+					this.removeClass(days[i], 'datepicker__month-day--invalid');
+					this.addClass(days[i], 'datepicker__month-day--valid');
+				}
 			}
 
             // Update day classes during the date range selection
@@ -1234,6 +1238,9 @@ export default class HotelDatepicker {
 						this.removeClass(days[i], 'datepicker__month-day--invalid');
 						this.removeClass(days[i], 'datepicker__month-day--disabled');
 					} else {
+						if (this.hasClass(days[i], 'datepicker__month-day--invalid')) {
+							this.addClass(days[i], 'datepicker__month-day--tmpinvalid');
+						}
 						this.addClass(days[i], 'datepicker__month-day--invalid');
 						this.addClass(days[i], 'datepicker__month-day--tmp');
 						this.removeClass(days[i], 'datepicker__month-day--valid');
