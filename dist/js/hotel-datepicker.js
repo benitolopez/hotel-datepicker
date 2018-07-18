@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.6.1 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.6.2 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -1168,18 +1168,26 @@ HotelDatepicker.prototype.disableNextPrevButtons = function disableNextPrevButto
 	var month2 = parseInt(this.getDateString(this.month2, 'YYYYMM'), 10);
 	var d = Math.abs(month1 - month2);
 
-        // First month "next" month button
-	var nextButton = this.datepicker.getElementsByClassName('datepicker__month-button--next')[0];
-
-        // Second month "previous" month button
-	var prevButton = this.datepicker.getElementsByClassName('datepicker__month-button--prev')[1];
+	var nextButtons = this.datepicker.getElementsByClassName('datepicker__month-button--next');
+	var prevButtons = this.datepicker.getElementsByClassName('datepicker__month-button--prev');
 
 	if (d > 1 && d !== 89) {
-		this.removeClass(nextButton, 'datepicker__month-button--disabled');
-		this.removeClass(prevButton, 'datepicker__month-button--disabled');
+		this.removeClass(nextButtons[0], 'datepicker__month-button--disabled');
+		this.removeClass(prevButtons[1], 'datepicker__month-button--disabled');
 	} else {
-		this.addClass(nextButton, 'datepicker__month-button--disabled');
-		this.addClass(prevButton, 'datepicker__month-button--disabled');
+		this.addClass(nextButtons[0], 'datepicker__month-button--disabled');
+		this.addClass(prevButtons[1], 'datepicker__month-button--disabled');
+	}
+
+	if (this.isMonthOutOfRange(this.getPrevMonth(this.month1))) {
+		this.addClass(prevButtons[0], 'datepicker__month-button--disabled');
+	} else {
+		this.removeClass(prevButtons[0], 'datepicker__month-button--disabled');
+	}
+	if (this.isMonthOutOfRange(this.getNextMonth(this.month2))) {
+		this.addClass(nextButtons[1], 'datepicker__month-button--disabled');
+	} else {
+		this.removeClass(nextButtons[1], 'datepicker__month-button--disabled');
 	}
 };
 

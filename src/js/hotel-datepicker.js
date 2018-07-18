@@ -1158,17 +1158,17 @@ export default class HotelDatepicker {
 			this.addClass(nextButtons[0], 'datepicker__month-button--disabled');
 			this.addClass(prevButtons[1], 'datepicker__month-button--disabled');
 		}
-        
-        if (this.isMonthOutOfRange(this.getPrevMonth(this.month1))) {
-            this.addClass(prevButtons[0], 'datepicker__month-button--disabled');
-        } else {
-            this.removeClass(prevButtons[0], 'datepicker__month-button--disabled');
-        }
-        if (this.isMonthOutOfRange(this.getNextMonth(this.month2))) {
-            this.addClass(nextButtons[1], 'datepicker__month-button--disabled');
-        } else {
-            this.removeClass(nextButtons[1], 'datepicker__month-button--disabled');
-        }
+
+		if (this.isMonthOutOfRange(this.getPrevMonth(this.month1))) {
+			this.addClass(prevButtons[0], 'datepicker__month-button--disabled');
+		} else {
+			this.removeClass(prevButtons[0], 'datepicker__month-button--disabled');
+		}
+		if (this.isMonthOutOfRange(this.getNextMonth(this.month2))) {
+			this.addClass(nextButtons[1], 'datepicker__month-button--disabled');
+		} else {
+			this.removeClass(nextButtons[1], 'datepicker__month-button--disabled');
+		}
 	}
 
 	topBarDefaultText() {
