@@ -1148,19 +1148,27 @@ export default class HotelDatepicker {
 		const month2 = parseInt(this.getDateString(this.month2, 'YYYYMM'), 10);
 		const d = Math.abs(month1 - month2);
 
-        // First month "next" month button
-		const nextButton = this.datepicker.getElementsByClassName('datepicker__month-button--next')[0];
-
-        // Second month "previous" month button
-		const prevButton = this.datepicker.getElementsByClassName('datepicker__month-button--prev')[1];
+		const nextButtons = this.datepicker.getElementsByClassName('datepicker__month-button--next');
+		const prevButtons = this.datepicker.getElementsByClassName('datepicker__month-button--prev');
 
 		if (d > 1 && d !== 89) {
-			this.removeClass(nextButton, 'datepicker__month-button--disabled');
-			this.removeClass(prevButton, 'datepicker__month-button--disabled');
+			this.removeClass(nextButtons[0], 'datepicker__month-button--disabled');
+			this.removeClass(prevButtons[1], 'datepicker__month-button--disabled');
 		} else {
-			this.addClass(nextButton, 'datepicker__month-button--disabled');
-			this.addClass(prevButton, 'datepicker__month-button--disabled');
+			this.addClass(nextButtons[0], 'datepicker__month-button--disabled');
+			this.addClass(prevButtons[1], 'datepicker__month-button--disabled');
 		}
+        
+        if (this.isMonthOutOfRange(this.getPrevMonth(this.month1))) {
+            this.addClass(prevButtons[0], 'datepicker__month-button--disabled');
+        } else {
+            this.removeClass(prevButtons[0], 'datepicker__month-button--disabled');
+        }
+        if (this.isMonthOutOfRange(this.getNextMonth(this.month2))) {
+            this.addClass(nextButtons[1], 'datepicker__month-button--disabled');
+        } else {
+            this.removeClass(nextButtons[1], 'datepicker__month-button--disabled');
+        }
 	}
 
 	topBarDefaultText() {
