@@ -234,17 +234,17 @@ export default class HotelDatepicker {
 			defaultTime = this.getPrevMonth(this.endDate);
 		}
 
+		// Parse disabled dates
+		if (this.disabledDates.length > 0) {
+			this.parseDisabledDates();
+		}
+
         // Show months
 		this.showMonth(defaultTime, 1);
 		this.showMonth(this.getNextMonth(defaultTime), 2);
 
 		// Print default info in top bar
 		this.topBarDefaultText();
-
-        // Parse disabled dates
-		if (this.disabledDates.length > 0) {
-			this.parseDisabledDates();
-		}
 
         // Attach listeners
 		this.addListeners();
@@ -462,6 +462,10 @@ export default class HotelDatepicker {
 				let isNoCheckOut = false;
 				let isDayOfWeekDisabled = false;
 
+				// Day between disabled dates and the last day
+				// before the disabled date
+				let isDayBeforeDisabledDate = false;
+
                 // Check if the day is one of the days passed in the
                 // (optional) disabledDates option. And set valid to
                 // false in this case.
@@ -470,6 +474,28 @@ export default class HotelDatepicker {
 				if (_day.valid) {
 					const dateString = this.getDateString(_day.time, 'YYYY-MM-DD');
 					if (this.disabledDates.length > 0) {
+						// Check if this day is between two disabled dates
+						// and disable it if there are not enough days
+						// available to select a valid range
+						const limit = this.getClosestDates(_day.date);
+
+						if (limit[0] && limit[1]) {
+							if (this.compareDay(_day.date, limit[0]) && (this.countDays(limit[0], limit[1]) - 2) > 0) {
+								const daysBeforeNextDisabledDate = this.countDays(limit[1], _day.date) - 1;
+								const daysAfterPrevDisabledDate = this.countDays(_day.date, limit[0]) - 1;
+
+								if (this.selectForward && daysBeforeNextDisabledDate < this.minDays) {
+									_day.valid = false;
+								} else if (!this.selectForward && daysBeforeNextDisabledDate < this.minDays && daysAfterPrevDisabledDate < this.minDays) {
+									_day.valid = false;
+								}
+
+								if (!_day.valid && this.enableCheckout && daysBeforeNextDisabledDate === 2) {
+									isDayBeforeDisabledDate = true;
+								}
+							}
+						}
+
 						if (this.disabledDates.indexOf(dateString) > -1) {
 							_day.valid = false;
 							isDisabled = true;
@@ -506,6 +532,7 @@ export default class HotelDatepicker {
 					isToday ? 'datepicker__month-day--today' : '',
 					isDisabled ? 'datepicker__month-day--disabled' : '',
 					isDisabled && this.enableCheckout && (flag === 1) ? 'datepicker__month-day--checkout-enabled' : '',
+					isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
 					isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
 					isNoCheckOut ? 'datepicker__month-day--no-check-out' : '',
 					isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''
@@ -1237,7 +1264,7 @@ export default class HotelDatepicker {
 
             // Update day classes during the date range selection
 			if (isSelecting) {
-				if (this.hasClass(days[i], 'datepicker__month-day--visibleMonth') && (this.hasClass(days[i], 'datepicker__month-day--valid') || this.hasClass(days[i], 'datepicker__month-day--disabled'))) {
+				if (this.hasClass(days[i], 'datepicker__month-day--visibleMonth') && (this.hasClass(days[i], 'datepicker__month-day--valid') || this.hasClass(days[i], 'datepicker__month-day--disabled') || this.hasClass(days[i], 'datepicker__month-day--before-disabled-date'))) {
 					const time = parseInt(days[i].getAttribute('time'), 10);
 
 					if (this.isValidDate(time)) {
@@ -1256,11 +1283,14 @@ export default class HotelDatepicker {
 				}
 			// At the end of the selection, restore the disabled/invalid class for
 			// days where the checkout is enabled. We need to check this when the
-			// autoclose option is false
-			} else if (this.hasClass(days[i], 'datepicker__month-day--checkout-enabled')) {
+			// autoclose option is false .the same for the day just before the
+			// disabled date
+			} else if (this.hasClass(days[i], 'datepicker__month-day--checkout-enabled') || this.hasClass(days[i], 'datepicker__month-day--before-disabled-date')) {
 				this.addClass(days[i], 'datepicker__month-day--invalid');
 				this.removeClass(days[i], 'datepicker__month-day--valid');
-				this.addClass(days[i], 'datepicker__month-day--disabled');
+				if (!this.hasClass(days[i], 'datepicker__month-day--before-disabled-date')) {
+					this.addClass(days[i], 'datepicker__month-day--disabled');
+				}
 			}
 		}
 

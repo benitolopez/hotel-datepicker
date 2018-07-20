@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.6.2 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.6.3 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -242,17 +242,17 @@ HotelDatepicker.prototype.init = function init () {
 		defaultTime = this.getPrevMonth(this.endDate);
 	}
 
+	// Parse disabled dates
+	if (this.disabledDates.length > 0) {
+		this.parseDisabledDates();
+	}
+
         // Show months
 	this.showMonth(defaultTime, 1);
 	this.showMonth(this.getNextMonth(defaultTime), 2);
 
 	// Print default info in top bar
 	this.topBarDefaultText();
-
-        // Parse disabled dates
-	if (this.disabledDates.length > 0) {
-		this.parseDisabledDates();
-	}
 
         // Attach listeners
 	this.addListeners();
@@ -476,6 +476,10 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 			var isNoCheckOut = false;
 			var isDayOfWeekDisabled = false;
 
+			// Day between disabled dates and the last day
+			// before the disabled date
+			var isDayBeforeDisabledDate = false;
+
                 // Check if the day is one of the days passed in the
                 // (optional) disabledDates option. And set valid to
                 // false in this case.
@@ -484,6 +488,28 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 			if (_day$2.valid) {
 				var dateString = this$1.getDateString(_day$2.time, 'YYYY-MM-DD');
 				if (this$1.disabledDates.length > 0) {
+					// Check if this day is between two disabled dates
+					// and disable it if there are not enough days
+					// available to select a valid range
+					var limit = this$1.getClosestDates(_day$2.date);
+
+					if (limit[0] && limit[1]) {
+						if (this$1.compareDay(_day$2.date, limit[0]) && (this$1.countDays(limit[0], limit[1]) - 2) > 0) {
+							var daysBeforeNextDisabledDate = this$1.countDays(limit[1], _day$2.date) - 1;
+							var daysAfterPrevDisabledDate = this$1.countDays(_day$2.date, limit[0]) - 1;
+
+							if (this$1.selectForward && daysBeforeNextDisabledDate < this$1.minDays) {
+								_day$2.valid = false;
+							} else if (!this$1.selectForward && daysBeforeNextDisabledDate < this$1.minDays && daysAfterPrevDisabledDate < this$1.minDays) {
+								_day$2.valid = false;
+							}
+
+							if (!_day$2.valid && this$1.enableCheckout && daysBeforeNextDisabledDate === 2) {
+								isDayBeforeDisabledDate = true;
+							}
+						}
+					}
+
 					if (this$1.disabledDates.indexOf(dateString) > -1) {
 						_day$2.valid = false;
 						isDisabled = true;
@@ -520,6 +546,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 				isToday ? 'datepicker__month-day--today' : '',
 				isDisabled ? 'datepicker__month-day--disabled' : '',
 				isDisabled && this$1.enableCheckout && (flag === 1) ? 'datepicker__month-day--checkout-enabled' : '',
+				isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
 				isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
 				isNoCheckOut ? 'datepicker__month-day--no-check-out' : '',
 				isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''
@@ -1259,7 +1286,7 @@ HotelDatepicker.prototype.updateSelectableRange = function updateSelectableRange
 
             // Update day classes during the date range selection
 		if (isSelecting) {
-			if (this$1.hasClass(days[i], 'datepicker__month-day--visibleMonth') && (this$1.hasClass(days[i], 'datepicker__month-day--valid') || this$1.hasClass(days[i], 'datepicker__month-day--disabled'))) {
+			if (this$1.hasClass(days[i], 'datepicker__month-day--visibleMonth') && (this$1.hasClass(days[i], 'datepicker__month-day--valid') || this$1.hasClass(days[i], 'datepicker__month-day--disabled') || this$1.hasClass(days[i], 'datepicker__month-day--before-disabled-date'))) {
 				var time = parseInt(days[i].getAttribute('time'), 10);
 
 				if (this$1.isValidDate(time)) {
@@ -1278,11 +1305,14 @@ HotelDatepicker.prototype.updateSelectableRange = function updateSelectableRange
 			}
 		// At the end of the selection, restore the disabled/invalid class for
 		// days where the checkout is enabled. We need to check this when the
-		// autoclose option is false
-		} else if (this$1.hasClass(days[i], 'datepicker__month-day--checkout-enabled')) {
+		// autoclose option is false .the same for the day just before the
+		// disabled date
+		} else if (this$1.hasClass(days[i], 'datepicker__month-day--checkout-enabled') || this$1.hasClass(days[i], 'datepicker__month-day--before-disabled-date')) {
 			this$1.addClass(days[i], 'datepicker__month-day--invalid');
 			this$1.removeClass(days[i], 'datepicker__month-day--valid');
-			this$1.addClass(days[i], 'datepicker__month-day--disabled');
+			if (!this$1.hasClass(days[i], 'datepicker__month-day--before-disabled-date')) {
+				this$1.addClass(days[i], 'datepicker__month-day--disabled');
+			}
 		}
 	}
 
