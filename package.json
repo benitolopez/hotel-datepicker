@@ -17,7 +17,7 @@
     "calendar",
     "date"
   ],
-  "main": "dist/js/hotel-datepicker.js",
+  "main": "src/js/hotel-datepicker.js",
   "scripts": {
     "test": "xo",
     "run:sass": "node-sass -o .sass-cache src/sass --output-style expanded",
