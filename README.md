@@ -213,7 +213,7 @@ onOpenDatepicker: function() {
 - Type: `Function`
 - Default: `false`
 
-Run a custom function when the datepicker is opened:
+Run a custom function when a range is selected:
 
 ```js
 onSelectRange: function() {
