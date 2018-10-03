@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.6.4 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.6.5 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -988,7 +988,7 @@ HotelDatepicker.prototype.isValidDate = function isValidDate (time) {
 HotelDatepicker.prototype.checkSelection = function checkSelection () {
 		var this$1 = this;
 
-	var numberOfDays = Math.ceil((this.end - this.start) / 86400000) + 1;
+	var numberOfDays = this.countDays(this.end, this.start);
 	var bar = this.showTopbar ? this.datepicker.getElementsByClassName('datepicker__info--feedback')[0] : false;
 
 	if (this.maxDays && numberOfDays > this.maxDays) {
