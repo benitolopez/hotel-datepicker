@@ -968,7 +968,7 @@ export default class HotelDatepicker {
 	}
 
 	checkSelection() {
-		const numberOfDays = Math.ceil((this.end - this.start) / 86400000) + 1;
+		const numberOfDays = this.countDays(this.end, this.start);
 		const bar = this.showTopbar ? this.datepicker.getElementsByClassName('datepicker__info--feedback')[0] : false;
 
 		if (this.maxDays && numberOfDays > this.maxDays) {
