@@ -227,11 +227,11 @@ export default class HotelDatepicker {
 		let defaultTime = new Date();
 
 		if (this.startDate && this.compareMonth(defaultTime, this.startDate) < 0) {
-			defaultTime = this.startDate;
+			defaultTime = new Date(this.startDate.getTime());
 		}
 
 		if (this.endDate && this.compareMonth(this.getNextMonth(defaultTime), this.endDate) > 0) {
-			defaultTime = this.getPrevMonth(this.endDate);
+			defaultTime = new Date(this.getPrevMonth(this.endDate.getTime()));
 		}
 
 		// Parse disabled dates
