@@ -296,7 +296,7 @@ Destroys the datepicker.
 
 ### afterClose
 
-You can list for this event when the datepicker closes.
+You can listen for this event when the datepicker closes.
 
 ```js
 var input = document.getElementById('input-id');
