@@ -161,14 +161,14 @@ export default class HotelDatepicker {
         // Get next month date
 		const _m = new Date(month.valueOf());
 
-		return new Date(_m.setMonth(_m.getMonth() + 1));
+		return new Date(_m.setMonth(_m.getMonth() + 1, 1));
 	}
 
 	getPrevMonth(month) {
         // Get previous month date
 		const _m = new Date(month.valueOf());
 
-		return new Date(_m.setMonth(_m.getMonth() - 1));
+		return new Date(_m.setMonth(_m.getMonth() - 1, 1));
 	}
 
 	getDateString(date, format = this.format) {

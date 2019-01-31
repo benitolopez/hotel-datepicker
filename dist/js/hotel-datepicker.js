@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.6.6 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.6.7 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -165,14 +165,14 @@ HotelDatepicker.prototype.getNextMonth = function getNextMonth (month) {
         // Get next month date
 	var _m = new Date(month.valueOf());
 
-	return new Date(_m.setMonth(_m.getMonth() + 1));
+	return new Date(_m.setMonth(_m.getMonth() + 1, 1));
 };
 
 HotelDatepicker.prototype.getPrevMonth = function getPrevMonth (month) {
         // Get previous month date
 	var _m = new Date(month.valueOf());
 
-	return new Date(_m.setMonth(_m.getMonth() - 1));
+	return new Date(_m.setMonth(_m.getMonth() - 1, 1));
 };
 
 HotelDatepicker.prototype.getDateString = function getDateString (date, format) {
