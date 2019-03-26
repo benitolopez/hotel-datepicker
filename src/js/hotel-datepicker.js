@@ -439,6 +439,9 @@ export default class HotelDatepicker {
 			});
 		}
 
+		// Flag for disabled dates
+		let flag = 0;
+
         // Create the week rows.
 		for (let week = 0; week < 6; week++) {
             // Iterate the days object week by week.
@@ -446,9 +449,6 @@ export default class HotelDatepicker {
 			if (days[week * 7].type === 'nextMonth') {
 				break;
 			}
-
-            // Flag for disabled dates
-			let flag = 0;
 
 			html += '<tr class="datepicker__week-row">';
 

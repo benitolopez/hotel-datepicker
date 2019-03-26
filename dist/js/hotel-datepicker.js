@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.6.7 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.6.8 - Copyright 2017 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -453,6 +453,9 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 		});
 	}
 
+	// Flag for disabled dates
+	var flag = 0;
+
         // Create the week rows.
 	for (var week = 0; week < 6; week++) {
             // Iterate the days object week by week.
@@ -460,9 +463,6 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 		if (days[week * 7].type === 'nextMonth') {
 			break;
 		}
-
-            // Flag for disabled dates
-		var flag = 0;
 
 		html += '<tr class="datepicker__week-row">';
 
