@@ -259,9 +259,6 @@ HotelDatepicker.prototype.init = function init () {
 
 	// Flag for first disabled date
 	this.isFirstDisabledDate = 0;
-
-	// Flag for first enabled date
-	this.isFirstEnabledDate = 0;
 };
 
 HotelDatepicker.prototype.addListeners = function addListeners () {
@@ -479,6 +476,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 			var isNoCheckIn = false;
 			var isNoCheckOut = false;
 			var isDayOfWeekDisabled = false;
+			var isFirstEnabledDate = false;
 
 			// Day between disabled dates and the last day
 			// before the disabled date
@@ -514,15 +512,18 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 						}
 					}
 
+					// First day after a disabled day
+					if (limit[0] && this$1.countDays(limit[0], _day$2.date) === 3) {
+						isFirstEnabledDate = true;
+					}
+
 					if (this$1.disabledDates.indexOf(dateString) > -1) {
 						_day$2.valid = false;
 						isDisabled = true;
 
 						this$1.isFirstDisabledDate++;
-						this$1.isFirstEnabledDate = 0;
 					} else {
 						this$1.isFirstDisabledDate = 0;
-						this$1.isFirstEnabledDate++;
 					}
 				}
 
@@ -536,7 +537,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 				if (this$1.noCheckInDates.length > 0) {
 					if (this$1.noCheckInDates.indexOf(dateString) > -1) {
 						isNoCheckIn = true;
-						this$1.isFirstEnabledDate = 0;
+						isFirstEnabledDate = false;
 					}
 				}
 
@@ -554,7 +555,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 				isDisabled ? 'datepicker__month-day--disabled' : '',
 				isDisabled && this$1.enableCheckout && (this$1.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
 				isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
-				isStartDate || (_day$2.valid && this$1.isFirstEnabledDate === 1) ? 'datepicker__month-day--checkin-only' : '',
+				isStartDate || isFirstEnabledDate ? 'datepicker__month-day--checkin-only' : '',
 				isNoCheckIn ? 'datepicker__month-day--no-checkin' : '',
 				isNoCheckOut ? 'datepicker__month-day--no-checkout' : '',
 				isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''
