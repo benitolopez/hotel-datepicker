@@ -485,7 +485,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
                 // false in this case.
                 //
                 // Also, check if the checkin or checkout is disabled
-			if (_day$2.valid) {
+			if (_day$2.valid || _day$2.type === 'visibleMonth') {
 				var dateString = this$1.getDateString(_day$2.time, 'YYYY-MM-DD');
 				if (this$1.disabledDates.length > 0) {
 					// Check if this day is between two disabled dates

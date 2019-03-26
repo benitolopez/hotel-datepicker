@@ -471,7 +471,7 @@ export default class HotelDatepicker {
                 // false in this case.
                 //
                 // Also, check if the checkin or checkout is disabled
-				if (_day.valid) {
+				if (_day.valid || _day.type === 'visibleMonth') {
 					const dateString = this.getDateString(_day.time, 'YYYY-MM-DD');
 					if (this.disabledDates.length > 0) {
 						// Check if this day is between two disabled dates
