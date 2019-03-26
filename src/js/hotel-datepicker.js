@@ -251,6 +251,9 @@ export default class HotelDatepicker {
 
 		// Flag for first disabled date
 		this.isFirstDisabledDate = 0;
+
+		// Flag for first enabled date
+		this.isFirstEnabledDate = 0;
 	}
 
 	addListeners() {
@@ -457,6 +460,7 @@ export default class HotelDatepicker {
 				let _day = (this.startOfWeek === 'monday') ? i + 1 : i;
 				_day = days[(week * 7) + _day];
 				const isToday = this.getDateString(_day.time) === this.getDateString(new Date());
+				const isStartDate = this.getDateString(_day.time) === this.getDateString(this.startDate);
 				let isDisabled = false;
 				let isNoCheckIn = false;
 				let isNoCheckOut = false;
@@ -501,8 +505,10 @@ export default class HotelDatepicker {
 							isDisabled = true;
 
 							this.isFirstDisabledDate++;
+							this.isFirstEnabledDate = 0;
 						} else {
 							this.isFirstDisabledDate = 0;
+							this.isFirstEnabledDate++;
 						}
 					}
 
@@ -516,6 +522,7 @@ export default class HotelDatepicker {
 					if (this.noCheckInDates.length > 0) {
 						if (this.noCheckInDates.indexOf(dateString) > -1) {
 							isNoCheckIn = true;
+							this.isFirstEnabledDate = 0;
 						}
 					}
 
@@ -533,6 +540,7 @@ export default class HotelDatepicker {
 					isDisabled ? 'datepicker__month-day--disabled' : '',
 					isDisabled && this.enableCheckout && (this.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
 					isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
+					isStartDate || (_day.valid && this.isFirstEnabledDate === 1) ? 'datepicker__month-day--checkin-only' : '',
 					isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
 					isNoCheckOut ? 'datepicker__month-day--no-check-out' : '',
 					isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''

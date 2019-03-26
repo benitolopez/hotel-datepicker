@@ -259,6 +259,9 @@ HotelDatepicker.prototype.init = function init () {
 
 	// Flag for first disabled date
 	this.isFirstDisabledDate = 0;
+
+	// Flag for first enabled date
+	this.isFirstEnabledDate = 0;
 };
 
 HotelDatepicker.prototype.addListeners = function addListeners () {
@@ -471,6 +474,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 			var _day$2 = (this$1.startOfWeek === 'monday') ? i$2 + 1 : i$2;
 			_day$2 = days[(week * 7) + _day$2];
 			var isToday = this$1.getDateString(_day$2.time) === this$1.getDateString(new Date());
+			var isStartDate = this$1.getDateString(_day$2.time) === this$1.getDateString(this$1.startDate);
 			var isDisabled = false;
 			var isNoCheckIn = false;
 			var isNoCheckOut = false;
@@ -515,8 +519,10 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 						isDisabled = true;
 
 						this$1.isFirstDisabledDate++;
+						this$1.isFirstEnabledDate = 0;
 					} else {
 						this$1.isFirstDisabledDate = 0;
+						this$1.isFirstEnabledDate++;
 					}
 				}
 
@@ -530,6 +536,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 				if (this$1.noCheckInDates.length > 0) {
 					if (this$1.noCheckInDates.indexOf(dateString) > -1) {
 						isNoCheckIn = true;
+						this$1.isFirstEnabledDate = 0;
 					}
 				}
 
@@ -547,6 +554,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 				isDisabled ? 'datepicker__month-day--disabled' : '',
 				isDisabled && this$1.enableCheckout && (this$1.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
 				isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
+				isStartDate || (_day$2.valid && this$1.isFirstEnabledDate === 1) ? 'datepicker__month-day--checkin-only' : '',
 				isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
 				isNoCheckOut ? 'datepicker__month-day--no-check-out' : '',
 				isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''
