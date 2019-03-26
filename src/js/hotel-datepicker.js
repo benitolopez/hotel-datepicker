@@ -248,6 +248,9 @@ export default class HotelDatepicker {
 
         // Attach listeners
 		this.addListeners();
+
+		// Flag for first disabled date
+		this.isFirstDisabledDate = 0;
 	}
 
 	addListeners() {
@@ -439,9 +442,6 @@ export default class HotelDatepicker {
 			});
 		}
 
-		// Flag for disabled dates
-		let flag = 0;
-
         // Create the week rows.
 		for (let week = 0; week < 6; week++) {
             // Iterate the days object week by week.
@@ -500,9 +500,9 @@ export default class HotelDatepicker {
 							_day.valid = false;
 							isDisabled = true;
 
-							flag++;
+							this.isFirstDisabledDate++;
 						} else {
-							flag = 0;
+							this.isFirstDisabledDate = 0;
 						}
 					}
 
@@ -531,7 +531,7 @@ export default class HotelDatepicker {
 					'datepicker__month-day--' + (_day.valid ? 'valid' : 'invalid'),
 					isToday ? 'datepicker__month-day--today' : '',
 					isDisabled ? 'datepicker__month-day--disabled' : '',
-					isDisabled && this.enableCheckout && (flag === 1) ? 'datepicker__month-day--checkout-enabled' : '',
+					isDisabled && this.enableCheckout && (this.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
 					isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
 					isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
 					isNoCheckOut ? 'datepicker__month-day--no-check-out' : '',

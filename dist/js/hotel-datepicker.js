@@ -256,6 +256,9 @@ HotelDatepicker.prototype.init = function init () {
 
         // Attach listeners
 	this.addListeners();
+
+	// Flag for first disabled date
+	this.isFirstDisabledDate = 0;
 };
 
 HotelDatepicker.prototype.addListeners = function addListeners () {
@@ -453,9 +456,6 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 		});
 	}
 
-	// Flag for disabled dates
-	var flag = 0;
-
         // Create the week rows.
 	for (var week = 0; week < 6; week++) {
             // Iterate the days object week by week.
@@ -514,9 +514,9 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 						_day$2.valid = false;
 						isDisabled = true;
 
-						flag++;
+						this$1.isFirstDisabledDate++;
 					} else {
-						flag = 0;
+						this$1.isFirstDisabledDate = 0;
 					}
 				}
 
@@ -545,7 +545,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 				'datepicker__month-day--' + (_day$2.valid ? 'valid' : 'invalid'),
 				isToday ? 'datepicker__month-day--today' : '',
 				isDisabled ? 'datepicker__month-day--disabled' : '',
-				isDisabled && this$1.enableCheckout && (flag === 1) ? 'datepicker__month-day--checkout-enabled' : '',
+				isDisabled && this$1.enableCheckout && (this$1.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
 				isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
 				isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
 				isNoCheckOut ? 'datepicker__month-day--no-check-out' : '',
