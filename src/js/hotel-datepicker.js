@@ -541,8 +541,8 @@ export default class HotelDatepicker {
 					isDisabled && this.enableCheckout && (this.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
 					isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
 					isStartDate || (_day.valid && this.isFirstEnabledDate === 1) ? 'datepicker__month-day--checkin-only' : '',
-					isNoCheckIn ? 'datepicker__month-day--no-check-in' : '',
-					isNoCheckOut ? 'datepicker__month-day--no-check-out' : '',
+					isNoCheckIn ? 'datepicker__month-day--no-checkin' : '',
+					isNoCheckOut ? 'datepicker__month-day--no-checkout' : '',
 					isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''
 				];
 
@@ -873,11 +873,11 @@ export default class HotelDatepicker {
 
 		// Return early for those days where the checkin or checkout is disabled
 		if (isSelectStart) {
-			if (this.hasClass(day, 'datepicker__month-day--no-check-in')) {
+			if (this.hasClass(day, 'datepicker__month-day--no-checkin')) {
 				return;
 			}
 		} else if (this.start) {
-			if (this.hasClass(day, 'datepicker__month-day--no-check-out')) {
+			if (this.hasClass(day, 'datepicker__month-day--no-checkout')) {
 				return;
 			}
 		}
