@@ -251,9 +251,6 @@ export default class HotelDatepicker {
 
 		// Flag for first disabled date
 		this.isFirstDisabledDate = 0;
-
-		// Flag for first enabled date
-		this.isFirstEnabledDate = 0;
 	}
 
 	addListeners() {
@@ -465,6 +462,7 @@ export default class HotelDatepicker {
 				let isNoCheckIn = false;
 				let isNoCheckOut = false;
 				let isDayOfWeekDisabled = false;
+				let isFirstEnabledDate = false;
 
 				// Day between disabled dates and the last day
 				// before the disabled date
@@ -500,15 +498,18 @@ export default class HotelDatepicker {
 							}
 						}
 
+						// First day after a disabled day
+						if (limit[0] && this.countDays(limit[0], _day.date) === 3) {
+							isFirstEnabledDate = true;
+						}
+
 						if (this.disabledDates.indexOf(dateString) > -1) {
 							_day.valid = false;
 							isDisabled = true;
 
 							this.isFirstDisabledDate++;
-							this.isFirstEnabledDate = 0;
 						} else {
 							this.isFirstDisabledDate = 0;
-							this.isFirstEnabledDate++;
 						}
 					}
 
@@ -522,7 +523,7 @@ export default class HotelDatepicker {
 					if (this.noCheckInDates.length > 0) {
 						if (this.noCheckInDates.indexOf(dateString) > -1) {
 							isNoCheckIn = true;
-							this.isFirstEnabledDate = 0;
+							isFirstEnabledDate = false;
 						}
 					}
 
@@ -540,7 +541,7 @@ export default class HotelDatepicker {
 					isDisabled ? 'datepicker__month-day--disabled' : '',
 					isDisabled && this.enableCheckout && (this.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
 					isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
-					isStartDate || (_day.valid && this.isFirstEnabledDate === 1) ? 'datepicker__month-day--checkin-only' : '',
+					isStartDate || isFirstEnabledDate ? 'datepicker__month-day--checkin-only' : '',
 					isNoCheckIn ? 'datepicker__month-day--no-checkin' : '',
 					isNoCheckOut ? 'datepicker__month-day--no-checkout' : '',
 					isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''
