@@ -251,6 +251,9 @@ export default class HotelDatepicker {
 
 		// Flag for first disabled date
 		this.isFirstDisabledDate = 0;
+
+		// Holds last disabled date
+		this.lastDisabledDate = false;
 	}
 
 	addListeners() {
@@ -498,18 +501,21 @@ export default class HotelDatepicker {
 							}
 						}
 
-						// First day after a disabled day
-						if (limit[0] && this.countDays(limit[0], _day.date) === 3) {
-							isFirstEnabledDate = true;
-						}
-
 						if (this.disabledDates.indexOf(dateString) > -1) {
 							_day.valid = false;
 							isDisabled = true;
 
 							this.isFirstDisabledDate++;
+
+							// Store last disabled date for later
+							this.lastDisabledDate = _day.date;
 						} else {
 							this.isFirstDisabledDate = 0;
+						}
+
+						// First day after a disabled day
+						if (_day.valid && this.lastDisabledDate && this.compareDay(_day.date, this.lastDisabledDate) > 0 && this.countDays(_day.date, this.lastDisabledDate) === 2) {
+							isFirstEnabledDate = true;
 						}
 					}
 

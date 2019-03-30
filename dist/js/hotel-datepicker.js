@@ -259,6 +259,9 @@ HotelDatepicker.prototype.init = function init () {
 
 	// Flag for first disabled date
 	this.isFirstDisabledDate = 0;
+
+	// Holds last disabled date
+	this.lastDisabledDate = false;
 };
 
 HotelDatepicker.prototype.addListeners = function addListeners () {
@@ -512,18 +515,21 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 						}
 					}
 
-					// First day after a disabled day
-					if (limit[0] && this$1.countDays(limit[0], _day$2.date) === 3) {
-						isFirstEnabledDate = true;
-					}
-
 					if (this$1.disabledDates.indexOf(dateString) > -1) {
 						_day$2.valid = false;
 						isDisabled = true;
 
 						this$1.isFirstDisabledDate++;
+
+						// Store last disabled date for later
+						this$1.lastDisabledDate = _day$2.date;
 					} else {
 						this$1.isFirstDisabledDate = 0;
+					}
+
+					// First day after a disabled day
+					if (_day$2.valid && this$1.lastDisabledDate && this$1.compareDay(_day$2.date, this$1.lastDisabledDate) > 0 && this$1.countDays(_day$2.date, this$1.lastDisabledDate) === 2) {
+						isFirstEnabledDate = true;
 					}
 				}
 
