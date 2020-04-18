@@ -180,7 +180,7 @@ Close the datepicker after the selection of the second date.
 - Type: `Boolean`
 - Default: `false`
 
-When a click is done outside the datepicker container, the datepicker closes. Use this option to disable this behaviour.
+When a click is done outside the datepicker container, the datepicker closes. Use this option to disable this behavior.
 
 ### moveBothMonths
 
