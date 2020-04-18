@@ -175,6 +175,13 @@ Show/hide the toolbar.
 
 Close the datepicker after the selection of the second date.
 
+### preventContainerClose
+
+- Type: `Boolean`
+- Default: `false`
+
+When a click is done outside the datepicker container, the datepicker closes. Use this option to disable this behaviour.
+
 ### moveBothMonths
 
 - Type: `Boolean`
