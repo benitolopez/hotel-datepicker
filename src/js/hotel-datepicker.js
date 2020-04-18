@@ -25,6 +25,7 @@ export default class HotelDatepicker {
 		this.noCheckOutDates = opts.noCheckOutDates || [];
 		this.disabledDaysOfWeek = opts.disabledDaysOfWeek || [];
 		this.enableCheckout = opts.enableCheckout || false;
+		this.preventContainerClose = opts.preventContainerClose || false;
 		this.container = opts.container || '';
 		this.animationSpeed = opts.animationSpeed || '.5s';
 		this.hoveringTooltip = opts.hoveringTooltip || true; // Or a function
@@ -655,7 +656,9 @@ export default class HotelDatepicker {
 	documentClick(evt) {
         // Check if the click was outside the datepicker and close it
 		if (!this.parent.contains(evt.target) && evt.target !== this.input) {
-			this.closeDatepicker();
+			if (!this.preventContainerClose) {
+				this.closeDatepicker();
+			}
 		} else if (evt.target.tagName.toLowerCase() === 'td') {
             // Check if the click was on a calendar day
 			this.dayClicked(evt.target);

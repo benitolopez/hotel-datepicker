@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.6.9 - Copyright 2019 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.7.0 - Copyright 2019 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -27,6 +27,7 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 	this.noCheckOutDates = opts.noCheckOutDates || [];
 	this.disabledDaysOfWeek = opts.disabledDaysOfWeek || [];
 	this.enableCheckout = opts.enableCheckout || false;
+	this.preventContainerClose = opts.preventContainerClose || false;
 	this.container = opts.container || '';
 	this.animationSpeed = opts.animationSpeed || '.5s';
 	this.hoveringTooltip = opts.hoveringTooltip || true; // Or a function
@@ -671,7 +672,9 @@ HotelDatepicker.prototype.autoclose = function autoclose () {
 HotelDatepicker.prototype.documentClick = function documentClick (evt) {
         // Check if the click was outside the datepicker and close it
 	if (!this.parent.contains(evt.target) && evt.target !== this.input) {
-		this.closeDatepicker();
+		if (!this.preventContainerClose) {
+			this.closeDatepicker();
+		}
 	} else if (evt.target.tagName.toLowerCase() === 'td') {
             // Check if the click was on a calendar day
 		this.dayClicked(evt.target);
