@@ -1,4 +1,4 @@
-/*! hotel-datepicker 3.7.0 - Copyright 2019 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 3.7.1 - Copyright 2019 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -708,12 +708,6 @@ HotelDatepicker.prototype.checkAndSetDefaultValue = function checkAndSetDefaultV
 	if (dates && (dates.length >= 2)) {
             // Format the values correctly
 		var _format = this.format;
-
-		if (_format.match(/Do/)) {
-			_format = _format.replace(/Do/, 'D');
-			dates[0] = dates[0].replace(/(\d+)(th|nd|st)/, '$1');
-			dates[1] = dates[1].replace(/(\d+)(th|nd|st)/, '$1');
-		}
 
             // Set the date range
 		this.changed = false;
@@ -1647,12 +1641,6 @@ HotelDatepicker.prototype.getNights = function getNights () {
 
 		if (dates && (dates.length >= 2)) {
 			var _format = this.format;
-
-			if (_format.match(/Do/)) {
-				_format = _format.replace(/Do/, 'D');
-				dates[0] = dates[0].replace(/(\d+)(th|nd|st)/, '$1');
-				dates[1] = dates[1].replace(/(\d+)(th|nd|st)/, '$1');
-			}
 
 			count = this.countDays(this.parseDate(dates[0], _format), this.parseDate(dates[1], _format)) - 1;
 		}

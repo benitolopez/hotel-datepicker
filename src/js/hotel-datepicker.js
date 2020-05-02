@@ -691,13 +691,7 @@ export default class HotelDatepicker {
         // If we have our two dates, set the date range
 		if (dates && (dates.length >= 2)) {
             // Format the values correctly
-			let _format = this.format;
-
-			if (_format.match(/Do/)) {
-				_format = _format.replace(/Do/, 'D');
-				dates[0] = dates[0].replace(/(\d+)(th|nd|st)/, '$1');
-				dates[1] = dates[1].replace(/(\d+)(th|nd|st)/, '$1');
-			}
+			const _format = this.format;
 
             // Set the date range
 			this.changed = false;
@@ -1614,13 +1608,7 @@ export default class HotelDatepicker {
 			const dates = value ? value.split(this.separator) : '';
 
 			if (dates && (dates.length >= 2)) {
-				let _format = this.format;
-
-				if (_format.match(/Do/)) {
-					_format = _format.replace(/Do/, 'D');
-					dates[0] = dates[0].replace(/(\d+)(th|nd|st)/, '$1');
-					dates[1] = dates[1].replace(/(\d+)(th|nd|st)/, '$1');
-				}
+				const _format = this.format;
 
 				count = this.countDays(this.parseDate(dates[0], _format), this.parseDate(dates[1], _format)) - 1;
 			}
