@@ -55,6 +55,6 @@
     ]
   },
   "dependencies": {
-    "fecha": "^2.3.0"
+    "fecha": "^4.2.0"
   }
 }

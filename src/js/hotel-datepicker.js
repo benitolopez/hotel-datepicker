@@ -102,10 +102,12 @@ export default class HotelDatepicker {
 	}
 
 	setFechaI18n() {
-		fecha.i18n.dayNamesShort = this.i18n['day-names-short'];
-		fecha.i18n.dayNames = this.i18n['day-names'];
-		fecha.i18n.monthNamesShort = this.i18n['month-names-short'];
-		fecha.i18n.monthNames = this.i18n['month-names'];
+		fecha.setGlobalDateI18n({
+			dayNamesShort: this.i18n['day-names-short'],
+			dayNames: this.i18n['day-names'],
+			monthNamesShort: this.i18n['month-names-short'],
+			monthNames: this.i18n['month-names']
+		});
 	}
 
 	getWeekDayNames() {

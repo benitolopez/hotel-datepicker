@@ -2,7 +2,7 @@
 
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-A pure Javascript date range picker for hotels. Requires [Fecha](https://github.com/taylorhakes/fecha) and supports all modern browsers. Check the [demo here](http://lopezb.com/hoteldatepicker).
+A pure Javascript date range picker for hotels. Requires [Fecha](https://github.com/taylorhakes/fecha) **4.0.0** or above and supports all modern browsers. Check the [demo here](http://lopezb.com/hoteldatepicker).
 
 ![Hotel Datepicker Thumbnail](http://static.lopezb.com/hoteldatepicker/datepicker_card.png "Hotel Thumbnail")
 
@@ -16,6 +16,8 @@ Include files:
 <script src="/path/to/hotel-datepicker.min.js"></script>
 
 ```
+
+**[BREAK CHANGE]** Use Fecha 4.0.0 or above.
 
 ## Usage
 
