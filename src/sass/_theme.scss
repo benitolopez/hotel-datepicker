@@ -3,11 +3,11 @@
  * ============================================================*/
 
 .datepicker {
-	background-color: #fff;
+	background-color: $background__color;
 	border-radius: 5px;
 	box-shadow: 8px 8px 40px 5px rgba(0,0,0,.08);
 	color: $text__base__color;
-	font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
+	font-family: $font__family;
 	font-size: 14px;
 	line-height: 14px;
 }
@@ -68,7 +68,7 @@
 	position: relative;
 
 	&:after {
-		background-color: rgba(red, .1);
+		background-color: rgba($checkin__disabled__color, .1);
 		bottom: 0;
 		content: '';
 		display: block;
@@ -84,7 +84,7 @@
 	position: relative;
 
 	&:after {
-		background-color: rgba(red, .1);
+		background-color: rgba($checkout__disabled__color, .1);
 		bottom: 0;
 		content: '';
 		display: block;
@@ -97,18 +97,18 @@
 }
 
 .datepicker__month-day--invalid {
-	color: $text__invalid__color;
+	color: $dates__invalid__color;
 }
 
 .datepicker__month-day--disabled {
-	color: $text__invalid__color;
+	color: $dates__disabled__color;
 	position: relative;
 
 	&:after {
 		content: '\00d7';
 		left: 50%;
 		position: absolute;
-		color: red;
+		color: $dates__disabled__cross__color;
 		font-size: 16px;
 		top: 50%;
 		transform: translate(-50%,-50%);
@@ -116,7 +116,7 @@
 }
 
 .datepicker__month-day--day-of-week-disabled {
-	background-color: rgba($text__invalid__color, .5);
+	background-color: rgba($dates__invalid__color, .5);
 }
 
 .datepicker__month-day--checkout-enabled {}
@@ -143,7 +143,7 @@
 .datepicker__month-day--first-day-selected,
 .datepicker__month-day--last-day-selected {
 	background-color: $accent__color;
-	color: #fff;
+	color: $background__color;
 }
 
 .datepicker__month-day--last-day-selected:after {
@@ -188,7 +188,7 @@
 }
 
 .datepicker__info--error {
-	color: red;
+	color: $info__error__color;
 	font-size: 13px;
 	font-style: italic;
 }
@@ -213,8 +213,8 @@
 	text-transform: uppercase;
 
 	&:hover {
-		background-color: $text__base__color;
-		color: #fff;
+		background-color: $button__bg__color;
+		color: $button__txt__color;
 	}
 
 	@include mq_l {
@@ -235,7 +235,7 @@
 	&:after {
 		border-left: 4px solid transparent;
 		border-right: 4px solid transparent;
-		border-top: 4px solid #ffe684;
+		border-top: 4px solid $tooltip__color;
 		bottom: -4px;
 		content: '';
 		left: 50%;
