@@ -63,7 +63,7 @@
   -webkit-box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
           box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
   color: #484c55;
-  font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
+  font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
   font-size: 14px;
   line-height: 14px;
 }
@@ -209,7 +209,7 @@
 
 .datepicker__month-button:hover {
   background-color: #746bfd;
-  color: #fff;
+  color: #ffffff;
 }
 
 .datepicker__topbar {
@@ -259,7 +259,7 @@
   -webkit-box-shadow: none;
           box-shadow: none;
   font-size: 10px;
-  color: #fff;
+  color: #ffffff;
   margin-top: 20px;
   padding: 7px 13px;
   text-decoration: none;
@@ -268,8 +268,8 @@
 }
 
 .datepicker__close-button:hover {
-  background-color: #484c55;
-  color: #fff;
+  background-color: #d6dae5;
+  color: #9da6b8;
 }
 
 .datepicker__tooltip {
