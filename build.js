@@ -5,7 +5,7 @@ const filesize = require('rollup-plugin-filesize');
 
 const packageInfo = require('./package.json');
 
-const banner = `/*! ${packageInfo.name} ${packageInfo.version} - Copyright 2019 ${packageInfo.author} - ${packageInfo.homepage} - ${packageInfo.license} */`;
+const banner = `/*! ${packageInfo.name} ${packageInfo.version} - Copyright 2020 ${packageInfo.author} - ${packageInfo.homepage} - ${packageInfo.license} */`;
 
 rollup.rollup({
 	entry: 'src/js/hotel-datepicker.js',
