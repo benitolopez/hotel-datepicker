@@ -1,0 +1,24 @@
+$font__family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif !default;
+
+//BASE
+$background__color: #fff !default;
+$text__base__color: #484c55 !default;
+$text__light__color: #acb2c1 !default;
+$accent__color: #746bfd !default;
+$line__border__color: #dcdcdc !default;
+$tooltip__color: #ffe684 !default;
+$info__error__color: red !default;
+
+//BUTTON
+$button__bg__color: #d6dae5 !default;
+$button__txt__color: #9da6b8 !default;
+$button__bg__hover__color: $accent__color !default;
+$button__txt__hover__color: #ffffff !default;
+
+//INVALID & DISABLED STATES
+$dates__invalid__color: #e8ebf4 !default;
+$dates__disabled__color: #e8ebf4 !default;
+$dates__disabled__cross__color: red !default;
+$checkin__disabled__color: red !default;
+$checkout__disabled__color: red !default;
+
