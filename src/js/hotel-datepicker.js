@@ -52,6 +52,7 @@ export default class HotelDatepicker {
 			'info-range': 'Please select a date range between %d and %d nights',
 			'info-default': 'Please select a date range'
 		};
+		this.singleDaySelection = opts.singleDaySelection || false;
 		this.getValue = opts.getValue || function () {
 			return input.value;
 		};
@@ -196,11 +197,14 @@ export default class HotelDatepicker {
         // End date of the selected range
 		this.end = false;
 
-        // Set the minimum of days required by the daterange
-		this.minDays = this.minNights > 1 ? this.minNights + 1 : 2;
-
-        // Set the maximum of days required by the daterange
-		this.maxDays = this.maxNights > 0 ? this.maxNights + 1 : 0;
+		// Set the minimum and maximum of days required by the daterange
+		if (this.singleDaySelection) {
+			this.minDays = 1;
+			this.maxDays = 1;
+		} else {
+			this.minDays = this.minNights > 1 ? this.minNights + 1 : 2;
+			this.maxDays = this.maxNights > 0 ? this.maxNights + 1 : 0;
+		}
 
         // Set startDate if we passed that option
 		if (this.startDate && typeof this.startDate === 'string') {
