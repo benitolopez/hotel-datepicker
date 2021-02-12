@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.0.1 - Copyright 2020 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.0.2 - Copyright 2021 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -372,6 +372,8 @@ HotelDatepicker.prototype.createDatepickerDomString = function createDatepickerD
 };
 
 HotelDatepicker.prototype.showMonth = function showMonth (date, month) {
+	date.setHours(0, 0, 0, 0);
+
         // Show month table and create the necessary HTML code
 	var name = this.getMonthName(date.getMonth());
 	var monthDom = this.getMonthDom(month);

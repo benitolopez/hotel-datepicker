@@ -360,6 +360,8 @@ export default class HotelDatepicker {
 	}
 
 	showMonth(date, month) {
+		date.setHours(0, 0, 0, 0);
+
         // Show month table and create the necessary HTML code
 		const name = this.getMonthName(date.getMonth());
 		const monthDom = this.getMonthDom(month);
