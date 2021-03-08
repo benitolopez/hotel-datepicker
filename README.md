@@ -8,6 +8,10 @@ A pure Javascript date range picker for hotels. Requires [Fecha](https://github.
 
 ## Installation
 
+Download [Fecha](https://github.com/taylorhakes/fecha/releases). 
+
+**[BREAK CHANGE]** Use Fecha 4.0.0 or above.
+
 Include files:
 
 ```html
@@ -16,8 +20,6 @@ Include files:
 <script src="/path/to/hotel-datepicker.min.js"></script>
 
 ```
-
-**[BREAK CHANGE]** Use Fecha 4.0.0 or above.
 
 ## Usage
 
