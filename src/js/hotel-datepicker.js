@@ -1080,7 +1080,7 @@ export default class HotelDatepicker {
 
 	daysFrom1970(t) {
         // Get days from 1970
-		return Math.floor(this.toLocalTimestamp(t) / 86400000);
+		return Math.round(this.toLocalTimestamp(t) / 86400000);
 	}
 
 	toLocalTimestamp(t) {
