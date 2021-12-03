@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.0.2 - Copyright 2021 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.0.3 - Copyright 2021 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -1100,7 +1100,7 @@ HotelDatepicker.prototype.compareMonth = function compareMonth (month1, month2) 
 
 HotelDatepicker.prototype.daysFrom1970 = function daysFrom1970 (t) {
         // Get days from 1970
-	return Math.floor(this.toLocalTimestamp(t) / 86400000);
+	return Math.round(this.toLocalTimestamp(t) / 86400000);
 };
 
 HotelDatepicker.prototype.toLocalTimestamp = function toLocalTimestamp (t) {
@@ -1321,7 +1321,7 @@ HotelDatepicker.prototype.updateSelectableRange = function updateSelectableRange
 			}
 		// At the end of the selection, restore the disabled/invalid class for
 		// days where the checkout is enabled. We need to check this when the
-		// autoclose option is false .the same for the day just before the
+		// autoclose option is false. The same for the day just before the
 		// disabled date
 		} else if (this$1.hasClass(days[i], 'datepicker__month-day--checkout-enabled') || this$1.hasClass(days[i], 'datepicker__month-day--before-disabled-date')) {
 			this$1.addClass(days[i], 'datepicker__month-day--invalid');
