@@ -1299,7 +1299,7 @@ export default class HotelDatepicker {
 				}
 			// At the end of the selection, restore the disabled/invalid class for
 			// days where the checkout is enabled. We need to check this when the
-			// autoclose option is false .the same for the day just before the
+			// autoclose option is false. The same for the day just before the
 			// disabled date
 			} else if (this.hasClass(days[i], 'datepicker__month-day--checkout-enabled') || this.hasClass(days[i], 'datepicker__month-day--before-disabled-date')) {
 				this.addClass(days[i], 'datepicker__month-day--invalid');
