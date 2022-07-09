@@ -32,11 +32,14 @@ export default class HotelDatepicker {
 		this.autoClose = opts.autoClose === undefined ? true : opts.autoClose;
 		this.showTopbar = opts.showTopbar === undefined ? true : opts.showTopbar;
 		this.moveBothMonths = opts.moveBothMonths || false;
+		this.inline = opts.inline || false;
+		this.clearButton = Boolean(this.inline && opts.clearButton);
 		this.i18n = opts.i18n || {
 			selected: 'Your stay:',
 			night: 'Night',
 			nights: 'Nights',
 			button: 'Close',
+			clearButton: 'Clear',
 			'checkin-disabled': 'Check-in disabled',
 			'checkout-disabled': 'Check-out disabled',
 			'day-names-short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -155,6 +158,11 @@ export default class HotelDatepicker {
 		return 'close-' + this.generateId();
 	}
 
+	getClearButtonId() {
+		// Get close button ID
+		return 'clear-' + this.generateId();
+	}
+
 	getTooltipId() {
 		// Get close button ID
 		return 'tooltip-' + this.generateId();
@@ -249,6 +257,15 @@ export default class HotelDatepicker {
 		// Print default info in top bar
 		this.topBarDefaultText();
 
+		// Open datepicker in inline mode
+		if (this.inline) {
+			this.openDatepicker();
+			if (this.clearButton) {
+				const clearButton = document.getElementById(this.getClearButtonId());
+				clearButton.disabled = true;
+			}
+		}
+
         // Attach listeners
 		this.addListeners();
 
@@ -277,9 +294,14 @@ export default class HotelDatepicker {
         // Open the datepicker on the input click
 		this.addBoundedListener(this.input, 'click', evt => this.openDatepicker(evt));
 
-		if (this.showTopbar) {
+		if (this.showTopbar && !this.inline) {
 			// Close the datepicker on the button click
 			document.getElementById(this.getCloseButtonId()).addEventListener('click', evt => this.closeDatepicker(evt));
+		}
+
+		if (this.showTopbar && this.clearButton) {
+			// Clear the datepicker on the button click
+			document.getElementById(this.getClearButtonId()).addEventListener('click', evt => this.clearDatepicker(evt));
 		}
 
         // Close the datepicker on resize?
@@ -322,7 +344,9 @@ export default class HotelDatepicker {
 
 	createDatepickerDomString() {
         // Generate our datepicker
-		let html = '<div id="' + this.getDatepickerId() + '" style="display:none" class="datepicker datepicker--closed">';
+		const wrapperClass = this.inline ? ' datepicker--inline' : '';
+		const wrapperStyle = !this.inline ? ' style="display:none"' : '';
+		let html = '<div id="' + this.getDatepickerId() + '"' + wrapperStyle + ' class="datepicker datepicker--closed' + wrapperClass + '">';
 
 		html += '<div class="datepicker__inner">';
 
@@ -333,10 +357,17 @@ export default class HotelDatepicker {
 							' <span class="datepicker__info-text datepicker__info--separator">' + this.separator + '</span> <strong class="datepicker__info-text datepicker__info-text--end-day">...</strong> <em class="datepicker__info-text datepicker__info-text--selected-days">(<span></span>)</em>' +
 						'</div>' +
 
-						'<div class="datepicker__info datepicker__info--feedback"></div>' +
+						'<div class="datepicker__info datepicker__info--feedback"></div>';
 
-						'<button type="button" id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>' +
-					'</div>';
+			if (!this.inline) {
+				html += '<button type="button" id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>';
+			}
+
+			if (this.clearButton) {
+				html += '<button type="button" id="' + this.getClearButtonId() + '" class="datepicker__clear-button">' + this.lang('clearButton') + '</button>';
+			}
+
+			html += '</div>';
 		}
 
         // Months section
@@ -605,7 +636,9 @@ export default class HotelDatepicker {
 			this.checkAndSetDefaultValue();
 
             // Slide down the datepicker
-			this.slideDown(this.datepicker, this.animationSpeed);
+			if (!this.inline) {
+				this.slideDown(this.datepicker, this.animationSpeed);
+			}
 
             // Set flag
 			this.isOpen = true;
@@ -630,7 +663,7 @@ export default class HotelDatepicker {
 
 	closeDatepicker() {
         // Close the datepicker
-		if (!this.isOpen) {
+		if (!this.isOpen || this.inline) {
 			return;
 		}
 
@@ -652,7 +685,7 @@ export default class HotelDatepicker {
 
 	autoclose() {
         // Autoclose the datepicker when the second date is set
-		if (this.autoClose && this.changed && this.isOpen && this.start && this.end) {
+		if (this.autoClose && this.changed && this.isOpen && this.start && this.end && !this.inline) {
 			this.closeDatepicker();
 		}
 	}
@@ -835,6 +868,7 @@ export default class HotelDatepicker {
 		const elEnd = selectedInfo.getElementsByClassName('datepicker__info-text--end-day')[0];
 		const elSelected = selectedInfo.getElementsByClassName('datepicker__info-text--selected-days')[0];
 		const closeButton = document.getElementById(this.getCloseButtonId());
+		const clearButton = document.getElementById(this.getClearButtonId());
 
         // Set default text and hide the count element
 		elStart.textContent = '...';
@@ -861,14 +895,22 @@ export default class HotelDatepicker {
             // Show count
 			elSelected.style.display = '';
 			elSelected.firstElementChild.textContent = countText;
-			closeButton.disabled = false;
+
+			if (!this.inline) {
+				closeButton.disabled = false;
+			} else if (this.clearButton) {
+				clearButton.disabled = false;
+			}
 
             // Set input value
 			this.setValue(dateRangeValue, this.getDateString(new Date(this.start)), this.getDateString(new Date(this.end)));
 			this.changed = true;
-		} else {
-            // Disable the close button until a valid date range
+		} else if (!this.inline) {
+				// Disable the close button until a valid date range
 			closeButton.disabled = true;
+		} else if (this.clearButton) {
+				// Disable the clear button until a valid date range
+			clearButton.disabled = true;
 		}
 	}
 
@@ -1414,6 +1456,46 @@ export default class HotelDatepicker {
 
         // Show selected dates in top bar
 		this.showSelectedInfo();
+
+        // Show selected days in the calendar
+		this.showSelectedDays();
+	}
+
+	clearDatepicker() {
+		// Show default (initial) months
+		// this.showMonth(this.startDate, 1);
+		// this.showMonth(this.getNextMonth(this.startDate), 2);
+
+		// Show selected days in the calendar
+		// this.showSelectedDays();
+
+		// Disable (if needed) the prev/next buttons
+		// this.disableNextPrevButtons();
+
+        // Reset start and end dates
+		this.start = false;
+		this.end = false;
+
+        // Remove selected classes
+		const days = this.datepicker.getElementsByTagName('td');
+		for (let i = 0; i < days.length; i++) {
+			this.removeClass(days[i], 'datepicker__month-day--selected');
+			this.removeClass(days[i], 'datepicker__month-day--first-day-selected');
+			this.removeClass(days[i], 'datepicker__month-day--last-day-selected');
+		}
+
+        // Reset input
+		this.setValue('');
+
+        // Check the selection
+		this.checkSelection();
+
+		// Show selected dates in top bar
+		this.showSelectedInfo();
+
+		// Hide the selected info
+		const selectedInfo = this.datepicker.getElementsByClassName('datepicker__info--selected')[0];
+		selectedInfo.style.display = 'none';
 
         // Show selected days in the calendar
 		this.showSelectedDays();
