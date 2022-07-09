@@ -198,7 +198,8 @@
 	font-style: italic;
 }
 
-.datepicker__close-button {
+.datepicker__close-button,
+.datepicker__clear-button {
 	@include transition;
 	background-color: $button__bg__hover__color;
 	border-radius: 4px;
@@ -215,6 +216,13 @@
 	&:hover {
 		background-color: $button__bg__color;
 		color: $button__txt__color;
+	}
+
+	&:disabled,
+	&[disabled] {
+		background-color: $button__bg__color;
+		color: $button__txt__color;
+		cursor: not-allowed;
 	}
 
 	@include mq_l {

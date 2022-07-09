@@ -20,6 +20,10 @@
 	@include mq_l {
 		width: 560px;
 	}
+
+	&--inline {
+		position: static;
+	}
 }
 
 .datepicker__inner {
@@ -89,7 +93,8 @@
 	display: block;
 }
 
-.datepicker__close-button {
+.datepicker__close-button,
+.datepicker__clear-button {
 	cursor: pointer;
 }
 
