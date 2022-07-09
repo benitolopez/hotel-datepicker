@@ -131,32 +131,32 @@ export default class HotelDatepicker {
 	}
 
 	getMonthDom(month) {
-        // Get month DOM element
+		// Get month DOM element
 		return document.getElementById(this.getMonthTableId(month));
 	}
 
 	getMonthName(m) {
-        // Get month name
+		// Get month name
 		return this.lang('month-names')[m];
 	}
 
 	getDatepickerId() {
-        // Get datepicker ID
+		// Get datepicker ID
 		return 'datepicker-' + this.generateId();
 	}
 
 	getMonthTableId(month) {
-        // Get month table ID
+		// Get month table ID
 		return 'month-' + month + '-' + this.generateId();
 	}
 
 	getCloseButtonId() {
-        // Get close button ID
+		// Get close button ID
 		return 'close-' + this.generateId();
 	}
 
 	getTooltipId() {
-        // Get close button ID
+		// Get close button ID
 		return 'tooltip-' + this.generateId();
 	}
 
