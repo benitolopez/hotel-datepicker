@@ -29,7 +29,7 @@
 	<h1>Hotel Datepicker</h1>
 	<p>A pure Javascript date range picker for hotels.</p>
 
-	<a class="button button--download" href="https://github.com/benitolopez/hotel-datepicker/archive/4.0.3.zip">Download</a>
+	<a class="button button--download" href="https://github.com/benitolopez/hotel-datepicker/archive/4.1.0.zip">Download</a>
 
 	<ul class="social">
 		<li class="social__item"><a class="social__link" href="https://github.com/benitolopez/hotel-datepicker">View on Github</a></li>
@@ -73,6 +73,21 @@ var datepicker = new HotelDatepicker(input);
 				<pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input);
+				</pre>
+			</div>
+		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="hidden" id="demo24" value="">
+			</div>
+			<p class="demo__description">Inline mode</p>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    inline: true
+});
 				</pre>
 			</div>
 		</div>
@@ -427,6 +442,13 @@ var datepicker = new HotelDatepicker(input, {
 
 			var demo3 = new HotelDatepicker(document.getElementById('demo3'), {
 				format: 'DD-MM-YYYY'
+			});
+
+			// ------------------- DEMO 24 ------------------- //
+
+			var demo24 = new HotelDatepicker(document.getElementById('demo24'), {
+				inline: true,
+				clearButton: true
 			});
 
 

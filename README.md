@@ -145,6 +145,20 @@ An array of **strings** in English: `'Monday'` (note the `''` and the uppercase)
 
 An element for putting the datepicker. If not set, the datepicker will be appended to the parent of the input.
 
+### inline
+
+- Type: `Boolean`
+- Default: `false`
+
+Render the datepicker inline.
+
+### clearButton
+
+- Type: `Boolean`
+- Default: `false`
+
+If `true`, a button to clear the selected dates is shown. Works only when `inline` and `showTopbar` are true.
+
 ### animationSpeed
 
 - Type: `String`
@@ -327,4 +341,4 @@ Hotel Datepicker was initially developed as a fork of [jQuery Date Range Picker 
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) Copyright (c) 2019 [Benito Lopez](http://lopezb.com)
+[MIT](http://opensource.org/licenses/MIT) Copyright (c) 2022 [Benito Lopez](http://lopezb.com)
