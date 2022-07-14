@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.1.1 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.2.0 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -33,15 +33,18 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 	this.hoveringTooltip = opts.hoveringTooltip || true; // Or a function
 	this.autoClose = opts.autoClose === undefined ? true : opts.autoClose;
 	this.showTopbar = opts.showTopbar === undefined ? true : opts.showTopbar;
+	this.topbarPosition = opts.topbarPosition === 'bottom' ? 'bottom' : 'top';
 	this.moveBothMonths = opts.moveBothMonths || false;
 	this.inline = opts.inline || false;
 	this.clearButton = Boolean(this.inline && opts.clearButton);
+	this.submitButton = Boolean(this.inline && opts.submitButton);
 	this.i18n = opts.i18n || {
 		selected: 'Your stay:',
 		night: 'Night',
 		nights: 'Nights',
 		button: 'Close',
 		clearButton: 'Clear',
+		submitButton: 'Submit',
 		'checkin-disabled': 'Check-in disabled',
 		'checkout-disabled': 'Check-out disabled',
 		'day-names-short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -167,6 +170,11 @@ HotelDatepicker.prototype.getClearButtonId = function getClearButtonId () {
 	return 'clear-' + this.generateId();
 };
 
+HotelDatepicker.prototype.getSubmitButtonId = function getSubmitButtonId () {
+	// Get close button ID
+	return 'submit-' + this.generateId();
+};
+
 HotelDatepicker.prototype.getTooltipId = function getTooltipId () {
 	// Get close button ID
 	return 'tooltip-' + this.generateId();
@@ -272,6 +280,11 @@ HotelDatepicker.prototype.init = function init () {
 			var clearButton = document.getElementById(this.getClearButtonId());
 			clearButton.disabled = true;
 		}
+
+		if (this.submitButton) {
+			var submitButton = document.getElementById(this.getSubmitButtonId());
+			submitButton.disabled = true;
+		}
 	}
 
         // Attach listeners
@@ -357,14 +370,21 @@ HotelDatepicker.prototype.createDatepickerDomString = function createDatepickerD
 
         // Generate our datepicker
 	var wrapperClass = this.inline ? ' datepicker--inline' : '';
+
+	if (this.showTopbar && this.topbarPosition === 'bottom') {
+		wrapperClass += ' datepicker--topbar-bottom';
+	}
+
 	var wrapperStyle = !this.inline ? ' style="display:none"' : '';
 	var html = '<div id="' + this.getDatepickerId() + '"' + wrapperStyle + ' class="datepicker datepicker--closed' + wrapperClass + '">';
 
 	html += '<div class="datepicker__inner">';
 
+	var topBarHtml = '';
+
 	if (this.showTopbar) {
 		// Top bar section
-		html += '<div class="datepicker__topbar">' +
+		topBarHtml += '<div class="datepicker__topbar">' +
 					'<div class="datepicker__info datepicker__info--selected"><span class="datepicker__info datepicker__info--selected-label">' + this.lang('selected') + ' </span> <strong class="datepicker__info-text datepicker__info-text--start-day">...</strong>' +
 						' <span class="datepicker__info-text datepicker__info--separator">' + this.separator + '</span> <strong class="datepicker__info-text datepicker__info-text--end-day">...</strong> <em class="datepicker__info-text datepicker__info-text--selected-days">(<span></span>)</em>' +
 					'</div>' +
@@ -372,14 +392,30 @@ HotelDatepicker.prototype.createDatepickerDomString = function createDatepickerD
 					'<div class="datepicker__info datepicker__info--feedback"></div>';
 
 		if (!this.inline) {
-			html += '<button type="button" id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>';
+			topBarHtml += '<button type="button" id="' + this.getCloseButtonId() + '" class="datepicker__close-button">' + this.lang('button') + '</button>';
+		}
+
+		if (this.clearButton || this.submitButton) {
+			topBarHtml += '<div class="datepicker__buttons">';
 		}
 
 		if (this.clearButton) {
-			html += '<button type="button" id="' + this.getClearButtonId() + '" class="datepicker__clear-button">' + this.lang('clearButton') + '</button>';
+			topBarHtml += '<button type="button" id="' + this.getClearButtonId() + '" class="datepicker__clear-button">' + this.lang('clearButton') + '</button>';
 		}
 
-		html += '</div>';
+		if (this.submitButton) {
+			topBarHtml += '<input type="submit" id="' + this.getSubmitButtonId() + '" class="datepicker__submit-button" value="' + this.lang('submitButton') + '">';
+		}
+
+		if (this.clearButton || this.submitButton) {
+			topBarHtml += '</div>';
+		}
+
+		topBarHtml += '</div>';
+	}
+
+	if (this.showTopbar && this.topbarPosition === 'top') {
+		html += topBarHtml;
 	}
 
         // Months section
@@ -391,6 +427,10 @@ HotelDatepicker.prototype.createDatepickerDomString = function createDatepickerD
 	}
 
 	html += '</div>';
+
+	if (this.showTopbar && this.topbarPosition === 'bottom') {
+		html += topBarHtml;
+	}
 
         // Tooltip
 	html += '<div style="display:none" id="' + this.getTooltipId() + '" class="datepicker__tooltip"></div>';
@@ -887,6 +927,7 @@ HotelDatepicker.prototype.showSelectedInfo = function showSelectedInfo () {
 	var elSelected = selectedInfo.getElementsByClassName('datepicker__info-text--selected-days')[0];
 	var closeButton = document.getElementById(this.getCloseButtonId());
 	var clearButton = document.getElementById(this.getClearButtonId());
+	var submitButton = document.getElementById(this.getSubmitButtonId());
 
         // Set default text and hide the count element
 	elStart.textContent = '...';
@@ -916,8 +957,14 @@ HotelDatepicker.prototype.showSelectedInfo = function showSelectedInfo () {
 
 		if (!this.inline) {
 			closeButton.disabled = false;
-		} else if (this.clearButton) {
-			clearButton.disabled = false;
+		} else {
+			if (this.clearButton) {
+				clearButton.disabled = false;
+			}
+
+			if (this.submitButton) {
+				submitButton.disabled = false;
+			}
 		}
 
             // Set input value
@@ -926,9 +973,16 @@ HotelDatepicker.prototype.showSelectedInfo = function showSelectedInfo () {
 	} else if (!this.inline) {
 			// Disable the close button until a valid date range
 		closeButton.disabled = true;
-	} else if (this.clearButton) {
+	} else {
+		if (this.clearButton) {
 			// Disable the clear button until a valid date range
-		clearButton.disabled = true;
+			clearButton.disabled = true;
+		}
+
+		if (this.submitButton) {
+			// Disable the submit button until a valid date range
+			submitButton.disabled = true;
+		}
 	}
 };
 
