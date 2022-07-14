@@ -159,6 +159,13 @@ Render the datepicker inline.
 
 If `true`, a button to clear the selected dates is shown. Works only when `inline` and `showTopbar` are true.
 
+### submitButton
+
+- Type: `Boolean`
+- Default: `false`
+
+If `true`, a submit button is shown. Works only when `inline` and `showTopbar` are true.
+
 ### animationSpeed
 
 - Type: `String`
@@ -185,6 +192,13 @@ hoveringTooltip: function(nights, startTime, hoverTime) {
 - Default: `true`
 
 Show/hide the toolbar.
+
+### topbarPosition
+
+- Type: `String`
+- Default: `top`
+
+Set the position of the toolbar.
 
 ### autoClose
 
@@ -260,6 +274,8 @@ i18n: {
     night: 'Night',
     nights: 'Nights',
     button: 'Close',
+    clearButton: 'Clear',
+    submitButton: 'Submit',
     'checkin-disabled': 'Check-in disabled',
     'checkout-disabled': 'Check-out disabled',
     'day-names-short': ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
