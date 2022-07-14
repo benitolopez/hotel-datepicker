@@ -222,6 +222,12 @@
   position: relative;
 }
 
+.datepicker--topbar-bottom .datepicker__topbar {
+  margin-bottom: 0;
+  padding-top: 20px;
+  border-top: 1px solid #dcdcdc;
+}
+
 .datepicker__info-text {
   font-size: 13px;
 }
@@ -252,7 +258,8 @@
 }
 
 .datepicker__close-button,
-.datepicker__clear-button {
+.datepicker__clear-button,
+.datepicker__submit-button {
   -webkit-transition-duration: 0.2s;
           transition-duration: 0.2s;
   -webkit-transition-property: color, background-color, border-color;
@@ -274,17 +281,28 @@
 }
 
 .datepicker__close-button:hover,
-.datepicker__clear-button:hover {
+.datepicker__clear-button:hover,
+.datepicker__submit-button:hover {
   background-color: #d6dae5;
   color: #9da6b8;
 }
 
 .datepicker__close-button:disabled, .datepicker__close-button[disabled],
 .datepicker__clear-button:disabled,
-.datepicker__clear-button[disabled] {
+.datepicker__clear-button[disabled],
+.datepicker__submit-button:disabled,
+.datepicker__submit-button[disabled] {
   background-color: #d6dae5;
   color: #9da6b8;
   cursor: not-allowed;
+}
+
+.datepicker__clear-button + .datepicker__submit-button {
+  margin-left: 10px;
+}
+
+.datepicker__submit-button {
+  width: auto;
 }
 
 .datepicker__tooltip {
@@ -354,11 +372,18 @@
   .datepicker__month {
     width: 240px;
   }
-  .datepicker__close-button,
-  .datepicker__clear-button {
+  .datepicker__close-button {
     margin-top: 0;
     position: absolute;
     right: 0;
     top: 0;
+  }
+  .datepicker__buttons {
+    margin-top: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
   }
 }

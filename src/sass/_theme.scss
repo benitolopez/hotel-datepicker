@@ -169,6 +169,14 @@
 	position: relative;
 }
 
+.datepicker--topbar-bottom {
+	.datepicker__topbar {
+		margin-bottom: 0;
+		padding-top: 20px;
+		border-top: 1px solid $line__border__color;
+	}
+}
+
 .datepicker__info-text {
 	font-size: 13px;
 }
@@ -199,7 +207,8 @@
 }
 
 .datepicker__close-button,
-.datepicker__clear-button {
+.datepicker__clear-button,
+.datepicker__submit-button {
 	@include transition;
 	background-color: $button__bg__hover__color;
 	border-radius: 4px;
@@ -224,12 +233,32 @@
 		color: $button__txt__color;
 		cursor: not-allowed;
 	}
+}
 
+.datepicker__close-button {
 	@include mq_l {
 		margin-top: 0;
 		position: absolute;
 		right: 0;
 		top: 0;
+	}
+}
+
+.datepicker__clear-button + .datepicker__submit-button {
+	margin-left: 10px;
+}
+
+.datepicker__submit-button {
+	width: auto;
+}
+
+.datepicker__buttons {
+	@include mq_l {
+		margin-top: 0;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
 	}
 }
 
