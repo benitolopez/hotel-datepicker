@@ -78,16 +78,34 @@ var datepicker = new HotelDatepicker(input);
 		</div>
 
 		<div class="demo__item">
+			<p class="demo__description">Inline mode</p>
 			<div class="demo__input">
 				<input type="hidden" id="demo24" value="">
 			</div>
-			<p class="demo__description">Inline mode</p>
 			<div class="demo__config">
 				<pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     inline: true,
     clearButton: true
+});
+				</pre>
+			</div>
+		</div>
+
+		<div class="demo__item">
+			<p class="demo__description">Inline mode with bottom bar and submit button</p>
+			<div class="demo__input">
+				<input type="hidden" id="demo25" value="">
+			</div>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    inline: true,
+    clearButton: true
+    submitButton: true,
+    topbarPosition: 'bottom'
 });
 				</pre>
 			</div>
@@ -449,7 +467,16 @@ var datepicker = new HotelDatepicker(input, {
 
 			var demo24 = new HotelDatepicker(document.getElementById('demo24'), {
 				inline: true,
-				clearButton: true
+				clearButton: true,
+			});
+
+			// ------------------- DEMO 25 ------------------- //
+
+			var demo25 = new HotelDatepicker(document.getElementById('demo25'), {
+				inline: true,
+				clearButton: true,
+				submitButton: true,
+				topbarPosition: 'bottom'
 			});
 
 
@@ -588,6 +615,7 @@ var datepicker = new HotelDatepicker(input, {
 					night: 'Notte',
 					nights: 'Notti',
 					button: 'Chiudi',
+					clearButton: 'Cancella',
 					'checkin-disabled': 'Check-in disabilitato',
 					'checkout-disabled': 'Check-out disabilitato',
 					'day-names-short': ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
