@@ -166,6 +166,13 @@ If `true`, a button to clear the selected dates is shown. Works only when `inlin
 
 If `true`, a submit button is shown. Works only when `inline` and `showTopbar` are true.
 
+### submitButtonName
+
+- Type: `String`
+- Default: ``
+
+The name of the button to reference the form-data. Works only when `submitButton` is true.
+
 ### animationSpeed
 
 - Type: `String`
