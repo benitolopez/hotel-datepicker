@@ -38,6 +38,7 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 	this.inline = opts.inline || false;
 	this.clearButton = Boolean(this.inline && opts.clearButton);
 	this.submitButton = Boolean(this.inline && opts.submitButton);
+	this.submitButtonName = this.submitButton && opts.submitButtonName ? opts.submitButtonName : '';
 	this.i18n = opts.i18n || {
 		selected: 'Your stay:',
 		night: 'Night',
@@ -404,7 +405,7 @@ HotelDatepicker.prototype.createDatepickerDomString = function createDatepickerD
 		}
 
 		if (this.submitButton) {
-			topBarHtml += '<input type="submit" id="' + this.getSubmitButtonId() + '" class="datepicker__submit-button" value="' + this.lang('submitButton') + '">';
+			topBarHtml += '<input type="submit" id="' + this.getSubmitButtonId() + '" class="datepicker__submit-button" value="' + this.lang('submitButton') + '" name="' + this.submitButtonName + '">';
 		}
 
 		if (this.clearButton || this.submitButton) {
