@@ -921,6 +921,12 @@ export default class HotelDatepicker {
 		if (this.start) {
 			selectedInfo.style.display = '';
 			elStart.textContent = this.getDateString(new Date(parseInt(this.start, 10)), this.infoFormat);
+
+			if (this.inline) {
+				if (this.clearButton) {
+					clearButton.disabled = false;
+				}
+			}
 		}
 
         // Show second date
@@ -940,14 +946,8 @@ export default class HotelDatepicker {
 
 			if (!this.inline) {
 				closeButton.disabled = false;
-			} else {
-				if (this.clearButton) {
-					clearButton.disabled = false;
-				}
-
-				if (this.submitButton) {
-					submitButton.disabled = false;
-				}
+			} else if (this.submitButton) {
+				submitButton.disabled = false;
 			}
 
             // Set input value
@@ -957,8 +957,8 @@ export default class HotelDatepicker {
 				// Disable the close button until a valid date range
 			closeButton.disabled = true;
 		} else {
-			if (this.clearButton) {
-				// Disable the clear button until a valid date range
+			if (this.clearButton && !this.start && !this.end) {
+				// Disable the clear button until one valid date is selected
 				clearButton.disabled = true;
 			}
 
