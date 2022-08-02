@@ -296,6 +296,7 @@ i18n: {
     'info-more': 'Please select a date range of at least 1 night',
     'info-more-plural': 'Please select a date range of at least %d nights',
     'info-range': 'Please select a date range between %d and %d nights',
+    'info-range-equal': 'Please select a date range of %d nights',
     'info-default': 'Please select a date range'
 }
 ```
