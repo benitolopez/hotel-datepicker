@@ -1550,6 +1550,9 @@ export default class HotelDatepicker {
 
         // Show selected days in the calendar
 		this.showSelectedDays();
+
+		// Check day dates
+		this.updateSelectableRange();
 	}
 
 	parseDisabledDates() {

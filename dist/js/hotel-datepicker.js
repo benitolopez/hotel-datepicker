@@ -1580,6 +1580,9 @@ HotelDatepicker.prototype.clearDatepicker = function clearDatepicker () {
 
         // Show selected days in the calendar
 	this.showSelectedDays();
+
+	// Check day dates
+	this.updateSelectableRange();
 };
 
 HotelDatepicker.prototype.parseDisabledDates = function parseDisabledDates () {
