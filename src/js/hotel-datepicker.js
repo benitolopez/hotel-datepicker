@@ -1501,6 +1501,7 @@ export default class HotelDatepicker {
 			this.removeClass(days[i], 'datepicker__month-day--selected');
 			this.removeClass(days[i], 'datepicker__month-day--first-day-selected');
 			this.removeClass(days[i], 'datepicker__month-day--last-day-selected');
+			this.removeClass(days[i], 'datepicker__month-day--hovering');
 		}
 
         // Reset input
@@ -1527,6 +1528,7 @@ export default class HotelDatepicker {
 			this.removeClass(days[i], 'datepicker__month-day--selected');
 			this.removeClass(days[i], 'datepicker__month-day--first-day-selected');
 			this.removeClass(days[i], 'datepicker__month-day--last-day-selected');
+			this.removeClass(days[i], 'datepicker__month-day--hovering');
 		}
 
         // Reset input
