@@ -1517,16 +1517,6 @@ export default class HotelDatepicker {
 	}
 
 	clearDatepicker() {
-		// Show default (initial) months
-		// this.showMonth(this.startDate, 1);
-		// this.showMonth(this.getNextMonth(this.startDate), 2);
-
-		// Show selected days in the calendar
-		// this.showSelectedDays();
-
-		// Disable (if needed) the prev/next buttons
-		// this.disableNextPrevButtons();
-
         // Reset start and end dates
 		this.start = false;
 		this.end = false;
