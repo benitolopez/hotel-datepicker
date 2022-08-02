@@ -117,7 +117,7 @@
   position: relative;
 }
 
-.datepicker__month-day--no-checkin:after {
+.datepicker__month-day--no-checkin:before {
   background-color: rgba(255, 0, 0, 0.1);
   bottom: 0;
   content: '';
@@ -133,7 +133,7 @@
   position: relative;
 }
 
-.datepicker__month-day--no-checkout:after {
+.datepicker__month-day--no-checkout:before {
   background-color: rgba(255, 0, 0, 0.1);
   bottom: 0;
   content: '';
@@ -174,7 +174,7 @@
   color: #fff;
 }
 
-.datepicker__month-day--selected:after {
+.datepicker__month-day--selected:after, .datepicker__month-day--selected:before {
   display: none;
 }
 

@@ -67,7 +67,7 @@
 .datepicker__month-day--no-checkin {
 	position: relative;
 
-	&:after {
+	&:before {
 		background-color: rgba($checkin__disabled__color, .1);
 		bottom: 0;
 		content: '';
@@ -83,7 +83,7 @@
 .datepicker__month-day--no-checkout {
 	position: relative;
 
-	&:after {
+	&:before {
 		background-color: rgba($checkout__disabled__color, .1);
 		bottom: 0;
 		content: '';
@@ -125,7 +125,8 @@
 	background-color: rgba($accent__color,.2);
 	color: #fff;
 
-	&:after {
+	&:after,
+	&:before {
 		display: none;
 	}
 }
