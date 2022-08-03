@@ -1322,10 +1322,11 @@ export default class HotelDatepicker {
 		let topBarText = '';
 
 		if (this.minDays && this.maxDays) {
-			if (this.minDays == this.maxDays) {
+			if (this.minDays === this.maxDays) {
 				topBarText = this.lang('info-range-equal');
+			} else {
+				topBarText = this.lang('info-range');
 			}
-			topBarText = this.lang('info-range');
 		} else if (this.minDays && this.minDays > 2) {
 			topBarText = this.lang('info-more-plural');
 		} else if (this.minDays) {
