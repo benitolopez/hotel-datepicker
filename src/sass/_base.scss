@@ -84,6 +84,12 @@
 	}
 }
 
+@media (min-width: 768px) {
+	.datepicker__info  {
+		max-width: 325px;
+	}
+}
+
 .datepicker__info--feedback {
 	display: none;
 }
