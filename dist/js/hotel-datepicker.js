@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.3.2 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.3.3 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -1768,25 +1768,6 @@ HotelDatepicker.prototype.getClosestDisabledDays = function getClosestDisabledDa
 	}
 
 	return dates;
-};
-
-HotelDatepicker.prototype.getClosestIndex = function getClosestIndex (dayOfWeek, direction) {
-		var this$1 = this;
-
-	var index = false;
-	var indexes = [];
-
-	for (var i = 0; i < 7; i++) {
-		indexes.push(i);
-	}
-
-	if (disabledDaysIndexes.length > 0) {
-		for (var i = 0; i < this.disabledDaysIndexes.length; i++) {
-			this$1.disabledDaysIndexes[i];
-		}
-	}
-
-	return index;
 };
 
 HotelDatepicker.prototype.lang = function lang (s) {

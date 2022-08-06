@@ -382,7 +382,7 @@ export default class HotelDatepicker {
 			wrapperClass += ' datepicker--topbar-has-submit-button';
 		}
 
-		const wrapperStyle = !this.inline ? ' style="display:none"' : '';
+		const wrapperStyle = this.inline ? '' : ' style="display:none"';
 		let html = '<div id="' + this.getDatepickerId() + '"' + wrapperStyle + ' class="datepicker datepicker--closed' + wrapperClass + '">';
 
 		html += '<div class="datepicker__inner">';
@@ -1710,7 +1710,6 @@ export default class HotelDatepicker {
         // - The closest date on the left
         // - The closest date on the right
 		const dates = [false, false];
-		const dayOfWeek = fecha.format(day, 'd');
 
 		for (let i = 0; i < 7; i++) {
 			const _date = this.substractDays(day, i);
@@ -1731,23 +1730,6 @@ export default class HotelDatepicker {
 		}
 
 		return dates;
-	}
-
-	getClosestIndex(dayOfWeek, direction) {
-		const index = false;
-		const indexes = [];
-
-		for (var i = 0; i < 7; i++) {
-			indexes.push(i);
-		}
-
-		if (disabledDaysIndexes.length > 0) {
-			for (var i = 0; i < this.disabledDaysIndexes.length; i++) {
-				this.disabledDaysIndexes[i];
-			}
-		}
-
-		return index;
 	}
 
 	lang(s) {
