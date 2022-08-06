@@ -394,7 +394,7 @@ HotelDatepicker.prototype.createDatepickerDomString = function createDatepickerD
 		wrapperClass += ' datepicker--topbar-has-submit-button';
 	}
 
-	var wrapperStyle = !this.inline ? ' style="display:none"' : '';
+	var wrapperStyle = this.inline ? '' : ' style="display:none"';
 	var html = '<div id="' + this.getDatepickerId() + '"' + wrapperStyle + ' class="datepicker datepicker--closed' + wrapperClass + '">';
 
 	html += '<div class="datepicker__inner">';
