@@ -988,6 +988,7 @@ export default class HotelDatepicker {
 		}
 
 		const isSelectStart = (this.start && this.end) || (!this.start && !this.end);
+		const time = parseInt(day.getAttribute('time'), 10);
 
 		// Return early for those days where the checkin or checkout is disabled
 		if (isSelectStart) {
@@ -995,12 +996,23 @@ export default class HotelDatepicker {
 				return;
 			}
 		} else if (this.start) {
+			if (this.start > time && this.hasClass(day, 'datepicker__month-day--no-checkin')) {
+				return;
+			}
+
+			const startDayEl = this.datepicker.querySelectorAll('td[time="' + this.start + '"]')[0];
+
+			if (startDayEl) {
+				if (this.hasClass(startDayEl, 'datepicker__month-day--no-checkout') && this.start > time) {
+					return;
+				}
+			}
+
 			if (this.hasClass(day, 'datepicker__month-day--no-checkout')) {
 				return;
 			}
 		}
 
-		const time = parseInt(day.getAttribute('time'), 10);
 		this.addClass(day, 'datepicker__month-day--selected');
 
 		if (isSelectStart) {
