@@ -572,7 +572,7 @@ export default class HotelDatepicker {
 						// Check if this day is between two disabled dates
 						// and disable it if there are not enough days
 						// available to select a valid range
-						const limit = this.getClosestDates(_day.date);
+						const limit = this.getClosestDisabledDates(_day.date);
 
 						if (limit[0] && limit[1]) {
 							if (this.compareDay(_day.date, limit[0]) && (this.countDays(limit[0], limit[1]) - 2) > 0) {
@@ -1090,7 +1090,7 @@ export default class HotelDatepicker {
 
             // Check the disabled dates
 			if (this.disabledDates.length > 0) {
-				const limit = this.getClosestDates(new Date(parseInt(this.start, 10)));
+				const limit = this.getClosestDisabledDates(new Date(parseInt(this.start, 10)));
 
 				if (limit[0] && this.compareDay(time, limit[0]) <= 0) {
 					return false;
@@ -1595,7 +1595,7 @@ export default class HotelDatepicker {
 		this.disabledDatesTime = _tmp;
 	}
 
-	getClosestDates(x) {
+	getClosestDisabledDates(x) {
         // This method implements part of the work done by the user Zeta
         // http://stackoverflow.com/a/11795472
 
