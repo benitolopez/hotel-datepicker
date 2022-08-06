@@ -132,7 +132,7 @@ An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the 
 - Type: `Array`
 - Default: `[]`
 
-An array of **strings** in English: `'Monday'` (note the `''` and the uppercase).
+An array of **strings** of day names in your language (same names used in `i18n['day-names']`): `'Monday'` (note the `''` and the uppercase).
 
 ```js
 ['Monday', 'Tuesday', 'Wednesday']
