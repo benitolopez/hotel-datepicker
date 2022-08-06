@@ -377,6 +377,18 @@ HotelDatepicker.prototype.createDatepickerDomString = function createDatepickerD
 		wrapperClass += ' datepicker--topbar-bottom';
 	}
 
+	if (!this.inline) {
+		wrapperClass += ' datepicker--topbar-has-close-button';
+	}
+
+	if (this.clearButton) {
+		wrapperClass += ' datepicker--topbar-has-clear-button';
+	}
+
+	if (this.submitButton) {
+		wrapperClass += ' datepicker--topbar-has-submit-button';
+	}
+
 	var wrapperStyle = !this.inline ? ' style="display:none"' : '';
 	var html = '<div id="' + this.getDatepickerId() + '"' + wrapperStyle + ' class="datepicker datepicker--closed' + wrapperClass + '">';
 
