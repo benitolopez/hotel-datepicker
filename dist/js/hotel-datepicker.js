@@ -268,6 +268,11 @@ HotelDatepicker.prototype.init = function init () {
 		this.parseDisabledDates();
 	}
 
+	// Parse disabled days
+	if (this.disabledDaysOfWeek.length > 0) {
+		this.getDisabledDays();
+	}
+
         // Show months
 	this.showMonth(defaultTime, 1);
 	this.showMonth(this.getNextMonth(defaultTime), 2);
@@ -586,7 +591,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 					// Check if this day is between two disabled dates
 					// and disable it if there are not enough days
 					// available to select a valid range
-					var limit = this$1.getClosestDates(_day$2.date);
+					var limit = this$1.getClosestDisabledDates(_day$2.date);
 
 					if (limit[0] && limit[1]) {
 						if (this$1.compareDay(_day$2.date, limit[0]) && (this$1.countDays(limit[0], limit[1]) - 2) > 0) {
@@ -1108,13 +1113,26 @@ HotelDatepicker.prototype.isValidDate = function isValidDate (time) {
 
             // Check the disabled dates
 		if (this.disabledDates.length > 0) {
-			var limit = this.getClosestDates(new Date(parseInt(this.start, 10)));
+			var limit = this.getClosestDisabledDates(new Date(parseInt(this.start, 10)));
 
 			if (limit[0] && this.compareDay(time, limit[0]) <= 0) {
 				return false;
 			}
 
 			if (limit[1] && this.compareDay(time, limit[1]) >= 0) {
+				return false;
+			}
+		}
+
+		// Check disabled days of week
+		if (this.disabledDaysOfWeek.length > 0) {
+			var limit$1 = this.getClosestDisabledDays(new Date(parseInt(this.start, 10)));
+
+			if (limit$1[0] && this.compareDay(time, limit$1[0]) <= 0) {
+				return false;
+			}
+
+			if (limit$1[1] && this.compareDay(time, limit$1[1]) >= 0) {
 				return false;
 			}
 		}
@@ -1181,6 +1199,15 @@ HotelDatepicker.prototype.addDays = function addDays (date, days) {
 	var result = new Date(date);
 
 	result.setDate(result.getDate() + days);
+
+	return result;
+};
+
+HotelDatepicker.prototype.substractDays = function substractDays (date, days) {
+        // Substract xx days to date
+	var result = new Date(date);
+
+	result.setDate(result.getDate() - days);
 
 	return result;
 };
@@ -1627,7 +1654,7 @@ HotelDatepicker.prototype.parseDisabledDates = function parseDisabledDates () {
 	this.disabledDatesTime = _tmp;
 };
 
-HotelDatepicker.prototype.getClosestDates = function getClosestDates (x) {
+HotelDatepicker.prototype.getClosestDisabledDates = function getClosestDisabledDates (x) {
 		var this$1 = this;
 
         // This method implements part of the work done by the user Zeta
@@ -1691,6 +1718,76 @@ HotelDatepicker.prototype.getClosestDates = function getClosestDates (x) {
 	}
 
 	return dates;
+};
+
+HotelDatepicker.prototype.getDisabledDays = function getDisabledDays () {
+		var this$1 = this;
+
+	var allDays = [];
+	var disabledDays = [];
+	var day = new Date();
+
+	for (var i = 0; i < 7; i++) {
+		var _date = this$1.addDays(day, i);
+		allDays[fecha.format(_date, 'd')] = fecha.format(_date, 'dddd');
+	}
+
+	for (var i$1 = 0; i$1 < this.disabledDaysOfWeek.length; i$1++) {
+		disabledDays.push(allDays.indexOf(this$1.disabledDaysOfWeek[i$1]));
+	}
+
+	disabledDays.sort();
+
+	this.disabledDaysIndexes = disabledDays;
+};
+
+HotelDatepicker.prototype.getClosestDisabledDays = function getClosestDisabledDays (day) {
+		var this$1 = this;
+
+	// Return an array with two elements:
+        // - The closest date on the left
+        // - The closest date on the right
+	var dates = [false, false];
+	var dayOfWeek = fecha.format(day, 'd');
+
+	for (var i = 0; i < 7; i++) {
+		var _date = this$1.substractDays(day, i);
+
+		if (this$1.disabledDaysIndexes.indexOf(parseInt(fecha.format(_date, 'd'), 10)) > -1) {
+			dates[0] = _date;
+			break;
+		}
+	}
+
+	for (var i$1 = 0; i$1 < 7; i$1++) {
+		var _date$1 = this$1.addDays(day, i$1);
+
+		if (this$1.disabledDaysIndexes.indexOf(parseInt(fecha.format(_date$1, 'd'), 10)) > -1) {
+			dates[1] = _date$1;
+			break;
+		}
+	}
+
+	return dates;
+};
+
+HotelDatepicker.prototype.getClosestIndex = function getClosestIndex (dayOfWeek, direction) {
+		var this$1 = this;
+
+	var index = false;
+	var indexes = [];
+
+	for (var i = 0; i < 7; i++) {
+		indexes.push(i);
+	}
+
+	if (disabledDaysIndexes.length > 0) {
+		for (var i = 0; i < this.disabledDaysIndexes.length; i++) {
+			this$1.disabledDaysIndexes[i];
+		}
+	}
+
+	return index;
 };
 
 HotelDatepicker.prototype.lang = function lang (s) {

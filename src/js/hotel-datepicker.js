@@ -260,6 +260,11 @@ export default class HotelDatepicker {
 			this.parseDisabledDates();
 		}
 
+		// Parse disabled days
+		if (this.disabledDaysOfWeek.length > 0) {
+			this.getDisabledDays();
+		}
+
         // Show months
 		this.showMonth(defaultTime, 1);
 		this.showMonth(this.getNextMonth(defaultTime), 2);
@@ -1100,6 +1105,19 @@ export default class HotelDatepicker {
 					return false;
 				}
 			}
+
+			// Check disabled days of week
+			if (this.disabledDaysOfWeek.length > 0) {
+				const limit = this.getClosestDisabledDays(new Date(parseInt(this.start, 10)));
+
+				if (limit[0] && this.compareDay(time, limit[0]) <= 0) {
+					return false;
+				}
+
+				if (limit[1] && this.compareDay(time, limit[1]) >= 0) {
+					return false;
+				}
+			}
 		}
 
 		return true;
@@ -1161,6 +1179,15 @@ export default class HotelDatepicker {
 		const result = new Date(date);
 
 		result.setDate(result.getDate() + days);
+
+		return result;
+	}
+
+	substractDays(date, days) {
+        // Substract xx days to date
+		const result = new Date(date);
+
+		result.setDate(result.getDate() - days);
 
 		return result;
 	}
@@ -1657,6 +1684,70 @@ export default class HotelDatepicker {
 		}
 
 		return dates;
+	}
+
+	getDisabledDays() {
+		const allDays = [];
+		const disabledDays = [];
+		const day = new Date();
+
+		for (let i = 0; i < 7; i++) {
+			const _date = this.addDays(day, i);
+			allDays[fecha.format(_date, 'd')] = fecha.format(_date, 'dddd');
+		}
+
+		for (let i = 0; i < this.disabledDaysOfWeek.length; i++) {
+			disabledDays.push(allDays.indexOf(this.disabledDaysOfWeek[i]));
+		}
+
+		disabledDays.sort();
+
+		this.disabledDaysIndexes = disabledDays;
+	}
+
+	getClosestDisabledDays(day) {
+		// Return an array with two elements:
+        // - The closest date on the left
+        // - The closest date on the right
+		const dates = [false, false];
+		const dayOfWeek = fecha.format(day, 'd');
+
+		for (let i = 0; i < 7; i++) {
+			const _date = this.substractDays(day, i);
+
+			if (this.disabledDaysIndexes.indexOf(parseInt(fecha.format(_date, 'd'), 10)) > -1) {
+				dates[0] = _date;
+				break;
+			}
+		}
+
+		for (let i = 0; i < 7; i++) {
+			const _date = this.addDays(day, i);
+
+			if (this.disabledDaysIndexes.indexOf(parseInt(fecha.format(_date, 'd'), 10)) > -1) {
+				dates[1] = _date;
+				break;
+			}
+		}
+
+		return dates;
+	}
+
+	getClosestIndex(dayOfWeek, direction) {
+		const index = false;
+		const indexes = [];
+
+		for (var i = 0; i < 7; i++) {
+			indexes.push(i);
+		}
+
+		if (disabledDaysIndexes.length > 0) {
+			for (var i = 0; i < this.disabledDaysIndexes.length; i++) {
+				this.disabledDaysIndexes[i];
+			}
+		}
+
+		return index;
 	}
 
 	lang(s) {
