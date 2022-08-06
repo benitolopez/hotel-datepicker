@@ -178,6 +178,16 @@
 	}
 }
 
+.datepicker--topbar-has-close-button,
+.datepicker--topbar-has-clear-button,
+.datepicker--topbar-has-submit-button {
+	.datepicker__info {
+		@include mq_l {
+			max-width: 325px;
+		}
+	}
+}
+
 .datepicker__info-text {
 	font-size: 13px;
 }

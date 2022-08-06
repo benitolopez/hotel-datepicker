@@ -372,6 +372,11 @@
   .datepicker__month {
     width: 240px;
   }
+  .datepicker--topbar-has-close-button .datepicker__info,
+  .datepicker--topbar-has-clear-button .datepicker__info,
+  .datepicker--topbar-has-submit-button .datepicker__info {
+    max-width: 325px;
+  }
   .datepicker__close-button {
     margin-top: 0;
     position: absolute;
