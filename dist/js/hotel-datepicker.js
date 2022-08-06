@@ -1748,7 +1748,6 @@ HotelDatepicker.prototype.getClosestDisabledDays = function getClosestDisabledDa
         // - The closest date on the left
         // - The closest date on the right
 	var dates = [false, false];
-	var dayOfWeek = fecha.format(day, 'd');
 
 	for (var i = 0; i < 7; i++) {
 		var _date = this$1.substractDays(day, i);
