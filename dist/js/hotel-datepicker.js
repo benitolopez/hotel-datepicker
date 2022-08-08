@@ -1031,7 +1031,7 @@ HotelDatepicker.prototype.dayClicked = function dayClicked (day) {
 			}
 		}
 
-		if (this.hasClass(day, 'datepicker__month-day--no-checkout')) {
+		if (this.hasClass(day, 'datepicker__month-day--no-checkout') && time > this.start) {
 			return;
 		}
 	}
