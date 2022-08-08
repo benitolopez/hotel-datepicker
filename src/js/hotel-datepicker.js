@@ -1421,6 +1421,10 @@ export default class HotelDatepicker {
 
         // Add needed classes
 		for (let i = 0; i < days.length; i++) {
+			if (isSelecting) {
+				this.addClass(days[i], 'datepicker__month-day--tmp');
+			}
+
 			if (this.hasClass(days[i], 'datepicker__month-day--invalid') && this.hasClass(days[i], 'datepicker__month-day--tmp')) {
 				this.removeClass(days[i], 'datepicker__month-day--tmp');
 				if (this.hasClass(days[i], 'datepicker__month-day--tmpinvalid')) {

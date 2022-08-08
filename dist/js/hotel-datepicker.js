@@ -1443,6 +1443,10 @@ HotelDatepicker.prototype.updateSelectableRange = function updateSelectableRange
 
         // Add needed classes
 	for (var i = 0; i < days.length; i++) {
+		if (isSelecting) {
+			this$1.addClass(days[i], 'datepicker__month-day--tmp');
+		}
+
 		if (this$1.hasClass(days[i], 'datepicker__month-day--invalid') && this$1.hasClass(days[i], 'datepicker__month-day--tmp')) {
 			this$1.removeClass(days[i], 'datepicker__month-day--tmp');
 			if (this$1.hasClass(days[i], 'datepicker__month-day--tmpinvalid')) {
