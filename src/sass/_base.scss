@@ -67,6 +67,7 @@
 
 .datepicker__month-day--valid {
 	cursor: pointer;
+    user-select: none;
 }
 
 .datepicker__month-day--lastMonth,
