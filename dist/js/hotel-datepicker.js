@@ -340,6 +340,9 @@ HotelDatepicker.prototype.addListeners = function addListeners () {
         // but for now I will disable this option. I'm open to new ideas.
         // window.addEventListener('resize', evt => this.closeDatepicker(evt));
 
+        // Re-check datepicker, buttons, etc after resize
+	window.addEventListener('resize', function (evt) { return this$1.onResizeDatepicker(evt); });
+
         // Add a mouseover event listener to the document. This will help us to:
         // 1 - Handle the hover on calendar days
 	this.datepicker.addEventListener('mouseover', function (evt) { return this$1.datepickerHover(evt); });
@@ -793,7 +796,14 @@ HotelDatepicker.prototype.datepickerMouseOut = function datepickerMouseOut (evt)
 	}
 };
 
-HotelDatepicker.prototype.checkAndSetDefaultValue = function checkAndSetDefaultValue () {
+HotelDatepicker.prototype.onResizeDatepicker = function onResizeDatepicker (evt) {
+	// Reset month views
+	this.checkAndSetDefaultValue(true);
+};
+
+HotelDatepicker.prototype.checkAndSetDefaultValue = function checkAndSetDefaultValue (onresize) {
+		if ( onresize === void 0 ) onresize = false;
+
         // Set range based on the input value
 
         // Get dates from input value
@@ -807,15 +817,38 @@ HotelDatepicker.prototype.checkAndSetDefaultValue = function checkAndSetDefaultV
 
             // Set the date range
 		this.changed = false;
-		this.setDateRange(this.parseDate(dates[0], _format), this.parseDate(dates[1], _format));
+		this.setDateRange(this.parseDate(dates[0], _format), this.parseDate(dates[1], _format), onresize);
 		this.changed = true;
 	} else if (this.showTopbar) {
 		var selectedInfo = this.datepicker.getElementsByClassName('datepicker__info--selected')[0];
 		selectedInfo.style.display = 'none';
+
+		if (onresize) {
+			// Set default time
+			var defaultTime = new Date();
+
+			if (this.startDate && this.compareMonth(defaultTime, this.startDate) < 0) {
+				defaultTime = new Date(this.startDate.getTime());
+			}
+
+			if (this.endDate && this.compareMonth(this.getNextMonth(defaultTime), this.endDate) > 0) {
+				defaultTime = new Date(this.getPrevMonth(this.endDate.getTime()));
+			}
+
+			if (this.start && !this.end) {
+				this.clearSelection();
+			}
+
+		        // Show months
+			this.showMonth(defaultTime, 1);
+			this.showMonth(this.getNextMonth(defaultTime), 2);
+		}
 	}
 };
 
-HotelDatepicker.prototype.setDateRange = function setDateRange (date1, date2) {
+HotelDatepicker.prototype.setDateRange = function setDateRange (date1, date2, onresize) {
+		if ( onresize === void 0 ) onresize = false;
+
         // Swap dates if needed
 	if (date1.getTime() > date2.getTime()) {
 		var tmp = date2;
@@ -880,7 +913,9 @@ HotelDatepicker.prototype.setDateRange = function setDateRange (date1, date2) {
 	this.showSelectedInfo();
 
         // Close the datepicker
-	this.autoclose();
+	if (!onresize) {
+		this.autoclose();
+	}
 };
 
 HotelDatepicker.prototype.showSelectedDays = function showSelectedDays () {

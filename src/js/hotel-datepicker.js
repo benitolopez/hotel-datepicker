@@ -330,6 +330,9 @@ export default class HotelDatepicker {
         // but for now I will disable this option. I'm open to new ideas.
         // window.addEventListener('resize', evt => this.closeDatepicker(evt));
 
+        // Re-check datepicker, buttons, etc after resize
+		window.addEventListener('resize', evt => this.onResizeDatepicker(evt));
+
         // Add a mouseover event listener to the document. This will help us to:
         // 1 - Handle the hover on calendar days
 		this.datepicker.addEventListener('mouseover', evt => this.datepickerHover(evt));
@@ -777,7 +780,12 @@ export default class HotelDatepicker {
 		}
 	}
 
-	checkAndSetDefaultValue() {
+	onResizeDatepicker(evt) {
+		// Reset month views
+		this.checkAndSetDefaultValue(true);
+	}
+
+	checkAndSetDefaultValue(onresize = false) {
         // Set range based on the input value
 
         // Get dates from input value
@@ -791,15 +799,36 @@ export default class HotelDatepicker {
 
             // Set the date range
 			this.changed = false;
-			this.setDateRange(this.parseDate(dates[0], _format), this.parseDate(dates[1], _format));
+			this.setDateRange(this.parseDate(dates[0], _format), this.parseDate(dates[1], _format), onresize);
 			this.changed = true;
 		} else if (this.showTopbar) {
 			const selectedInfo = this.datepicker.getElementsByClassName('datepicker__info--selected')[0];
 			selectedInfo.style.display = 'none';
+
+			if (onresize) {
+				// Set default time
+				let defaultTime = new Date();
+
+				if (this.startDate && this.compareMonth(defaultTime, this.startDate) < 0) {
+					defaultTime = new Date(this.startDate.getTime());
+				}
+
+				if (this.endDate && this.compareMonth(this.getNextMonth(defaultTime), this.endDate) > 0) {
+					defaultTime = new Date(this.getPrevMonth(this.endDate.getTime()));
+				}
+
+				if (this.start && !this.end) {
+					this.clearSelection();
+				}
+
+		        // Show months
+				this.showMonth(defaultTime, 1);
+				this.showMonth(this.getNextMonth(defaultTime), 2);
+			}
 		}
 	}
 
-	setDateRange(date1, date2) {
+	setDateRange(date1, date2, onresize = false) {
         // Swap dates if needed
 		if (date1.getTime() > date2.getTime()) {
 			let tmp = date2;
@@ -864,7 +893,9 @@ export default class HotelDatepicker {
 		this.showSelectedInfo();
 
         // Close the datepicker
-		this.autoclose();
+		if (!onresize) {
+			this.autoclose();
+		}
 	}
 
 	showSelectedDays() {
