@@ -24,6 +24,8 @@ export default class HotelDatepicker {
 		this.noCheckInDates = opts.noCheckInDates || [];
 		this.noCheckOutDates = opts.noCheckOutDates || [];
 		this.disabledDaysOfWeek = opts.disabledDaysOfWeek || [];
+		this.noCheckInDaysOfWeek = opts.noCheckInDaysOfWeek || [];
+		this.noCheckOutDaysOfWeek = opts.noCheckOutDaysOfWeek || [];
 		this.enableCheckout = opts.enableCheckout || false;
 		this.preventContainerClose = opts.preventContainerClose || false;
 		this.container = opts.container || '';
@@ -636,6 +638,19 @@ export default class HotelDatepicker {
 							isNoCheckOut = true;
 						}
 					}
+
+					if (this.noCheckInDaysOfWeek.length > 0) {
+						if (this.noCheckInDaysOfWeek.indexOf(fecha.format(_day.time, 'dddd')) > -1) {
+							isNoCheckIn = true;
+							isFirstEnabledDate = false;
+						}
+					}
+
+					if (this.noCheckOutDaysOfWeek.length > 0) {
+						if (this.noCheckOutDaysOfWeek.indexOf(fecha.format(_day.time, 'dddd')) > -1) {
+							isNoCheckOut = true;
+						}
+					}
 				}
 
 				const classes = [
@@ -780,7 +795,7 @@ export default class HotelDatepicker {
 		}
 	}
 
-	onResizeDatepicker(evt) {
+	onResizeDatepicker() {
 		// Reset month views
 		this.checkAndSetDefaultValue(true);
 	}
@@ -821,7 +836,7 @@ export default class HotelDatepicker {
 					this.clearSelection();
 				}
 
-		        // Show months
+				// Show months
 				this.showMonth(defaultTime, 1);
 				this.showMonth(this.getNextMonth(defaultTime), 2);
 			}

@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.3.3 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.4.0 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function () {
 'use strict';
 
@@ -26,6 +26,8 @@ var HotelDatepicker = function HotelDatepicker(input, options) {
 	this.noCheckInDates = opts.noCheckInDates || [];
 	this.noCheckOutDates = opts.noCheckOutDates || [];
 	this.disabledDaysOfWeek = opts.disabledDaysOfWeek || [];
+	this.noCheckInDaysOfWeek = opts.noCheckInDaysOfWeek || [];
+	this.noCheckOutDaysOfWeek = opts.noCheckOutDaysOfWeek || [];
 	this.enableCheckout = opts.enableCheckout || false;
 	this.preventContainerClose = opts.preventContainerClose || false;
 	this.container = opts.container || '';
@@ -650,6 +652,19 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 						isNoCheckOut = true;
 					}
 				}
+
+				if (this$1.noCheckInDaysOfWeek.length > 0) {
+					if (this$1.noCheckInDaysOfWeek.indexOf(fecha.format(_day$2.time, 'dddd')) > -1) {
+						isNoCheckIn = true;
+						isFirstEnabledDate = false;
+					}
+				}
+
+				if (this$1.noCheckOutDaysOfWeek.length > 0) {
+					if (this$1.noCheckOutDaysOfWeek.indexOf(fecha.format(_day$2.time, 'dddd')) > -1) {
+						isNoCheckOut = true;
+					}
+				}
 			}
 
 			var classes = [
@@ -796,7 +811,7 @@ HotelDatepicker.prototype.datepickerMouseOut = function datepickerMouseOut (evt)
 	}
 };
 
-HotelDatepicker.prototype.onResizeDatepicker = function onResizeDatepicker (evt) {
+HotelDatepicker.prototype.onResizeDatepicker = function onResizeDatepicker () {
 	// Reset month views
 	this.checkAndSetDefaultValue(true);
 };
@@ -839,7 +854,7 @@ HotelDatepicker.prototype.checkAndSetDefaultValue = function checkAndSetDefaultV
 				this.clearSelection();
 			}
 
-		        // Show months
+			// Show months
 			this.showMonth(defaultTime, 1);
 			this.showMonth(this.getNextMonth(defaultTime), 2);
 		}
