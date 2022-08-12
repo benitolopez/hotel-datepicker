@@ -190,21 +190,6 @@ var datepicker = new HotelDatepicker(input, {
 
 		<div class="demo__item">
 			<div class="demo__input">
-				<input type="text" id="demo20" value="">
-			</div>
-			<p class="demo__description">Disable specific days of weeks</p>
-			<div class="demo__config">
-				<pre>
-var input = document.getElementById('input-id');
-var datepicker = new HotelDatepicker(input, {
-    disabledDaysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-});
-				</pre>
-			</div>
-		</div>
-
-		<div class="demo__item">
-			<div class="demo__input">
 				<input type="text" id="demo8" value="">
 			</div>
 			<p class="demo__description">Don't allow ranges before custom date: <code id="code-demo8"></code></p>
@@ -258,6 +243,67 @@ var datepicker = new HotelDatepicker(input, {
 			<p class="demo__description">Disable some dates but allow the checkout in those dates. <code id="code-demo12"></code></p>
 			<div class="demo__config">
 				<pre id="pre-demo12">
+				</pre>
+			</div>
+		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo20" value="">
+			</div>
+			<p class="demo__description">Disable specific days of week</p>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    disabledDaysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+});
+				</pre>
+			</div>
+		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo26" value="">
+			</div>
+			<p class="demo__description">Disable check-in on specific days of week</p>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    noCheckInDaysOfWeek: ['Monday', 'Tuesday']
+});
+				</pre>
+			</div>
+		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo27" value="">
+			</div>
+			<p class="demo__description">Disable check-out on specific days of week</p>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    noCheckOutDaysOfWeek: ['Saturday', 'Sunday']
+});
+				</pre>
+			</div>
+		</div>
+
+		<div class="demo__item">
+			<div class="demo__input">
+				<input type="text" id="demo28" value="">
+			</div>
+			<p class="demo__description">Allow check-in and check-out on Saturday only</p>
+			<div class="demo__config">
+				<pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    noCheckInDaysOfWeek: ['Monday', 'Tuesday',  'Wednesday', 'Thursday', 'Friday', 'Sunday'],
+    noCheckOutDaysOfWeek: ['Monday', 'Tuesday',  'Wednesday', 'Thursday', 'Friday', 'Sunday']
+});
 				</pre>
 			</div>
 		</div>
@@ -382,7 +428,7 @@ var datepicker = new HotelDatepicker(input, {
 			<div class="demo__input">
 				<input type="text" id="demo19" value="">
 			</div>
-			<p class="demo__description">Run a function when the datepicker closes.</p>
+			<p class="demo__description">Run a function when the datepicker closes</p>
 			<div class="demo__config">
 				<pre>
 var input = document.getElementById('input-id');
@@ -715,6 +761,25 @@ var datepicker = new HotelDatepicker(input, {
 
 			var demo20 = new HotelDatepicker(document.getElementById('demo20'), {
 				disabledDaysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+			});
+
+			// ------------------- DEMO 26 ------------------ //
+
+			var demo26 = new HotelDatepicker(document.getElementById('demo26'), {
+				noCheckInDaysOfWeek: ['Monday', 'Tuesday']
+			});
+
+			// ------------------- DEMO 27 ------------------ //
+
+			var demo27 = new HotelDatepicker(document.getElementById('demo27'), {
+				noCheckOutDaysOfWeek: ['Saturday', 'Sunday']
+			});
+
+			// ------------------- DEMO 28 ------------------ //
+
+			var demo28 = new HotelDatepicker(document.getElementById('demo28'), {
+				noCheckInDaysOfWeek: ['Monday', 'Tuesday',  'Wednesday', 'Thursday', 'Friday', 'Sunday'],
+    			noCheckOutDaysOfWeek: ['Monday', 'Tuesday',  'Wednesday', 'Thursday', 'Friday', 'Sunday']
 			});
 
 			// ------------------- DEMO 22 ------------------- //
