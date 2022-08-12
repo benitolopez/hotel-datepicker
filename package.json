@@ -43,7 +43,7 @@
     "rollup-plugin-filesize": "^1.0.1",
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-watch": "^4.3.1",
-    "xo": "^0.18.2"
+    "xo": "^0.51.0"
   },
   "xo": {
     "esnext": true,
