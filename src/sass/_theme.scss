@@ -68,15 +68,16 @@
 	position: relative;
 
 	&:before {
-		background-color: rgba($checkin__disabled__color, .1);
 		bottom: 0;
 		content: '';
 		display: block;
 		left: 0;
 		position: absolute;
-		right: 50%;
-		top: 0;
 		z-index: -1;
+		width: 0;
+		height: 0;
+		border-bottom: 8px solid $checkin__disabled__color;
+		border-right: 8px solid transparent;
 	}
 }
 
@@ -84,16 +85,21 @@
 	position: relative;
 
 	&:before {
-		background-color: rgba($checkout__disabled__color, .1);
-		bottom: 0;
+		top: 0;
 		content: '';
 		display: block;
-		left: 50%;
-		position: absolute;
 		right: 0;
-		top: 0;
+		position: absolute;
 		z-index: -1;
+		width: 0;
+		height: 0;
+		border-top: 8px solid $checkin__disabled__color;
+		border-left: 8px solid transparent;
 	}
+}
+
+.datepicker__month-day--no-checkin.datepicker__month-day--no-checkout:before {
+	content: none;
 }
 
 .datepicker__month-day--invalid {
@@ -115,6 +121,8 @@
 	}
 }
 
+.datepicker__month-day--no-checkin,
+.datepicker__month-day--no-checkout,
 .datepicker__month-day--day-of-week-disabled {
 	background-color: rgba($dates__invalid__color, .5);
 }
