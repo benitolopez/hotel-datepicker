@@ -30,6 +30,10 @@
 
 .datepicker__month-day--valid {
   cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .datepicker__month-day--lastMonth,
@@ -52,6 +56,13 @@
 .datepicker__info--error,
 .datepicker__info--help {
   display: block;
+}
+
+datepicker__buttons {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .datepicker__close-button,
