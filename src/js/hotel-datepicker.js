@@ -656,6 +656,7 @@ export default class HotelDatepicker {
 				const classes = [
 					'datepicker__month-day--' + _day.type,
 					'datepicker__month-day--' + (_day.valid ? 'valid' : 'invalid'),
+					this.start && !this.end && !_day.valid ? 'datepicker__month-day--tmp' : '',
 					isToday ? 'datepicker__month-day--today' : '',
 					isDisabled ? 'datepicker__month-day--disabled' : '',
 					isDisabled && this.enableCheckout && (this.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
@@ -1467,10 +1468,6 @@ export default class HotelDatepicker {
 
         // Add needed classes
 		for (let i = 0; i < days.length; i++) {
-			if (isSelecting) {
-				this.addClass(days[i], 'datepicker__month-day--tmp');
-			}
-
 			if (this.hasClass(days[i], 'datepicker__month-day--invalid') && this.hasClass(days[i], 'datepicker__month-day--tmp')) {
 				this.removeClass(days[i], 'datepicker__month-day--tmp');
 				if (this.hasClass(days[i], 'datepicker__month-day--tmpinvalid')) {

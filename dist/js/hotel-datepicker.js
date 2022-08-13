@@ -670,6 +670,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 			var classes = [
 				'datepicker__month-day--' + _day$2.type,
 				'datepicker__month-day--' + (_day$2.valid ? 'valid' : 'invalid'),
+				this$1.start && !this$1.end && !_day$2.valid ? 'datepicker__month-day--tmp' : '',
 				isToday ? 'datepicker__month-day--today' : '',
 				isDisabled ? 'datepicker__month-day--disabled' : '',
 				isDisabled && this$1.enableCheckout && (this$1.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
@@ -1493,10 +1494,6 @@ HotelDatepicker.prototype.updateSelectableRange = function updateSelectableRange
 
         // Add needed classes
 	for (var i = 0; i < days.length; i++) {
-		if (isSelecting) {
-			this$1.addClass(days[i], 'datepicker__month-day--tmp');
-		}
-
 		if (this$1.hasClass(days[i], 'datepicker__month-day--invalid') && this$1.hasClass(days[i], 'datepicker__month-day--tmp')) {
 			this$1.removeClass(days[i], 'datepicker__month-day--tmp');
 			if (this$1.hasClass(days[i], 'datepicker__month-day--tmpinvalid')) {
