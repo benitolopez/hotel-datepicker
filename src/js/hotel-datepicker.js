@@ -589,7 +589,7 @@ export default class HotelDatepicker {
 				}
 
                 // Create the day HTML
-				html += '<td class="datepicker__month-day ' + dayAttributes.class + '" ' + this.printAttributes(dayAttributes) + '>' + _day.day + '</td>';
+				html += '<td class="' + dayAttributes.class + '" ' + this.printAttributes(dayAttributes) + '>' + _day.day + '</td>';
 			}
 
 			html += '</tr>';
