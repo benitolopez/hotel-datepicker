@@ -808,6 +808,39 @@ export default class HotelDatepicker {
 
 		return classes;
 	}
+
+	checkAndSetDayClasses() {
+		// Get every td in the months table: our days
+		const days = this.datepicker.getElementsByTagName('td');
+
+        // Iterate each day and re-check HTML classes
+		for (let i = 0; i < days.length; i++) {
+			const time = parseInt(days[i].getAttribute('time'), 10);
+			const day = new Date(time);
+			const daytype = days[i].getAttribute('daytype');
+			let valid;
+
+			// Check if the day is valid. And pass this property to the days object
+			valid = this.isValidDate(day.getTime());
+
+			if ((this.startDate && this.compareDay(day, this.startDate) < 0) || (this.endDate && this.compareDay(day, this.endDate) > 0)) {
+				valid = false;
+			}
+
+			const _day = {
+				date: day,
+				type: daytype,
+				day: day.getDate(),
+				time,
+				valid
+			};
+
+			const classes = this.getDayClasses(_day);
+
+			days[i].className = classes.join(' ');
+		}
+	}
+
 	checkAndSetDefaultValue(onresize = false) {
         // Set range based on the input value
 
@@ -1110,13 +1143,13 @@ export default class HotelDatepicker {
         // Show selected dates in top bar
 		this.showSelectedInfo();
 
-        // Show selected days in the calendar
-		this.showSelectedDays();
-
 		// Check dates again after selection
 		if (this.start && this.end) {
-			this.checkAndSetDefaultValue();
+			this.checkAndSetDayClasses();
 		}
+
+        // Show selected days in the calendar
+		this.showSelectedDays();
 
         // Close the datepicker
 		this.autoclose();
