@@ -579,6 +579,7 @@ export default class HotelDatepicker {
 
                 // Each day has the "time" attribute (timestamp) and an appropriate class
 				const dayAttributes = {
+					daytype: _day.type,
 					time: _day.time,
 					class: classes.join(' ')
 				};
