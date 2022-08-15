@@ -670,7 +670,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 			var classes = [
 				'datepicker__month-day--' + _day$2.type,
 				'datepicker__month-day--' + (_day$2.valid ? 'valid' : 'invalid'),
-				this$1.start && !this$1.end && !_day$2.valid ? 'datepicker__month-day--tmp' : '',
+				this$1.start && !this$1.end && !_day$2.valid && !isDisabled && !isDayOfWeekDisabled ? 'datepicker__month-day--tmp' : '',
 				isToday ? 'datepicker__month-day--today' : '',
 				isDisabled ? 'datepicker__month-day--disabled' : '',
 				isDisabled && this$1.enableCheckout && (this$1.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
