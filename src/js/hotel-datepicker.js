@@ -559,121 +559,17 @@ export default class HotelDatepicker {
 			for (let i = 0; i < 7; i++) {
 				let _day = (this.startOfWeek === 'monday') ? i + 1 : i;
 				_day = days[(week * 7) + _day];
-				const isToday = this.getDateString(_day.time) === this.getDateString(new Date());
-				const isStartDate = this.getDateString(_day.time) === this.getDateString(this.startDate);
-				let isDisabled = false;
-				let isNoCheckIn = false;
-				let isNoCheckOut = false;
-				let isDayOfWeekDisabled = false;
-				let isFirstEnabledDate = false;
 
-				// Day between disabled dates and the last day
-				// before the disabled date
-				let isDayBeforeDisabledDate = false;
-
-                // Check if the day is one of the days passed in the
-                // (optional) disabledDates option. And set valid to
-                // false in this case.
-                //
-                // Also, check if the checkin or checkout is disabled
-				if (_day.valid || _day.type === 'visibleMonth') {
-					const dateString = this.getDateString(_day.time, 'YYYY-MM-DD');
-					if (this.disabledDates.length > 0) {
-						// Check if this day is between two disabled dates
-						// and disable it if there are not enough days
-						// available to select a valid range
-						const limit = this.getClosestDisabledDates(_day.date);
-
-						if (limit[0] && limit[1]) {
-							if (this.compareDay(_day.date, limit[0]) && (this.countDays(limit[0], limit[1]) - 2) > 0) {
-								const daysBeforeNextDisabledDate = this.countDays(limit[1], _day.date) - 1;
-								const daysAfterPrevDisabledDate = this.countDays(_day.date, limit[0]) - 1;
-
-								if (this.selectForward && daysBeforeNextDisabledDate < this.minDays) {
-									_day.valid = false;
-								} else if (!this.selectForward && daysBeforeNextDisabledDate < this.minDays && daysAfterPrevDisabledDate < this.minDays) {
-									_day.valid = false;
-								}
-
-								if (!_day.valid && this.enableCheckout && daysBeforeNextDisabledDate === 2) {
-									isDayBeforeDisabledDate = true;
-								}
-							}
-						}
-
-						if (this.disabledDates.indexOf(dateString) > -1) {
-							_day.valid = false;
-							isDisabled = true;
-
-							this.isFirstDisabledDate++;
-
-							// Store last disabled date for later
-							this.lastDisabledDate = _day.date;
-						} else {
-							this.isFirstDisabledDate = 0;
-						}
-
-						// First day after a disabled day
-						if (_day.valid && this.lastDisabledDate && this.compareDay(_day.date, this.lastDisabledDate) > 0 && this.countDays(_day.date, this.lastDisabledDate) === 2) {
-							isFirstEnabledDate = true;
-						}
-					}
-
-					if (this.disabledDaysOfWeek.length > 0) {
-						if (this.disabledDaysOfWeek.indexOf(fecha.format(_day.time, 'dddd')) > -1) {
-							_day.valid = false;
-							isDayOfWeekDisabled = true;
-						}
-					}
-
-					if (this.noCheckInDates.length > 0) {
-						if (this.noCheckInDates.indexOf(dateString) > -1) {
-							isNoCheckIn = true;
-							isFirstEnabledDate = false;
-						}
-					}
-
-					if (this.noCheckOutDates.length > 0) {
-						if (this.noCheckOutDates.indexOf(dateString) > -1) {
-							isNoCheckOut = true;
-						}
-					}
-
-					if (this.noCheckInDaysOfWeek.length > 0) {
-						if (this.noCheckInDaysOfWeek.indexOf(fecha.format(_day.time, 'dddd')) > -1) {
-							isNoCheckIn = true;
-							isFirstEnabledDate = false;
-						}
-					}
-
-					if (this.noCheckOutDaysOfWeek.length > 0) {
-						if (this.noCheckOutDaysOfWeek.indexOf(fecha.format(_day.time, 'dddd')) > -1) {
-							isNoCheckOut = true;
-						}
-					}
-				}
-
-				const classes = [
-					'datepicker__month-day--' + _day.type,
-					'datepicker__month-day--' + (_day.valid ? 'valid' : 'invalid'),
-					isToday ? 'datepicker__month-day--today' : '',
-					isDisabled ? 'datepicker__month-day--disabled' : '',
-					isDisabled && this.enableCheckout && (this.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
-					isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
-					isStartDate || isFirstEnabledDate ? 'datepicker__month-day--checkin-only' : '',
-					isNoCheckIn ? 'datepicker__month-day--no-checkin' : '',
-					isNoCheckOut ? 'datepicker__month-day--no-checkout' : '',
-					isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''
-				];
+				const classes = this.getDayClasses(_day);
 
 				// Add a title for those days where the checkin or checkout is disabled
 				let title = '';
 
-				if (isNoCheckIn) {
+				if (this.hasClass(_day, 'datepicker__month-day--no-checkin')) {
 					title = this.i18n['checkin-disabled'];
 				}
 
-				if (isNoCheckOut) {
+				if (this.hasClass(_day, 'datepicker__month-day--no-checkout')) {
 					if (title) {
 						title += '. ';
 					}
@@ -800,6 +696,117 @@ export default class HotelDatepicker {
 		this.checkAndSetDefaultValue(true);
 	}
 
+	getDayClasses(_day) {
+		const isToday = this.getDateString(_day.time) === this.getDateString(new Date());
+		const isStartDate = this.getDateString(_day.time) === this.getDateString(this.startDate);
+		let isDisabled = false;
+		let isNoCheckIn = false;
+		let isNoCheckOut = false;
+		let isDayOfWeekDisabled = false;
+		let isFirstEnabledDate = false;
+
+		// Day between disabled dates and the last day
+		// before the disabled date
+		let isDayBeforeDisabledDate = false;
+
+        // Check if the day is one of the days passed in the
+        // (optional) disabledDates option. And set valid to
+        // false in this case.
+        //
+        // Also, check if the checkin or checkout is disabled
+		if (_day.valid || _day.type === 'visibleMonth') {
+			const dateString = this.getDateString(_day.time, 'YYYY-MM-DD');
+			if (this.disabledDates.length > 0) {
+				// Check if this day is between two disabled dates
+				// and disable it if there are not enough days
+				// available to select a valid range
+				const limit = this.getClosestDisabledDates(_day.date);
+
+				if (limit[0] && limit[1]) {
+					if (this.compareDay(_day.date, limit[0]) && (this.countDays(limit[0], limit[1]) - 2) > 0) {
+						const daysBeforeNextDisabledDate = this.countDays(limit[1], _day.date) - 1;
+						const daysAfterPrevDisabledDate = this.countDays(_day.date, limit[0]) - 1;
+
+						if (this.selectForward && daysBeforeNextDisabledDate < this.minDays) {
+							_day.valid = false;
+						} else if (!this.selectForward && daysBeforeNextDisabledDate < this.minDays && daysAfterPrevDisabledDate < this.minDays) {
+							_day.valid = false;
+						}
+
+						if (!_day.valid && this.enableCheckout && daysBeforeNextDisabledDate === 2) {
+							isDayBeforeDisabledDate = true;
+						}
+					}
+				}
+
+				if (this.disabledDates.indexOf(dateString) > -1) {
+					_day.valid = false;
+					isDisabled = true;
+
+					this.isFirstDisabledDate++;
+
+					// Store last disabled date for later
+					this.lastDisabledDate = _day.date;
+				} else {
+					this.isFirstDisabledDate = 0;
+				}
+
+				// First day after a disabled day
+				if (_day.valid && this.lastDisabledDate && this.compareDay(_day.date, this.lastDisabledDate) > 0 && this.countDays(_day.date, this.lastDisabledDate) === 2) {
+					isFirstEnabledDate = true;
+				}
+			}
+
+			if (this.disabledDaysOfWeek.length > 0) {
+				if (this.disabledDaysOfWeek.indexOf(fecha.format(_day.time, 'dddd')) > -1) {
+					_day.valid = false;
+					isDayOfWeekDisabled = true;
+				}
+			}
+
+			if (this.noCheckInDates.length > 0) {
+				if (this.noCheckInDates.indexOf(dateString) > -1) {
+					isNoCheckIn = true;
+					isFirstEnabledDate = false;
+				}
+			}
+
+			if (this.noCheckOutDates.length > 0) {
+				if (this.noCheckOutDates.indexOf(dateString) > -1) {
+					isNoCheckOut = true;
+				}
+			}
+
+			if (this.noCheckInDaysOfWeek.length > 0) {
+				if (this.noCheckInDaysOfWeek.indexOf(fecha.format(_day.time, 'dddd')) > -1) {
+					isNoCheckIn = true;
+					isFirstEnabledDate = false;
+				}
+			}
+
+			if (this.noCheckOutDaysOfWeek.length > 0) {
+				if (this.noCheckOutDaysOfWeek.indexOf(fecha.format(_day.time, 'dddd')) > -1) {
+					isNoCheckOut = true;
+				}
+			}
+		}
+
+		const classes = [
+			'datepicker__month-day',
+			'datepicker__month-day--' + _day.type,
+			'datepicker__month-day--' + (_day.valid ? 'valid' : 'invalid'),
+			isToday ? 'datepicker__month-day--today' : '',
+			isDisabled ? 'datepicker__month-day--disabled' : '',
+			isDisabled && this.enableCheckout && (this.isFirstDisabledDate === 1) ? 'datepicker__month-day--checkout-enabled' : '',
+			isDayBeforeDisabledDate ? 'datepicker__month-day--before-disabled-date' : '',
+			isStartDate || isFirstEnabledDate ? 'datepicker__month-day--checkin-only' : '',
+			isNoCheckIn ? 'datepicker__month-day--no-checkin' : '',
+			isNoCheckOut ? 'datepicker__month-day--no-checkout' : '',
+			isDayOfWeekDisabled ? 'datepicker__month-day--day-of-week-disabled' : ''
+		];
+
+		return classes;
+	}
 	checkAndSetDefaultValue(onresize = false) {
         // Set range based on the input value
 
