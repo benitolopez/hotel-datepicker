@@ -8,17 +8,16 @@ A pure Javascript date range picker for hotels. Requires [Fecha](https://github.
 
 ## Installation
 
-Download [Fecha](https://github.com/taylorhakes/fecha/releases). 
+Download [Fecha](https://github.com/taylorhakes/fecha/releases).
 
 **[BREAK CHANGE]** Use Fecha 4.0.0 or above.
 
 Include files:
 
 ```html
-<link  href="/path/to/hotel-datepicker.css" rel="stylesheet"><!-- Optional -->
+<link href="/path/to/hotel-datepicker.css" rel="stylesheet" /><!-- Optional -->
 <script src="/path/to/fecha.js"></script>
 <script src="/path/to/hotel-datepicker.min.js"></script>
-
 ```
 
 ## Usage
@@ -26,178 +25,177 @@ Include files:
 Initialize with vanilla JS.
 
 ```html
-<input id="input-id" type="text">
-
+<input id="input-id" type="text" />
 ```
 
 ```js
-var hdpkr = new HotelDatepicker(document.getElementById('input-id'), options);
+var hdpkr = new HotelDatepicker(document.getElementById("input-id"), options);
 ```
 
 ## Options
 
 ### format
 
-- Type: `String`
-- Default: `YYYY-MM-DD`
+-   Type: `String`
+-   Default: `YYYY-MM-DD`
 
 The date format string.
 
 ### infoFormat
 
-- Type: `String`
-- Default: `YYYY-MM-DD`
+-   Type: `String`
+-   Default: `YYYY-MM-DD`
 
 The date format string in the info box. If not set, it uses the `format` option.
 
 ### separator
 
-- Type: `String`
-- Default: ` - `
+-   Type: `String`
+-   Default: `-`
 
 The separator string used between date strings.
 
 ### startOfWeek
 
-- Type: `String`
-- Default: `sunday`
+-   Type: `String`
+-   Default: `sunday`
 
 Default start week: `sunday` or `monday`.
 
 ### startDate
 
-- Type: `Date` or `String`
-- Default: `new Date()`
+-   Type: `Date` or `String`
+-   Default: `new Date()`
 
 The start view date. All the dates before this date will be disabled.
 
 ### endDate
 
-- Type: `Date` or `String` or `Boolean`
-- Default: `false`
+-   Type: `Date` or `String` or `Boolean`
+-   Default: `false`
 
 The end view date. All the dates after this date will be disabled.
 
 ### minNights
 
-- Type: `Number`
-- Default: `1`
+-   Type: `Number`
+-   Default: `1`
 
 Minimum nights required to select a range of dates.
 
 ### maxNights
 
-- Type: `Number`
-- Default: `0`
+-   Type: `Number`
+-   Default: `0`
 
 Maximum nights required to select a range of dates.
 
 ### selectForward
 
-- Type: `Boolean`
-- Default: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 If `true`, the selection of the second date must be after the first date. If `false`, you can select a range of dates in both directions.
 
 ### disabledDates
 
-- Type: `Array`
-- Default: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the dates passed to the list will be disabled.
 
 ### enableCheckout
 
-- Type: `Boolean`
-- Default: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 If `true`, allows the checkout on a **disabled** date. But with a criteria. Let's say we have these disabled dates: `03 April 2020` and `04 April 2020`. With this option enabled, an user can still select the first date (`03 April 2020`) for the checkout. But not `04 April 2020`.
 
 ### noCheckInDates
 
-- Type: `Array`
-- Default: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the dates passed to the list will not allow a check-in on that day.
 
 ### noCheckOutDates
 
-- Type: `Array`
-- Default: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the dates passed to the list will not allow a check-out on that day.
 
 ### disabledDaysOfWeek
 
-- Type: `Array`
-- Default: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 An array of **strings** of day names in your language (same names used in `i18n['day-names']`): `'Monday'` (note the `''` and the uppercase).
 
 ### noCheckInDaysOfWeek
 
-- Type: `Array`
-- Default: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 An array of **strings** of day names in your language (same names used in `i18n['day-names']`): `'Monday'` (note the `''` and the uppercase).
 
 ### noCheckOutDaysOfWeek
 
-- Type: `Array`
-- Default: `[]`
+-   Type: `Array`
+-   Default: `[]`
 
 An array of **strings** of day names in your language (same names used in `i18n['day-names']`): `'Monday'` (note the `''` and the uppercase).
 
 ```js
-['Monday', 'Tuesday', 'Wednesday']
+["Monday", "Tuesday", "Wednesday"];
 ```
 
 ### container
 
-- Type: `Element`
-- Default: `''`
+-   Type: `Element`
+-   Default: `''`
 
 An element for putting the datepicker. If not set, the datepicker will be appended to the parent of the input.
 
 ### inline
 
-- Type: `Boolean`
-- Default: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 Render the datepicker inline.
 
 ### clearButton
 
-- Type: `Boolean`
-- Default: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 If `true`, a button to clear the selected dates is shown. Works only when `inline` and `showTopbar` are true.
 
 ### submitButton
 
-- Type: `Boolean`
-- Default: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 If `true`, a submit button is shown. Works only when `inline` and `showTopbar` are true.
 
 ### submitButtonName
 
-- Type: `String`
-- Default: ``
+-   Type: `String`
+-   Default: ``
 
 The name of the button to reference the form-data. Works only when `submitButton` is true.
 
 ### animationSpeed
 
-- Type: `String`
-- Default: `.5s`
+-   Type: `String`
+-   Default: `.5s`
 
 The duration (in seconds) of the animation (open/close datepicker).
 
 ### hoveringTooltip
 
-- Type: `Boolean` or `Function`
-- Default: `true`
+-   Type: `Boolean` or `Function`
+-   Default: `true`
 
 Shows a tooltip when hovering a date. It can be a custom function:
 
@@ -209,43 +207,43 @@ hoveringTooltip: function(nights, startTime, hoverTime) {
 
 ### showTopbar
 
-- Type: `Boolean`
-- Default: `true`
+-   Type: `Boolean`
+-   Default: `true`
 
 Show/hide the toolbar.
 
 ### topbarPosition
 
-- Type: `String`
-- Default: `top`
+-   Type: `String`
+-   Default: `top`
 
 Set the position of the toolbar.
 
 ### autoClose
 
-- Type: `Boolean`
-- Default: `true`
+-   Type: `Boolean`
+-   Default: `true`
 
 Close the datepicker after the selection of the second date.
 
 ### preventContainerClose
 
-- Type: `Boolean`
-- Default: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 When a click is done outside the datepicker container, the datepicker closes. Use this option to disable this behavior.
 
 ### moveBothMonths
 
-- Type: `Boolean`
-- Default: `false`
+-   Type: `Boolean`
+-   Default: `false`
 
 Move both months when clicking on the next/prev month button.
 
 ### onDayClick
 
-- Type: `Function`
-- Default: `false`
+-   Type: `Function`
+-   Default: `false`
 
 Run a custom function every time a day is clicked:
 
@@ -257,8 +255,8 @@ onDayClick: function() {
 
 ### onOpenDatepicker
 
-- Type: `Function`
-- Default: `false`
+-   Type: `Function`
+-   Default: `false`
 
 Run a custom function when the datepicker is opened:
 
@@ -270,8 +268,8 @@ onOpenDatepicker: function() {
 
 ### onSelectRange
 
-- Type: `Function`
-- Default: `false`
+-   Type: `Function`
+-   Default: `false`
 
 Run a custom function when a range is selected:
 
@@ -283,9 +281,9 @@ onSelectRange: function() {
 
 ### i18n
 
-**[BREAK CHANGE]** Two new options has been introduced in the v.3: `month-names-short` and `day-names-short`. Previously, the *short* day name version ('Sun', 'Mon', 'Tue', etc) was used in the `day-names` option. Now, the `day-names` option uses the *long* version.
+**[BREAK CHANGE]** Two new options has been introduced in the v.3: `month-names-short` and `day-names-short`. Previously, the _short_ day name version ('Sun', 'Mon', 'Tue', etc) was used in the `day-names` option. Now, the `day-names` option uses the _long_ version.
 
-- Type: `Object`
+-   Type: `Object`
 
 Default:
 
@@ -362,11 +360,15 @@ Destroys the datepicker.
 You can listen for this event when the datepicker closes.
 
 ```js
-var input = document.getElementById('input-id');
+var input = document.getElementById("input-id");
 
-input.addEventListener('afterClose', function () {
-    console.log('Closed!');
-}, false);
+input.addEventListener(
+    "afterClose",
+    function () {
+        console.log("Closed!");
+    },
+    false
+);
 ```
 
 ## Versioning
