@@ -3,110 +3,110 @@
  * ============================================================*/
 
 .datepicker {
-	box-sizing: border-box;
-	overflow: hidden;
-	position: absolute;
-	width: 260px;
-	z-index: 1;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: absolute;
+    width: 260px;
+    z-index: 1;
 
-	@include mq_s {
-		width: 300px;
-	}
+    @include mq_s {
+        width: 300px;
+    }
 
-	@include mq_m {
-		width: 460px;
-	}
+    @include mq_m {
+        width: 460px;
+    }
 
-	@include mq_l {
-		width: 560px;
-	}
+    @include mq_l {
+        width: 560px;
+    }
 
-	&--inline {
-		position: relative;
-	}
+    &--inline {
+        position: relative;
+    }
 }
 
 .datepicker__inner {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .datepicker__months {
-	@include mq_m {
-		overflow: hidden;
-	}
+    @include mq_m {
+        overflow: hidden;
+    }
 }
 
 .datepicker__month {
-	border-collapse: collapse;
-	text-align: center;
-	width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
 
-	@include mq_m {
-		width: 200px;
-	}
+    @include mq_m {
+        width: 200px;
+    }
 
-	@include mq_l {
-		width: 240px;
-	}
+    @include mq_l {
+        width: 240px;
+    }
 }
 
 .datepicker__month--month1 {
-	@include mq_m {
-		float: left;
-	}
+    @include mq_m {
+        float: left;
+    }
 }
 
 .datepicker__month--month2 {
-	display: none;
+    display: none;
 
-	@include mq_m {
-		display: table;
-		float: right;
-	}
+    @include mq_m {
+        display: table;
+        float: right;
+    }
 }
 
 .datepicker__month-day--valid {
-	cursor: pointer;
+    cursor: pointer;
     user-select: none;
 }
 
 .datepicker__month-day--lastMonth,
 .datepicker__month-day--nextMonth {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 .datepicker__month-button {
-	cursor: pointer;
-    -webkit-user-select: none;    
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .datepicker__month-button--disabled {
-	@include mq_m {
-		visibility: hidden;
-	}
+    @include mq_m {
+        visibility: hidden;
+    }
 }
 
 .datepicker__info--feedback {
-	display: none;
+    display: none;
 }
 
 .datepicker__info--error,
 .datepicker__info--help {
-	display: block;
+    display: block;
 }
 
 datepicker__buttons {
-	user-select: none;
+    user-select: none;
 }
 
 .datepicker__close-button,
 .datepicker__clear-button {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .datepicker__tooltip {
-	position: absolute;
+    position: absolute;
 }
