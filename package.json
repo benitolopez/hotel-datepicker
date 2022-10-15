@@ -25,10 +25,11 @@
     "build:css": "postcss --no-map -w .sass-cache/hotel-datepicker.css -d dist/css",
     "build:xo": "xo --fix || true",
     "build:js": "node build.js",
+    "build:img": "cp -R src/icons dist",
     "watch:server": "browser-sync start --startPath demo --reload-delay 300 --server --files 'dist/**,demo/**'",
     "watch:build": "onchange 'src/js/*.js' -i -- npm-run-all --parallel --silent build:*",
-    "watch": "mkdir -p dist dist/css .sass-cache; touch .sass-cache/hotel-datepicker.css; npm-run-all --parallel --silent watch:*",
-    "build": "mkdir -p dist dist/css .sass-cache; touch .sass-cache/hotel-datepicker.css; npm-run-all --parallel --silent build:*"
+    "watch": "mkdir -p dist dist/css dist/icons .sass-cache; touch .sass-cache/hotel-datepicker.css; npm-run-all --parallel --silent watch:*",
+    "build": "mkdir -p dist dist/css dist/icons .sass-cache; touch .sass-cache/hotel-datepicker.css; npm-run-all --parallel --silent build:*"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
