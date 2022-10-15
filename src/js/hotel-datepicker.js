@@ -108,8 +108,24 @@ export default class HotelDatepicker {
                 'Please select a date range of at least %d nights',
 			'info-range': 'Please select a date range between %d and %d nights',
 			'info-range-equal': 'Please select a date range of %d nights',
-			'info-default': 'Please select a date range'
+			'info-default': 'Please select a date range',
+			'aria-application': 'Calendar',
+			'aria-selected-checkin': 'Selected as check-in date, %s',
+			'aria-selected-checkout': 'Selected as check-out date, %s',
+			'aria-selected': 'Selected, %s',
+			'aria-disabled': 'Not available, %s',
+			'aria-choose-checkin': 'Choose %s as your check-in date',
+			'aria-choose-checkout': 'Choose %s as your check-out date',
+			'aria-prev-month': 'Move backward to switch to the previous month',
+			'aria-next-month': 'Move forward to switch to the next month',
+			'aria-close-button': 'Close the datepicker',
+			'aria-clear-button': 'Clear the selected dates',
+			'aria-submit-button': 'Submit the form'
 		};
+		this.aria = opts.aria || {
+			'day-format': 'dddd, MMMM DD, YYYY'
+		};
+
 		this.getValue =
             opts.getValue ||
             function () {
@@ -351,6 +367,7 @@ export default class HotelDatepicker {
                     this.getClearButtonId()
                 );
 				clearButton.disabled = true;
+				clearButton.setAttribute('aria-disabled', 'true');
 			}
 
 			if (this.submitButton) {
@@ -358,6 +375,7 @@ export default class HotelDatepicker {
                     this.getSubmitButtonId()
                 );
 				submitButton.disabled = true;
+				submitButton.setAttribute('aria-disabled', 'true');
 			}
 		}
 
@@ -369,6 +387,9 @@ export default class HotelDatepicker {
 
         // Holds last disabled date
 		this.lastDisabledDate = false;
+
+        // Add aria attributes
+		this.setDayAriaAttributes();
 	}
 
 	addListeners() {
@@ -513,7 +534,9 @@ export default class HotelDatepicker {
 				topBarHtml +=
                     '<button type="button" id="' +
                     this.getCloseButtonId() +
-                    '" class="datepicker__close-button">' +
+                    '" class="datepicker__close-button" aria-label="' +
+                    this.i18n['aria-close-button'] +
+                    '">' +
                     this.lang('button') +
                     '</button>';
 			}
@@ -526,7 +549,9 @@ export default class HotelDatepicker {
 				topBarHtml +=
                     '<button type="button" id="' +
                     this.getClearButtonId() +
-                    '" class="datepicker__clear-button">' +
+                    '" class="datepicker__clear-button" aria-label="' +
+                    this.i18n['aria-clear-button'] +
+                    '">' +
                     this.lang('clearButton') +
                     '</button>';
 			}
@@ -539,6 +564,8 @@ export default class HotelDatepicker {
                     this.lang('submitButton') +
                     '" name="' +
                     this.submitButtonName +
+                    '" aria-label="' +
+                    this.i18n['aria-submit-button'] +
                     '">';
 			}
 
@@ -554,20 +581,27 @@ export default class HotelDatepicker {
 		}
 
         // Months section
-		html += '<div class="datepicker__months">';
+		html +=
+            '<div class="datepicker__months" role="application" aria-roledescription="datepicker" aria-label="' +
+            this.i18n['aria-application'] +
+            '">';
 
         // Print single months
 		for (let i = 1; i <= 2; i++) {
 			html +=
-                '<table id="' +
+                '<table role="presentation" id="' +
                 this.getMonthTableId(i) +
                 '" class="datepicker__month datepicker__month--month' +
                 i +
-                '"><thead><tr class="datepicker__month-caption"><th><span class="datepicker__month-button datepicker__month-button--prev" month="' +
+                '"><thead><tr class="datepicker__month-caption"><th><span  role="button" aria-label="' +
+                this.i18n['aria-prev-month'] +
+                '" class="datepicker__month-button datepicker__month-button--prev" month="' +
                 i +
-                '">&lt;</span></th><th colspan="5" class="datepicker__month-name"></th><th><span class="datepicker__month-button datepicker__month-button--next" month="' +
+                '">&lt;</span></th><th colspan="5" class="datepicker__month-name"></th><th><span role="button" aria-label="' +
+                this.i18n['aria-next-month'] +
+                '" class="datepicker__month-button datepicker__month-button--next" month="' +
                 i +
-                '">&gt;</span></th></tr><tr class="datepicker__week-days">' +
+                '">&gt;</span></th></tr><tr class="datepicker__week-days"  aria-hidden="true" role="presentation">' +
                 this.getWeekDayNames(i) +
                 '</tr></thead><tbody></tbody></table>';
 		}
@@ -740,6 +774,9 @@ export default class HotelDatepicker {
 				if (title) {
 					dayAttributes.title = title;
 				}
+
+                // Add role
+				dayAttributes.role = 'button';
 
                 // Create the day HTML
 				html +=
@@ -1192,6 +1229,9 @@ export default class HotelDatepicker {
 		if (!onresize) {
 			this.autoclose();
 		}
+
+        // Add aria attributes
+		this.setDayAriaAttributes();
 	}
 
 	showSelectedDays() {
@@ -1317,6 +1357,7 @@ export default class HotelDatepicker {
 			if (this.inline) {
 				if (this.clearButton) {
 					clearButton.disabled = false;
+					clearButton.setAttribute('aria-disabled', 'false');
 				}
 			}
 		}
@@ -1347,8 +1388,10 @@ export default class HotelDatepicker {
 
 			if (!this.inline) {
 				closeButton.disabled = false;
+				closeButton.setAttribute('aria-disabled', 'false');
 			} else if (this.submitButton) {
 				submitButton.disabled = false;
+				submitButton.setAttribute('aria-disabled', 'false');
 			}
 
             // Set input value
@@ -1361,15 +1404,18 @@ export default class HotelDatepicker {
 		} else if (!this.inline) {
             // Disable the close button until a valid date range
 			closeButton.disabled = true;
+			closeButton.setAttribute('aria-disabled', 'true');
 		} else {
 			if (this.clearButton && !this.start && !this.end) {
                 // Disable the clear button until one valid date is selected
 				clearButton.disabled = true;
+				clearButton.setAttribute('aria-disabled', 'true');
 			}
 
 			if (this.submitButton) {
                 // Disable the submit button until a valid date range
 				submitButton.disabled = true;
+				submitButton.setAttribute('aria-disabled', 'true');
 			}
 		}
 	}
@@ -1478,6 +1524,9 @@ export default class HotelDatepicker {
 		if (this.end && this.onSelectRange) {
 			this.onSelectRange();
 		}
+
+        // Add aria attributes
+		this.setDayAriaAttributes();
 	}
 
 	isValidDate(time) {
@@ -1968,10 +2017,8 @@ export default class HotelDatepicker {
                         );
 					}
 				}
-                // At the end of the selection, restore the disabled/invalid class for
-                // days where the checkout is enabled. We need to check this when the
-                // autoclose option is false. The same for the day just before the
-                // disabled date
+                // Set aria attributes
+				this.setDayAriaAttributes();
 			} else if (
                 this.hasClass(
                     days[i],
@@ -1982,6 +2029,10 @@ export default class HotelDatepicker {
                     'datepicker__month-day--before-disabled-date'
                 )
             ) {
+                // At the end of the selection, restore the disabled/invalid class for
+                // days where the checkout is enabled. We need to check this when the
+                // autoclose option is false. The same for the day just before the
+                // disabled date
 				this.addClass(days[i], 'datepicker__month-day--invalid');
 				this.removeClass(days[i], 'datepicker__month-day--valid');
 				if (
@@ -2399,6 +2450,64 @@ export default class HotelDatepicker {
             'ontouchstart' in window ||
             (window.DocumentTouch && document instanceof DocumentTouch)
 		);
+	}
+
+	setDayAriaAttributes() {
+		const days = this.datepicker.getElementsByTagName('td');
+		for (let i = 0; i < days.length; i++) {
+			const classes = days[i].className;
+			const time = parseInt(days[i].getAttribute('time'), 10);
+			let ariaDisabled = 'false';
+			let ariaLabel = '';
+
+			if (classes.includes('datepicker__month-day--invalid')) {
+				ariaLabel = this.replacei18n(
+                    this.i18n['aria-disabled'],
+                    fecha.format(time, this.aria['day-format'])
+                );
+
+				ariaDisabled = 'true';
+			} else if (
+                classes.includes('datepicker__month-day--first-day-selected')
+            ) {
+				ariaLabel = this.replacei18n(
+                    this.i18n['aria-selected-checkin'],
+                    fecha.format(time, this.aria['day-format'])
+                );
+			} else if (
+                classes.includes('datepicker__month-day--last-day-selected')
+            ) {
+				ariaLabel = this.replacei18n(
+                    this.i18n['aria-selected-checkout'],
+                    fecha.format(time, this.aria['day-format'])
+                );
+			} else if (classes.includes('datepicker__month-day--selected')) {
+				ariaLabel = this.replacei18n(
+                    this.i18n['aria-selected'],
+                    fecha.format(time, this.aria['day-format'])
+                );
+			} else if (this.start && !this.end) {
+				ariaLabel = this.replacei18n(
+                    this.i18n['aria-choose-checkout'],
+                    fecha.format(time, this.aria['day-format'])
+                );
+			} else {
+				ariaLabel = this.replacei18n(
+                    this.i18n['aria-choose-checkin'],
+                    fecha.format(time, this.aria['day-format'])
+                );
+			}
+
+			if (ariaLabel) {
+				days[i].setAttribute('aria-label', ariaLabel);
+			}
+
+			days[i].setAttribute('aria-disabled', ariaDisabled);
+		}
+	}
+
+	replacei18n(string, value) {
+		return string.replace('%s', value);
 	}
 
     // ------------------ //
