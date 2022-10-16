@@ -13,6 +13,7 @@ export default class HotelDatepicker {
 
 		this.format = opts.format || 'YYYY-MM-DD';
 		this.infoFormat = opts.infoFormat || this.format;
+		this.ariaDayFormat = opts.ariaDayFormat || 'dddd, MMMM DD, YYYY';
 		this.separator = opts.separator || ' - ';
 		this.startOfWeek = opts.startOfWeek || 'sunday'; // Or monday
 		this.startDate = opts.startDate || new Date();
@@ -121,9 +122,6 @@ export default class HotelDatepicker {
 			'aria-close-button': 'Close the datepicker',
 			'aria-clear-button': 'Clear the selected dates',
 			'aria-submit-button': 'Submit the form'
-		};
-		this.aria = opts.aria || {
-			'day-format': 'dddd, MMMM DD, YYYY'
 		};
 
 		this.getValue =
@@ -593,11 +591,11 @@ export default class HotelDatepicker {
                 this.getMonthTableId(i) +
                 '" class="datepicker__month datepicker__month--month' +
                 i +
-                '"><thead><tr class="datepicker__month-caption"><th><span  role="button" aria-label="' +
+                '"><thead><tr class="datepicker__month-caption"><th><span  role="button" tabindex="0" aria-label="' +
                 this.i18n['aria-prev-month'] +
                 '" class="datepicker__month-button datepicker__month-button--prev" month="' +
                 i +
-                '">&lt;</span></th><th colspan="5" class="datepicker__month-name"></th><th><span role="button" aria-label="' +
+                '">&lt;</span></th><th colspan="5" class="datepicker__month-name"></th><th><span role="button" tabindex="0" aria-label="' +
                 this.i18n['aria-next-month'] +
                 '" class="datepicker__month-button datepicker__month-button--next" month="' +
                 i +
@@ -777,6 +775,14 @@ export default class HotelDatepicker {
 
                 // Add role
 				dayAttributes.role = 'button';
+
+                // Add tabindex to today date
+				if (
+                    this.getDateString(_day.time) ===
+                    this.getDateString(new Date())
+                ) {
+					dayAttributes.tabindex = '0';
+				}
 
                 // Create the day HTML
 				html +=
@@ -2463,7 +2469,7 @@ export default class HotelDatepicker {
 			if (classes.includes('datepicker__month-day--invalid')) {
 				ariaLabel = this.replacei18n(
                     this.i18n['aria-disabled'],
-                    fecha.format(time, this.aria['day-format'])
+                    fecha.format(time, this.ariaDayFormat)
                 );
 
 				ariaDisabled = 'true';
@@ -2472,29 +2478,29 @@ export default class HotelDatepicker {
             ) {
 				ariaLabel = this.replacei18n(
                     this.i18n['aria-selected-checkin'],
-                    fecha.format(time, this.aria['day-format'])
+                    fecha.format(time, this.ariaDayFormat)
                 );
 			} else if (
                 classes.includes('datepicker__month-day--last-day-selected')
             ) {
 				ariaLabel = this.replacei18n(
                     this.i18n['aria-selected-checkout'],
-                    fecha.format(time, this.aria['day-format'])
+                    fecha.format(time, this.ariaDayFormat)
                 );
 			} else if (classes.includes('datepicker__month-day--selected')) {
 				ariaLabel = this.replacei18n(
                     this.i18n['aria-selected'],
-                    fecha.format(time, this.aria['day-format'])
+                    fecha.format(time, this.ariaDayFormat)
                 );
 			} else if (this.start && !this.end) {
 				ariaLabel = this.replacei18n(
                     this.i18n['aria-choose-checkout'],
-                    fecha.format(time, this.aria['day-format'])
+                    fecha.format(time, this.ariaDayFormat)
                 );
 			} else {
 				ariaLabel = this.replacei18n(
                     this.i18n['aria-choose-checkin'],
-                    fecha.format(time, this.aria['day-format'])
+                    fecha.format(time, this.ariaDayFormat)
                 );
 			}
 
