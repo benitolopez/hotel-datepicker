@@ -48,6 +48,13 @@ The date format string.
 
 The date format string in the info box. If not set, it uses the `format` option.
 
+### ariaDayFormat
+
+-   Type: `String`
+-   Default: `dddd, MMMM DD, YYYY`
+
+The date format string in the aria label strings.
+
 ### separator
 
 -   Type: `String`
@@ -309,7 +316,19 @@ i18n: {
     'info-more-plural': 'Please select a date range of at least %d nights',
     'info-range': 'Please select a date range between %d and %d nights',
     'info-range-equal': 'Please select a date range of %d nights',
-    'info-default': 'Please select a date range'
+    'info-default': 'Please select a date range',
+    'aria-application': 'Calendar',
+    'aria-selected-checkin': 'Selected as check-in date, %s',
+    'aria-selected-checkout': 'Selected as check-out date, %s',
+    'aria-selected': 'Selected, %s',
+    'aria-disabled': 'Not available, %s',
+    'aria-choose-checkin': 'Choose %s as your check-in date',
+    'aria-choose-checkout': 'Choose %s as your check-out date',
+    'aria-prev-month': 'Move backward to switch to the previous month',
+    'aria-next-month': 'Move forward to switch to the next month',
+    'aria-close-button': 'Close the datepicker',
+    'aria-clear-button': 'Clear the selected dates',
+    'aria-submit-button': 'Submit the form'
 }
 ```
 
