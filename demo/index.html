@@ -579,18 +579,18 @@ var datepicker = new HotelDatepicker(input, {
         'info-range': 'Per favore seleziona un intervallo di date tra %d e %d notti',
         'info-range-equal': 'Per favore seleziona un intervallo di %d notti',
         'info-default': 'Per favore seleziona un intervallo di date',
-		'aria-application': 'Calendario',
-		'aria-selected-checkin': 'Data selezionata come check-in, %s',
-		'aria-selected-checkout': 'Data selezionata come check-out, %s',
-		'aria-selected': 'Data selezionata, %s',
-		'aria-disabled': 'Non disponibile, %s',
-		'aria-choose-checkin': 'Scegli %s come data del check-in',
-		'aria-choose-checkout': 'Scegli %s come data del check-out',
-		'aria-prev-month': 'Muovi indietro per visualizzare il mese precedente',
-		'aria-next-month': 'Muovi in avanti per visualizzare il mese successivo',
-		'aria-close-button': 'Chiudi il datepicker',
-		'aria-clear-button': 'Cancella le date selezionate',
-		'aria-submit-button': 'Invia il form'
+        'aria-application': 'Calendario',
+        'aria-selected-checkin': 'Data selezionata come check-in, %s',
+        'aria-selected-checkout': 'Data selezionata come check-out, %s',
+        'aria-selected': 'Data selezionata, %s',
+        'aria-disabled': 'Non disponibile, %s',
+        'aria-choose-checkin': 'Scegli %s come data del check-in',
+        'aria-choose-checkout': 'Scegli %s come data del check-out',
+        'aria-prev-month': 'Muovi indietro per visualizzare il mese precedente',
+        'aria-next-month': 'Muovi in avanti per visualizzare il mese successivo',
+        'aria-close-button': 'Chiudi il datepicker',
+        'aria-clear-button': 'Cancella le date selezionate',
+        'aria-submit-button': 'Invia il form'
     }
 });
 				</pre
@@ -1090,87 +1090,105 @@ var datepicker = new HotelDatepicker(input, {
 
                 // ------------------- DEMO 14 ------------------ //
 
-                // var demo14 = new HotelDatepicker(
-                //     document.getElementById("demo14"),
-                //     {
-                //         format: "dddd D MMM YYYY",
-                //         startOfWeek: "monday",
-                //         i18n: {
-                //             selected: "Il tuo soggiorno:",
-                //             night: "Notte",
-                //             nights: "Notti",
-                //             button: "Chiudi",
-                //             clearButton: "Cancella",
-                //             submitButton: "Invia",
-                //             "checkin-disabled": "Check-in disabilitato",
-                //             "checkout-disabled": "Check-out disabilitato",
-                //             "day-names-short": [
-                //                 "Dom",
-                //                 "Lun",
-                //                 "Mar",
-                //                 "Mer",
-                //                 "Gio",
-                //                 "Ven",
-                //                 "Sab",
-                //             ],
-                //             "day-names": [
-                //                 "Domenica",
-                //                 "Lunedì",
-                //                 "Martedì",
-                //                 "Mercoledì",
-                //                 "Giovedì",
-                //                 "Venerdì",
-                //                 "Sabato",
-                //             ],
-                //             "month-names-short": [
-                //                 "Gen",
-                //                 "Feb",
-                //                 "Mar",
-                //                 "Apr",
-                //                 "Mag",
-                //                 "Giu",
-                //                 "Lug",
-                //                 "Ago",
-                //                 "Set",
-                //                 "Ott",
-                //                 "Nov",
-                //                 "Dic",
-                //             ],
-                //             "month-names": [
-                //                 "Gennaio",
-                //                 "Febbraio",
-                //                 "Marzo",
-                //                 "Aprile",
-                //                 "Maggio",
-                //                 "Giugno",
-                //                 "Luglio",
-                //                 "Agosto",
-                //                 "Settembre",
-                //                 "Ottobre",
-                //                 "Novembre",
-                //                 "Dicembre",
-                //             ],
-                //             "error-more":
-                //                 "L'intervallo di date non deve avere più di 1 notte",
-                //             "error-more-plural":
-                //                 "L'intervallo di date non deve avere più di %d notti",
-                //             "error-less":
-                //                 "L'intervallo di date non deve avere meno di 1 notte",
-                //             "error-less-plural":
-                //                 "L'intervallo di date non deve avere meno di %d notti",
-                //             "info-more":
-                //                 "Per favore seleziona un intervallo di date di almeno 1 notte",
-                //             "info-more-plural":
-                //                 "Per favore seleziona un intervallo di date di almeno %d notti",
-                //             "info-range":
-                //                 "Per favore seleziona un intervallo di date tra %d e %d notti",
-                //             "info-range-equal":
-                //                 "Per favore seleziona un intervallo di %d notti",
-                //             "info-default":
-                //                 "Per favore seleziona un intervallo di date",
-                //         },
-                //     }
-                // );
+                var demo14 = new HotelDatepicker(
+                    document.getElementById("demo14"),
+                    {
+                        format: "dddd D MMM YYYY",
+                        startOfWeek: "monday",
+                        i18n: {
+                            selected: "Il tuo soggiorno:",
+                            night: "Notte",
+                            nights: "Notti",
+                            button: "Chiudi",
+                            clearButton: "Cancella",
+                            submitButton: "Invia",
+                            "checkin-disabled": "Check-in disabilitato",
+                            "checkout-disabled": "Check-out disabilitato",
+                            "day-names-short": [
+                                "Dom",
+                                "Lun",
+                                "Mar",
+                                "Mer",
+                                "Gio",
+                                "Ven",
+                                "Sab",
+                            ],
+                            "day-names": [
+                                "Domenica",
+                                "Lunedì",
+                                "Martedì",
+                                "Mercoledì",
+                                "Giovedì",
+                                "Venerdì",
+                                "Sabato",
+                            ],
+                            "month-names-short": [
+                                "Gen",
+                                "Feb",
+                                "Mar",
+                                "Apr",
+                                "Mag",
+                                "Giu",
+                                "Lug",
+                                "Ago",
+                                "Set",
+                                "Ott",
+                                "Nov",
+                                "Dic",
+                            ],
+                            "month-names": [
+                                "Gennaio",
+                                "Febbraio",
+                                "Marzo",
+                                "Aprile",
+                                "Maggio",
+                                "Giugno",
+                                "Luglio",
+                                "Agosto",
+                                "Settembre",
+                                "Ottobre",
+                                "Novembre",
+                                "Dicembre",
+                            ],
+                            "error-more":
+                                "L'intervallo di date non deve avere più di 1 notte",
+                            "error-more-plural":
+                                "L'intervallo di date non deve avere più di %d notti",
+                            "error-less":
+                                "L'intervallo di date non deve avere meno di 1 notte",
+                            "error-less-plural":
+                                "L'intervallo di date non deve avere meno di %d notti",
+                            "info-more":
+                                "Per favore seleziona un intervallo di date di almeno 1 notte",
+                            "info-more-plural":
+                                "Per favore seleziona un intervallo di date di almeno %d notti",
+                            "info-range":
+                                "Per favore seleziona un intervallo di date tra %d e %d notti",
+                            "info-range-equal":
+                                "Per favore seleziona un intervallo di %d notti",
+                            "info-default":
+                                "Per favore seleziona un intervallo di date",
+                            "aria-application": "Calendario",
+                            "aria-selected-checkin":
+                                "Data selezionata come check-in, %s",
+                            "aria-selected-checkout":
+                                "Data selezionata come check-out, %s",
+                            "aria-selected": "Data selezionata, %s",
+                            "aria-disabled": "Non disponibile, %s",
+                            "aria-choose-checkin":
+                                "Scegli %s come data del check-in",
+                            "aria-choose-checkout":
+                                "Scegli %s come data del check-out",
+                            "aria-prev-month":
+                                "Muovi indietro per visualizzare il mese precedente",
+                            "aria-next-month":
+                                "Muovi in avanti per visualizzare il mese successivo",
+                            "aria-close-button": "Chiudi il datepicker",
+                            "aria-clear-button": "Cancella le date selezionate",
+                            "aria-submit-button": "Invia il form",
+                        },
+                    }
+                );
 
                 // ------------------- DEMO 15 ------------------ //
 
