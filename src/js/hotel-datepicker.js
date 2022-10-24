@@ -320,6 +320,12 @@ export default class HotelDatepicker {
         // Flag that checks if the second date of the range is set
 		this.changed = false;
 
+        // Flag that checks if we exit from the datepicker with the ESC key
+		this.justEsc = false;
+
+        // Flag that checks if we datepicker is on focus
+		this.isOnFocus = false;
+
         // Create the DOM elements
 		this.createDom();
 
@@ -353,6 +359,7 @@ export default class HotelDatepicker {
         // Show months
 		this.showMonth(defaultTime, 1);
 		this.showMonth(this.getNextMonth(defaultTime), 2);
+		this.setDayIndexes();
 
         // Print default info in top bar
 		this.topBarDefaultText();
@@ -458,6 +465,27 @@ export default class HotelDatepicker {
         // Update the selected values when the input changes manually
 		this.addBoundedListener(this.input, 'change', () =>
             this.checkAndSetDefaultValue()
+        );
+
+        // Open datepicker on focus
+		if (!this.inline) {
+			if (!this.justEsc) {
+				this.addBoundedListener(this.input, 'focus', evt =>
+                    this.openDatepicker(evt)
+                );
+			}
+
+			this.justEsc = false;
+		}
+
+        // Listen for keystrokes
+		window.addEventListener('keydown', evt => this.doKeyDown(evt));
+
+        // Listen for focus
+		document.addEventListener(
+            'focus',
+            evt => this.checkOnFocus(evt),
+            true
         );
 	}
 
@@ -765,7 +793,8 @@ export default class HotelDatepicker {
 				const dayAttributes = {
 					daytype: _day.type,
 					time: _day.time,
-					class: classes.join(' ')
+					class: classes.join(' '),
+					d: i + 1
 				};
 
                 // Add title attribute if available
@@ -1157,6 +1186,7 @@ export default class HotelDatepicker {
                 // Show months
 				this.showMonth(defaultTime, 1);
 				this.showMonth(this.getNextMonth(defaultTime), 2);
+				this.setDayIndexes();
 			}
 		}
 	}
@@ -1186,6 +1216,7 @@ export default class HotelDatepicker {
             // Show default (initial) months
 			this.showMonth(this.startDate, 1);
 			this.showMonth(this.getNextMonth(this.startDate), 2);
+			this.setDayIndexes();
 
             // Show selected days in the calendar
 			this.showSelectedDays();
@@ -1218,6 +1249,7 @@ export default class HotelDatepicker {
         // Show the months
 		this.showMonth(date1, 1);
 		this.showMonth(date2, 2);
+		this.setDayIndexes();
 
         // Show selected days in the calendar
 		this.showSelectedDays();
@@ -1756,9 +1788,12 @@ export default class HotelDatepicker {
 		return attribute;
 	}
 
-	goToNextMonth(e) {
+	goToNextMonth(e, forceBoth = false) {
         // Go to the next month
-		const thisMonth = e.target.getAttribute('month');
+		const thisMonth = Number.isInteger(e) ?
+            e :
+            e.target.getAttribute('month');
+
 		const isMonth2 = thisMonth > 1;
 		let nextMonth = isMonth2 ? this.month2 : this.month1;
 
@@ -1775,21 +1810,27 @@ export default class HotelDatepicker {
                 this.compareMonth(nextMonth, this.month2) >= 0) ||
             this.isMonthOutOfRange(nextMonth)
         ) {
-			return;
+			return false;
 		}
 
         // We can now show the month and proceed
-		if (this.moveBothMonths && isMonth2) {
+		if ((this.moveBothMonths || forceBoth) && isMonth2) {
 			this.showMonth(this.month2, 1);
 		}
 		this.showMonth(nextMonth, thisMonth);
+		this.setDayIndexes();
 		this.showSelectedDays();
 		this.disableNextPrevButtons();
+
+		return true;
 	}
 
-	goToPreviousMonth(e) {
+	goToPreviousMonth(e, forceBoth = false) {
         // Go to the previous month
-		const thisMonth = e.target.getAttribute('month');
+		const thisMonth = Number.isInteger(e) ?
+            e :
+            e.target.getAttribute('month');
+
 		const isMonth2 = thisMonth > 1;
 		let prevMonth = isMonth2 ? this.month2 : this.month1;
 
@@ -1804,16 +1845,19 @@ export default class HotelDatepicker {
             (isMonth2 && this.compareMonth(prevMonth, this.month1) <= 0) ||
             this.isMonthOutOfRange(prevMonth)
         ) {
-			return;
+			return false;
 		}
 
         // We can now show the month and proceed
-		if (this.moveBothMonths && !isMonth2) {
+		if ((this.moveBothMonths || forceBoth) && !isMonth2) {
 			this.showMonth(this.month1, 2);
 		}
 		this.showMonth(prevMonth, thisMonth);
+		this.setDayIndexes();
 		this.showSelectedDays();
 		this.disableNextPrevButtons();
+
+		return true;
 	}
 
 	isSingleMonth() {
@@ -2524,6 +2568,314 @@ export default class HotelDatepicker {
 
 	replacei18n(string, value) {
 		return string.replace('%s', value);
+	}
+
+	checkOnFocus(event) {
+		if (
+            (event.target && this.input === event.target) ||
+            this.datepicker.contains(event.target)
+        ) {
+			this.isOnFocus = true;
+		} else {
+			this.isOnFocus = false;
+			if (this.isOpen) {
+				this.closeDatepicker();
+			}
+		}
+	}
+
+	doKeyDown(event) {
+		switch (event.keyCode) {
+			case 39:
+				if (this.isOnFocus) {
+					event.preventDefault();
+					this.setActiveDay('next');
+				}
+
+				break;
+
+			case 37:
+				if (this.isOnFocus) {
+					event.preventDefault();
+					this.setActiveDay('prev');
+				}
+				break;
+
+			case 40:
+				if (this.isOnFocus) {
+					event.preventDefault();
+					this.setActiveDay('down');
+				}
+				break;
+
+			case 38:
+				if (this.isOnFocus) {
+					event.preventDefault();
+					this.setActiveDay('up');
+				}
+				break;
+
+			case 36:
+				if (this.isOnFocus) {
+					event.preventDefault();
+					this.setActiveDay('first');
+				}
+				break;
+
+			case 35:
+				if (this.isOnFocus) {
+					event.preventDefault();
+					this.setActiveDay('last');
+				}
+				break;
+
+			case 27:
+				if (this.input.offsetParent !== null) {
+					this.setFocusToInput();
+				}
+				break;
+
+			case 34:
+				if (this.isOnFocus) {
+					event.preventDefault();
+					this.moveMonthFromKeyboard('next');
+				}
+				break;
+
+			case 33:
+				if (this.isOnFocus) {
+					event.preventDefault();
+					this.moveMonthFromKeyboard('prev');
+				}
+				break;
+
+			case 13:
+				if (this.isOnFocus) {
+					event.preventDefault();
+					this.selectDay();
+				}
+				break;
+		}
+	}
+
+	setActiveDay($direction) {
+		const activeEl = document.activeElement;
+
+		if (
+            activeEl &&
+            this.hasClass(activeEl, 'datepicker__month-day--visibleMonth') &&
+            this.datepicker.contains(activeEl)
+        ) {
+			const currentIndex = parseInt(activeEl.getAttribute('index'), 10);
+			const currentWeekdayIndex = parseInt(
+                activeEl.getAttribute('d'),
+                10
+            );
+			let nextIndex = -1;
+
+			switch ($direction) {
+				case 'next':
+					nextIndex = currentIndex + 1;
+					break;
+
+				case 'prev':
+					nextIndex = currentIndex - 1;
+					break;
+
+				case 'up':
+					nextIndex = currentIndex - 7;
+					break;
+
+				case 'down':
+					nextIndex = currentIndex + 7;
+					break;
+
+				case 'first':
+					if (currentWeekdayIndex === 1) {
+						return false;
+					}
+					nextIndex = currentIndex - (currentWeekdayIndex - 1);
+
+					break;
+
+				case 'last':
+					if (currentWeekdayIndex === 7) {
+						return false;
+					}
+					nextIndex = currentIndex + (7 - currentWeekdayIndex);
+
+					break;
+			}
+
+			const nextDay = this.datepicker.querySelectorAll(
+                '[index="' + nextIndex + '"]'
+            );
+			if (nextDay.length > 0 && nextIndex > 0) {
+				this.setDayFocus(nextDay[0]);
+			} else if (nextIndex > 0) {
+				let nextDay = '';
+				const gone = this.goToNextMonth(2, true);
+				if (gone) {
+					const month = this.datepicker.getElementsByClassName(
+                        'datepicker__month--month2'
+                    );
+
+					if (month.length > 0) {
+						if ($direction === 'down') {
+							nextDay = month[0].querySelectorAll(
+                                '.datepicker__month-day--visibleMonth[d="' +
+                                    currentWeekdayIndex +
+                                    '"]'
+                            );
+						} else if ($direction === 'last') {
+							const nextWeekdayIndex =
+                                currentWeekdayIndex + (7 - currentWeekdayIndex);
+							nextDay = month[0].querySelectorAll(
+                                '.datepicker__month-day--visibleMonth[d="' +
+                                    nextWeekdayIndex +
+                                    '"]'
+                            );
+						} else {
+							nextDay = month[0].querySelectorAll(
+                                '.datepicker__month-day--visibleMonth'
+                            );
+						}
+
+						if (nextDay.length > 0) {
+							this.setDayFocus(nextDay[0]);
+						}
+					}
+				}
+			} else if (nextIndex <= 0) {
+				let prevDay = '';
+				const gone = this.goToPreviousMonth(1, true);
+				if (gone) {
+					const month = this.datepicker.getElementsByClassName(
+                        'datepicker__month--month1'
+                    );
+
+					if (month.length > 0) {
+						if ($direction === 'up') {
+							prevDay = month[0].querySelectorAll(
+                                '.datepicker__month-day--visibleMonth[d="' +
+                                    currentWeekdayIndex +
+                                    '"]'
+                            );
+						} else if ($direction === 'first') {
+							const prevWeekdayIndex =
+                                currentWeekdayIndex - (currentWeekdayIndex - 1);
+
+							prevDay = month[0].querySelectorAll(
+                                '.datepicker__month-day--visibleMonth[d="' +
+                                    prevWeekdayIndex +
+                                    '"]'
+                            );
+						} else {
+							prevDay = month[0].querySelectorAll(
+                                '.datepicker__month-day--visibleMonth'
+                            );
+						}
+
+						if (prevDay.length > 0) {
+							this.setDayFocus(prevDay[prevDay.length - 1]);
+						}
+					}
+				}
+			}
+		} else {
+			this.setInitialActiveDay();
+		}
+	}
+
+	setInitialActiveDay() {
+        // Check if today is visible
+		const today = this.datepicker.getElementsByClassName(
+            'datepicker__month-day--today'
+        );
+
+		if (today.length > 0) {
+			this.setDayFocus(today[0]);
+			return today[0];
+		}
+
+        // Check if check-in is visible
+		const checkin = this.datepicker.getElementsByClassName(
+            'datepicker__month-day--first-day-selected'
+        );
+
+		if (checkin.length > 0) {
+			this.setDayFocus(checkin[0]);
+			return checkin[0];
+		}
+
+        // Get first visible day
+		const visibleDay = this.datepicker.getElementsByClassName(
+            'datepicker__month-day--visibleMonth'
+        );
+
+		if (visibleDay.length > 0) {
+			this.setDayFocus(visibleDay[0]);
+			return visibleDay[0];
+		}
+	}
+
+	setDayFocus(day) {
+		const days = this.datepicker.getElementsByTagName('td');
+
+		this.removeDaysTabIndex(days);
+		day.setAttribute('tabindex', '0');
+		day.focus();
+
+		if (this.start && !this.end) {
+			this.dayHovering(day);
+		}
+	}
+
+	removeDaysTabIndex(days) {
+		for (let i = 0; i < days.length; i++) {
+			days[i].removeAttribute('tabindex');
+		}
+	}
+
+	setDayIndexes() {
+		const days = this.datepicker.getElementsByTagName('td');
+		this.dayIndex = 1;
+
+		for (let i = 0; i < days.length; i++) {
+			if (this.hasClass(days[i], 'datepicker__month-day--visibleMonth')) {
+				days[i].setAttribute('index', this.dayIndex);
+				this.dayIndex++;
+			} else {
+				days[i].setAttribute('index', 0);
+			}
+		}
+	}
+
+	setFocusToInput() {
+		this.input.focus();
+		this.closeDatepicker();
+		this.justEsc = true;
+		this.isOnFocus = false;
+	}
+
+	moveMonthFromKeyboard($direction) {
+		if ($direction === 'prev') {
+			this.goToPreviousMonth(1, true);
+		} else {
+			this.goToNextMonth(2, true);
+		}
+	}
+
+	selectDay() {
+		const activeEl = document.activeElement;
+
+		if (
+            activeEl &&
+            this.hasClass(activeEl, 'datepicker__month-day--visibleMonth') &&
+            this.datepicker.contains(activeEl)
+        ) {
+			activeEl.click();
+		}
 	}
 
     // ------------------ //
