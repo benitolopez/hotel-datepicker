@@ -153,3 +153,32 @@ h3 {
 .demo__description {
     font-size: 14px;
 }
+
+.shortcuts {
+    margin-top: 5em;
+}
+
+.shortcuts__list {
+    margin: 0;
+}
+
+.shortcuts__item {
+    margin-bottom: 5px;
+}
+
+.shortcuts__item code {
+    position: absolute;
+    color: #000;
+    padding: 0 7px;
+    font-size: 11px;
+    font-family: Consolas, Monaco, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+
+.shortcuts__item span {
+    margin-left: 95px;
+    font-size: 15px;
+}
+
+#datepicker-2.datepicker {
+    z-index: 2;
+}
