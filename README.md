@@ -390,6 +390,15 @@ input.addEventListener(
 );
 ```
 
+## Keyboard Shortcuts
+
+-   `←/→`: Move backward (left) and forward (right) by one day.
+-   `↑/↓`: Move backward (up) and forward (down) by one week.
+-   `PGUP/PGDN`: Switch months.
+-   `HOME/END`: Go to the first or last day of a week.
+-   `↵`: Select the date in focus.
+-   `ESC`: Return to the date input field.
+
 ## Versioning
 
 Maintained under the [Semantic Versioning guidelines](http://semver.org/).
