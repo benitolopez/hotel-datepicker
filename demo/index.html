@@ -1,105 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Hotel Datepicker - A pure Javascript date range picker for hotels</title>
-	<meta name="viewport" content="width=device-width, minimum-scale=1.0">
-	<meta name="description" content="A pure Javascript date range picker standalone plugin for hotels or booking websites. Free and released under MIT license."/>
+    <head>
+        <meta charset="UTF-8" />
+        <title>
+            Hotel Datepicker - A pure Javascript date range picker for hotels
+        </title>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+        <meta
+            name="description"
+            content="A pure Javascript date range picker standalone plugin for hotels or booking websites. Free and released under MIT license."
+        />
 
-	<meta property="og:locale" content="en_US" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Hotel Datepicker - A pure Javascript date range picker for hotels" />
-	<meta property="og:description" content="A pure Javascript date range picker standalone plugin for hotels or booking websites. Free and released under MIT license." />
-	<meta property="og:url" content="http://lopezb.com/hoteldatepicker/" />
-	<meta property="og:site_name" content="Hotel Datepicker" />
-	<meta property="og:image" content="http://static.lopezb.com/hoteldatepicker/datepicker_card.png" />
-	<meta name="twitter:card" content="summary_large_image"/>
-	<meta name="twitter:description" content="A pure Javascript date range picker standalone plugin for hotels or booking websites. Free and released under MIT license."/>
-	<meta name="twitter:title" content="Hotel Datepicker - A pure Javascript date range picker for hotels"/>
-	<meta name="twitter:site" content="@LopezBenito"/>
-	<meta name="twitter:image" content="http://static.lopezb.com/hoteldatepicker/datepicker_card.png"/>
-	<meta name="twitter:creator" content="@LopezBenito"/>
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:title"
+            content="Hotel Datepicker - A pure Javascript date range picker for hotels"
+        />
+        <meta
+            property="og:description"
+            content="A pure Javascript date range picker standalone plugin for hotels or booking websites. Free and released under MIT license."
+        />
+        <meta property="og:url" content="http://lopezb.com/hoteldatepicker/" />
+        <meta property="og:site_name" content="Hotel Datepicker" />
+        <meta
+            property="og:image"
+            content="http://static.lopezb.com/hoteldatepicker/datepicker_card.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:description"
+            content="A pure Javascript date range picker standalone plugin for hotels or booking websites. Free and released under MIT license."
+        />
+        <meta
+            name="twitter:title"
+            content="Hotel Datepicker - A pure Javascript date range picker for hotels"
+        />
+        <meta name="twitter:site" content="@LopezBenito" />
+        <meta
+            name="twitter:image"
+            content="http://static.lopezb.com/hoteldatepicker/datepicker_card.png"
+        />
+        <meta name="twitter:creator" content="@LopezBenito" />
 
-	<link rel="stylesheet" type="text/css" href="../dist/css/hotel-datepicker.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-</head>
-<body>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="../dist/css/hotel-datepicker.css"
+        />
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+    </head>
+    <body>
+        <div class="page">
+            <h1>Hotel Datepicker</h1>
+            <p>A pure Javascript date range picker for hotels.</p>
 
-<div class="page">
-	<h1>Hotel Datepicker</h1>
-	<p>A pure Javascript date range picker for hotels.</p>
+            <a
+                class="button button--download"
+                href="https://github.com/benitolopez/hotel-datepicker/archive/4.5.0.zip"
+                >Download</a
+            >
 
-	<a class="button button--download" href="https://github.com/benitolopez/hotel-datepicker/archive/4.4.1.zip">Download</a>
+            <ul class="social">
+                <li class="social__item">
+                    <a
+                        class="social__link"
+                        href="https://github.com/benitolopez/hotel-datepicker"
+                        >View on Github</a
+                    >
+                </li>
+                <li class="social__item">
+                    <a
+                        class="social__link"
+                        href="https://twitter.com/LopezBenito"
+                        >Twitter</a
+                    >
+                </li>
+            </ul>
 
-	<ul class="social">
-		<li class="social__item"><a class="social__link" href="https://github.com/benitolopez/hotel-datepicker">View on Github</a></li>
-		<li class="social__item"><a class="social__link" href="https://twitter.com/LopezBenito">Twitter</a></li>
-	</ul>
+            <div class="installation">
+                <h2>Installation</h2>
 
-	<div class="installation">
-		<h2>Installation</h2>
+                <p class="installation__description">
+                    Download
+                    <a href="https://github.com/taylorhakes/fecha">Fecha</a>
+                    (4.0.0 or above) and the Hotel Datepicker repository from
+                    <a href="https://github.com/benitolopez/hotel-datepicker"
+                        >Github</a
+                    >. Then include the files in your page:
+                </p>
 
-		<p class="installation__description">Download <a href="https://github.com/taylorhakes/fecha">Fecha</a> (4.0.0 or above) and the Hotel Datepicker repository from <a href="https://github.com/benitolopez/hotel-datepicker">Github</a>. Then include the files in your page:</p>
-
-		<pre>
+                <pre>
 &lt;link  href="/path/to/hotel-datepicker.css" rel="stylesheet"&gt;
 &lt;script src="/path/to/fecha.js"&gt;&lt;/script&gt;
 &lt;script src="/path/to/hotel-datepicker.min.js"&gt;&lt;/script&gt;"
-		</pre>
-	</div>
+		</pre
+                >
+            </div>
 
-	<div class="demo">
-		<h3>Demo</h3>
+            <div class="shortcuts">
+                <h3>Keyboard Shortcuts</h3>
 
-		<div class="demo__item">
-			<div class="demo__input" id="demo1-input-parent">
-				<input type="text" value="">
-			</div>
-			<p class="demo__description">Default settings with a predefined value in the input</p>
-			<div class="demo__config">
-				<pre id="pre-demo1">
+                <ul class="shortcuts__list">
+                    <li class="shortcuts__item">
+                        <code>←/→</code
+                        ><span
+                            >Move backward (left) and forward (right) by one
+                            day.</span
+                        >
+                    </li>
+                    <li class="shortcuts__item">
+                        <code>↑/↓</code
+                        ><span
+                            >Move backward (up) and forward (down) by one
+                            week.</span
+                        >
+                    </li>
+                    <li class="shortcuts__item">
+                        <code>PGUP/PGDN</code><span>Switch months.</span>
+                    </li>
+                    <li class="shortcuts__item">
+                        <code>HOME/END</code
+                        ><span>Go to the first or last day of a week.</span>
+                    </li>
+                    <li class="shortcuts__item">
+                        <code>↵</code><span>Select the date in focus.</span>
+                    </li>
+                    <li class="shortcuts__item">
+                        <code>ESC</code
+                        ><span>Return to the date input field.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="demo">
+                <h3>Demo</h3>
+
+                <div class="demo__item">
+                    <div class="demo__input" id="demo1-input-parent">
+                        <input
+                            type="text"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo1-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo1-input-description">
+                        Default settings with a predefined value in the input
+                    </p>
+                    <div class="demo__config">
+                        <pre id="pre-demo1">
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input);
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-            <div class="demo__input" id="demo2-input-parent">
-				<input type="text" value="">
-			</div>
-			<p class="demo__description">Default settings with an empty input</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input" id="demo2-input-parent">
+                        <input
+                            type="text"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo2-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo2-input-description">
+                        Default settings with an empty input
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input);
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<p class="demo__description">Inline mode</p>
-			<div class="demo__input">
-				<input type="hidden" id="demo24" value="">
-			</div>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <p class="demo__description" id="demo24-input-description">
+                        Inline mode
+                    </p>
+                    <div class="demo__input">
+                        <input
+                            type="hidden"
+                            id="demo24"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo24-input-description"
+                        />
+                    </div>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     inline: true,
     clearButton: true
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<p class="demo__description">Inline mode with bottom bar and submit button</p>
-			<div class="demo__input">
-				<input type="hidden" id="demo25" value="">
-			</div>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <p class="demo__description" id="demo25-input-description">
+                        Inline mode with bottom bar and submit button
+                    </p>
+                    <div class="demo__input">
+                        <input
+                            type="hidden"
+                            id="demo25"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo25-input-description"
+                        />
+                    </div>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     inline: true,
@@ -108,228 +226,368 @@ var datepicker = new HotelDatepicker(input, {
     topbarPosition: 'bottom',
     submitButtonName: 'name_of_submit_button'
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo3" value="">
-			</div>
-			<p class="demo__description">Custom format: <code>DD-MM-YYYY</code></p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo3"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo3-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo3-input-description">
+                        Custom format: <code>DD-MM-YYYY</code>
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     format: 'DD-MM-YYYY'
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo4" value="">
-			</div>
-			<p class="demo__description">Start of week: <code>monday</code></p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo4"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo4-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo4-input-description">
+                        Start of week: <code>monday</code>
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     startOfWeek: 'monday'
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo5" value="">
-			</div>
-			<p class="demo__description">Mininum number of nights: <code>7</code></p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo5"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo5-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo5-input-description">
+                        Mininum number of nights: <code>7</code>
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     minNights: 7
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo6" value="">
-			</div>
-			<p class="demo__description">Maximum number of nights: <code>5</code></p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo6"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo6-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo6-input-description">
+                        Maximum number of nights: <code>5</code>
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     maxNights: 5
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo7" value="">
-			</div>
-			<p class="demo__description">Range between <code>4</code> and <code>8</code> nights</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo7"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo7-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo7-input-description">
+                        Range between <code>4</code> and <code>8</code> nights
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     minNights: 4,
     maxNights: 8
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo8" value="">
-			</div>
-			<p class="demo__description">Don't allow ranges before custom date: <code id="code-demo8"></code></p>
-			<div class="demo__config">
-				<pre id="pre-demo8">
-				</pre>
-			</div>
-		</div>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo8"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo8-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo8-input-description">
+                        Don't allow ranges before custom date:
+                        <code id="code-demo8"></code>
+                    </p>
+                    <div class="demo__config">
+                        <pre id="pre-demo8"></pre>
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo9" value="">
-			</div>
-			<p class="demo__description">Don't allow ranges after custom date: <code id="code-demo9"></code></p>
-			<div class="demo__config">
-				<pre id="pre-demo9">
-				</pre>
-			</div>
-		</div>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo9"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo9-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo9-input-description">
+                        Don't allow ranges after custom date:
+                        <code id="code-demo9"></code>
+                    </p>
+                    <div class="demo__config">
+                        <pre id="pre-demo9"></pre>
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo10" value="">
-			</div>
-			<p class="demo__description">Don't allow selections in both directions (first click = first date, second click = second date)</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo10"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo10-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo10-input-description">
+                        Don't allow selections in both directions (first click =
+                        first date, second click = second date)
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     selectForward: true
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo11" value="">
-			</div>
-			<p class="demo__description">Disable some dates: <code id="code-demo11"></code></p>
-			<div class="demo__config">
-				<pre id="pre-demo11">
-				</pre>
-			</div>
-		</div>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo11"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo11-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo11-input-description">
+                        Disable some dates: <code id="code-demo11"></code>
+                    </p>
+                    <div class="demo__config">
+                        <pre id="pre-demo11"></pre>
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo12" value="">
-			</div>
-			<p class="demo__description">Disable some dates but allow the checkout in those dates. <code id="code-demo12"></code></p>
-			<div class="demo__config">
-				<pre id="pre-demo12">
-				</pre>
-			</div>
-		</div>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo12"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo12-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo12-input-description">
+                        Disable some dates but allow the checkout in those
+                        dates. <code id="code-demo12"></code>
+                    </p>
+                    <div class="demo__config">
+                        <pre id="pre-demo12"></pre>
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo20" value="">
-			</div>
-			<p class="demo__description">Disable specific days of week</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo20"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo20-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo20-input-description">
+                        Disable specific days of week
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     disabledDaysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo26" value="">
-			</div>
-			<p class="demo__description">Disable check-in on specific days of week</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo26"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo26-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo26-input-description">
+                        Disable check-in on specific days of week
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     noCheckInDaysOfWeek: ['Monday', 'Tuesday']
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo27" value="">
-			</div>
-			<p class="demo__description">Disable check-out on specific days of week</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo27"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo27-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo27-input-description">
+                        Disable check-out on specific days of week
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     noCheckOutDaysOfWeek: ['Saturday', 'Sunday']
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo28" value="">
-			</div>
-			<p class="demo__description">Allow check-in and check-out on Saturday only</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo28"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo28-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo28-input-description">
+                        Allow check-in and check-out on Saturday only
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     noCheckInDaysOfWeek: ['Monday', 'Tuesday',  'Wednesday', 'Thursday', 'Friday', 'Sunday'],
     noCheckOutDaysOfWeek: ['Monday', 'Tuesday',  'Wednesday', 'Thursday', 'Friday', 'Sunday']
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo13" value="">
-			</div>
-			<p class="demo__description">Don't close the datepicker after selection</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo13"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo13-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo13-input-description">
+                        Don't close the datepicker after selection
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     autoClose: false
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo14" value="">
-			</div>
-			<p class="demo__description">Use datepicker in another language (italian)</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo14"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo14-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo14-input-description">
+                        Use datepicker in another language (italian)
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     format: 'dddd D MMM YYYY',
@@ -355,21 +613,48 @@ var datepicker = new HotelDatepicker(input, {
         'info-more-plural': 'Per favore seleziona un intervallo di date maggiore di %d notti',
         'info-range': 'Per favore seleziona un intervallo di date tra %d e %d notti',
         'info-range-equal': 'Per favore seleziona un intervallo di %d notti',
-        'info-default': 'Per favore seleziona un intervallo di date'
+        'info-default': 'Per favore seleziona un intervallo di date',
+        'aria-application': 'Calendario',
+        'aria-selected-checkin': 'Data selezionata come check-in, %s',
+        'aria-selected-checkout': 'Data selezionata come check-out, %s',
+        'aria-selected': 'Data selezionata, %s',
+        'aria-disabled': 'Non disponibile, %s',
+        'aria-choose-checkin': 'Scegli %s come data del check-in',
+        'aria-choose-checkout': 'Scegli %s come data del check-out',
+        'aria-prev-month': 'Muovi indietro per visualizzare il mese precedente',
+        'aria-next-month': 'Muovi in avanti per visualizzare il mese successivo',
+        'aria-close-button': 'Chiudi il datepicker',
+        'aria-clear-button': 'Cancella le date selezionate',
+        'aria-submit-button': 'Invia il form'
     }
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo15" value="">
-				<button type="button" id="destroy-datepicker" class="button">Destroy</button>
-			</div>
-			<p class="demo__description">Click the button to destroy the datepicker</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo15"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo15-input-description"
+                        />
+                        <button
+                            type="button"
+                            id="destroy-datepicker"
+                            class="button"
+                        >
+                            Destroy
+                        </button>
+                    </div>
+                    <p class="demo__description" id="demo15-input-description">
+                        Click the button to destroy the datepicker
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input);
 
@@ -379,75 +664,127 @@ destroyButton.addEventListener('click', destroyDatepicker);
 function destroyDatepicker() {
 	datepicker.destroy();
 }
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo16" value="">
-			</div>
-			<p class="demo__description">Don't show the top bar</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo16"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo16-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo16-input-description">
+                        Don't show the top bar
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     showTopbar: false
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo17" value="">
-			</div>
-			<p class="demo__description">Disable check-in or check-out on some dates. Check-in disabled on: <code id="code-demo17-a"></code>. Check-out disabled on <code id="code-demo17-b"></code>.</p>
-			<div class="demo__config">
-				<pre id="pre-demo17">
-				</pre>
-			</div>
-		</div>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo17"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo17-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo17-input-description">
+                        Disable check-in or check-out on some dates. Check-in
+                        disabled on: <code id="code-demo17-a"></code>. Check-out
+                        disabled on <code id="code-demo17-b"></code>.
+                    </p>
+                    <div class="demo__config">
+                        <pre id="pre-demo17"></pre>
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo18" value="">
-			</div>
-			<p class="demo__description">Move both months when clicking on the next/prev month button</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo18"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo18-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo18-input-description">
+                        Move both months when clicking on the next/prev month
+                        button
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     moveBothMonths: true
 });
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo19" value="">
-			</div>
-			<p class="demo__description">Run a function when the datepicker closes</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo19"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo19-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo19-input-description">
+                        Run a function when the datepicker closes
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 
 input.addEventListener('afterClose', function () {
     console.log('Closed!');
 }, false);
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo22" value="">
-				<button type="button" id="open-datepicker" class="button">Open</button>
-			</div>
-			<p class="demo__description">Click the button to open the datepicker</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo22"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo22-input-description"
+                        />
+                        <button
+                            type="button"
+                            id="open-datepicker"
+                            class="button"
+                        >
+                            Open
+                        </button>
+                    </div>
+                    <p class="demo__description" id="demo22-input-description">
+                        Click the button to open the datepicker
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var datepicker = new HotelDatepicker(document.getElementById('input-id'));
 var open_datepicker_button = document.getElementById('open-datepicker');
 
@@ -457,351 +794,640 @@ function open_datepicker_function() {
 	console.log('Open!');
 	datepicker.open();
 }
-				</pre>
-			</div>
-		</div>
+				</pre
+                        >
+                    </div>
+                </div>
 
-		<div class="demo__item">
-			<div class="demo__input">
-				<input type="text" id="demo23" value="">
-			</div>
-			<p class="demo__description">Run a custom function when a date range is selected</p>
-			<div class="demo__config">
-				<pre>
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo23"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo23-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo23-input-description">
+                        Run a custom function when a date range is selected
+                    </p>
+                    <div class="demo__config">
+                        <pre>
 var input = document.getElementById('input-id');
 var datepicker = new HotelDatepicker(input, {
     onSelectRange: function() {
 		console.log('Date range selected!')
 	}
 });
-				</pre>
-			</div>
-		</div>
-	</div>
+				</pre
+                        >
+                    </div>
+                </div>
+            </div>
 
-	<footer class="site__footer">
-		Developed by <a href="http://lopezb.com/">Benito Lopez</a>
-	</footer>
+            <footer class="site__footer">
+                Developed by <a href="http://lopezb.com/">Benito Lopez</a>
+            </footer>
+        </div>
 
-</div>
+        <script
+            type="text/javascript"
+            src="../node_modules/fecha/dist/fecha.min.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="../dist/js/hotel-datepicker.js"
+        ></script>
 
-	<script type="text/javascript" src="../node_modules/fecha/dist/fecha.min.js"></script>
-	<script type="text/javascript" src="../dist/js/hotel-datepicker.js"></script>
+        <script type="text/javascript">
+            (function () {
+                // ------------------- DEMO 1 ------------------- //
 
-	<script type="text/javascript">
-		(function() {
-			// ------------------- DEMO 1 ------------------- //
+                var today = new Date();
+                var tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                var input1 = document.querySelector(
+                    "#demo1-input-parent input"
+                );
+                input1.value =
+                    fecha.format(today, "YYYY-MM-DD") +
+                    " - " +
+                    fecha.format(tomorrow, "YYYY-MM-DD");
 
-			var today = new Date();
-			var tomorrow = new Date();
-			tomorrow.setDate(tomorrow.getDate() + 1);
-            var input1 = document.querySelector('#demo1-input-parent input');
-			input1.value = fecha.format(today, 'YYYY-MM-DD') + ' - ' + fecha.format(tomorrow, 'YYYY-MM-DD');
+                var demo1 = new HotelDatepicker(input1);
 
-			var demo1 = new HotelDatepicker(input1);
+                // ------------------- DEMO 2 ------------------- //
 
+                var demo2 = new HotelDatepicker(
+                    document.querySelector("#demo2-input-parent input")
+                );
 
-			// ------------------- DEMO 2 ------------------- //
+                // ------------------- DEMO 3 ------------------- //
 
-            var demo2 = new HotelDatepicker(document.querySelector('#demo2-input-parent input'));
+                var demo3 = new HotelDatepicker(
+                    document.getElementById("demo3"),
+                    {
+                        format: "DD-MM-YYYY",
+                    }
+                );
 
+                // ------------------- DEMO 24 ------------------- //
 
-			// ------------------- DEMO 3 ------------------- //
+                var demo24 = new HotelDatepicker(
+                    document.getElementById("demo24"),
+                    {
+                        inline: true,
+                        clearButton: true,
+                    }
+                );
 
-			var demo3 = new HotelDatepicker(document.getElementById('demo3'), {
-				format: 'DD-MM-YYYY'
-			});
+                // ------------------- DEMO 25 ------------------- //
 
-			// ------------------- DEMO 24 ------------------- //
+                var demo25 = new HotelDatepicker(
+                    document.getElementById("demo25"),
+                    {
+                        inline: true,
+                        clearButton: true,
+                        submitButton: true,
+                        topbarPosition: "bottom",
+                        submitButtonName: "name_of_submit_button",
+                    }
+                );
 
-			var demo24 = new HotelDatepicker(document.getElementById('demo24'), {
-				inline: true,
-				clearButton: true,
-			});
+                // ------------------- DEMO 4 ------------------- //
 
-			// ------------------- DEMO 25 ------------------- //
+                var demo4 = new HotelDatepicker(
+                    document.getElementById("demo4"),
+                    {
+                        startOfWeek: "monday",
+                    }
+                );
 
-			var demo25 = new HotelDatepicker(document.getElementById('demo25'), {
-				inline: true,
-				clearButton: true,
-				submitButton: true,
-				topbarPosition: 'bottom',
-				submitButtonName: 'name_of_submit_button'
-			});
+                // ------------------- DEMO 5 ------------------- //
 
+                var demo5 = new HotelDatepicker(
+                    document.getElementById("demo5"),
+                    {
+                        minNights: 7,
+                    }
+                );
 
-			// ------------------- DEMO 4 ------------------- //
+                // ------------------- DEMO 6 ------------------- //
 
-			var demo4 = new HotelDatepicker(document.getElementById('demo4'), {
-				startOfWeek: 'monday'
-			});
+                var demo6 = new HotelDatepicker(
+                    document.getElementById("demo6"),
+                    {
+                        maxNights: 5,
+                    }
+                );
 
+                // ------------------- DEMO 7 ------------------- //
 
-			// ------------------- DEMO 5 ------------------- //
+                var demo7 = new HotelDatepicker(
+                    document.getElementById("demo7"),
+                    {
+                        minNights: 4,
+                        maxNights: 8,
+                    }
+                );
 
-			var demo5 = new HotelDatepicker(document.getElementById('demo5'), {
-				minNights: 7
-			});
+                // ------------------- DEMO 8 ------------------- //
 
+                var date = new Date();
+                date.setDate(date.getDate() + 5);
 
-			// ------------------- DEMO 6 ------------------- //
+                var codeDemo8 = document.getElementById("code-demo8");
+                var preDemo8 = document.getElementById("pre-demo8");
+                var txt =
+                    "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    startDate: " +
+                    fecha.format(date, "YYYY-MM-DD") +
+                    "\n});";
+                preDemo8.textContent = txt;
+                codeDemo8.textContent = fecha.format(date, "YYYY-MM-DD");
 
-			var demo6 = new HotelDatepicker(document.getElementById('demo6'), {
-				maxNights: 5
-			});
+                var demo8 = new HotelDatepicker(
+                    document.getElementById("demo8"),
+                    {
+                        startDate: date,
+                    }
+                );
 
+                // ------------------- DEMO 9 ------------------- //
 
-			// ------------------- DEMO 7 ------------------- //
+                var date = new Date();
+                date.setDate(date.getDate() + 25);
 
-			var demo7 = new HotelDatepicker(document.getElementById('demo7'), {
-				minNights: 4,
-				maxNights: 8
-			});
+                var codeDemo9 = document.getElementById("code-demo9");
+                var preDemo9 = document.getElementById("pre-demo9");
+                var txt =
+                    "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    endDate: " +
+                    fecha.format(date, "YYYY-MM-DD") +
+                    "\n});";
+                preDemo9.textContent = txt;
+                codeDemo9.textContent = fecha.format(date, "YYYY-MM-DD");
 
+                var demo9 = new HotelDatepicker(
+                    document.getElementById("demo9"),
+                    {
+                        endDate: date,
+                    }
+                );
 
-			// ------------------- DEMO 8 ------------------- //
+                // ------------------- DEMO 10 ------------------ //
 
-			var date = new Date();
-			date.setDate(date.getDate() + 5);
+                var demo10 = new HotelDatepicker(
+                    document.getElementById("demo10"),
+                    {
+                        selectForward: true,
+                    }
+                );
 
-			var codeDemo8 = document.getElementById('code-demo8');
-			var preDemo8 = document.getElementById('pre-demo8');
-			var txt = "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    startDate: "+ fecha.format(date, 'YYYY-MM-DD') +"\n});";
-			preDemo8.textContent = txt;
-			codeDemo8.textContent = fecha.format(date, 'YYYY-MM-DD');
+                // ------------------- DEMO 11 & 12 ------------------ //
 
-			var demo8 = new HotelDatepicker(document.getElementById('demo8'), {
-				startDate: date
-			});
+                var date1 = new Date();
+                var date2 = new Date();
+                var date3 = new Date();
+                var date4 = new Date();
+                var date5 = new Date();
+                var date6 = new Date();
+                date1.setDate(date1.getDate() + 3);
+                date2.setDate(date2.getDate() + 6);
+                date3.setDate(date3.getDate() + 7);
+                date4.setDate(date4.getDate() + 8);
+                date5.setDate(date5.getDate() + 11);
+                date6.setDate(date6.getDate() + 21);
 
+                var codeDemo11 = document.getElementById("code-demo11");
+                var codeDemo12 = document.getElementById("code-demo12");
+                var preDemo11 = document.getElementById("pre-demo11");
+                var preDemo12 = document.getElementById("pre-demo12");
+                var txt =
+                    "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    disabledDates: [\n        " +
+                    "'" +
+                    fecha.format(date3, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date1, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date2, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date4, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date5, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date6, "YYYY-MM-DD") +
+                    "'" +
+                    "\n    ]\n});";
+                preDemo11.textContent = txt;
+                var txt =
+                    "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    disabledDates: [\n        " +
+                    "'" +
+                    fecha.format(date3, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date1, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date2, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date4, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date5, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date6, "YYYY-MM-DD") +
+                    "'" +
+                    "\n    ],\n    enableCheckout: true\n});";
+                preDemo12.textContent = txt;
+                codeDemo11.textContent =
+                    "[" +
+                    fecha.format(date3, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date1, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date2, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date4, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date5, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date6, "YYYY-MM-DD") +
+                    "]";
+                codeDemo12.textContent =
+                    "[" +
+                    fecha.format(date3, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date1, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date2, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date4, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date5, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date6, "YYYY-MM-DD") +
+                    "]";
 
-			// ------------------- DEMO 9 ------------------- //
+                var demo11 = new HotelDatepicker(
+                    document.getElementById("demo11"),
+                    {
+                        disabledDates: [
+                            fecha.format(date3, "YYYY-MM-DD"),
+                            fecha.format(date1, "YYYY-MM-DD"),
+                            fecha.format(date2, "YYYY-MM-DD"),
+                            fecha.format(date4, "YYYY-MM-DD"),
+                            fecha.format(date5, "YYYY-MM-DD"),
+                            fecha.format(date6, "YYYY-MM-DD"),
+                        ],
+                    }
+                );
 
-			var date = new Date();
-			date.setDate(date.getDate() + 25);
+                var demo12 = new HotelDatepicker(
+                    document.getElementById("demo12"),
+                    {
+                        disabledDates: [
+                            fecha.format(date3, "YYYY-MM-DD"),
+                            fecha.format(date1, "YYYY-MM-DD"),
+                            fecha.format(date2, "YYYY-MM-DD"),
+                            fecha.format(date4, "YYYY-MM-DD"),
+                            fecha.format(date5, "YYYY-MM-DD"),
+                            fecha.format(date6, "YYYY-MM-DD"),
+                        ],
+                        enableCheckout: true,
+                    }
+                );
 
-			var codeDemo9 = document.getElementById('code-demo9');
-			var preDemo9 = document.getElementById('pre-demo9');
-			var txt = "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    endDate: "+ fecha.format(date, 'YYYY-MM-DD') +"\n});";
-			preDemo9.textContent = txt;
-			codeDemo9.textContent = fecha.format(date, 'YYYY-MM-DD');
+                // ------------------- DEMO 13 ------------------ //
 
-			var demo9 = new HotelDatepicker(document.getElementById('demo9'), {
-				endDate: date
-			});
+                var demo13 = new HotelDatepicker(
+                    document.getElementById("demo13"),
+                    {
+                        autoClose: false,
+                    }
+                );
 
+                // ------------------- DEMO 14 ------------------ //
 
-			// ------------------- DEMO 10 ------------------ //
+                var demo14 = new HotelDatepicker(
+                    document.getElementById("demo14"),
+                    {
+                        format: "dddd D MMM YYYY",
+                        startOfWeek: "monday",
+                        i18n: {
+                            selected: "Il tuo soggiorno:",
+                            night: "Notte",
+                            nights: "Notti",
+                            button: "Chiudi",
+                            clearButton: "Cancella",
+                            submitButton: "Invia",
+                            "checkin-disabled": "Check-in disabilitato",
+                            "checkout-disabled": "Check-out disabilitato",
+                            "day-names-short": [
+                                "Dom",
+                                "Lun",
+                                "Mar",
+                                "Mer",
+                                "Gio",
+                                "Ven",
+                                "Sab",
+                            ],
+                            "day-names": [
+                                "Domenica",
+                                "Lunedì",
+                                "Martedì",
+                                "Mercoledì",
+                                "Giovedì",
+                                "Venerdì",
+                                "Sabato",
+                            ],
+                            "month-names-short": [
+                                "Gen",
+                                "Feb",
+                                "Mar",
+                                "Apr",
+                                "Mag",
+                                "Giu",
+                                "Lug",
+                                "Ago",
+                                "Set",
+                                "Ott",
+                                "Nov",
+                                "Dic",
+                            ],
+                            "month-names": [
+                                "Gennaio",
+                                "Febbraio",
+                                "Marzo",
+                                "Aprile",
+                                "Maggio",
+                                "Giugno",
+                                "Luglio",
+                                "Agosto",
+                                "Settembre",
+                                "Ottobre",
+                                "Novembre",
+                                "Dicembre",
+                            ],
+                            "error-more":
+                                "L'intervallo di date non deve avere più di 1 notte",
+                            "error-more-plural":
+                                "L'intervallo di date non deve avere più di %d notti",
+                            "error-less":
+                                "L'intervallo di date non deve avere meno di 1 notte",
+                            "error-less-plural":
+                                "L'intervallo di date non deve avere meno di %d notti",
+                            "info-more":
+                                "Per favore seleziona un intervallo di date di almeno 1 notte",
+                            "info-more-plural":
+                                "Per favore seleziona un intervallo di date di almeno %d notti",
+                            "info-range":
+                                "Per favore seleziona un intervallo di date tra %d e %d notti",
+                            "info-range-equal":
+                                "Per favore seleziona un intervallo di %d notti",
+                            "info-default":
+                                "Per favore seleziona un intervallo di date",
+                            "aria-application": "Calendario",
+                            "aria-selected-checkin":
+                                "Data selezionata come check-in, %s",
+                            "aria-selected-checkout":
+                                "Data selezionata come check-out, %s",
+                            "aria-selected": "Data selezionata, %s",
+                            "aria-disabled": "Non disponibile, %s",
+                            "aria-choose-checkin":
+                                "Scegli %s come data del check-in",
+                            "aria-choose-checkout":
+                                "Scegli %s come data del check-out",
+                            "aria-prev-month":
+                                "Muovi indietro per visualizzare il mese precedente",
+                            "aria-next-month":
+                                "Muovi in avanti per visualizzare il mese successivo",
+                            "aria-close-button": "Chiudi il datepicker",
+                            "aria-clear-button": "Cancella le date selezionate",
+                            "aria-submit-button": "Invia il form",
+                        },
+                    }
+                );
 
-			var demo10 = new HotelDatepicker(document.getElementById('demo10'), {
-				selectForward: true
-			});
+                // ------------------- DEMO 15 ------------------ //
 
+                var demo15 = new HotelDatepicker(
+                    document.getElementById("demo15")
+                );
 
-			// ------------------- DEMO 11 & 12 ------------------ //
+                var destroyButton =
+                    document.getElementById("destroy-datepicker");
+                destroyButton.addEventListener("click", destroyDatepicker);
 
-			var date1 = new Date();
-			var date2 = new Date();
-			var date3 = new Date();
-			var date4 = new Date();
-			var date5 = new Date();
-			var date6 = new Date();
-			date1.setDate(date1.getDate() + 3);
-			date2.setDate(date2.getDate() + 6);
-			date3.setDate(date3.getDate() + 7);
-			date4.setDate(date4.getDate() + 8);
-			date5.setDate(date5.getDate() + 11);
-			date6.setDate(date6.getDate() + 21);
-
-			var codeDemo11 = document.getElementById('code-demo11');
-			var codeDemo12 = document.getElementById('code-demo12');
-			var preDemo11 = document.getElementById('pre-demo11');
-			var preDemo12 = document.getElementById('pre-demo12');
-			var txt = "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    disabledDates: [\n        "+ "'" + fecha.format(date3, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date1, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date2, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date4, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date5, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date6, 'YYYY-MM-DD') + "'" + "\n    ]\n});";
-			preDemo11.textContent = txt;
-			var txt = "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    disabledDates: [\n        "+ "'" + fecha.format(date3, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date1, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date2, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date4, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date5, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date6, 'YYYY-MM-DD') + "'" + "\n    ],\n    enableCheckout: true\n});";
-			preDemo12.textContent = txt;
-			codeDemo11.textContent = '['+ fecha.format(date3, 'YYYY-MM-DD') +', '+ fecha.format(date1, 'YYYY-MM-DD') +', '+ fecha.format(date2, 'YYYY-MM-DD') +', '+ fecha.format(date4, 'YYYY-MM-DD') +', '+ fecha.format(date5, 'YYYY-MM-DD') +', '+ fecha.format(date6, 'YYYY-MM-DD') +']'
-			codeDemo12.textContent = '['+ fecha.format(date3, 'YYYY-MM-DD') +', '+ fecha.format(date1, 'YYYY-MM-DD') +', '+ fecha.format(date2, 'YYYY-MM-DD') +', '+ fecha.format(date4, 'YYYY-MM-DD') +', '+ fecha.format(date5, 'YYYY-MM-DD') +', '+ fecha.format(date6, 'YYYY-MM-DD') +']'
-
-			var demo11 = new HotelDatepicker(document.getElementById('demo11'), {
-				disabledDates: [
-					fecha.format(date3, 'YYYY-MM-DD'),
-					fecha.format(date1, 'YYYY-MM-DD'),
-					fecha.format(date2, 'YYYY-MM-DD'),
-					fecha.format(date4, 'YYYY-MM-DD'),
-					fecha.format(date5, 'YYYY-MM-DD'),
-					fecha.format(date6, 'YYYY-MM-DD')
-				]
-			});
-
-			var demo12 = new HotelDatepicker(document.getElementById('demo12'), {
-				disabledDates: [
-					fecha.format(date3, 'YYYY-MM-DD'),
-					fecha.format(date1, 'YYYY-MM-DD'),
-					fecha.format(date2, 'YYYY-MM-DD'),
-					fecha.format(date4, 'YYYY-MM-DD'),
-					fecha.format(date5, 'YYYY-MM-DD'),
-					fecha.format(date6, 'YYYY-MM-DD')
-				],
-				enableCheckout: true
-			});
-
-
-			// ------------------- DEMO 13 ------------------ //
-
-			var demo13 = new HotelDatepicker(document.getElementById('demo13'), {
-				autoClose: false
-			});
-
-
-			// ------------------- DEMO 14 ------------------ //
-
-			var demo14 = new HotelDatepicker(document.getElementById('demo14'), {
-                format: 'dddd D MMM YYYY',
-				startOfWeek: 'monday',
-				i18n: {
-					selected: 'Il tuo soggiorno:',
-					night: 'Notte',
-					nights: 'Notti',
-					button: 'Chiudi',
-					clearButton: 'Cancella',
-       				submitButton: 'Invia',
-					'checkin-disabled': 'Check-in disabilitato',
-					'checkout-disabled': 'Check-out disabilitato',
-					'day-names-short': ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'],
-					'day-names': ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
-					'month-names-short': ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'],
-					'month-names': ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'],
-					'error-more': 'L\'intervallo di date non deve avere più di 1 notte',
-					'error-more-plural': 'L\'intervallo di date non deve avere più di %d notti',
-					'error-less': 'L\'intervallo di date non deve avere meno di 1 notte',
-					'error-less-plural': 'L\'intervallo di date non deve avere meno di %d notti',
-					'info-more': 'Per favore seleziona un intervallo di date di almeno 1 notte',
-					'info-more-plural': 'Per favore seleziona un intervallo di date di almeno %d notti',
-					'info-range': 'Per favore seleziona un intervallo di date tra %d e %d notti',
-					'info-range-equal': 'Per favore seleziona un intervallo di %d notti',
-					'info-default': 'Per favore seleziona un intervallo di date'
-				}
-			});
-
-			// ------------------- DEMO 15 ------------------ //
-
-			var demo15 = new HotelDatepicker(document.getElementById('demo15'));
-
-			var destroyButton = document.getElementById('destroy-datepicker');
-			destroyButton.addEventListener('click', destroyDatepicker);
-
-			function destroyDatepicker() {
-                if (document.getElementById('datepicker-demo15')) {
-                    demo15.destroy();
-                    destroyButton.textContent = "Recreate";
-                } else {
-                    demo15 = new HotelDatepicker(document.getElementById('demo15'));
-                    destroyButton.textContent = "Destroy";
+                function destroyDatepicker() {
+                    if (document.getElementById("datepicker-demo15")) {
+                        demo15.destroy();
+                        destroyButton.textContent = "Recreate";
+                    } else {
+                        demo15 = new HotelDatepicker(
+                            document.getElementById("demo15")
+                        );
+                        destroyButton.textContent = "Destroy";
+                    }
                 }
-			}
 
-			// ------------------- DEMO 16 ------------------- //
+                // ------------------- DEMO 16 ------------------- //
 
-			var demo16 = new HotelDatepicker(document.getElementById('demo16'), {
-				showTopbar: false
-			});
+                var demo16 = new HotelDatepicker(
+                    document.getElementById("demo16"),
+                    {
+                        showTopbar: false,
+                    }
+                );
 
-			// ------------------- DEMO 17 ------------------- //
+                // ------------------- DEMO 17 ------------------- //
 
-			var date1 = new Date();
-			var date2 = new Date();
-			var date3 = new Date();
-			var date4 = new Date();
-			var date5 = new Date();
-			var date6 = new Date();
-			date1.setDate(date1.getDate() + 3);
-			date2.setDate(date2.getDate() + 10);
-			date3.setDate(date3.getDate() + 6);
-			date4.setDate(date4.getDate() + 15);
+                var date1 = new Date();
+                var date2 = new Date();
+                var date3 = new Date();
+                var date4 = new Date();
+                var date5 = new Date();
+                var date6 = new Date();
+                date1.setDate(date1.getDate() + 3);
+                date2.setDate(date2.getDate() + 10);
+                date3.setDate(date3.getDate() + 6);
+                date4.setDate(date4.getDate() + 15);
 
-			var codeDemo17a = document.getElementById('code-demo17-a');
-			var codeDemo17b = document.getElementById('code-demo17-b');
-			var preDemo17 = document.getElementById('pre-demo17');
+                var codeDemo17a = document.getElementById("code-demo17-a");
+                var codeDemo17b = document.getElementById("code-demo17-b");
+                var preDemo17 = document.getElementById("pre-demo17");
 
-			var txt = "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    noCheckInDates: [\n        "+ "'" + fecha.format(date1, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date2, 'YYYY-MM-DD') + "'" + "\n    ],\n    noCheckOutDates: [\n        "+ "'" + fecha.format(date3, 'YYYY-MM-DD') + "'" + ",\n        "+ "'" + fecha.format(date4, 'YYYY-MM-DD') + "'" + "\n    ]\n});";
-			preDemo17.textContent = txt;
+                var txt =
+                    "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    noCheckInDates: [\n        " +
+                    "'" +
+                    fecha.format(date1, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date2, "YYYY-MM-DD") +
+                    "'" +
+                    "\n    ],\n    noCheckOutDates: [\n        " +
+                    "'" +
+                    fecha.format(date3, "YYYY-MM-DD") +
+                    "'" +
+                    ",\n        " +
+                    "'" +
+                    fecha.format(date4, "YYYY-MM-DD") +
+                    "'" +
+                    "\n    ]\n});";
+                preDemo17.textContent = txt;
 
-			codeDemo17a.textContent = '['+ fecha.format(date1, 'YYYY-MM-DD') +', '+ fecha.format(date2, 'YYYY-MM-DD') +']'
-			codeDemo17b.textContent = '['+ fecha.format(date3, 'YYYY-MM-DD') +', '+ fecha.format(date4, 'YYYY-MM-DD') +']'
+                codeDemo17a.textContent =
+                    "[" +
+                    fecha.format(date1, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date2, "YYYY-MM-DD") +
+                    "]";
+                codeDemo17b.textContent =
+                    "[" +
+                    fecha.format(date3, "YYYY-MM-DD") +
+                    ", " +
+                    fecha.format(date4, "YYYY-MM-DD") +
+                    "]";
 
-			var demo17 = new HotelDatepicker(document.getElementById('demo17'), {
-				noCheckInDates: [
-					fecha.format(date1, 'YYYY-MM-DD'),
-					fecha.format(date2, 'YYYY-MM-DD'),
-				],
-				noCheckOutDates: [
-					fecha.format(date3, 'YYYY-MM-DD'),
-					fecha.format(date4, 'YYYY-MM-DD'),
-				]
-			});
+                var demo17 = new HotelDatepicker(
+                    document.getElementById("demo17"),
+                    {
+                        noCheckInDates: [
+                            fecha.format(date1, "YYYY-MM-DD"),
+                            fecha.format(date2, "YYYY-MM-DD"),
+                        ],
+                        noCheckOutDates: [
+                            fecha.format(date3, "YYYY-MM-DD"),
+                            fecha.format(date4, "YYYY-MM-DD"),
+                        ],
+                    }
+                );
 
-			// ------------------- DEMO 18 ------------------ //
+                // ------------------- DEMO 18 ------------------ //
 
-			var demo18 = new HotelDatepicker(document.getElementById('demo18'), {
-				moveBothMonths: true
-			});
+                var demo18 = new HotelDatepicker(
+                    document.getElementById("demo18"),
+                    {
+                        moveBothMonths: true,
+                    }
+                );
 
-			// ------------------- DEMO 19 ------------------ //
+                // ------------------- DEMO 19 ------------------ //
 
-			var input19 = document.getElementById('demo19');
-			var demo19 = new HotelDatepicker(input19);
+                var input19 = document.getElementById("demo19");
+                var demo19 = new HotelDatepicker(input19);
 
-			input19.addEventListener('afterClose', function () {
-			    console.log('Closed!');
-			}, false);
+                input19.addEventListener(
+                    "afterClose",
+                    function () {
+                        console.log("Closed!");
+                    },
+                    false
+                );
 
-			// ------------------- DEMO 20 ------------------ //
+                // ------------------- DEMO 20 ------------------ //
 
-			var demo20 = new HotelDatepicker(document.getElementById('demo20'), {
-				disabledDaysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-			});
+                var demo20 = new HotelDatepicker(
+                    document.getElementById("demo20"),
+                    {
+                        disabledDaysOfWeek: [
+                            "Monday",
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday",
+                        ],
+                    }
+                );
 
-			// ------------------- DEMO 26 ------------------ //
+                // ------------------- DEMO 26 ------------------ //
 
-			var demo26 = new HotelDatepicker(document.getElementById('demo26'), {
-				noCheckInDaysOfWeek: ['Monday', 'Tuesday']
-			});
+                var demo26 = new HotelDatepicker(
+                    document.getElementById("demo26"),
+                    {
+                        noCheckInDaysOfWeek: ["Monday", "Tuesday"],
+                    }
+                );
 
-			// ------------------- DEMO 27 ------------------ //
+                // ------------------- DEMO 27 ------------------ //
 
-			var demo27 = new HotelDatepicker(document.getElementById('demo27'), {
-				noCheckOutDaysOfWeek: ['Saturday', 'Sunday']
-			});
+                var demo27 = new HotelDatepicker(
+                    document.getElementById("demo27"),
+                    {
+                        noCheckOutDaysOfWeek: ["Saturday", "Sunday"],
+                    }
+                );
 
-			// ------------------- DEMO 28 ------------------ //
+                // ------------------- DEMO 28 ------------------ //
 
-			var demo28 = new HotelDatepicker(document.getElementById('demo28'), {
-				noCheckInDaysOfWeek: ['Monday', 'Tuesday',  'Wednesday', 'Thursday', 'Friday', 'Sunday'],
-    			noCheckOutDaysOfWeek: ['Monday', 'Tuesday',  'Wednesday', 'Thursday', 'Friday', 'Sunday']
-			});
+                var demo28 = new HotelDatepicker(
+                    document.getElementById("demo28"),
+                    {
+                        noCheckInDaysOfWeek: [
+                            "Monday",
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday",
+                            "Sunday",
+                        ],
+                        noCheckOutDaysOfWeek: [
+                            "Monday",
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday",
+                            "Sunday",
+                        ],
+                    }
+                );
 
-			// ------------------- DEMO 22 ------------------- //
+                // ------------------- DEMO 22 ------------------- //
 
-			var demo22 = new HotelDatepicker(document.getElementById('demo22'));
-			var open_datepicker_button = document.getElementById('open-datepicker');
+                var demo22 = new HotelDatepicker(
+                    document.getElementById("demo22")
+                );
+                var open_datepicker_button =
+                    document.getElementById("open-datepicker");
 
-			open_datepicker_button.addEventListener('click', open_datepicker_function);
+                open_datepicker_button.addEventListener(
+                    "click",
+                    open_datepicker_function
+                );
 
-			function open_datepicker_function() {
-				console.log('Open!');
-				demo22.open();
-			}
+                function open_datepicker_function() {
+                    console.log("Open!");
+                    demo22.open();
+                }
 
-			// ------------------- DEMO 23 ------------------- //
+                // ------------------- DEMO 23 ------------------- //
 
-			var demo23 = new HotelDatepicker(document.getElementById('demo23'), {
-				onSelectRange: function() {
-					console.log('Date range selected!')
-				}
-			});
-		})();
-	</script>
-</body>
+                var demo23 = new HotelDatepicker(
+                    document.getElementById("demo23"),
+                    {
+                        onSelectRange: function () {
+                            console.log("Date range selected!");
+                        },
+                    }
+                );
+            })();
+        </script>
+    </body>
 </html>
