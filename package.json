@@ -24,6 +24,7 @@
     "build:css": "postcss --no-map -w .sass-cache/hotel-datepicker.css -d dist/css",
     "build:js": "node build.js",
     "build:img": "cp -R src/icons dist",
+    "lint": "eslint src/js/**",
     "watch:server": "browser-sync start --startPath demo --reload-delay 300 --server --files 'dist/**,demo/**'",
     "watch:build": "onchange 'src/js/*.js' -i -- npm-run-all --parallel --silent build:*",
     "watch": "mkdir -p dist dist/css dist/icons .sass-cache; touch .sass-cache/hotel-datepicker.css; npm-run-all --parallel --silent watch:*",
@@ -43,6 +44,8 @@
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-watch": "^4.3.1",
   },
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
   },
   "dependencies": {
     "fecha": "^4.2.0"
