@@ -2,8 +2,7 @@
  * BASE STYLES
  * ============================================================*/
 .datepicker {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   overflow: hidden;
   position: absolute;
   width: 260px;
@@ -31,8 +30,6 @@
 .datepicker__month-day--valid {
   cursor: pointer;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 
@@ -44,8 +41,6 @@
 .datepicker__month-button {
   cursor: pointer;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -60,8 +55,6 @@
 
 datepicker__buttons {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 
@@ -80,8 +73,7 @@ datepicker__buttons {
 .datepicker {
   background-color: #fff;
   border-radius: 4px;
-  -webkit-box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
-          box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
+  box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
   color: #000;
   font-family: "Helvetica", "Helvetica Neue", "Arial", sans-serif;
   font-size: 14px;
@@ -118,12 +110,9 @@ datepicker__buttons {
 }
 
 .datepicker__month-day {
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  -webkit-transition-property: color, background-color, border-color;
+  transition-duration: 0.2s;
   transition-property: color, background-color, border-color;
-  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   color: #333;
   padding: 9px 7px;
 }
@@ -182,8 +171,7 @@ datepicker__buttons {
   color: red;
   font-size: 16px;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .datepicker__month-day--no-checkin,
@@ -222,12 +210,9 @@ datepicker__buttons {
 }
 
 .datepicker__month-button {
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  -webkit-transition-property: color, background-color, border-color;
+  transition-duration: 0.2s;
   transition-property: color, background-color, border-color;
-  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-block;
   text-indent: -9999px;
 }
@@ -293,17 +278,13 @@ datepicker__buttons {
 .datepicker__close-button,
 .datepicker__clear-button,
 .datepicker__submit-button {
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  -webkit-transition-property: color, background-color, border-color;
+  transition-duration: 0.2s;
   transition-property: color, background-color, border-color;
-  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #3858e9;
   border-radius: 2px;
   border: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   font-size: 10px;
   color: #ffffff;
   margin-top: 20px;
@@ -421,7 +402,6 @@ datepicker__buttons {
     position: absolute;
     right: 0;
     top: 50%;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
+    transform: translateY(-50%);
   }
 }
