@@ -33,7 +33,6 @@
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "browser-sync": "^2.18.6",
-    "css-mqpacker": "^6.0.1",
     "node-sass": "^7.0.1",
     "npm-run-all": "^4.0.0",
     "onchange": "^3.2.1",
@@ -46,6 +45,7 @@
   },
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
+    "postcss-sort-media-queries": "^4.3.0",
   },
   "dependencies": {
     "fecha": "^4.2.0"
