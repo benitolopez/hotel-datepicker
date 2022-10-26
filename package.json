@@ -19,11 +19,9 @@
   ],
   "main": "src/js/hotel-datepicker.js",
   "scripts": {
-    "test": "xo",
     "run:sass": "node-sass -o .sass-cache src/sass --output-style expanded",
     "build:scss": "npm run run:sass && npm run run:sass -- -w",
     "build:css": "postcss --no-map -w .sass-cache/hotel-datepicker.css -d dist/css",
-    "build:xo": "xo --fix || true",
     "build:js": "node build.js",
     "build:img": "cp -R src/icons dist",
     "watch:server": "browser-sync start --startPath demo --reload-delay 300 --server --files 'dist/**,demo/**'",
@@ -44,16 +42,7 @@
     "rollup-plugin-filesize": "^1.0.1",
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-watch": "^4.3.1",
-    "xo": "^0.18.2"
   },
-  "xo": {
-    "esnext": true,
-    "ignores": [
-      "demo/**"
-    ],
-    "env": [
-      "browser"
-    ]
   },
   "dependencies": {
     "fecha": "^4.2.0"
