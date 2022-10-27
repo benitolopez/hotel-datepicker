@@ -174,7 +174,7 @@ Render the datepicker inline.
 -   Type: `Boolean`
 -   Default: `false`
 
-If `true`, a button to clear the selected dates is shown. Works only when `inline` and `showTopbar` are true.
+If `true`, a button to clear the selected dates is shown. Works only when `showTopbar` is true.
 
 ### submitButton
 
@@ -394,7 +394,7 @@ input.addEventListener(
 -   `↑/↓`: Move backward (up) and forward (down) by one week.
 -   `PGUP/PGDN`: Switch months.
 -   `HOME/END`: Go to the first or last day of a week.
--   `↵`: Select the date in focus.
+-   `↵`: Select the date in focus or trigger click on button in focus.
 -   `ESC`: Return to the date input field.
 
 ## Versioning

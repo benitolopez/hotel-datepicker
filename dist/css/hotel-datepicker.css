@@ -301,6 +301,12 @@ datepicker__buttons {
   text-transform: uppercase;
 }
 
+.datepicker--topbar-top .datepicker__close-button, .datepicker--topbar-top
+.datepicker__clear-button, .datepicker--topbar-top
+.datepicker__submit-button {
+  margin-top: 0;
+}
+
 .datepicker__close-button:hover,
 .datepicker__clear-button:hover,
 .datepicker__submit-button:hover {
@@ -316,6 +322,10 @@ datepicker__buttons {
   background-color: #c8c9d0;
   color: #ffffff;
   cursor: not-allowed;
+}
+
+.datepicker__clear-button + .datepicker__close-button {
+  margin-left: 10px;
 }
 
 .datepicker__clear-button + .datepicker__submit-button {
@@ -397,12 +407,6 @@ datepicker__buttons {
   .datepicker--topbar-has-clear-button .datepicker__info,
   .datepicker--topbar-has-submit-button .datepicker__info {
     max-width: 325px;
-  }
-  .datepicker__close-button {
-    margin-top: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
   }
   .datepicker__buttons {
     margin-top: 0;

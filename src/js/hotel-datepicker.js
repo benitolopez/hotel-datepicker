@@ -1,6 +1,9 @@
 "use strict";
 /* global fecha, DocumentTouch */
 /* eslint-disable no-multi-assign */
+
+import * as fecha from "fecha";
+
 let idCounter = 0;
 
 export default class HotelDatepicker {
@@ -39,7 +42,7 @@ export default class HotelDatepicker {
             opts.topbarPosition === "bottom" ? "bottom" : "top";
         this.moveBothMonths = opts.moveBothMonths || false;
         this.inline = opts.inline || false;
-        this.clearButton = Boolean(this.inline && opts.clearButton);
+        this.clearButton = opts.clearButton || false;
         this.submitButton = Boolean(this.inline && opts.submitButton);
         this.submitButtonName =
             this.submitButton && opts.submitButtonName
@@ -367,13 +370,6 @@ export default class HotelDatepicker {
         // Open datepicker in inline mode
         if (this.inline) {
             this.openDatepicker();
-            if (this.clearButton) {
-                const clearButton = document.getElementById(
-                    this.getClearButtonId()
-                );
-                clearButton.disabled = true;
-                clearButton.setAttribute("aria-disabled", "true");
-            }
 
             if (this.submitButton) {
                 const submitButton = document.getElementById(
@@ -381,6 +377,16 @@ export default class HotelDatepicker {
                 );
                 submitButton.disabled = true;
                 submitButton.setAttribute("aria-disabled", "true");
+            }
+        }
+
+        if (this.clearButton) {
+            if (this.inline || (!this.start && !this.end)) {
+                const clearButton = document.getElementById(
+                    this.getClearButtonId()
+                );
+                clearButton.disabled = true;
+                clearButton.setAttribute("aria-disabled", "true");
             }
         }
 
@@ -513,8 +519,12 @@ export default class HotelDatepicker {
         // Generate our datepicker
         let wrapperClass = this.inline ? " datepicker--inline" : "";
 
-        if (this.showTopbar && this.topbarPosition === "bottom") {
-            wrapperClass += " datepicker--topbar-bottom";
+        if (this.showTopbar) {
+            if (this.topbarPosition === "bottom") {
+                wrapperClass += " datepicker--topbar-bottom";
+            } else {
+                wrapperClass += " datepicker--topbar-top";
+            }
         }
 
         if (!this.inline) {
@@ -556,23 +566,10 @@ export default class HotelDatepicker {
                 "</div>" +
                 '<div class="datepicker__info datepicker__info--feedback"></div>';
 
-            if (!this.inline) {
-                topBarHtml +=
-                    '<button type="button" id="' +
-                    this.getCloseButtonId() +
-                    '" class="datepicker__close-button" aria-label="' +
-                    this.i18n["aria-close-button"] +
-                    '">' +
-                    this.lang("button") +
-                    "</button>";
-            }
-
-            if (this.clearButton || this.submitButton) {
-                topBarHtml += '<div class="datepicker__buttons">';
-            }
+            let buttonsHtml = "";
 
             if (this.clearButton) {
-                topBarHtml +=
+                buttonsHtml +=
                     '<button type="button" id="' +
                     this.getClearButtonId() +
                     '" class="datepicker__clear-button" aria-label="' +
@@ -582,8 +579,23 @@ export default class HotelDatepicker {
                     "</button>";
             }
 
+            if (!this.inline) {
+                buttonsHtml +=
+                    '<button type="button" id="' +
+                    this.getCloseButtonId() +
+                    '" class="datepicker__close-button" aria-label="' +
+                    this.i18n["aria-close-button"] +
+                    '">' +
+                    this.lang("button") +
+                    "</button>";
+            }
+
+            // if (this.clearButton || this.submitButton) {
+            //     topBarHtml += '<div class="datepicker__buttons">';
+            // }
+
             if (this.submitButton) {
-                topBarHtml +=
+                buttonsHtml +=
                     '<input type="submit" id="' +
                     this.getSubmitButtonId() +
                     '" class="datepicker__submit-button" value="' +
@@ -595,8 +607,11 @@ export default class HotelDatepicker {
                     '">';
             }
 
-            if (this.clearButton || this.submitButton) {
-                topBarHtml += "</div>";
+            if (buttonsHtml) {
+                topBarHtml +=
+                    '<div class="datepicker__buttons">' +
+                    buttonsHtml +
+                    "</div>";
             }
 
             topBarHtml += "</div>";
@@ -1392,11 +1407,9 @@ export default class HotelDatepicker {
                 this.infoFormat
             );
 
-            if (this.inline) {
-                if (this.clearButton) {
-                    clearButton.disabled = false;
-                    clearButton.setAttribute("aria-disabled", "false");
-                }
+            if (this.clearButton) {
+                clearButton.disabled = false;
+                clearButton.setAttribute("aria-disabled", "false");
             }
         }
 
@@ -1444,17 +1457,17 @@ export default class HotelDatepicker {
             closeButton.disabled = true;
             closeButton.setAttribute("aria-disabled", "true");
         } else {
-            if (this.clearButton && !this.start && !this.end) {
-                // Disable the clear button until one valid date is selected
-                clearButton.disabled = true;
-                clearButton.setAttribute("aria-disabled", "true");
-            }
-
             if (this.submitButton) {
                 // Disable the submit button until a valid date range
                 submitButton.disabled = true;
                 submitButton.setAttribute("aria-disabled", "true");
             }
+        }
+
+        if (this.clearButton && !this.start && !this.end) {
+            // Disable the clear button until one valid date is selected
+            clearButton.disabled = true;
+            clearButton.setAttribute("aria-disabled", "true");
         }
     }
 
@@ -2854,6 +2867,7 @@ export default class HotelDatepicker {
     setFocusToInput() {
         this.input.focus();
         this.closeDatepicker();
+        this.clearHovering();
         this.justEsc = true;
         this.isOnFocus = false;
     }
