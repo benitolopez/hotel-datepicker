@@ -2652,7 +2652,7 @@ export default class HotelDatepicker {
             case 13:
                 if (this.isOnFocus) {
                     event.preventDefault();
-                    this.selectDay();
+                    this.handleReturn();
                 }
                 break;
         }
@@ -2866,13 +2866,17 @@ export default class HotelDatepicker {
         }
     }
 
-    selectDay() {
+    handleReturn() {
         const activeEl = document.activeElement;
 
         if (
             activeEl &&
-            this.hasClass(activeEl, "datepicker__month-day--visibleMonth") &&
-            this.datepicker.contains(activeEl)
+            this.datepicker.contains(activeEl) &&
+            (this.hasClass(activeEl, "datepicker__month-day--visibleMonth") ||
+                this.hasClass(activeEl, "datepicker__month-button") ||
+                this.hasClass(activeEl, "datepicker__close-button") ||
+                this.hasClass(activeEl, "datepicker__clear-button") ||
+                this.hasClass(activeEl, "datepicker__submit-button"))
         ) {
             activeEl.click();
         }
