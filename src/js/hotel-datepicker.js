@@ -2630,7 +2630,7 @@ export default class HotelDatepicker {
                 break;
 
             case 27:
-                if (this.input.offsetParent !== null) {
+                if (this.isOnFocus && this.input.offsetParent !== null) {
                     this.setFocusToInput();
                 }
                 break;
