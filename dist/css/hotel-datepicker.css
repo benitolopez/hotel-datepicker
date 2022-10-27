@@ -115,6 +115,12 @@ datepicker__buttons {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   color: #333;
   padding: 9px 7px;
+  border: 1px solid transparent;
+}
+
+.datepicker__month-day:focus {
+  outline: none;
+  background-color: #ffe684;
 }
 
 .datepicker__month-day--no-checkin {
@@ -215,6 +221,7 @@ datepicker__buttons {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-block;
   text-indent: -9999px;
+  padding: 5px;
 }
 
 .datepicker__month-button:after {
