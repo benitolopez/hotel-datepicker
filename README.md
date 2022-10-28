@@ -2,7 +2,7 @@
 
 A pure Javascript date range picker for hotels. Requires [Fecha](https://github.com/taylorhakes/fecha) **4.0.0** or above and supports all modern browsers. Check the [demo here](http://lopezb.com/hoteldatepicker).
 
-![Hotel Datepicker Thumbnail](http://static.lopezb.com/hoteldatepicker/datepicker_card.png "Hotel Thumbnail")
+![Hotel Datepicker Thumbnail](http://static.lopezb.com/hoteldatepicker/datepicker_card_2022.jpg "Hotel Datepicker Thumbnail")
 
 ## Installation
 
