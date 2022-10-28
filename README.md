@@ -6,6 +6,24 @@ A pure Javascript date range picker for hotels. Requires [Fecha](https://github.
 
 ## Installation
 
+### As a module:
+
+Install with:
+
+```
+npm i hotel-datepicker
+```
+
+Then import the modules with:
+
+```
+import * as fecha from "fecha";
+import HotelDatepicker from "hotel-datepicker";
+import "hotel-datepicker/dist/css/hotel-datepicker.css";
+```
+
+### As a script:
+
 Download [Fecha](https://github.com/taylorhakes/fecha/releases).
 
 **[BREAK CHANGE]** Use Fecha 4.0.0 or above.
