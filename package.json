@@ -19,6 +19,7 @@
     "date"
   ],
   "main": "dist/js/hotel-datepicker.esm.js",
+  "style": "dist/css/hotel-datepicker.css",
   "scripts": {
     "run:sass": "node-sass -o .sass-cache src/sass --output-style expanded",
     "build:scss": "npm run run:sass && npm run run:sass -- -w",
