@@ -302,6 +302,23 @@ onSelectRange: function() {
 }
 ```
 
+### extraDayText
+
+-   Type: `Function`
+-   Default: `false`
+
+Run a custom function to show extra text in day cells:
+
+```js
+extraDayText: function(date, attributes) {
+    if (attributes.class.includes("datepicker__month-day--visibleMonth")) {
+        console.log(date);
+        console.log(attributes);
+        return "<span>$150</span>";
+    }
+}
+```
+
 ### i18n
 
 **[BREAK CHANGE]** Two new options has been introduced in the v.3: `month-names-short` and `day-names-short`. Previously, the _short_ day name version ('Sun', 'Mon', 'Tue', etc) was used in the `day-names` option. Now, the `day-names` option uses the _long_ version.
