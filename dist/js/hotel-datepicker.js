@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.5.0 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.6.0 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -102,6 +102,7 @@ var HotelDatepicker = (function (fecha) {
         this.onDayClick = opts.onDayClick === undefined ? false : opts.onDayClick;
         this.onOpenDatepicker = opts.onOpenDatepicker === undefined ? false : opts.onOpenDatepicker;
         this.onSelectRange = opts.onSelectRange === undefined ? false : opts.onSelectRange;
+        this.extraDayText = opts.extraDayText === undefined ? false : opts.extraDayText;
 
         // DOM input
         this.input = input;
@@ -597,9 +598,19 @@ var HotelDatepicker = (function (fecha) {
             if (this.getDateString(_day.time) === this.getDateString(new Date())) {
               dayAttributes.tabindex = "0";
             }
+            let extraText = "";
+
+            // Optionally print some text in day cells
+            if (this.extraDayText) {
+              extraText = this.extraDayText(this.getDateString(_day.time), dayAttributes);
+            }
+            extraText = extraText ? extraText : "";
+            if (extraText) {
+              dayAttributes.class = dayAttributes.class + " datepicker__month-day--with-extra";
+            }
 
             // Create the day HTML
-            html += '<td class="' + dayAttributes.class + '" ' + this.printAttributes(dayAttributes) + ">" + _day.day + "</td>";
+            html += '<td class="' + dayAttributes.class + '" ' + this.printAttributes(dayAttributes) + ">" + _day.day + extraText + "</td>";
           }
           html += "</tr>";
         }
