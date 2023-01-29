@@ -844,6 +844,33 @@ var datepicker = new HotelDatepicker(input, {
                         >
                     </div>
                 </div>
+
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
+                            id="demo29"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo29-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo29-input-description">
+                        Show extra text in day cells
+                    </p>
+                    <div class="demo__config">
+                        <pre>
+var demo29 = new HotelDatepicker(document.getElementById("demo29"), {
+    extraDayText: function (date, attributes) {
+        if (date === fecha.format(testDate, "YYYY-MM-DD") && attributes.class.includes("datepicker__month-day--visibleMonth")) {
+            return "<span>$150</span>";
+        }
+    },
+);
+				</pre
+                        >
+                    </div>
+                </div>
             </div>
 
             <footer class="site__footer">
@@ -1444,6 +1471,27 @@ var datepicker = new HotelDatepicker(input, {
                     {
                         onSelectRange: function () {
                             console.log("Date range selected!");
+                        },
+                    }
+                );
+
+                // ------------------- DEMO 29 ------------------- //
+
+                var testDate = new Date();
+                testDate.setDate(testDate.getDate() + 2);
+
+                var demo29 = new HotelDatepicker(
+                    document.getElementById("demo29"),
+                    {
+                        extraDayText: function (date, attributes) {
+                            if (
+                                date === fecha.format(testDate, "YYYY-MM-DD") &&
+                                attributes.class.includes(
+                                    "datepicker__month-day--visibleMonth"
+                                )
+                            ) {
+                                return "<span>$150</span>";
+                            }
                         },
                     }
                 );

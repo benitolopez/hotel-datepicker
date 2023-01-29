@@ -183,3 +183,14 @@ h3 {
 #datepicker-2.datepicker {
     z-index: 2;
 }
+
+.datepicker__month-day--with-extra span {
+    display: block;
+    margin-top: 5px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.datepicker__month-day--with-extra {
+    padding: 0px 7px;
+}
