@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.6.0 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.6.1 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -731,6 +731,12 @@ var HotelDatepicker = (function (fecha) {
             // and disable it if there are not enough days
             // available to select a valid range
             const limit = this.getClosestDisabledDates(_day.date);
+
+            // Consider also the day before startDate
+            // as disabled date
+            if (limit[0] === false) {
+              limit[0] = this.substractDays(this.startDate, 1);
+            }
             if (limit[0] && limit[1]) {
               if (this.compareDay(_day.date, limit[0]) && this.countDays(limit[0], limit[1]) - 2 > 0) {
                 const daysBeforeNextDisabledDate = this.countDays(limit[1], _day.date) - 1;

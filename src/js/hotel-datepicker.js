@@ -1004,6 +1004,12 @@ export default class HotelDatepicker {
                 // available to select a valid range
                 const limit = this.getClosestDisabledDates(_day.date);
 
+                // Consider also the day before startDate
+                // as disabled date
+                if (limit[0] === false) {
+                    limit[0] = this.substractDays(this.startDate, 1);
+                }
+
                 if (limit[0] && limit[1]) {
                     if (
                         this.compareDay(_day.date, limit[0]) &&
