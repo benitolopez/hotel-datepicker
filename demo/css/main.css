@@ -189,6 +189,7 @@ h3 {
     margin-top: 5px;
     font-style: italic;
     font-weight: bold;
+    pointer-events: none;
 }
 
 .datepicker__month-day--with-extra {
