@@ -30,6 +30,7 @@ export default class HotelDatepicker {
         this.disabledDaysOfWeek = opts.disabledDaysOfWeek || [];
         this.noCheckInDaysOfWeek = opts.noCheckInDaysOfWeek || [];
         this.noCheckOutDaysOfWeek = opts.noCheckOutDaysOfWeek || [];
+        this.daysWithExtraText = [];
         this.enableCheckout = opts.enableCheckout || false;
         this.preventContainerClose = opts.preventContainerClose || false;
         this.container = opts.container || "";
@@ -846,6 +847,7 @@ export default class HotelDatepicker {
                     dayAttributes.class =
                         dayAttributes.class +
                         " datepicker__month-day--with-extra";
+                    this.daysWithExtraText.push(this.getDateString(_day.time));
                 }
 
                 // Create the day HTML
@@ -981,6 +983,8 @@ export default class HotelDatepicker {
         const isStartDate =
             this.getDateString(_day.time) ===
             this.getDateString(this.startDate);
+        const isDayWithExtraText =
+            this.daysWithExtraText.indexOf(this.getDateString(_day.time)) > -1;
         let isDisabled = false;
         let isNoCheckIn = false;
         let isNoCheckOut = false;
@@ -1132,6 +1136,7 @@ export default class HotelDatepicker {
             isDayOfWeekDisabled
                 ? "datepicker__month-day--day-of-week-disabled"
                 : "",
+            isDayWithExtraText ? "datepicker__month-day--with-extra" : "",
         ];
 
         return classes;

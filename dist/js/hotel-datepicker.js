@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.6.1 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.6.2 - Copyright 2022 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -45,6 +45,7 @@ var HotelDatepicker = (function (fecha) {
         this.disabledDaysOfWeek = opts.disabledDaysOfWeek || [];
         this.noCheckInDaysOfWeek = opts.noCheckInDaysOfWeek || [];
         this.noCheckOutDaysOfWeek = opts.noCheckOutDaysOfWeek || [];
+        this.daysWithExtraText = [];
         this.enableCheckout = opts.enableCheckout || false;
         this.preventContainerClose = opts.preventContainerClose || false;
         this.container = opts.container || "";
@@ -607,6 +608,7 @@ var HotelDatepicker = (function (fecha) {
             extraText = extraText ? extraText : "";
             if (extraText) {
               dayAttributes.class = dayAttributes.class + " datepicker__month-day--with-extra";
+              this.daysWithExtraText.push(this.getDateString(_day.time));
             }
 
             // Create the day HTML
@@ -709,6 +711,7 @@ var HotelDatepicker = (function (fecha) {
       getDayClasses(_day) {
         const isToday = this.getDateString(_day.time) === this.getDateString(new Date());
         const isStartDate = this.getDateString(_day.time) === this.getDateString(this.startDate);
+        const isDayWithExtraText = this.daysWithExtraText.indexOf(this.getDateString(_day.time)) > -1;
         let isDisabled = false;
         let isNoCheckIn = false;
         let isNoCheckOut = false;
@@ -796,7 +799,7 @@ var HotelDatepicker = (function (fecha) {
             }
           }
         }
-        const classes = ["datepicker__month-day", "datepicker__month-day--" + _day.type, "datepicker__month-day--" + (_day.valid ? "valid" : "invalid"), isToday ? "datepicker__month-day--today" : "", isDisabled ? "datepicker__month-day--disabled" : "", isDisabled && this.enableCheckout && this.isFirstDisabledDate === 1 ? "datepicker__month-day--checkout-enabled" : "", isDayBeforeDisabledDate ? "datepicker__month-day--before-disabled-date" : "", isStartDate || isFirstEnabledDate ? "datepicker__month-day--checkin-only" : "", isNoCheckIn ? "datepicker__month-day--no-checkin" : "", isNoCheckOut ? "datepicker__month-day--no-checkout" : "", isDayOfWeekDisabled ? "datepicker__month-day--day-of-week-disabled" : ""];
+        const classes = ["datepicker__month-day", "datepicker__month-day--" + _day.type, "datepicker__month-day--" + (_day.valid ? "valid" : "invalid"), isToday ? "datepicker__month-day--today" : "", isDisabled ? "datepicker__month-day--disabled" : "", isDisabled && this.enableCheckout && this.isFirstDisabledDate === 1 ? "datepicker__month-day--checkout-enabled" : "", isDayBeforeDisabledDate ? "datepicker__month-day--before-disabled-date" : "", isStartDate || isFirstEnabledDate ? "datepicker__month-day--checkin-only" : "", isNoCheckIn ? "datepicker__month-day--no-checkin" : "", isNoCheckOut ? "datepicker__month-day--no-checkout" : "", isDayOfWeekDisabled ? "datepicker__month-day--day-of-week-disabled" : "", isDayWithExtraText ? "datepicker__month-day--with-extra" : ""];
         return classes;
       }
       checkAndSetDayClasses() {
