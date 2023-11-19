@@ -327,6 +327,32 @@ var datepicker = new HotelDatepicker(input, {
                     <div class="demo__input">
                         <input
                             type="text"
+                            id="demo30"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo30-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo30-input-description">
+                        Mininum number of nights:
+                        <code>7, 14, 21, 28, etc</code>
+                    </p>
+                    <div class="demo__config">
+                        <pre>
+var input = document.getElementById('input-id');
+var datepicker = new HotelDatepicker(input, {
+    minNights: 7
+    minNightsMultiple: true
+});
+				</pre
+                        >
+                    </div>
+                </div>
+
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
                             id="demo6"
                             value=""
                             aria-label="Check-in and check-out dates"
@@ -957,6 +983,16 @@ var demo29 = new HotelDatepicker(document.getElementById("demo29"), {
                     document.getElementById("demo5"),
                     {
                         minNights: 7,
+                    }
+                );
+
+                // ------------------- DEMO 30 ------------------- //
+
+                var demo30 = new HotelDatepicker(
+                    document.getElementById("demo30"),
+                    {
+                        minNights: 7,
+                        minNightsMultiple: true,
                     }
                 );
 
