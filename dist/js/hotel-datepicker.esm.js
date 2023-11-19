@@ -17,6 +17,7 @@ class HotelDatepicker {
     this.startDate = opts.startDate || new Date();
     this.endDate = opts.endDate || false;
     this.minNights = opts.minNights || 1;
+    this.minNightsMultiple = opts.minNightsMultiple || false;
     this.maxNights = opts.maxNights || 0;
     this.selectForward = opts.selectForward || false;
     this.disabledDates = opts.disabledDates || [];
@@ -1133,6 +1134,11 @@ class HotelDatepicker {
     if (this.start && !this.end) {
       // Check maximum/minimum days
       if (this.maxDays > 0 && this.countDays(time, this.start) > this.maxDays || this.minDays > 0 && this.countDays(time, this.start) > 1 && this.countDays(time, this.start) < this.minDays) {
+        return false;
+      }
+
+      // Check if only multiple of minDays is allowed
+      if (this.minNightsMultiple && (this.countDays(time, this.start) - 1) % 7 !== 0) {
         return false;
       }
 
