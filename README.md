@@ -113,6 +113,13 @@ Minimum nights required to select a range of dates.
 
 Maximum nights required to select a range of dates.
 
+### minNightsMultiple
+
+-   Type: `Boolean`
+-   Default: `false`
+
+If `true`, only ranges that are multiples of `minNights` are allowed.
+
 ### selectForward
 
 -   Type: `Boolean`
