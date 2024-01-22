@@ -1023,7 +1023,7 @@ var HotelDatepicker = (function (fecha) {
 
         // If both dates are set, show the count and set the value of our input
         if (this.start && this.end) {
-          const count = this.countDays(this.end, this.start) - 1;
+          const count = this.countDays(this.getDateString(new Date(this.end)), this.getDateString(new Date(this.start))) - 1;
           const countText = count === 1 ? count + " " + this.lang("night") : count + " " + this.lang("nights");
           const dateRangeValue = this.getDateString(new Date(this.start)) + this.separator + this.getDateString(new Date(this.end));
 
