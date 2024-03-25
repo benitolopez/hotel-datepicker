@@ -1489,6 +1489,9 @@ export default class HotelDatepicker {
                 this.getDateString(new Date(this.end))
             );
             this.changed = true;
+        } else if (!this.inline && this.start === false && this.end === false) {
+            closeButton.disabled = false;
+            closeButton.setAttribute("aria-disabled", "false");
         } else if (!this.inline) {
             // Disable the close button until a valid date range
             closeButton.disabled = true;
