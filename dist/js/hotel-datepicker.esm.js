@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.7.1 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.7.2 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 import * as fecha from 'fecha';
 
 let idCounter = 0;
@@ -1021,6 +1021,9 @@ class HotelDatepicker {
       // Set input value
       this.setValue(dateRangeValue, this.getDateString(new Date(this.start)), this.getDateString(new Date(this.end)));
       this.changed = true;
+    } else if (!this.inline && this.start === false && this.end === false) {
+      closeButton.disabled = false;
+      closeButton.setAttribute("aria-disabled", "false");
     } else if (!this.inline) {
       // Disable the close button until a valid date range
       closeButton.disabled = true;
