@@ -2075,6 +2075,9 @@ var HotelDatepicker = (function (fecha) {
         if (typeof d1 === "string" && typeof d2 === "string") {
           d1 = this.parseDate(d1);
           d2 = this.parseDate(d2);
+        } else {
+          d1 = new Date(d1.getTime());
+          d2 = new Date(d2.getTime());
         }
         this.setDateRange(d1, d2);
       }
