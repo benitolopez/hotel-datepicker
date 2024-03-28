@@ -53,7 +53,7 @@
   display: block;
 }
 
-datepicker__buttons {
+.datepicker__buttons {
   -webkit-user-select: none;
           user-select: none;
 }
