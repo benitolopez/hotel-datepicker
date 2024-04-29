@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.7.3 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.7.4 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 import * as fecha from 'fecha';
 
 let idCounter = 0;
