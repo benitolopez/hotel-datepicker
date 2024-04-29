@@ -399,7 +399,7 @@ class HotelDatepicker {
       wrapperClass += " datepicker--topbar-has-submit-button";
     }
     const wrapperStyle = this.inline ? "" : ' style="display:none"';
-    let html = '<div id="' + this.getDatepickerId() + '"' + wrapperStyle + ' class="datepicker datepicker--closed' + wrapperClass + '">';
+    let html = '<div id="' + this.getDatepickerId() + '"' + wrapperStyle + ' class="datepicker datepicker--closed' + wrapperClass + '" tabindex="0">';
     html += '<div class="datepicker__inner">';
     let topBarHtml = "";
     if (this.showTopbar) {
