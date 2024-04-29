@@ -551,7 +551,7 @@ export default class HotelDatepicker {
             wrapperStyle +
             ' class="datepicker datepicker--closed' +
             wrapperClass +
-            '">';
+            '" tabindex="0">';
 
         html += '<div class="datepicker__inner">';
 
