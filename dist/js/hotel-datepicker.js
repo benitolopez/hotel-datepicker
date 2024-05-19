@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.7.4 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.8.0 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -29,6 +29,7 @@ var HotelDatepicker = (function (fecha) {
 
         // Set default values
         const opts = options || {};
+        this.className = opts.className || "datepicker";
         this.format = opts.format || "YYYY-MM-DD";
         this.infoFormat = opts.infoFormat || this.format;
         this.ariaDayFormat = opts.ariaDayFormat || "dddd, MMMM DD, YYYY";
@@ -155,14 +156,14 @@ var HotelDatepicker = (function (fecha) {
         // Start from monday if we passed that option
         if (this.startOfWeek === "monday") {
           for (let i = 0; i < 7; i++) {
-            week += '<th class="datepicker__week-name">' + this.lang("day-names-short")[(1 + i) % 7] + "</th>";
+            week += '<th class="' + this.className + '__week-name">' + this.lang("day-names-short")[(1 + i) % 7] + "</th>";
           }
           return week;
         }
 
         // Otherwise start from sunday (default)
         for (let i = 0; i < 7; i++) {
-          week += '<th class="datepicker__week-name">' + this.lang("day-names-short")[i] + "</th>";
+          week += '<th class="' + this.className + '__week-name">' + this.lang("day-names-short")[i] + "</th>";
         }
         return week;
       }
@@ -176,7 +177,7 @@ var HotelDatepicker = (function (fecha) {
       }
       getDatepickerId() {
         // Get datepicker ID
-        return "datepicker-" + this.generateId();
+        return this.className + "-" + this.generateId();
       }
       getMonthTableId(month) {
         // Get month table ID
@@ -324,13 +325,13 @@ var HotelDatepicker = (function (fecha) {
       }
       addListeners() {
         // Next month button
-        const nextButtons = this.datepicker.getElementsByClassName("datepicker__month-button--next");
+        const nextButtons = this.datepicker.getElementsByClassName(this.className + "__month-button--next");
         for (let i = 0; i < nextButtons.length; i++) {
           nextButtons[i].addEventListener("click", evt => this.goToNextMonth(evt));
         }
 
         // Previous month button
-        const prevButtons = this.datepicker.getElementsByClassName("datepicker__month-button--prev");
+        const prevButtons = this.datepicker.getElementsByClassName(this.className + "__month-button--prev");
         for (let i = 0; i < prevButtons.length; i++) {
           prevButtons[i].addEventListener("click", evt => this.goToPreviousMonth(evt));
         }
@@ -401,47 +402,47 @@ var HotelDatepicker = (function (fecha) {
       }
       createDatepickerDomString() {
         // Generate our datepicker
-        let wrapperClass = this.inline ? " datepicker--inline" : "";
+        let wrapperClass = this.inline ? " " + this.className + "--inline" : "";
         if (this.showTopbar) {
           if (this.topbarPosition === "bottom") {
-            wrapperClass += " datepicker--topbar-bottom";
+            wrapperClass += " " + this.className + "--topbar-bottom";
           } else {
-            wrapperClass += " datepicker--topbar-top";
+            wrapperClass += " " + this.className + "--topbar-top";
           }
         }
         if (!this.inline) {
-          wrapperClass += " datepicker--topbar-has-close-button";
+          wrapperClass += " " + this.className + this.className + "--topbar-has-close-button";
         }
         if (this.clearButton) {
-          wrapperClass += " datepicker--topbar-has-clear-button";
+          wrapperClass += " " + this.className + "--topbar-has-clear-button";
         }
         if (this.submitButton) {
-          wrapperClass += " datepicker--topbar-has-submit-button";
+          wrapperClass += " " + this.className + "--topbar-has-submit-button";
         }
         const wrapperStyle = this.inline ? "" : ' style="display:none"';
-        let html = '<div id="' + this.getDatepickerId() + '"' + wrapperStyle + ' class="datepicker datepicker--closed' + wrapperClass + '" tabindex="0">';
-        html += '<div class="datepicker__inner">';
+        let html = '<div id="' + this.getDatepickerId() + '"' + wrapperStyle + ' class="' + this.className + " " + this.className + "--closed" + wrapperClass + '" tabindex="0">';
+        html += '<div class="' + this.className + '__inner">';
         let topBarHtml = "";
         if (this.showTopbar) {
           // Top bar section
-          topBarHtml += '<div class="datepicker__topbar">' + '<div class="datepicker__info datepicker__info--selected"><span class="datepicker__info datepicker__info--selected-label">' + this.lang("selected") + ' </span> <strong class="datepicker__info-text datepicker__info-text--start-day">...</strong>' + ' <span class="datepicker__info-text datepicker__info--separator">' + this.separator + '</span> <strong class="datepicker__info-text datepicker__info-text--end-day">...</strong> <em class="datepicker__info-text datepicker__info-text--selected-days">(<span></span>)</em>' + "</div>" + '<div class="datepicker__info datepicker__info--feedback"></div>';
+          topBarHtml += '<div class="' + this.className + '__topbar">' + '<div class="' + this.className + "__info " + this.className + '__info--selected"><span class="' + this.className + "__info " + this.className + '__info--selected-label">' + this.lang("selected") + ' </span> <strong class="' + this.className + "__info-text " + this.className + '__info-text--start-day">...</strong>' + ' <span class="' + this.className + "__info-text " + this.className + '__info--separator">' + this.separator + '</span> <strong class="' + this.className + "__info-text " + this.className + '__info-text--end-day">...</strong> <em class="' + this.className + "__info-text " + this.className + '__info-text--selected-days">(<span></span>)</em>' + "</div>" + '<div class="' + this.className + "__info " + this.className + '__info--feedback"></div>';
           let buttonsHtml = "";
           if (this.clearButton) {
-            buttonsHtml += '<button type="button" id="' + this.getClearButtonId() + '" class="datepicker__clear-button" aria-label="' + this.i18n["aria-clear-button"] + '">' + this.lang("clearButton") + "</button>";
+            buttonsHtml += '<button type="button" id="' + this.getClearButtonId() + '" class="' + this.className + '__clear-button" aria-label="' + this.i18n["aria-clear-button"] + '">' + this.lang("clearButton") + "</button>";
           }
           if (!this.inline) {
-            buttonsHtml += '<button type="button" id="' + this.getCloseButtonId() + '" class="datepicker__close-button" aria-label="' + this.i18n["aria-close-button"] + '">' + this.lang("button") + "</button>";
+            buttonsHtml += '<button type="button" id="' + this.getCloseButtonId() + '" class="' + this.className + '__close-button" aria-label="' + this.i18n["aria-close-button"] + '">' + this.lang("button") + "</button>";
           }
 
           // if (this.clearButton || this.submitButton) {
-          //     topBarHtml += '<div class="datepicker__buttons">';
+          //     topBarHtml += '<div class="' + this.className + '__buttons">';
           // }
 
           if (this.submitButton) {
-            buttonsHtml += '<input type="submit" id="' + this.getSubmitButtonId() + '" class="datepicker__submit-button" value="' + this.lang("submitButton") + '" name="' + this.submitButtonName + '" aria-label="' + this.i18n["aria-submit-button"] + '">';
+            buttonsHtml += '<input type="submit" id="' + this.getSubmitButtonId() + '" class="' + this.className + '__submit-button" value="' + this.lang("submitButton") + '" name="' + this.submitButtonName + '" aria-label="' + this.i18n["aria-submit-button"] + '">';
           }
           if (buttonsHtml) {
-            topBarHtml += '<div class="datepicker__buttons">' + buttonsHtml + "</div>";
+            topBarHtml += '<div class="' + this.className + '__buttons">' + buttonsHtml + "</div>";
           }
           topBarHtml += "</div>";
         }
@@ -450,11 +451,11 @@ var HotelDatepicker = (function (fecha) {
         }
 
         // Months section
-        html += '<div class="datepicker__months" role="application" aria-roledescription="datepicker" aria-label="' + this.i18n["aria-application"] + '">';
+        html += '<div class="' + this.className + '__months" role="application" aria-roledescription="datepicker" aria-label="' + this.i18n["aria-application"] + '">';
 
         // Print single months
         for (let i = 1; i <= 2; i++) {
-          html += '<table role="presentation" id="' + this.getMonthTableId(i) + '" class="datepicker__month datepicker__month--month' + i + '"><thead><tr class="datepicker__month-caption"><th><span  role="button" tabindex="0" aria-label="' + this.i18n["aria-prev-month"] + '" class="datepicker__month-button datepicker__month-button--prev" month="' + i + '">&lt;</span></th><th colspan="5" class="datepicker__month-name"></th><th><span role="button" tabindex="0" aria-label="' + this.i18n["aria-next-month"] + '" class="datepicker__month-button datepicker__month-button--next" month="' + i + '">&gt;</span></th></tr><tr class="datepicker__week-days"  aria-hidden="true" role="presentation">' + this.getWeekDayNames(i) + "</tr></thead><tbody></tbody></table>";
+          html += '<table role="presentation" id="' + this.getMonthTableId(i) + '" class="' + this.className + "__month " + this.className + "__month--month" + i + '"><thead><tr class="' + this.className + '__month-caption"><th><span  role="button" tabindex="0" aria-label="' + this.i18n["aria-prev-month"] + '" class="' + this.className + "__month-button " + this.className + '__month-button--prev" month="' + i + '">&lt;</span></th><th colspan="5" class="' + this.className + '__month-name"></th><th><span role="button" tabindex="0" aria-label="' + this.i18n["aria-next-month"] + '" class="' + this.className + "__month-button " + this.className + '__month-button--next" month="' + i + '">&gt;</span></th></tr><tr class="' + this.className + '__week-days"  aria-hidden="true" role="presentation">' + this.getWeekDayNames(i) + "</tr></thead><tbody></tbody></table>";
         }
         html += "</div>";
         if (this.showTopbar && this.topbarPosition === "bottom") {
@@ -462,7 +463,7 @@ var HotelDatepicker = (function (fecha) {
         }
 
         // Tooltip
-        html += '<div style="display:none" id="' + this.getTooltipId() + '" class="datepicker__tooltip"></div>';
+        html += '<div style="display:none" id="' + this.getTooltipId() + '" class="' + this.className + '__tooltip"></div>';
         html += "</div>";
         html += "</div>";
         return html;
@@ -473,7 +474,7 @@ var HotelDatepicker = (function (fecha) {
         // Show month table and create the necessary HTML code
         const name = this.getMonthName(date.getMonth());
         const monthDom = this.getMonthDom(month);
-        const monthName = monthDom.getElementsByClassName("datepicker__month-name")[0];
+        const monthName = monthDom.getElementsByClassName(this.className + "__month-name")[0];
         const monthBody = monthDom.getElementsByTagName("tbody")[0];
 
         // Month caption
@@ -560,7 +561,7 @@ var HotelDatepicker = (function (fecha) {
           if (days[week * 7].type === "nextMonth") {
             break;
           }
-          html += '<tr class="datepicker__week-row">';
+          html += '<tr class="' + this.className + '__week-row">';
 
           // Create the days of a week, one by one
           for (let i = 0; i < 7; i++) {
@@ -570,10 +571,10 @@ var HotelDatepicker = (function (fecha) {
 
             // Add a title for those days where the checkin or checkout is disabled
             let title = "";
-            if (this.hasClass(_day, "datepicker__month-day--no-checkin")) {
+            if (this.hasClass(_day, this.className + "__month-day--no-checkin")) {
               title = this.i18n["checkin-disabled"];
             }
-            if (this.hasClass(_day, "datepicker__month-day--no-checkout")) {
+            if (this.hasClass(_day, +this.className + "__month-day--no-checkout")) {
               if (title) {
                 title += ". ";
               }
@@ -608,7 +609,7 @@ var HotelDatepicker = (function (fecha) {
             }
             extraText = extraText ? extraText : "";
             if (extraText) {
-              dayAttributes.class = dayAttributes.class + " datepicker__month-day--with-extra";
+              dayAttributes.class = dayAttributes.class + " " + this.className + "__month-day--with-extra";
               this.daysWithExtraText.push(this.getDateString(_day.time));
             }
 
@@ -623,8 +624,8 @@ var HotelDatepicker = (function (fecha) {
         // Open the datepicker
         if (!this.isOpen) {
           // Add/remove helper classes
-          this.removeClass(this.datepicker, "datepicker--closed");
-          this.addClass(this.datepicker, "datepicker--open");
+          this.removeClass(this.datepicker, this.className + "--closed");
+          this.addClass(this.datepicker, this.className + "--open");
 
           // Set (and check) the range value based on the current input value
           this.checkAndSetDefaultValue();
@@ -661,8 +662,8 @@ var HotelDatepicker = (function (fecha) {
         }
 
         // Add/remove helper classes
-        this.removeClass(this.datepicker, "datepicker--open");
-        this.addClass(this.datepicker, "datepicker--closed");
+        this.removeClass(this.datepicker, this.className + "--open");
+        this.addClass(this.datepicker, this.className + "--closed");
 
         // Slide up the datepicker
         this.slideUp(this.datepicker, this.animationSpeed);
@@ -800,7 +801,7 @@ var HotelDatepicker = (function (fecha) {
             }
           }
         }
-        const classes = ["datepicker__month-day", "datepicker__month-day--" + _day.type, "datepicker__month-day--" + (_day.valid ? "valid" : "invalid"), isToday ? "datepicker__month-day--today" : "", isDisabled ? "datepicker__month-day--disabled" : "", isDisabled && this.enableCheckout && this.isFirstDisabledDate === 1 ? "datepicker__month-day--checkout-enabled" : "", isDayBeforeDisabledDate ? "datepicker__month-day--before-disabled-date" : "", isStartDate || isFirstEnabledDate ? "datepicker__month-day--checkin-only" : "", isNoCheckIn ? "datepicker__month-day--no-checkin" : "", isNoCheckOut ? "datepicker__month-day--no-checkout" : "", isDayOfWeekDisabled ? "datepicker__month-day--day-of-week-disabled" : "", isDayWithExtraText ? "datepicker__month-day--with-extra" : ""];
+        const classes = [this.className + "__month-day", this.className + "__month-day--" + _day.type, this.className + "__month-day--" + (_day.valid ? "valid" : "invalid"), isToday ? this.className + "__month-day--today" : "", isDisabled ? this.className + "__month-day--disabled" : "", isDisabled && this.enableCheckout && this.isFirstDisabledDate === 1 ? this.className + "__month-day--checkout-enabled" : "", isDayBeforeDisabledDate ? this.className + "__month-day--before-disabled-date" : "", isStartDate || isFirstEnabledDate ? this.className + "__month-day--checkin-only" : "", isNoCheckIn ? this.className + "__month-day--no-checkin" : "", isNoCheckOut ? this.className + "__month-day--no-checkout" : "", isDayOfWeekDisabled ? this.className + "__month-day--day-of-week-disabled" : "", isDayWithExtraText ? this.className + "__month-day--with-extra" : ""];
         return classes;
       }
       checkAndSetDayClasses() {
@@ -848,7 +849,7 @@ var HotelDatepicker = (function (fecha) {
           this.setDateRange(this.parseDate(dates[0], _format), this.parseDate(dates[1], _format), onresize);
           this.changed = true;
         } else if (this.showTopbar) {
-          const selectedInfo = this.datepicker.getElementsByClassName("datepicker__info--selected")[0];
+          const selectedInfo = this.datepicker.getElementsByClassName(this.className + "__info--selected")[0];
           selectedInfo.style.display = "none";
           if (onresize) {
             // Set default time
@@ -958,23 +959,23 @@ var HotelDatepicker = (function (fecha) {
 
           // Add selected class
           if (this.start && this.end && this.end >= time && this.start <= time || this.start && !this.end && this.getDateString(this.start, "YYYY-MM-DD") === this.getDateString(time, "YYYY-MM-DD")) {
-            this.addClass(days[i], "datepicker__month-day--selected");
+            this.addClass(days[i], this.className + "__month-day--selected");
           } else {
-            this.removeClass(days[i], "datepicker__month-day--selected");
+            this.removeClass(days[i], this.className + "__month-day--selected");
           }
 
           // Add class to the first day of the range
           if (this.start && this.getDateString(this.start, "YYYY-MM-DD") === this.getDateString(time, "YYYY-MM-DD")) {
-            this.addClass(days[i], "datepicker__month-day--first-day-selected");
+            this.addClass(days[i], this.className + "__month-day--first-day-selected");
           } else {
-            this.removeClass(days[i], "datepicker__month-day--first-day-selected");
+            this.removeClass(days[i], this.className + "__month-day--first-day-selected");
           }
 
           // Add class to the last day of the range
           if (this.end && this.getDateString(this.end, "YYYY-MM-DD") === this.getDateString(time, "YYYY-MM-DD")) {
-            this.addClass(days[i], "datepicker__month-day--last-day-selected");
+            this.addClass(days[i], this.className + "__month-day--last-day-selected");
           } else {
-            this.removeClass(days[i], "datepicker__month-day--last-day-selected");
+            this.removeClass(days[i], this.className + "__month-day--last-day-selected");
           }
         }
       }
@@ -993,10 +994,10 @@ var HotelDatepicker = (function (fecha) {
         }
 
         // Show selected range in top bar
-        const selectedInfo = this.datepicker.getElementsByClassName("datepicker__info--selected")[0];
-        const elStart = selectedInfo.getElementsByClassName("datepicker__info-text--start-day")[0];
-        const elEnd = selectedInfo.getElementsByClassName("datepicker__info-text--end-day")[0];
-        const elSelected = selectedInfo.getElementsByClassName("datepicker__info-text--selected-days")[0];
+        const selectedInfo = this.datepicker.getElementsByClassName(this.className + "__info--selected")[0];
+        const elStart = selectedInfo.getElementsByClassName(this.className + "__info-text--start-day")[0];
+        const elEnd = selectedInfo.getElementsByClassName(this.className + "__info-text--end-day")[0];
+        const elSelected = selectedInfo.getElementsByClassName(this.className + "__info-text--selected-days")[0];
         const closeButton = document.getElementById(this.getCloseButtonId());
         const clearButton = document.getElementById(this.getClearButtonId());
         const submitButton = document.getElementById(this.getSubmitButtonId());
@@ -1062,7 +1063,7 @@ var HotelDatepicker = (function (fecha) {
         }
       }
       dayClicked(day) {
-        if (this.hasClass(day, "datepicker__month-day--invalid")) {
+        if (this.hasClass(day, this.className + "__month-day--invalid")) {
           return;
         }
         const isSelectStart = this.start && this.end || !this.start && !this.end;
@@ -1070,24 +1071,24 @@ var HotelDatepicker = (function (fecha) {
 
         // Return early for those days where the checkin or checkout is disabled
         if (isSelectStart) {
-          if (this.hasClass(day, "datepicker__month-day--no-checkin")) {
+          if (this.hasClass(day, this.className + "__month-day--no-checkin")) {
             return;
           }
         } else if (this.start) {
-          if (this.start > time && this.hasClass(day, "datepicker__month-day--no-checkin")) {
+          if (this.start > time && this.hasClass(day, this.className + "__month-day--no-checkin")) {
             return;
           }
           const startDayEl = this.datepicker.querySelectorAll('td[time="' + this.start + '"]')[0];
           if (startDayEl) {
-            if (this.hasClass(startDayEl, "datepicker__month-day--no-checkout") && this.start > time) {
+            if (this.hasClass(startDayEl, this.className + "__month-day--no-checkout") && this.start > time) {
               return;
             }
           }
-          if (this.hasClass(day, "datepicker__month-day--no-checkout") && time > this.start) {
+          if (this.hasClass(day, this.className + "__month-day--no-checkout") && time > this.start) {
             return;
           }
         }
-        this.addClass(day, "datepicker__month-day--selected");
+        this.addClass(day, this.className + "__month-day--selected");
         if (isSelectStart) {
           this.start = time;
           this.end = false;
@@ -1196,7 +1197,7 @@ var HotelDatepicker = (function (fecha) {
       }
       checkSelection() {
         const numberOfDays = this.countDays(this.end, this.start);
-        const bar = this.showTopbar ? this.datepicker.getElementsByClassName("datepicker__info--feedback")[0] : false;
+        const bar = this.showTopbar ? this.datepicker.getElementsByClassName(this.className + "__info--feedback")[0] : false;
         if (this.maxDays && numberOfDays > this.maxDays) {
           this.start = false;
           this.end = false;
@@ -1204,9 +1205,9 @@ var HotelDatepicker = (function (fecha) {
           // Remove selected class from each day
           const days = this.datepicker.getElementsByTagName("td");
           for (let i = 0; i < days.length; i++) {
-            this.removeClass(days[i], "datepicker__month-day--selected");
-            this.removeClass(days[i], "datepicker__month-day--first-day-selected");
-            this.removeClass(days[i], "datepicker__month-day--last-day-selected");
+            this.removeClass(days[i], this.className + "__month-day--selected");
+            this.removeClass(days[i], this.className + "__month-day--first-day-selected");
+            this.removeClass(days[i], this.className + "__month-day--last-day-selected");
           }
           if (this.showTopbar) {
             // Show error in top bar
@@ -1220,9 +1221,9 @@ var HotelDatepicker = (function (fecha) {
           // Remove selected class from each day
           const days = this.datepicker.getElementsByTagName("td");
           for (let i = 0; i < days.length; i++) {
-            this.removeClass(days[i], "datepicker__month-day--selected");
-            this.removeClass(days[i], "datepicker__month-day--first-day-selected");
-            this.removeClass(days[i], "datepicker__month-day--last-day-selected");
+            this.removeClass(days[i], this.className + "__month-day--selected");
+            this.removeClass(days[i], this.className + "__month-day--first-day-selected");
+            this.removeClass(days[i], this.className + "__month-day--last-day-selected");
           }
           if (this.showTopbar) {
             // Show error in top bar
@@ -1232,13 +1233,13 @@ var HotelDatepicker = (function (fecha) {
         } else if (this.start || this.end) {
           if (this.showTopbar) {
             // Remove error and help classes from top bar
-            this.removeClass(bar, "datepicker__info--error");
-            this.removeClass(bar, "datepicker__info--help");
+            this.removeClass(bar, this.className + "__info--error");
+            this.removeClass(bar, this.className + "__info--help");
           }
         } else if (this.showTopbar) {
           // Show help message
-          this.removeClass(bar, "datepicker__info--error");
-          this.addClass(bar, "datepicker__info--help");
+          this.removeClass(bar, this.className + "__info--error");
+          this.addClass(bar, this.className + "__info--help");
         }
       }
       addDays(date, days) {
@@ -1382,31 +1383,31 @@ var HotelDatepicker = (function (fecha) {
         const month1 = parseInt(this.getDateString(this.month1, "YYYYMM"), 10);
         const month2 = parseInt(this.getDateString(this.month2, "YYYYMM"), 10);
         const d = Math.abs(month1 - month2);
-        const nextButtons = this.datepicker.getElementsByClassName("datepicker__month-button--next");
-        const prevButtons = this.datepicker.getElementsByClassName("datepicker__month-button--prev");
+        const nextButtons = this.datepicker.getElementsByClassName(this.className + "__month-button--next");
+        const prevButtons = this.datepicker.getElementsByClassName(this.className + "__month-button--prev");
         if (d > 1 && d !== 89) {
-          this.removeClass(nextButtons[0], "datepicker__month-button--disabled");
+          this.removeClass(nextButtons[0], this.className + "__month-button--disabled");
           nextButtons[0].setAttribute("aria-disabled", "false");
-          this.removeClass(prevButtons[1], "datepicker__month-button--disabled");
+          this.removeClass(prevButtons[1], this.className + "__month-button--disabled");
           prevButtons[1].setAttribute("aria-disabled", "false");
         } else {
-          this.addClass(nextButtons[0], "datepicker__month-button--disabled");
+          this.addClass(nextButtons[0], this.className + "__month-button--disabled");
           nextButtons[0].setAttribute("aria-disabled", "true");
-          this.addClass(prevButtons[1], "datepicker__month-button--disabled");
+          this.addClass(prevButtons[1], this.className + "__month-button--disabled");
           prevButtons[1].setAttribute("aria-disabled", "true");
         }
         if (this.isMonthOutOfRange(this.getPrevMonth(this.month1))) {
-          this.addClass(prevButtons[0], "datepicker__month-button--disabled");
+          this.addClass(prevButtons[0], this.className + "__month-button--disabled");
           prevButtons[0].setAttribute("aria-disabled", "true");
         } else {
-          this.removeClass(prevButtons[0], "datepicker__month-button--disabled");
+          this.removeClass(prevButtons[0], this.className + "__month-button--disabled");
           prevButtons[0].setAttribute("aria-disabled", "false");
         }
         if (this.isMonthOutOfRange(this.getNextMonth(this.month2))) {
-          this.addClass(nextButtons[1], "datepicker__month-button--disabled");
+          this.addClass(nextButtons[1], this.className + "__month-button--disabled");
           nextButtons[1].setAttribute("aria-disabled", "true");
         } else {
-          this.removeClass(nextButtons[1], "datepicker__month-button--disabled");
+          this.removeClass(nextButtons[1], this.className + "__month-button--disabled");
           nextButtons[1].setAttribute("aria-disabled", "false");
         }
       }
@@ -1431,10 +1432,10 @@ var HotelDatepicker = (function (fecha) {
         } else {
           topBarText = this.lang("info-default");
         }
-        const bar = this.datepicker.getElementsByClassName("datepicker__info--feedback")[0];
+        const bar = this.datepicker.getElementsByClassName(this.className + "__info--feedback")[0];
         topBarText = topBarText.replace(/%d/, this.minDays - 1).replace(/%d/, this.maxDays - 1);
-        this.addClass(bar, "datepicker__info--help");
-        this.removeClass(bar, "datepicker__info--error");
+        this.addClass(bar, this.className + "__info--help");
+        this.removeClass(bar, this.className + "__info--error");
         bar.textContent = topBarText;
       }
       topBarErrorText(bar, errorText, errorValue) {
@@ -1443,8 +1444,8 @@ var HotelDatepicker = (function (fecha) {
         }
 
         // Show error message on top bar
-        this.addClass(bar, "datepicker__info--error");
-        this.removeClass(bar, "datepicker__info--help");
+        this.addClass(bar, this.className + "__info--error");
+        this.removeClass(bar, this.className + "__info--help");
         if (errorValue > 1) {
           errorText = this.lang(errorText + "-plural");
           errorText = errorText.replace("%d", errorValue);
@@ -1454,7 +1455,7 @@ var HotelDatepicker = (function (fecha) {
         }
 
         // And hide the selected info
-        const selectedInfo = this.datepicker.getElementsByClassName("datepicker__info--selected")[0];
+        const selectedInfo = this.datepicker.getElementsByClassName(this.className + "__info--selected")[0];
         selectedInfo.style.display = "none";
       }
       updateSelectableRange() {
@@ -1463,45 +1464,45 @@ var HotelDatepicker = (function (fecha) {
 
         // Add needed classes
         for (let i = 0; i < days.length; i++) {
-          if (this.hasClass(days[i], "datepicker__month-day--invalid") && this.hasClass(days[i], "datepicker__month-day--tmp")) {
-            this.removeClass(days[i], "datepicker__month-day--tmp");
-            if (this.hasClass(days[i], "datepicker__month-day--tmpinvalid")) {
-              this.removeClass(days[i], "datepicker__month-day--tmpinvalid");
+          if (this.hasClass(days[i], this.className + "__month-day--invalid") && this.hasClass(days[i], this.className + "__month-day--tmp")) {
+            this.removeClass(days[i], this.className + "__month-day--tmp");
+            if (this.hasClass(days[i], this.className + "__month-day--tmpinvalid")) {
+              this.removeClass(days[i], this.className + "__month-day--tmpinvalid");
             } else {
-              this.removeClass(days[i], "datepicker__month-day--invalid");
-              this.addClass(days[i], "datepicker__month-day--valid");
+              this.removeClass(days[i], this.className + "__month-day--invalid");
+              this.addClass(days[i], this.className + "__month-day--valid");
             }
           }
 
           // Update day classes during the date range selection
           if (isSelecting) {
-            if (this.hasClass(days[i], "datepicker__month-day--visibleMonth") && (this.hasClass(days[i], "datepicker__month-day--valid") || this.hasClass(days[i], "datepicker__month-day--disabled") || this.hasClass(days[i], "datepicker__month-day--before-disabled-date"))) {
+            if (this.hasClass(days[i], this.className + "__month-day--visibleMonth") && (this.hasClass(days[i], this.className + "__month-day--valid") || this.hasClass(days[i], this.className + "__month-day--disabled") || this.hasClass(days[i], this.className + "__month-day--before-disabled-date"))) {
               const time = parseInt(days[i].getAttribute("time"), 10);
               if (this.isValidDate(time)) {
-                this.addClass(days[i], "datepicker__month-day--valid");
-                this.addClass(days[i], "datepicker__month-day--tmp");
-                this.removeClass(days[i], "datepicker__month-day--invalid");
-                this.removeClass(days[i], "datepicker__month-day--disabled");
+                this.addClass(days[i], this.className + "__month-day--valid");
+                this.addClass(days[i], this.className + "__month-day--tmp");
+                this.removeClass(days[i], this.className + "__month-day--invalid");
+                this.removeClass(days[i], this.className + "__month-day--disabled");
               } else {
-                if (this.hasClass(days[i], "datepicker__month-day--invalid")) {
-                  this.addClass(days[i], "datepicker__month-day--tmpinvalid");
+                if (this.hasClass(days[i], this.className + "__month-day--invalid")) {
+                  this.addClass(days[i], this.className + "__month-day--tmpinvalid");
                 }
-                this.addClass(days[i], "datepicker__month-day--invalid");
-                this.addClass(days[i], "datepicker__month-day--tmp");
-                this.removeClass(days[i], "datepicker__month-day--valid");
+                this.addClass(days[i], this.className + "__month-day--invalid");
+                this.addClass(days[i], this.className + "__month-day--tmp");
+                this.removeClass(days[i], this.className + "__month-day--valid");
               }
             }
             // Set aria attributes
             this.setDayAriaAttributes();
-          } else if (this.hasClass(days[i], "datepicker__month-day--checkout-enabled") || this.hasClass(days[i], "datepicker__month-day--before-disabled-date")) {
+          } else if (this.hasClass(days[i], this.className + "__month-day--checkout-enabled") || this.hasClass(days[i], this.className + "__month-day--before-disabled-date")) {
             // At the end of the selection, restore the disabled/invalid class for
             // days where the checkout is enabled. We need to check this when the
             // autoclose option is false. The same for the day just before the
             // disabled date
-            this.addClass(days[i], "datepicker__month-day--invalid");
-            this.removeClass(days[i], "datepicker__month-day--valid");
-            if (!this.hasClass(days[i], "datepicker__month-day--before-disabled-date")) {
-              this.addClass(days[i], "datepicker__month-day--disabled");
+            this.addClass(days[i], this.className + "__month-day--invalid");
+            this.removeClass(days[i], this.className + "__month-day--valid");
+            if (!this.hasClass(days[i], this.className + "__month-day--before-disabled-date")) {
+              this.addClass(days[i], this.className + "__month-day--disabled");
             }
           }
         }
@@ -1510,7 +1511,7 @@ var HotelDatepicker = (function (fecha) {
       dayHovering(day) {
         const hoverTime = parseInt(day.getAttribute("time"), 10);
         let tooltip = "";
-        if (!this.hasClass(day, "datepicker__month-day--invalid")) {
+        if (!this.hasClass(day, this.className + "__month-day--invalid")) {
           // Get every td in the months table: our days
           const days = this.datepicker.getElementsByTagName("td");
 
@@ -1518,14 +1519,14 @@ var HotelDatepicker = (function (fecha) {
           for (let i = 0; i < days.length; i++) {
             const time = parseInt(days[i].getAttribute("time"), 10);
             if (time === hoverTime) {
-              this.addClass(days[i], "datepicker__month-day--hovering");
+              this.addClass(days[i], this.className + "__month-day--hovering");
             } else {
-              this.removeClass(days[i], "datepicker__month-day--hovering");
+              this.removeClass(days[i], this.className + "__month-day--hovering");
             }
             if (this.start && !this.end && (this.start < time && hoverTime >= time || this.start > time && hoverTime <= time)) {
-              this.addClass(days[i], "datepicker__month-day--hovering");
+              this.addClass(days[i], this.className + "__month-day--hovering");
             } else {
-              this.removeClass(days[i], "datepicker__month-day--hovering");
+              this.removeClass(days[i], this.className + "__month-day--hovering");
             }
           }
 
@@ -1570,7 +1571,7 @@ var HotelDatepicker = (function (fecha) {
         // Remove hovering class from every day
         const days = this.datepicker.getElementsByTagName("td");
         for (let i = 0; i < days.length; i++) {
-          this.removeClass(days[i], "datepicker__month-day--hovering");
+          this.removeClass(days[i], this.className + "__month-day--hovering");
         }
 
         // Hide the tooltip
@@ -1585,10 +1586,10 @@ var HotelDatepicker = (function (fecha) {
         // Remove selected classes
         const days = this.datepicker.getElementsByTagName("td");
         for (let i = 0; i < days.length; i++) {
-          this.removeClass(days[i], "datepicker__month-day--selected");
-          this.removeClass(days[i], "datepicker__month-day--first-day-selected");
-          this.removeClass(days[i], "datepicker__month-day--last-day-selected");
-          this.removeClass(days[i], "datepicker__month-day--hovering");
+          this.removeClass(days[i], this.className + "__month-day--selected");
+          this.removeClass(days[i], this.className + "__month-day--first-day-selected");
+          this.removeClass(days[i], this.className + "__month-day--last-day-selected");
+          this.removeClass(days[i], this.className + "__month-day--hovering");
         }
 
         // Reset input
@@ -1611,10 +1612,10 @@ var HotelDatepicker = (function (fecha) {
         // Remove selected classes
         const days = this.datepicker.getElementsByTagName("td");
         for (let i = 0; i < days.length; i++) {
-          this.removeClass(days[i], "datepicker__month-day--selected");
-          this.removeClass(days[i], "datepicker__month-day--first-day-selected");
-          this.removeClass(days[i], "datepicker__month-day--last-day-selected");
-          this.removeClass(days[i], "datepicker__month-day--hovering");
+          this.removeClass(days[i], this.className + "__month-day--selected");
+          this.removeClass(days[i], this.className + "__month-day--first-day-selected");
+          this.removeClass(days[i], this.className + "__month-day--last-day-selected");
+          this.removeClass(days[i], this.className + "__month-day--hovering");
         }
 
         // Reset input
@@ -1627,7 +1628,7 @@ var HotelDatepicker = (function (fecha) {
         this.showSelectedInfo();
 
         // Hide the selected info
-        const selectedInfo = this.datepicker.getElementsByClassName("datepicker__info--selected")[0];
+        const selectedInfo = this.datepicker.getElementsByClassName(this.className + "__info--selected")[0];
         selectedInfo.style.display = "none";
 
         // Show selected days in the calendar
@@ -1815,14 +1816,14 @@ var HotelDatepicker = (function (fecha) {
           const time = parseInt(days[i].getAttribute("time"), 10);
           let ariaDisabled = "false";
           let ariaLabel = "";
-          if (classes.includes("datepicker__month-day--invalid")) {
+          if (classes.includes(this.className + "__month-day--invalid")) {
             ariaLabel = this.replacei18n(this.i18n["aria-disabled"], fecha__namespace.format(time, this.ariaDayFormat));
             ariaDisabled = "true";
-          } else if (classes.includes("datepicker__month-day--first-day-selected")) {
+          } else if (classes.includes(this.className + "__month-day--first-day-selected")) {
             ariaLabel = this.replacei18n(this.i18n["aria-selected-checkin"], fecha__namespace.format(time, this.ariaDayFormat));
-          } else if (classes.includes("datepicker__month-day--last-day-selected")) {
+          } else if (classes.includes(this.className + "__month-day--last-day-selected")) {
             ariaLabel = this.replacei18n(this.i18n["aria-selected-checkout"], fecha__namespace.format(time, this.ariaDayFormat));
-          } else if (classes.includes("datepicker__month-day--selected")) {
+          } else if (classes.includes(this.className + "__month-day--selected")) {
             ariaLabel = this.replacei18n(this.i18n["aria-selected"], fecha__namespace.format(time, this.ariaDayFormat));
           } else if (this.start && !this.end) {
             ariaLabel = this.replacei18n(this.i18n["aria-choose-checkout"], fecha__namespace.format(time, this.ariaDayFormat));
@@ -1913,7 +1914,7 @@ var HotelDatepicker = (function (fecha) {
       }
       setActiveDay($direction) {
         const activeEl = document.activeElement;
-        if (activeEl && this.hasClass(activeEl, "datepicker__month-day--visibleMonth") && this.datepicker.contains(activeEl)) {
+        if (activeEl && this.hasClass(activeEl, this.className + "__month-day--visibleMonth") && this.datepicker.contains(activeEl)) {
           const currentIndex = parseInt(activeEl.getAttribute("index"), 10);
           const currentWeekdayIndex = parseInt(activeEl.getAttribute("d"), 10);
           let nextIndex = -1;
@@ -1950,15 +1951,15 @@ var HotelDatepicker = (function (fecha) {
             let nextDay = "";
             const gone = this.goToNextMonth(2, true);
             if (gone) {
-              const month = this.datepicker.getElementsByClassName("datepicker__month--month2");
+              const month = this.datepicker.getElementsByClassName(this.className + "__month--month2");
               if (month.length > 0) {
                 if ($direction === "down") {
-                  nextDay = month[0].querySelectorAll('.datepicker__month-day--visibleMonth[d="' + currentWeekdayIndex + '"]');
+                  nextDay = month[0].querySelectorAll("." + this.className + '__month-day--visibleMonth[d="' + currentWeekdayIndex + '"]');
                 } else if ($direction === "last") {
                   const nextWeekdayIndex = currentWeekdayIndex + (7 - currentWeekdayIndex);
-                  nextDay = month[0].querySelectorAll('.datepicker__month-day--visibleMonth[d="' + nextWeekdayIndex + '"]');
+                  nextDay = month[0].querySelectorAll("." + this.className + '__month-day--visibleMonth[d="' + nextWeekdayIndex + '"]');
                 } else {
-                  nextDay = month[0].querySelectorAll(".datepicker__month-day--visibleMonth");
+                  nextDay = month[0].querySelectorAll("." + this.className + "__month-day--visibleMonth");
                 }
                 if (nextDay.length > 0) {
                   this.setDayFocus(nextDay[0]);
@@ -1969,15 +1970,15 @@ var HotelDatepicker = (function (fecha) {
             let prevDay = "";
             const gone = this.goToPreviousMonth(1, true);
             if (gone) {
-              const month = this.datepicker.getElementsByClassName("datepicker__month--month1");
+              const month = this.datepicker.getElementsByClassName(this.className + "__month--month1");
               if (month.length > 0) {
                 if ($direction === "up") {
-                  prevDay = month[0].querySelectorAll('.datepicker__month-day--visibleMonth[d="' + currentWeekdayIndex + '"]');
+                  prevDay = month[0].querySelectorAll("." + this.className + '__month-day--visibleMonth[d="' + currentWeekdayIndex + '"]');
                 } else if ($direction === "first") {
                   const prevWeekdayIndex = currentWeekdayIndex - (currentWeekdayIndex - 1);
-                  prevDay = month[0].querySelectorAll('.datepicker__month-day--visibleMonth[d="' + prevWeekdayIndex + '"]');
+                  prevDay = month[0].querySelectorAll("." + this.className + '__month-day--visibleMonth[d="' + prevWeekdayIndex + '"]');
                 } else {
-                  prevDay = month[0].querySelectorAll(".datepicker__month-day--visibleMonth");
+                  prevDay = month[0].querySelectorAll("." + this.className + "__month-day--visibleMonth");
                 }
                 if (prevDay.length > 0) {
                   this.setDayFocus(prevDay[prevDay.length - 1]);
@@ -1991,21 +1992,21 @@ var HotelDatepicker = (function (fecha) {
       }
       setInitialActiveDay() {
         // Check if today is visible
-        const today = this.datepicker.getElementsByClassName("datepicker__month-day--today");
+        const today = this.datepicker.getElementsByClassName(this.className + "__month-day--today");
         if (today.length > 0) {
           this.setDayFocus(today[0]);
           return today[0];
         }
 
         // Check if check-in is visible
-        const checkin = this.datepicker.getElementsByClassName("datepicker__month-day--first-day-selected");
+        const checkin = this.datepicker.getElementsByClassName(this.className + "__month-day--first-day-selected");
         if (checkin.length > 0) {
           this.setDayFocus(checkin[0]);
           return checkin[0];
         }
 
         // Get first visible day
-        const visibleDay = this.datepicker.getElementsByClassName("datepicker__month-day--visibleMonth");
+        const visibleDay = this.datepicker.getElementsByClassName(this.className + "__month-day--visibleMonth");
         if (visibleDay.length > 0) {
           this.setDayFocus(visibleDay[0]);
           return visibleDay[0];
@@ -2029,7 +2030,7 @@ var HotelDatepicker = (function (fecha) {
         const days = this.datepicker.getElementsByTagName("td");
         this.dayIndex = 1;
         for (let i = 0; i < days.length; i++) {
-          if (this.hasClass(days[i], "datepicker__month-day--visibleMonth")) {
+          if (this.hasClass(days[i], this.className + "__month-day--visibleMonth")) {
             days[i].setAttribute("index", this.dayIndex);
             this.dayIndex++;
           } else {
@@ -2053,7 +2054,7 @@ var HotelDatepicker = (function (fecha) {
       }
       handleReturn() {
         const activeEl = document.activeElement;
-        if (activeEl && this.datepicker.contains(activeEl) && (this.hasClass(activeEl, "datepicker__month-day--visibleMonth") || this.hasClass(activeEl, "datepicker__month-button") || this.hasClass(activeEl, "datepicker__close-button") || this.hasClass(activeEl, "datepicker__clear-button") || this.hasClass(activeEl, "datepicker__submit-button"))) {
+        if (activeEl && this.datepicker.contains(activeEl) && (this.hasClass(activeEl, this.className + "__month-day--visibleMonth") || this.hasClass(activeEl, this.className + "__month-button") || this.hasClass(activeEl, this.className + "__close-button") || this.hasClass(activeEl, this.className + "__clear-button") || this.hasClass(activeEl, this.className + "__submit-button"))) {
           activeEl.click();
         }
       }
