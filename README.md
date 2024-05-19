@@ -50,6 +50,13 @@ var hdpkr = new HotelDatepicker(document.getElementById("input-id"), options);
 
 ## Options
 
+### className
+
+-   Type: `String`
+-   Default: `datepicker`
+
+The CSS selector of the datepicker.
+
 ### format
 
 -   Type: `String`
