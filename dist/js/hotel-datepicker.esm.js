@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.8.0 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.9.0 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 import * as fecha from 'fecha';
 
 let idCounter = 0;
@@ -41,6 +41,7 @@ class HotelDatepicker {
     this.clearButton = opts.clearButton || false;
     this.submitButton = Boolean(this.inline && opts.submitButton);
     this.submitButtonName = this.submitButton && opts.submitButtonName ? opts.submitButtonName : "";
+    this.closeOnScroll = opts.closeOnScroll || false;
     this.i18n = opts.i18n || {
       selected: "Your stay:",
       night: "Night",
@@ -360,6 +361,11 @@ class HotelDatepicker {
 
     // Listen for focus
     document.addEventListener("focus", evt => this.checkOnFocus(evt), true);
+
+    // Close datepicker on scroll
+    if (this.closeOnScroll) {
+      window.addEventListener("scroll", evt => this.closeDatepicker(evt));
+    }
   }
   generateId() {
     // Generate an unique ID for each datepicker
