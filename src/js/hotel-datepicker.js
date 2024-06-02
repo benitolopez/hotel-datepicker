@@ -51,6 +51,7 @@ export default class HotelDatepicker {
             this.submitButton && opts.submitButtonName
                 ? opts.submitButtonName
                 : "";
+        this.closeOnScroll = opts.closeOnScroll || false;
         this.i18n = opts.i18n || {
             selected: "Your stay:",
             night: "Night",
@@ -502,6 +503,13 @@ export default class HotelDatepicker {
             (evt) => this.checkOnFocus(evt),
             true
         );
+
+        // Close datepicker on scroll
+        if (this.closeOnScroll) {
+            window.addEventListener("scroll", (evt) =>
+                this.closeDatepicker(evt)
+            );
+        }
     }
 
     generateId() {
