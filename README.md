@@ -432,7 +432,7 @@ input.addEventListener(
 
 ### afterClear
 
-You can listen for this event when the datepicker clear the dates.
+You can listen for this event when the datepicker clears the dates.
 
 ```js
 var input = document.getElementById("input-id");
