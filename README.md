@@ -444,6 +444,22 @@ input.addEventListener(
 );
 ```
 
+### afterClear
+
+You can listen for this event when the datepicker clears the dates.
+
+```js
+var input = document.getElementById("input-id");
+
+input.addEventListener(
+    "afterClear",
+    function () {
+        console.log("Cleared!");
+    },
+    false
+);
+```
+
 ## Keyboard Shortcuts
 
 -   `←/→`: Move backward (left) and forward (right) by one day.
