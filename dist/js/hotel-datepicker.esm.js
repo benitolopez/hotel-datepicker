@@ -1615,6 +1615,11 @@ class HotelDatepicker {
 
     // Check day dates
     this.updateSelectableRange();
+
+    // Create event on clear
+    const evt = document.createEvent("Event");
+    evt.initEvent("afterClear", true, true);
+    this.input.dispatchEvent(evt);
   }
   parseDisabledDates() {
     // Sort disabled dates and store it in property
