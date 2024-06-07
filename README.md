@@ -50,6 +50,13 @@ var hdpkr = new HotelDatepicker(document.getElementById("input-id"), options);
 
 ## Options
 
+### className
+
+-   Type: `String`
+-   Default: `datepicker`
+
+The CSS selector of the datepicker.
+
 ### format
 
 -   Type: `String`
@@ -269,6 +276,13 @@ When a click is done outside the datepicker container, the datepicker closes. Us
 -   Default: `false`
 
 Move both months when clicking on the next/prev month button.
+
+### closeOnScroll
+
+-   Type: `Boolean`
+-   Default: `false`
+
+Close datepicker on scroll. Some devices might trigger the scroll event in an unpredictable way. Use it at your own risk.
 
 ### onDayClick
 

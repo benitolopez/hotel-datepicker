@@ -2,7 +2,7 @@
  * BASE STYLES
  * ============================================================*/
 
-.datepicker {
+.#{$selector} {
     box-sizing: border-box;
     overflow: hidden;
     position: absolute;
@@ -26,17 +26,17 @@
     }
 }
 
-.datepicker__inner {
+.#{$selector}__inner {
     overflow: hidden;
 }
 
-.datepicker__months {
+.#{$selector}__months {
     @include mq_m {
         overflow: hidden;
     }
 }
 
-.datepicker__month {
+.#{$selector}__month {
     border-collapse: collapse;
     text-align: center;
     width: 100%;
@@ -50,13 +50,13 @@
     }
 }
 
-.datepicker__month--month1 {
+.#{$selector}__month--month1 {
     @include mq_m {
         float: left;
     }
 }
 
-.datepicker__month--month2 {
+.#{$selector}__month--month2 {
     display: none;
 
     @include mq_m {
@@ -65,17 +65,17 @@
     }
 }
 
-.datepicker__month-day--valid {
+.#{$selector}__month-day--valid {
     cursor: pointer;
     user-select: none;
 }
 
-.datepicker__month-day--lastMonth,
-.datepicker__month-day--nextMonth {
+.#{$selector}__month-day--lastMonth,
+.#{$selector}__month-day--nextMonth {
     visibility: hidden;
 }
 
-.datepicker__month-button {
+.#{$selector}__month-button {
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -83,30 +83,30 @@
     user-select: none;
 }
 
-.datepicker__month-button--disabled {
+.#{$selector}__month-button--disabled {
     @include mq_m {
         visibility: hidden;
     }
 }
 
-.datepicker__info--feedback {
+.#{$selector}__info--feedback {
     display: none;
 }
 
-.datepicker__info--error,
-.datepicker__info--help {
+.#{$selector}__info--error,
+.#{$selector}__info--help {
     display: block;
 }
 
-.datepicker__buttons {
+.#{$selector}__buttons {
     user-select: none;
 }
 
-.datepicker__close-button,
-.datepicker__clear-button {
+.#{$selector}__close-button,
+.#{$selector}__clear-button {
     cursor: pointer;
 }
 
-.datepicker__tooltip {
+.#{$selector}__tooltip {
     position: absolute;
 }
