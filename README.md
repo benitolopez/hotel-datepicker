@@ -1,6 +1,8 @@
 # Hotel Datepicker
 
-A pure Javascript date range picker for hotels. Requires [Fecha](https://github.com/taylorhakes/fecha) **4.0.0** or above and supports all modern browsers. Check the [demo here](http://lopezb.com/hoteldatepicker).
+The Hotel Datepicker is a responsive JavaScript date range picker for hotels. It supports modern browsers and it requires [Fecha](https://github.com/taylorhakes/fecha) **4.0.0** (or above).
+
+View the [demo here](http://lopezb.com/hoteldatepicker).
 
 ![Hotel Datepicker Thumbnail](http://static.lopezb.com/hoteldatepicker/datepicker_card_2022.jpg "Hotel Datepicker Thumbnail")
 
