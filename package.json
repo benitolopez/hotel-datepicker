@@ -21,8 +21,7 @@
   "main": "dist/js/hotel-datepicker.esm.js",
   "style": "dist/css/hotel-datepicker.css",
   "scripts": {
-    "run:sass": "node-sass -o .sass-cache src/sass --output-style expanded",
-    "build:scss": "npm run run:sass && npm run run:sass -- -w",
+    "build:sass": "sass src/sass/hotel-datepicker.scss .sass-cache/hotel-datepicker.css --no-source-map -w",
     "build:css": "postcss --no-map -w .sass-cache/hotel-datepicker.css -d dist/css",
     "build:img": "cp -R src/icons dist",
     "build:rollup": "rollup --config -w",
@@ -41,13 +40,13 @@
     "browser-sync": "^2.27.10",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
-    "node-sass": "^7.0.3",
     "npm-run-all": "^4.1.5",
     "onchange": "^7.1.0",
     "postcss-cli": "^10.0.0",
     "postcss-sort-media-queries": "^4.3.0",
     "rollup": "^3.2.3",
-    "rollup-plugin-minification": "^0.2.0"
+    "rollup-plugin-minification": "^0.2.0",
+    "sass": "^1.77.8"
   },
   "dependencies": {
     "fecha": "^4.2.3"
