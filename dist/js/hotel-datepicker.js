@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.11.0 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.11.1 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -1626,6 +1626,9 @@ var HotelDatepicker = (function (fecha) {
 
         // Reset input
         this.setValue("");
+
+        // Show default text in top bar
+        this.topBarDefaultText();
 
         // Check the selection
         this.checkSelection();
