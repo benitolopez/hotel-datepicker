@@ -2490,6 +2490,9 @@ export default class HotelDatepicker {
         // Reset input
         this.setValue("");
 
+        // Show default text in top bar
+        this.topBarDefaultText();
+
         // Check the selection
         this.checkSelection();
 
