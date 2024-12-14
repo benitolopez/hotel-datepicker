@@ -2288,8 +2288,6 @@ export default class HotelDatepicker {
                         );
                     }
                 }
-                // Set aria attributes
-                this.setDayAriaAttributes();
             } else if (
                 this.hasClass(
                     days[i],
@@ -2322,6 +2320,9 @@ export default class HotelDatepicker {
                 }
             }
         }
+
+        // Set aria attributes
+        this.setDayAriaAttributes();
 
         return true;
     }
