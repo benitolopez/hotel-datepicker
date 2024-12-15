@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.11.1 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.11.2 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -1498,8 +1498,6 @@ var HotelDatepicker = (function (fecha) {
                 this.removeClass(days[i], this.className + "__month-day--valid");
               }
             }
-            // Set aria attributes
-            this.setDayAriaAttributes();
           } else if (this.hasClass(days[i], this.className + "__month-day--checkout-enabled") || this.hasClass(days[i], this.className + "__month-day--before-disabled-date")) {
             // At the end of the selection, restore the disabled/invalid class for
             // days where the checkout is enabled. We need to check this when the
@@ -1512,6 +1510,9 @@ var HotelDatepicker = (function (fecha) {
             }
           }
         }
+
+        // Set aria attributes
+        this.setDayAriaAttributes();
         return true;
       }
       dayHovering(day) {
