@@ -52,7 +52,7 @@ export default class HotelDatepicker {
                 ? opts.submitButtonName
                 : "";
         this.closeOnScroll = opts.closeOnScroll || false;
-        this.i18n = opts.i18n || {
+        this.i18n = {
             selected: "Your stay:",
             night: "Night",
             nights: "Nights",
@@ -129,7 +129,7 @@ export default class HotelDatepicker {
             "aria-close-button": "Close the datepicker",
             "aria-clear-button": "Clear the selected dates",
             "aria-submit-button": "Submit the form",
-        };
+        ...opts.i18n };
 
         this.getValue =
             opts.getValue ||
