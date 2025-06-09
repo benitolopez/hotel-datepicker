@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.11.2 - Copyright 2024 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.12.0 - Copyright 2025 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -62,7 +62,7 @@ var HotelDatepicker = (function (fecha) {
         this.submitButton = Boolean(this.inline && opts.submitButton);
         this.submitButtonName = this.submitButton && opts.submitButtonName ? opts.submitButtonName : "";
         this.closeOnScroll = opts.closeOnScroll || false;
-        this.i18n = opts.i18n || {
+        this.i18n = {
           selected: "Your stay:",
           night: "Night",
           nights: "Nights",
@@ -95,7 +95,8 @@ var HotelDatepicker = (function (fecha) {
           "aria-next-month": "Move forward to switch to the next month",
           "aria-close-button": "Close the datepicker",
           "aria-clear-button": "Clear the selected dates",
-          "aria-submit-button": "Submit the form"
+          "aria-submit-button": "Submit the form",
+          ...opts.i18n
         };
         this.getValue = opts.getValue || function () {
           return input.value;

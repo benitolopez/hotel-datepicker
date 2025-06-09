@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /* =============================================================
  * BASE STYLES
  * ============================================================*/
@@ -9,6 +8,7 @@
   width: 260px;
   z-index: 1;
 }
+
 .datepicker--inline {
   position: relative;
 }
@@ -117,6 +117,7 @@
   padding: 9px 7px;
   border: 1px solid transparent;
 }
+
 .datepicker__month-day:focus {
   outline: none;
   background-color: #ffe684;
@@ -125,6 +126,7 @@
 .datepicker__month-day--no-checkin {
   position: relative;
 }
+
 .datepicker__month-day--no-checkin:before {
   bottom: 0;
   content: "";
@@ -141,6 +143,7 @@
 .datepicker__month-day--no-checkout {
   position: relative;
 }
+
 .datepicker__month-day--no-checkout:before {
   top: 0;
   content: "";
@@ -166,8 +169,9 @@
   color: #e8ebf4;
   position: relative;
 }
+
 .datepicker__month-day--disabled:after {
-  content: "×";
+  content: "\00d7";
   left: 50%;
   position: absolute;
   color: red;
@@ -186,6 +190,7 @@
   background-color: rgba(56, 88, 233, 0.2);
   color: #fff;
 }
+
 .datepicker__month-day--selected:after, .datepicker__month-day--selected:before {
   display: none;
 }
@@ -218,6 +223,7 @@
   text-indent: -9999px;
   padding: 5px;
 }
+
 .datepicker__month-button:after {
   background-repeat: no-repeat;
   background-position: center;
@@ -294,17 +300,20 @@
   text-shadow: none;
   text-transform: uppercase;
 }
-.datepicker--topbar-top .datepicker__close-button,
-.datepicker--topbar-top .datepicker__clear-button,
-.datepicker--topbar-top .datepicker__submit-button {
+
+.datepicker--topbar-top .datepicker__close-button, .datepicker--topbar-top
+.datepicker__clear-button, .datepicker--topbar-top
+.datepicker__submit-button {
   margin-top: 0;
 }
+
 .datepicker__close-button:hover,
 .datepicker__clear-button:hover,
 .datepicker__submit-button:hover {
   background-color: #213fd4;
   color: #ffffff;
 }
+
 .datepicker__close-button:disabled, .datepicker__close-button[disabled],
 .datepicker__clear-button:disabled,
 .datepicker__clear-button[disabled],
@@ -334,6 +343,7 @@
   margin-top: -5px;
   padding: 5px 10px;
 }
+
 .datepicker__tooltip:after {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
@@ -344,12 +354,14 @@
   margin-left: -4px;
   position: absolute;
 }
-@media (min-width: 320px){
+
+@media (min-width: 320px) {
   .datepicker {
     width: 300px;
   }
 }
-@media (min-width: 480px){
+
+@media (min-width: 480px) {
   .datepicker {
     width: 460px;
   }
@@ -383,7 +395,8 @@
     width: 1px;
   }
 }
-@media (min-width: 768px){
+
+@media (min-width: 768px) {
   .datepicker {
     width: 560px;
   }
