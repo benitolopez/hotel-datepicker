@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.12.0 - Copyright 2025 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.12.1 - Copyright 2025 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -677,8 +677,10 @@ var HotelDatepicker = (function (fecha) {
         this.isOpen = false;
 
         // Create event on close
-        const evt = document.createEvent("Event");
-        evt.initEvent("afterClose", true, true);
+        const evt = new CustomEvent("afterClose", {
+          bubbles: true,
+          cancelable: true
+        });
         this.input.dispatchEvent(evt);
         this.removeAllBoundedListeners(document, "click");
       }
@@ -1649,8 +1651,10 @@ var HotelDatepicker = (function (fecha) {
         this.updateSelectableRange();
 
         // Create event on clear
-        const evt = document.createEvent("Event");
-        evt.initEvent("afterClear", true, true);
+        const evt = new CustomEvent("afterClear", {
+          bubbles: true,
+          cancelable: true
+        });
         this.input.dispatchEvent(evt);
       }
       parseDisabledDates() {
