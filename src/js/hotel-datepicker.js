@@ -1015,8 +1015,10 @@ export default class HotelDatepicker {
         this.isOpen = false;
 
         // Create event on close
-        const evt = document.createEvent("Event");
-        evt.initEvent("afterClose", true, true);
+        const evt = new CustomEvent("afterClose", {
+            bubbles: true,
+            cancelable: true,
+        });
         this.input.dispatchEvent(evt);
 
         this.removeAllBoundedListeners(document, "click");
@@ -2513,8 +2515,10 @@ export default class HotelDatepicker {
         this.updateSelectableRange();
 
         // Create event on clear
-        const evt = document.createEvent("Event");
-        evt.initEvent("afterClear", true, true);
+        const evt = new CustomEvent("afterClear", {
+            bubbles: true,
+            cancelable: true,
+        });
         this.input.dispatchEvent(evt);
     }
 
