@@ -861,7 +861,17 @@ export default class HotelDatepicker {
         for (let week = 0; week < 6; week++) {
             // Iterate the days object week by week.
             // If the last day is part of the next month, stop the loop.
-            if (days[week * 7].type === "nextMonth") {
+            let allNextMonth = true;
+            for (let i = 0; i < 7; i++) {
+                let dayIdx = this.startOfWeek === "monday" ? week * 7 + i + 1 : week * 7 + i;
+                let dayObj = days[dayIdx];
+                if (dayObj && dayObj.type !== "nextMonth") {
+                  allNextMonth = false;
+                  break;
+                }
+            }
+    
+            if (allNextMonth) {
                 break;
             }
 
