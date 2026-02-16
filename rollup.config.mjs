@@ -4,7 +4,7 @@ import babel from "@rollup/plugin-babel";
 //import { terser } from "rollup-plugin-terser";
 import { terser } from "rollup-plugin-minification";
 
-const banner = `/*! ${pkg.name} ${pkg.version} - Copyright 2025 ${pkg.author} - ${pkg.homepage} - ${pkg.license} */`;
+const banner = `/*! ${pkg.name} ${pkg.version} - Copyright 2026 ${pkg.author} - ${pkg.homepage} - ${pkg.license} */`;
 
 export default {
     input: "src/js/hotel-datepicker.js",
