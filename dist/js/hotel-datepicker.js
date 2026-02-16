@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.12.2 - Copyright 2025 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.12.3 - Copyright 2026 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -306,7 +306,7 @@ var HotelDatepicker = (function (fecha) {
           }
         }
         if (this.clearButton) {
-          if (this.inline || !this.start && !this.end) {
+          if (!this.start && !this.end) {
             const clearButton = document.getElementById(this.getClearButtonId());
             clearButton.disabled = true;
             clearButton.setAttribute("aria-disabled", "true");
