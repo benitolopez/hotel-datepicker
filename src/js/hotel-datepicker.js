@@ -391,7 +391,7 @@ export default class HotelDatepicker {
         }
 
         if (this.clearButton) {
-            if (this.inline || (!this.start && !this.end)) {
+            if (!this.start && !this.end) {
                 const clearButton = document.getElementById(
                     this.getClearButtonId()
                 );
