@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.12.3 - Copyright 2026 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.12.4 - Copyright 2026 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -1403,7 +1403,7 @@ var HotelDatepicker = (function (fecha) {
         const d = Math.abs(month1 - month2);
         const nextButtons = this.datepicker.getElementsByClassName(this.className + "__month-button--next");
         const prevButtons = this.datepicker.getElementsByClassName(this.className + "__month-button--prev");
-        if (d > 1 && d !== 89) {
+        if (d > 1 && d !== 89 && !this.moveBothMonths) {
           this.removeClass(nextButtons[0], this.className + "__month-button--disabled");
           nextButtons[0].setAttribute("aria-disabled", "false");
           this.removeClass(prevButtons[1], this.className + "__month-button--disabled");
