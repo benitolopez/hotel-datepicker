@@ -2091,7 +2091,7 @@ export default class HotelDatepicker {
             this.className + "__month-button--prev",
         );
 
-        if (d > 1 && d !== 89) {
+        if (d > 1 && d !== 89 && !this.moveBothMonths) {
             this.removeClass(
                 nextButtons[0],
                 this.className + "__month-button--disabled",
