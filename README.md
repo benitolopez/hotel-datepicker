@@ -488,4 +488,4 @@ Hotel Datepicker was initially developed as a fork of [jQuery Date Range Picker 
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) Copyright (c) 2025 [Benito Lopez](https://lopezb.com)
+[MIT](http://opensource.org/licenses/MIT) Copyright (c) 2026 [Benito Lopez](https://lopezb.com)
