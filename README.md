@@ -99,7 +99,7 @@ Default start week: `sunday` or `monday`.
 -   Type: `Date` or `String`
 -   Default: `new Date()`
 
-The start view date. All the dates before this date will be disabled.
+The earliest selectable date. All the dates before this date will be disabled, and the calendar cannot navigate before its month. To open the calendar on a later month without disabling earlier dates, use `defaultViewDate` instead.
 
 ### endDate
 
@@ -107,6 +107,13 @@ The start view date. All the dates before this date will be disabled.
 -   Default: `false`
 
 The end view date. All the dates after this date will be disabled.
+
+### defaultViewDate
+
+- Type: `Date` or `String`
+- Default: `false`
+
+The month the calendar initially opens on. Unlike `startDate`, this does **not** disable earlier dates or block backward navigation — it only sets the initial view. Use it to open on a future month while still allowing selection of, and navigation to, earlier dates (down to `startDate`). If it falls outside the `startDate`–`endDate` range it is clamped into range. A string must match the `format` option. The matching day cell gets the `<className>__month-day--default-view-date` class so it can be styled.
 
 ### minNights
 
