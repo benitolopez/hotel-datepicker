@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.12.4 - Copyright 2026 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.13.0 - Copyright 2026 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 import * as fecha from 'fecha';
 
 let idCounter = 0;
@@ -17,6 +17,7 @@ class HotelDatepicker {
     this.startOfWeek = opts.startOfWeek || "sunday"; // Or monday
     this.startDate = opts.startDate || new Date();
     this.endDate = opts.endDate || false;
+    this.defaultViewDate = opts.defaultViewDate || false;
     this.minNights = opts.minNights || 1;
     this.minNightsMultiple = opts.minNightsMultiple || false;
     this.maxNights = opts.maxNights || 0;
@@ -191,6 +192,21 @@ class HotelDatepicker {
     const _m = new Date(month.valueOf());
     return new Date(_m.setMonth(_m.getMonth() - 1, 1));
   }
+  getDefaultTime() {
+    // Seed the initial view month from defaultViewDate (if provided),
+    // otherwise today. Then clamp into [startDate, endDate] so the
+    // calendar never opens out of range. defaultViewDate ONLY affects
+    // the seed; startDate still governs the navigation floor and day
+    // validity.
+    let defaultTime = this.defaultViewDate ? new Date(this.defaultViewDate.getTime()) : new Date();
+    if (this.startDate && this.compareMonth(defaultTime, this.startDate) < 0) {
+      defaultTime = new Date(this.startDate.getTime());
+    }
+    if (this.endDate && this.compareMonth(this.getNextMonth(defaultTime), this.endDate) > 0) {
+      defaultTime = new Date(this.getPrevMonth(this.endDate.getTime()));
+    }
+    return defaultTime;
+  }
   getDateString(date) {
     let format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.format;
     // Format date
@@ -229,6 +245,11 @@ class HotelDatepicker {
       this.endDate = this.parseDate(this.endDate);
     }
 
+    // Parse defaultViewDate if passed as a string
+    if (this.defaultViewDate && typeof this.defaultViewDate === "string") {
+      this.defaultViewDate = this.parseDate(this.defaultViewDate);
+    }
+
     // Hide tooltip on touch devices
     if (this.isTouchDevice()) {
       this.hoveringTooltip = false;
@@ -250,13 +271,7 @@ class HotelDatepicker {
     this.createDom();
 
     // Set default time
-    let defaultTime = new Date();
-    if (this.startDate && this.compareMonth(defaultTime, this.startDate) < 0) {
-      defaultTime = new Date(this.startDate.getTime());
-    }
-    if (this.endDate && this.compareMonth(this.getNextMonth(defaultTime), this.endDate) > 0) {
-      defaultTime = new Date(this.getPrevMonth(this.endDate.getTime()));
-    }
+    const defaultTime = this.getDefaultTime();
 
     // Parse disabled dates
     if (this.disabledDates.length > 0) {
@@ -711,6 +726,7 @@ class HotelDatepicker {
   getDayClasses(_day) {
     const isToday = this.getDateString(_day.time) === this.getDateString(new Date());
     const isStartDate = this.getDateString(_day.time) === this.getDateString(this.startDate);
+    const isDefaultViewDate = this.defaultViewDate && this.getDateString(_day.time) === this.getDateString(this.defaultViewDate);
     const isDayWithExtraText = this.daysWithExtraText.indexOf(this.getDateString(_day.time)) > -1;
     let isDisabled = false;
     let isNoCheckIn = false;
@@ -799,7 +815,7 @@ class HotelDatepicker {
         }
       }
     }
-    const classes = [this.className + "__month-day", this.className + "__month-day--" + _day.type, this.className + "__month-day--" + (_day.valid ? "valid" : "invalid"), isToday ? this.className + "__month-day--today" : "", isDisabled ? this.className + "__month-day--disabled" : "", isDisabled && this.enableCheckout && this.isFirstDisabledDate === 1 ? this.className + "__month-day--checkout-enabled" : "", isDayBeforeDisabledDate ? this.className + "__month-day--before-disabled-date" : "", isStartDate || isFirstEnabledDate ? this.className + "__month-day--checkin-only" : "", isNoCheckIn ? this.className + "__month-day--no-checkin" : "", isNoCheckOut ? this.className + "__month-day--no-checkout" : "", isDayOfWeekDisabled ? this.className + "__month-day--day-of-week-disabled" : "", isDayWithExtraText ? this.className + "__month-day--with-extra" : ""];
+    const classes = [this.className + "__month-day", this.className + "__month-day--" + _day.type, this.className + "__month-day--" + (_day.valid ? "valid" : "invalid"), isToday ? this.className + "__month-day--today" : "", isDefaultViewDate ? this.className + "__month-day--default-view-date" : "", isDisabled ? this.className + "__month-day--disabled" : "", isDisabled && this.enableCheckout && this.isFirstDisabledDate === 1 ? this.className + "__month-day--checkout-enabled" : "", isDayBeforeDisabledDate ? this.className + "__month-day--before-disabled-date" : "", isStartDate || isFirstEnabledDate ? this.className + "__month-day--checkin-only" : "", isNoCheckIn ? this.className + "__month-day--no-checkin" : "", isNoCheckOut ? this.className + "__month-day--no-checkout" : "", isDayOfWeekDisabled ? this.className + "__month-day--day-of-week-disabled" : "", isDayWithExtraText ? this.className + "__month-day--with-extra" : ""];
     return classes;
   }
   checkAndSetDayClasses() {
@@ -851,13 +867,7 @@ class HotelDatepicker {
       selectedInfo.style.display = "none";
       if (onresize) {
         // Set default time
-        let defaultTime = new Date();
-        if (this.startDate && this.compareMonth(defaultTime, this.startDate) < 0) {
-          defaultTime = new Date(this.startDate.getTime());
-        }
-        if (this.endDate && this.compareMonth(this.getNextMonth(defaultTime), this.endDate) > 0) {
-          defaultTime = new Date(this.getPrevMonth(this.endDate.getTime()));
-        }
+        const defaultTime = this.getDefaultTime();
         if (this.start && !this.end) {
           this.clearSelection();
         }
@@ -888,8 +898,9 @@ class HotelDatepicker {
     // If not valid, reset the datepicker
     if (!valid) {
       // Show default (initial) months
-      this.showMonth(this.startDate, 1);
-      this.showMonth(this.getNextMonth(this.startDate), 2);
+      const resetTime = this.defaultViewDate ? this.getDefaultTime() : this.startDate;
+      this.showMonth(resetTime, 1);
+      this.showMonth(this.getNextMonth(resetTime), 2);
       this.setDayIndexes();
 
       // Show selected days in the calendar
