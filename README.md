@@ -54,57 +54,57 @@ var hdpkr = new HotelDatepicker(document.getElementById("input-id"), options);
 
 ### className
 
--   Type: `String`
--   Default: `datepicker`
+- Type: `String`
+- Default: `datepicker`
 
 The CSS selector of the datepicker.
 
 ### format
 
--   Type: `String`
--   Default: `YYYY-MM-DD`
+- Type: `String`
+- Default: `YYYY-MM-DD`
 
 The date format string.
 
 ### infoFormat
 
--   Type: `String`
--   Default: `YYYY-MM-DD`
+- Type: `String`
+- Default: `YYYY-MM-DD`
 
 The date format string in the info box. If not set, it uses the `format` option.
 
 ### ariaDayFormat
 
--   Type: `String`
--   Default: `dddd, MMMM DD, YYYY`
+- Type: `String`
+- Default: `dddd, MMMM DD, YYYY`
 
 The date format string in the aria label strings.
 
 ### separator
 
--   Type: `String`
--   Default: `-`
+- Type: `String`
+- Default: `-`
 
 The separator string used between date strings.
 
 ### startOfWeek
 
--   Type: `String`
--   Default: `sunday`
+- Type: `String`
+- Default: `sunday`
 
 Default start week: `sunday` or `monday`.
 
 ### startDate
 
--   Type: `Date` or `String`
--   Default: `new Date()`
+- Type: `Date` or `String`
+- Default: `new Date()`
 
 The earliest selectable date. All the dates before this date will be disabled, and the calendar cannot navigate before its month. To open the calendar on a later month without disabling earlier dates, use `defaultViewDate` instead.
 
 ### endDate
 
--   Type: `Date` or `String` or `Boolean`
--   Default: `false`
+- Type: `Date` or `String` or `Boolean`
+- Default: `false`
 
 The end view date. All the dates after this date will be disabled.
 
@@ -117,78 +117,78 @@ The month the calendar initially opens on. Unlike `startDate`, this does **not**
 
 ### minNights
 
--   Type: `Number`
--   Default: `1`
+- Type: `Number`
+- Default: `1`
 
 Minimum nights required to select a range of dates.
 
 ### maxNights
 
--   Type: `Number`
--   Default: `0`
+- Type: `Number`
+- Default: `0`
 
 Maximum nights required to select a range of dates.
 
 ### minNightsMultiple
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
 If `true`, only ranges that are multiples of `minNights` are allowed.
 
 ### selectForward
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
 If `true`, the selection of the second date must be after the first date. If `false`, you can select a range of dates in both directions.
 
 ### disabledDates
 
--   Type: `Array`
--   Default: `[]`
+- Type: `Array`
+- Default: `[]`
 
 An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the dates passed to the list will be disabled.
 
 ### enableCheckout
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
 If `true`, allows the checkout on a **disabled** date. But with a criteria. Let's say we have these disabled dates: `03 April 2020` and `04 April 2020`. With this option enabled, an user can still select the first date (`03 April 2020`) for the checkout. But not `04 April 2020`.
 
 ### noCheckInDates
 
--   Type: `Array`
--   Default: `[]`
+- Type: `Array`
+- Default: `[]`
 
 An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the dates passed to the list will not allow a check-in on that day.
 
 ### noCheckOutDates
 
--   Type: `Array`
--   Default: `[]`
+- Type: `Array`
+- Default: `[]`
 
 An array of **strings** in this format: `'YYYY-MM-DD'` (note the `''`). All the dates passed to the list will not allow a check-out on that day.
 
 ### disabledDaysOfWeek
 
--   Type: `Array`
--   Default: `[]`
+- Type: `Array`
+- Default: `[]`
 
 An array of **strings** of day names in your language (same names used in `i18n['day-names']`): `'Monday'` (note the `''` and the uppercase).
 
 ### noCheckInDaysOfWeek
 
--   Type: `Array`
--   Default: `[]`
+- Type: `Array`
+- Default: `[]`
 
 An array of **strings** of day names in your language (same names used in `i18n['day-names']`): `'Monday'` (note the `''` and the uppercase).
 
 ### noCheckOutDaysOfWeek
 
--   Type: `Array`
--   Default: `[]`
+- Type: `Array`
+- Default: `[]`
 
 An array of **strings** of day names in your language (same names used in `i18n['day-names']`): `'Monday'` (note the `''` and the uppercase).
 
@@ -198,50 +198,50 @@ An array of **strings** of day names in your language (same names used in `i18n[
 
 ### container
 
--   Type: `Element`
--   Default: `''`
+- Type: `Element`
+- Default: `''`
 
 An element for putting the datepicker. If not set, the datepicker will be appended to the parent of the input.
 
 ### inline
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
 Render the datepicker inline.
 
 ### clearButton
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
 If `true`, a button to clear the selected dates is shown. Works only when `showTopbar` is true.
 
 ### submitButton
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
 If `true`, a submit button is shown. Works only when `inline` and `showTopbar` are true.
 
 ### submitButtonName
 
--   Type: `String`
--   Default: ``
+- Type: `String`
+- Default: ``
 
 The name of the button to reference the form-data. Works only when `submitButton` is true.
 
 ### animationSpeed
 
--   Type: `String`
--   Default: `.5s`
+- Type: `String`
+- Default: `.5s`
 
 The duration (in seconds) of the animation (open/close datepicker).
 
 ### hoveringTooltip
 
--   Type: `Boolean` or `Function`
--   Default: `true`
+- Type: `Boolean` or `Function`
+- Default: `true`
 
 Shows a tooltip when hovering a date. It can be a custom function:
 
@@ -253,50 +253,50 @@ hoveringTooltip: function(nights, startTime, hoverTime) {
 
 ### showTopbar
 
--   Type: `Boolean`
--   Default: `true`
+- Type: `Boolean`
+- Default: `true`
 
 Show/hide the toolbar.
 
 ### topbarPosition
 
--   Type: `String`
--   Default: `top`
+- Type: `String`
+- Default: `top`
 
 Set the position of the toolbar.
 
 ### autoClose
 
--   Type: `Boolean`
--   Default: `true`
+- Type: `Boolean`
+- Default: `true`
 
 Close the datepicker after the selection of the second date.
 
 ### preventContainerClose
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
 When a click is done outside the datepicker container, the datepicker closes. Use this option to disable this behavior.
 
 ### moveBothMonths
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
 Move both months when clicking on the next/prev month button.
 
 ### closeOnScroll
 
--   Type: `Boolean`
--   Default: `false`
+- Type: `Boolean`
+- Default: `false`
 
 Close datepicker on scroll. Some devices might trigger the scroll event in an unpredictable way. Use it at your own risk.
 
 ### onDayClick
 
--   Type: `Function`
--   Default: `false`
+- Type: `Function`
+- Default: `false`
 
 Run a custom function every time a day is clicked:
 
@@ -308,8 +308,8 @@ onDayClick: function() {
 
 ### onOpenDatepicker
 
--   Type: `Function`
--   Default: `false`
+- Type: `Function`
+- Default: `false`
 
 Run a custom function when the datepicker is opened:
 
@@ -321,8 +321,8 @@ onOpenDatepicker: function() {
 
 ### onSelectRange
 
--   Type: `Function`
--   Default: `false`
+- Type: `Function`
+- Default: `false`
 
 Run a custom function when a range is selected:
 
@@ -334,8 +334,8 @@ onSelectRange: function() {
 
 ### extraDayText
 
--   Type: `Function`
--   Default: `false`
+- Type: `Function`
+- Default: `false`
 
 Run a custom function to show extra text in day cells:
 
@@ -353,7 +353,7 @@ extraDayText: function(date, attributes) {
 
 **[BREAK CHANGE]** Two new options has been introduced in the v.3: `month-names-short` and `day-names-short`. Previously, the _short_ day name version ('Sun', 'Mon', 'Tue', etc) was used in the `day-names` option. Now, the `day-names` option uses the _long_ version.
 
--   Type: `Object`
+- Type: `Object`
 
 Default:
 
@@ -449,7 +449,7 @@ input.addEventListener(
     function () {
         console.log("Closed!");
     },
-    false
+    false,
 );
 ```
 
@@ -465,18 +465,18 @@ input.addEventListener(
     function () {
         console.log("Cleared!");
     },
-    false
+    false,
 );
 ```
 
 ## Keyboard Shortcuts
 
--   `←/→`: Move backward (left) and forward (right) by one day.
--   `↑/↓`: Move backward (up) and forward (down) by one week.
--   `PGUP/PGDN`: Switch months.
--   `HOME/END`: Go to the first or last day of a week.
--   `↵`: Select the date in focus or trigger click on button in focus.
--   `ESC`: Return to the date input field.
+- `←/→`: Move backward (left) and forward (right) by one day.
+- `↑/↓`: Move backward (up) and forward (down) by one week.
+- `PGUP/PGDN`: Switch months.
+- `HOME/END`: Go to the first or last day of a week.
+- `↵`: Select the date in focus or trigger click on button in focus.
+- `ESC`: Return to the date input field.
 
 ## Versioning
 
