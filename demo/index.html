@@ -440,6 +440,26 @@ var datepicker = new HotelDatepicker(input, {
                     <div class="demo__input">
                         <input
                             type="text"
+                            id="demo31"
+                            value=""
+                            aria-label="Check-in and check-out dates"
+                            aria-describedby="demo31-input-description"
+                        />
+                    </div>
+                    <p class="demo__description" id="demo31-input-description">
+                        Open the calendar on a future month while still
+                        allowing navigation and selection of earlier dates
+                        (down to today): <code id="code-demo31"></code>
+                    </p>
+                    <div class="demo__config">
+                        <pre id="pre-demo31"></pre>
+                    </div>
+                </div>
+
+                <div class="demo__item">
+                    <div class="demo__input">
+                        <input
+                            type="text"
                             id="demo10"
                             value=""
                             aria-label="Check-in and check-out dates"
@@ -1054,6 +1074,27 @@ var demo29 = new HotelDatepicker(document.getElementById("demo29"), {
                     document.getElementById("demo9"),
                     {
                         endDate: date,
+                    }
+                );
+
+                // ------------------- DEMO 31 ------------------ //
+
+                var viewDate = new Date();
+                viewDate.setMonth(viewDate.getMonth() + 2);
+
+                var codeDemo31 = document.getElementById("code-demo31");
+                var preDemo31 = document.getElementById("pre-demo31");
+                var txt =
+                    "var input = document.getElementById('input-id');\nvar datepicker = new HotelDatepicker(input, {\n    defaultViewDate: " +
+                    fecha.format(viewDate, "YYYY-MM-DD") +
+                    "\n});";
+                preDemo31.textContent = txt;
+                codeDemo31.textContent = fecha.format(viewDate, "YYYY-MM-DD");
+
+                var demo31 = new HotelDatepicker(
+                    document.getElementById("demo31"),
+                    {
+                        defaultViewDate: viewDate,
                     }
                 );
 
