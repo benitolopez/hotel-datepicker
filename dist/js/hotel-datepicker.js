@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.13.0 - Copyright 2026 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.13.1 - Copyright 2026 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
@@ -695,6 +695,7 @@ var HotelDatepicker = (function (fecha) {
         // Add/remove helper classes
         this.removeClass(this.datepicker, this.className + "--open");
         this.addClass(this.datepicker, this.className + "--closed");
+        this.clearHovering();
 
         // Slide up the datepicker
         this.slideUp(this.datepicker, this.animationSpeed);
@@ -1818,27 +1819,55 @@ var HotelDatepicker = (function (fecha) {
         return element.offsetWidth || element.offsetHeight || element.getClientRects().length;
       }
       slideDown(element, speed) {
-        // Slide down an element
-        element.style.display = "";
-        const h = element.getBoundingClientRect().height;
-        element.style.height = 0;
-        this.recalc(element.offsetHeight);
-        element.style.transition = "height " + speed;
-        element.style.height = h + "px";
-        element.addEventListener("transitionend", () => {
-          element.style.height = element.style.transition = element.style.display = "";
-        });
+        this.slide(element, speed, true);
       }
       slideUp(element, speed) {
-        // Slide up an element
-        const h = element.getBoundingClientRect().height;
-        element.style.height = h + "px";
-        this.recalc(element.offsetHeight);
+        this.slide(element, speed, false);
+      }
+      slide(element, speed, opening) {
+        if (this._slideCleanup) {
+          this._slideCleanup();
+        }
+        const startHeight = element.getBoundingClientRect().height;
+
+        // Clip only while sliding; the open picker must let its tooltip overflow.
+        this.addClass(element, this.className + "--animating");
+        element.style.transition = "";
+        element.style.display = "";
+        element.style.height = "";
+        const endHeight = opening ? element.getBoundingClientRect().height : 0;
+        element.style.height = startHeight + "px";
+        void element.offsetHeight;
         element.style.transition = "height " + speed;
-        element.style.height = 0;
-        element.addEventListener("transitionend", () => {
-          element.style.display = "none";
-        });
+        element.style.height = endHeight + "px";
+        let timeout;
+        const finish = () => {
+          this._slideCleanup();
+          element.style.display = opening ? "" : "none";
+          element.style.height = element.style.transition = "";
+        };
+        const onTransitionEnd = evt => {
+          if (evt.target === element && evt.propertyName === "height") {
+            finish();
+          }
+        };
+        this._slideCleanup = () => {
+          clearTimeout(timeout);
+          element.removeEventListener("transitionend", onTransitionEnd);
+          this.removeClass(element, this.className + "--animating");
+          this._slideCleanup = null;
+        };
+        element.addEventListener("transitionend", onTransitionEnd);
+
+        // Zero-duration and interrupted transitions may not emit transitionend.
+        const style = window.getComputedStyle(element);
+        const duration = parseFloat(style.transitionDuration) * 1000;
+        const delay = parseFloat(style.transitionDelay) * 1000;
+        if (startHeight === endHeight || duration === 0) {
+          finish();
+        } else {
+          timeout = setTimeout(finish, Math.max(0, duration + delay) + 50);
+        }
       }
       recalc(element) {
         // Force browser recalculation
@@ -2140,6 +2169,9 @@ var HotelDatepicker = (function (fecha) {
         return count;
       }
       destroy() {
+        if (this._slideCleanup) {
+          this._slideCleanup();
+        }
         if (document.getElementById(this.getDatepickerId())) {
           this.removeAllBoundedListeners(this.input, "click");
           this.removeAllBoundedListeners(document, "click");
