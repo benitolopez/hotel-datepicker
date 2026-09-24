@@ -4,7 +4,7 @@
 
 .#{$selector} {
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: visible;
     position: absolute;
     width: 260px;
     z-index: 1;
@@ -19,6 +19,10 @@
 
     @include mq_l {
         width: 560px;
+    }
+
+    &--animating {
+        overflow: hidden;
     }
 
     &--inline {
