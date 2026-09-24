@@ -1,4 +1,4 @@
-/*! hotel-datepicker 4.13.1 - Copyright 2026 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
+/*! hotel-datepicker 4.13.2 - Copyright 2026 Benito Lopez (http://lopezb.com) - https://github.com/benitolopez/hotel-datepicker - MIT */
 var HotelDatepicker = (function (fecha) {
     'use strict';
 
