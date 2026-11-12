@@ -1643,7 +1643,10 @@ export default class HotelDatepicker {
     }
 
     dayClicked(day) {
-        if (this.hasClass(day, this.className + "__month-day--invalid")) {
+        if (
+            this.input.matches(":disabled") ||
+            this.hasClass(day, this.className + "__month-day--invalid")
+        ) {
             return;
         }
 
